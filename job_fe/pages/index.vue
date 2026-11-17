@@ -8,24 +8,6 @@
     >
       <div class="hero-shell">
         <div class="hero-banner" data-hero>
-
-          <div class="hero-orbits" aria-hidden="true">
-            <span data-parallax-depth="26" data-parallax-center />
-            <span data-parallax-depth="20" data-parallax-center />
-            <span data-parallax-depth="14" data-parallax-center />
-          </div>
-
-          <span
-            v-for="chip in heroChips"
-            :key="chip.text"
-            class="hero-floating-chip"
-            :class="chip.positionClass"
-            data-hero-chip
-            data-scroll-drift="0.04"
-          >
-            {{ chip.text }}
-          </span>
-
           <div class="hero-copy">
             <h1>Get teaching jobs <span class="highlight-text">in Vietnam?</span></h1>
             <p>
