@@ -27,9 +27,9 @@
           </span>
 
           <div class="hero-copy">
-            <h1>Việc Làm Giáo Viên <span class="highlight-text">Toàn Quốc</span></h1>
+            <h1>Get teaching jobs <span class="highlight-text">in Vietnam?</span></h1>
             <p>
-              Hơn <strong>700+</strong> vị trí tuyển dụng, <strong>200+</strong> trường học & trung tâm uy tín trên cả nước.
+              Over <strong>700+</strong> teaching positions, <strong>200+</strong> verified international schools & language academies across Vietnam.
             </p>
 
             <form
@@ -43,7 +43,7 @@
                   <input
                     v-model="keyword"
                     type="text"
-                    placeholder="Vị trí ứng tuyển"
+                    placeholder="Job title, keywords, subject..."
                   >
                 </div>
                 <div class="search-item search-item-hero">
@@ -53,7 +53,7 @@
                     value-key="value"
                     variant="none"
                     :placeholder="$t('home.search.placeholderLocation')"
-                    :search-input="{ placeholder: 'Tìm tỉnh thành...', variant: 'none' }"
+                    :search-input="{ placeholder: 'Search city or province...', variant: 'none' }"
                     :ui="heroLocationSelectUi"
                     class="hero-location-select"
                     @update:open="onHeroLocationMenuOpenChange"
@@ -61,7 +61,7 @@
                   <span class="arr">▾</span>
                 </div>
                 <button type="submit" class="primary-btn hero-search-submit">
-                  <span>Tìm kiếm</span>
+                  <span>Search</span>
                 </button>
               </div>
             </form>
@@ -72,7 +72,7 @@
               style="--delay: 0.28s"
             >
               <div class="hero-search-meta-row">
-                <span class="meta-label">Tìm nhanh:</span>
+                <span class="meta-label">Quick search:</span>
                 <button
                   v-for="tag in heroQuickTags"
                   :key="tag.value"
@@ -143,9 +143,9 @@
     <section class="section-block latest-jobs-block py-10 relative z-10">
       <div class="container">
         <div class="section-head section-head-center">
-          <h2>Việc làm mới nhất</h2>
+          <h2>Latest Teaching Jobs</h2>
           <p class="section-subtitle">
-            Danh sách được cập nhật hằng giờ.
+            Updated hourly from accredited schools and institutions nationwide.
           </p>
         </div>
 
@@ -184,7 +184,7 @@
                     >
                       <h3 class="job-row-title">{{ job.title }}</h3>
                     </NuxtLink>
-                    <span v-if="job.postType === 'Urgent'" class="job-tag-badge job-tag-urgent">Tuyển gấp</span>
+                    <span v-if="job.postType === 'Urgent'" class="job-tag-badge job-tag-urgent">Urgent</span>
                   </div>
 
                   <div class="job-row-company">
@@ -224,7 +224,7 @@
                       class="job-row-apply"
                       @click.stop
                     >
-                      <span>Ứng tuyển</span>
+                      <span>Apply Now</span>
                       <span class="apply-arrow" aria-hidden="true">→</span>
                     </NuxtLink>
                   </div>
@@ -240,7 +240,7 @@
             class="section-cta-link"
             @click="viewAllClick()"
           >
-            <span>Xem tất cả việc làm</span>
+            <span>View All Teaching Jobs</span>
             <span class="cta-arrow" aria-hidden="true">→</span>
           </button>
         </div>
@@ -251,9 +251,9 @@
     <section class="section-block popular-categories-block py-10 relative z-10">
       <div class="container">
         <div class="section-head section-head-center">
-          <h2>Danh mục môn học phổ biến</h2>
+          <h2>Popular Teaching Categories</h2>
           <p class="section-subtitle">
-            Hơn 700+ cơ hội giảng dạy đa dạng theo từng chuyên môn đào tạo
+            Explore 700+ diverse teaching opportunities across disciplines and grade levels
           </p>
         </div>
 
@@ -284,9 +284,9 @@
     >
       <div class="container">
         <div class="section-head section-head-center">
-          <h2>Việc làm tuyển gấp</h2>
+          <h2>Urgent Hiring</h2>
           <p class="section-subtitle">
-            Cơ hội việc làm hấp dẫn.
+            High-priority teaching positions with immediate start dates.
           </p>
         </div>
 
@@ -357,7 +357,7 @@
               </div>
 
               <div class="job-row-side">
-                <span class="job-fire-icon" title="Tuyển gấp" aria-label="Tuyển gấp">
+                <span class="job-fire-icon" title="Urgent" aria-label="Urgent">
                   <svg viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true">
                     <path fill="#ea580c" d="M12 23c-4.97 0-9-4.03-9-9 0-4.92 3.84-9.36 6.89-12.06.4-.35.99-.21 1.2.29.98 2.27 2.7 4.09 3.91 5.37.28.29.74.22.92-.14.73-1.42 1.61-3.66 1.15-5.96-.08-.41.28-.78.7-.72 4.16.59 7.23 4.8 7.23 8.22 0 4.97-4.03 9-9 9z" />
                     <path fill="#f59e0b" d="M11.5 17.5c1.93 0 3.5-1.57 3.5-3.5 0-1.88-1.55-3.41-3.23-4.88-.23-.2-.58-.09-.67.19-.51 1.63-1.6 3.19-1.6 4.69 0 1.93 1.57 3.5 2 3.5z" />
@@ -369,7 +369,7 @@
                   class="job-row-apply"
                   @click.stop
                 >
-                  <span>Ứng tuyển</span>
+                  <span>Apply Now</span>
                   <span class="apply-arrow" aria-hidden="true">→</span>
                 </NuxtLink>
               </div>
@@ -383,7 +383,7 @@
             class="section-cta-link"
             @click="viewAllClick({ postType: 'Urgent' })"
           >
-            <span>Xem tất cả việc làm tuyển gấp</span>
+            <span>View All Urgent Jobs</span>
             <span class="cta-arrow" aria-hidden="true">→</span>
           </button>
         </div>
@@ -395,13 +395,13 @@
       <div class="container">
         <div class="section-head section-head-between">
           <div>
-            <h2>Địa điểm nổi bật</h2>
+            <h2>Popular Locations</h2>
             <p class="section-subtitle">
-              Khám phá cơ hội việc làm giáo dục tại các thành phố trọng điểm cả nước
+              Discover teaching opportunities in Vietnam's most vibrant educational hubs
             </p>
           </div>
           <NuxtLink to="/jobs/search" class="section-head-link">
-            <span>Xem tất cả địa điểm</span>
+            <span>Explore all locations</span>
             <span aria-hidden="true">→</span>
           </NuxtLink>
         </div>
@@ -417,7 +417,7 @@
             <div class="city-card-bg">
               <img
                 :src="city.image"
-                :alt="`Việc làm giáo viên tại ${city.name}`"
+                :alt="`Teaching jobs in ${city.name}`"
                 loading="lazy"
               >
             </div>
@@ -451,7 +451,7 @@ import { formatSalaryRange } from '~/utils/formatSalary'
 const config = useRuntimeConfig()
 
 useHead({
-  title: 'Trang chủ',
+  title: 'Home - GetTeachingJobs',
 })
 
 const {
@@ -516,11 +516,11 @@ type HeroChip = {
 }
 
 const heroChips: HeroChip[] = [
-  { text: 'Giáo viên Tiếng Anh', positionClass: 'hero-floating-chip-top' },
-  { text: 'Giáo viên Mầm non', positionClass: 'hero-floating-chip-upper-right' },
-  { text: 'Giáo viên Toán', positionClass: 'hero-floating-chip-upper-left' },
-  { text: 'Giáo viên Tiểu học', positionClass: 'hero-floating-chip-low-left' },
-  { text: 'Giáo viên IELTS', positionClass: 'hero-floating-chip-low-right' },
+  { text: 'English Teacher', positionClass: 'hero-floating-chip-top' },
+  { text: 'Kindergarten Teacher', positionClass: 'hero-floating-chip-upper-right' },
+  { text: 'Math Teacher', positionClass: 'hero-floating-chip-upper-left' },
+  { text: 'Primary Teacher', positionClass: 'hero-floating-chip-low-left' },
+  { text: 'IELTS Teacher', positionClass: 'hero-floating-chip-low-right' },
 ]
 
 let disposeHeroParallax: (() => void) | undefined
@@ -682,65 +682,65 @@ const randomLength = Math.floor(Math.random() * 2) + 6
 const popularTags = shuffled.slice(0, randomLength)
 
 const heroQuickTags = [
-  { label: 'Trợ Giảng', value: '26' },
-  { label: 'Giáo Viên Toán', value: '4' },
-  { label: 'Giáo Viên Ngữ Văn', value: '3' },
-  { label: 'Giáo Viên Tiếng Anh', value: '5' },
+  { label: 'Teaching Assistant', value: '26' },
+  { label: 'Math Teacher', value: '4' },
+  { label: 'Science Teacher', value: '9' },
+  { label: 'English Teacher', value: '5' },
 ]
 
 const featuredCategories = [
   {
     id: '5',
-    name: 'Giáo viên Tiếng Anh',
-    countText: '350+ vị trí tuyển dụng',
+    name: 'English Teacher',
+    countText: '350+ openings',
     iconSvg: '<circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>',
   },
   {
     id: '2',
-    name: 'Giáo viên Tiểu học',
-    countText: '170+ vị trí tuyển dụng',
+    name: 'Primary School Teacher',
+    countText: '170+ openings',
     iconSvg: '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>',
   },
   {
     id: '13',
-    name: 'Giáo viên Nghệ thuật',
-    countText: '130+ vị trí tuyển dụng',
+    name: 'Art & Music Teacher',
+    countText: '130+ openings',
     iconSvg: '<circle cx="13.5" cy="6.5" r=".5" fill="currentColor"></circle><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"></circle><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"></circle><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"></circle><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.563-2.512 5.563-5.563C22 6.5 17.5 2 12 2z"></path>',
   },
   {
     id: '4',
-    name: 'Giáo viên Toán học',
-    countText: '60+ vị trí tuyển dụng',
+    name: 'Math Teacher',
+    countText: '60+ openings',
     iconSvg: '<rect x="4" y="2" width="16" height="20" rx="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line><line x1="16" y1="14" x2="16" y2="18"></line><path d="M16 10h.01"></path><path d="M12 10h.01"></path><path d="M8 10h.01"></path><path d="M12 14h.01"></path><path d="M8 14h.01"></path><path d="M12 18h.01"></path><path d="M8 18h.01"></path>',
   },
   {
     id: '1',
-    name: 'Giáo viên Mầm non',
-    countText: '30+ vị trí tuyển dụng',
+    name: 'Kindergarten Teacher',
+    countText: '30+ openings',
     iconSvg: '<circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line>',
   },
   {
     id: '23',
-    name: 'Giáo viên Tiếng Trung',
-    countText: '40+ vị trí tuyển dụng',
+    name: 'Foreign Language Teacher',
+    countText: '40+ openings',
     iconSvg: '<path d="m5 8 6 6"></path><path d="m4 14 6-6 2-3"></path><path d="M2 5h12"></path><path d="M7 2h1"></path><path d="m22 22-5-10-5 10"></path><path d="M14 18h6"></path>',
   },
   {
     id: '11',
-    name: 'Giáo viên Tin học',
-    countText: '20+ vị trí tuyển dụng',
+    name: 'Computer Science & IT',
+    countText: '20+ openings',
     iconSvg: '<rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line>',
   },
   {
     id: '25',
-    name: 'Giáo viên STEM / STEAM',
-    countText: '10+ vị trí tuyển dụng',
+    name: 'STEM / STEAM Teacher',
+    countText: '10+ openings',
     iconSvg: '<path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path>',
   },
   {
     id: '12',
-    name: 'Giáo dục Thể chất',
-    countText: '10+ vị trí tuyển dụng',
+    name: 'Physical Education (PE)',
+    countText: '10+ openings',
     iconSvg: '<circle cx="12" cy="12" r="10"></circle><path d="m4.93 4.93 4.24 4.24"></path><path d="m14.83 9.17 4.24-4.24"></path><path d="m14.83 14.83 4.24 4.24"></path><path d="m9.17 14.83-4.24 4.24"></path><circle cx="12" cy="12" r="4"></circle>',
   },
 ]
@@ -748,25 +748,40 @@ const featuredCategories = [
 const featuredCities = [
   {
     id: '29',
-    name: 'TP. Hồ Chí Minh',
-    countText: '350+ việc làm',
+    name: 'Ho Chi Minh City',
+    countText: '350+ jobs',
     image: '/images/cities/hcm.jpg',
     isLarge: true,
   },
   {
     id: '12',
-    name: 'Hà Nội',
-    countText: '280+ việc làm',
+    name: 'Hanoi',
+    countText: '280+ jobs',
     image: '/images/cities/hanoi.jpg',
     isLarge: false,
   },
   {
     id: '21',
-    name: 'Đà Nẵng',
-    countText: '120+ việc làm',
+    name: 'Da Nang',
+    countText: '120+ jobs',
     image: '/images/cities/danang.jpg',
     isLarge: false,
   },
+  {
+    id: '13',
+    name: 'Hai Phong',
+    countText: '60+ jobs',
+    image: '/images/cities/haiphong.jpg',
+    isLarge: false,
+  },
+  {
+    id: '33',
+    name: 'Can Tho',
+    countText: '40+ jobs',
+    image: '/images/cities/cantho.jpg',
+    isLarge: false,
+  },
+]
   {
     id: '13',
     name: 'Hải Phòng',
@@ -785,9 +800,9 @@ const featuredCities = [
 
 
 const stats = [
-  { count: '2,543', label: 'Việc làm' },
-  { count: '856', label: 'Cơ sở giáo dục' },
-  { count: '15,420', label: 'Giáo viên toàn Quốc' },
+  { count: '2,543', label: 'Teaching Jobs' },
+  { count: '856', label: 'Schools & Centers' },
+  { count: '15,420', label: 'Educators in Vietnam' },
 ]
 
 const tabs = [
@@ -1099,11 +1114,11 @@ const timeAgo = (d: Date) => {
   const date = d instanceof Date ? d : new Date(d)
   const diffMs = Date.now() - date.getTime()
   const diffMins = Math.floor(diffMs / 60000)
-  if (diffMins < 60) return `${Math.max(diffMins, 1)} phút trước`
+  if (diffMins < 60) return `${Math.max(diffMins, 1)}m ago`
   const diffHours = Math.floor(diffMins / 60)
-  if (diffHours < 24) return `${diffHours} giờ trước`
+  if (diffHours < 24) return `${diffHours}h ago`
   const diffDays = Math.floor(diffHours / 24)
-  return `${diffDays} ngày trước`
+  return `${diffDays}d ago`
 }
 
 const getExperienceText = (job: JobModel) => {
@@ -1284,12 +1299,12 @@ const truncateText = (text: string, maxLength: number = 40): string => {
 
 const getBlogBadgeText = (blog: BlogModel) => {
   const t = (blog.title || '').toLowerCase()
-  if (t.includes('cv')) return 'CV'
-  if (t.includes('phỏng vấn') || t.includes('phong van')) return 'Phỏng vấn'
-  if (t.includes('kinh nghiệm') || t.includes('kinh nghiem')) return 'Kinh nghiệm'
-  if (t.includes('lương') || t.includes('luong')) return 'Lương'
-  if (t.includes('hồ sơ') || t.includes('ho so')) return 'Hồ sơ'
-  return 'Cẩm nang'
+  if (t.includes('cv') || t.includes('resume')) return 'Resume'
+  if (t.includes('phỏng vấn') || t.includes('phong van') || t.includes('interview')) return 'Interview'
+  if (t.includes('kinh nghiệm') || t.includes('kinh nghiem') || t.includes('tips')) return 'Tips'
+  if (t.includes('lương') || t.includes('luong') || t.includes('salary')) return 'Salary'
+  if (t.includes('hồ sơ') || t.includes('ho so') || t.includes('visa')) return 'Visa & Legal'
+  return 'Guide'
 }
 
 const guideCardMediaVariants = ['guide-card-media-blue', 'guide-card-media-dark', 'guide-card-media-light'] as const

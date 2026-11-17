@@ -2,7 +2,7 @@
   <form class="apply-modal-form" @submit.prevent="submit">
     <!-- 1. CV CỦA BẠN (Top Box matching VLDL) -->
     <section class="apply-vldl-cv-box">
-      <h3 class="apply-vldl-cv-title">CV của bạn <span class="is-required">*</span></h3>
+      <h3 class="apply-vldl-cv-title">Your Resume / CV <span class="is-required">*</span></h3>
 
       <!-- When CV is chosen/uploaded -->
       <div v-if="hasCvFile" class="apply-vldl-cv-selected">
@@ -19,7 +19,7 @@
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <polyline points="20 6 9 17 4 12" />
               </svg>
-              {{ form.cvFile ? 'Đã chọn tệp' : 'Đã tải lên' }}
+              {{ form.cvFile ? 'File Selected' : 'Uploaded' }}
             </span>
           </div>
         </div>
@@ -32,7 +32,7 @@
             hidden
             @change="onCvSelected"
           />
-          <span>Đổi CV khác</span>
+          <span>Change Resume</span>
         </label>
       </div>
 
@@ -46,10 +46,10 @@
             hidden
             @change="onCvSelected"
           />
-          <span>Tải lên CV</span>
+          <span>Upload Resume</span>
         </label>
         <p class="apply-vldl-cv-hint">
-          Vui lòng tải lên tệp .doc, .docx hoặc .pdf, tối đa 3MB và không có mật khẩu bảo vệ
+          Please upload .doc, .docx or .pdf file (max 3MB, unencrypted)
         </p>
       </div>
 
@@ -61,12 +61,12 @@
       class="apply-modal-field"
       :class="{ 'has-error': fieldErrors.fullName }"
     >
-      <span class="field-label">Họ và tên <span class="is-required">*</span></span>
+      <span class="field-label">Full Name <span class="is-required">*</span></span>
       <div class="field-input-wrap">
         <input
           v-model="form.fullName"
           type="text"
-          placeholder="Nhập họ và tên đầy đủ của bạn"
+          placeholder="Enter your full name"
           :disabled="isFullNameDisabled"
           @input="onFullNameInput"
           @blur="validateFieldOnBlur('fullName')"
@@ -82,12 +82,12 @@
       class="apply-modal-field"
       :class="{ 'has-error': fieldErrors.email }"
     >
-      <span class="field-label">Email liên hệ <span class="is-required">*</span></span>
+      <span class="field-label">Contact Email <span class="is-required">*</span></span>
       <div class="field-input-wrap has-trailing-icon">
         <input
           v-model="form.email"
           type="email"
-          placeholder="Nhập địa chỉ email của bạn"
+          placeholder="Enter your email address"
           :disabled="isEmailDisabled"
           @blur="validateFieldOnBlur('email')"
           @input="clearFieldError('email')"
@@ -107,12 +107,12 @@
       class="apply-modal-field"
       :class="{ 'has-error': fieldErrors.phone }"
     >
-      <span class="field-label">Số điện thoại <span class="is-required">*</span></span>
+      <span class="field-label">Phone Number <span class="is-required">*</span></span>
       <div class="field-input-wrap has-trailing-icon">
         <input
           v-model="form.phone"
           type="tel"
-          placeholder="Nhập số điện thoại liên hệ"
+          placeholder="Enter contact phone number (e.g. +84...)"
           :disabled="isPhoneDisabled"
           @blur="validateFieldOnBlur('phone')"
           @input="clearFieldError('phone')"
@@ -128,13 +128,13 @@
 
     <!-- 5. COVER LETTER -->
     <label class="apply-modal-field apply-modal-field-textarea">
-      <span class="field-label">Thư giới thiệu / Cover Letter (Không bắt buộc)</span>
+      <span class="field-label">Cover Letter / Introduction (Optional)</span>
       <div class="field-textarea-wrap">
         <textarea
           v-model="form.coverLetter"
           rows="3"
           maxlength="1000"
-          placeholder="Hãy điền thêm thông tin để nhà tuyển dụng biết rõ hơn về thế mạnh của bạn"
+          placeholder="Tell the school more about your teaching background, certifications, and teaching philosophy..."
         />
         <div class="apply-textarea-counter">{{ coverLetterCount }} / 1000</div>
       </div>
@@ -144,11 +144,11 @@
     <label class="apply-vldl-terms-row">
       <input v-model="termsAgreed" type="checkbox" class="apply-vldl-checkbox" />
       <span class="terms-text">
-        Tôi đồng ý với
-        <a href="/policy#dieu-khoan-dieu-kien" target="_blank" rel="noopener noreferrer" class="terms-link" @click.stop>Điều khoản dịch vụ</a>
-        và
-        <a href="/policy#chinh-sach-quyen-rieng-tu" target="_blank" rel="noopener noreferrer" class="terms-link" @click.stop>Chính sách bảo mật</a>
-        của TuyenGiaoVien khi nộp đơn ứng tuyển.
+        I agree to the
+        <a href="/policy#dieu-khoan-dieu-kien" target="_blank" rel="noopener noreferrer" class="terms-link" @click.stop>Terms of Service</a>
+        and
+        <a href="/policy#chinh-sach-quyen-rieng-tu" target="_blank" rel="noopener noreferrer" class="terms-link" @click.stop>Privacy Policy</a>
+        of GetTeachingJobs upon submitting this application.
       </span>
     </label>
 
@@ -164,8 +164,8 @@
         :disabled="!isValid || !termsAgreed || loading"
         @click="submit"
       >
-        <span v-if="!loading">Nộp đơn</span>
-        <span v-else>Đang gửi hồ sơ...</span>
+        <span v-if="!loading">Submit Application</span>
+        <span v-else>Submitting application...</span>
       </button>
     </div>
   </form>
@@ -375,13 +375,13 @@ function onCvSelected(e: Event) {
   ]
 
   if (file.size > maxSize) {
-    cvError.value = 'File tối đa 3MB'
+    cvError.value = 'File size must be 3MB or less'
     input.value = ''
     return
   }
 
   if (!allowedTypes.includes(file.type)) {
-    cvError.value = 'Chỉ hỗ trợ PDF, DOC, DOCX'
+    cvError.value = 'Only PDF, DOC, and DOCX formats are supported'
     input.value = ''
     return
   }

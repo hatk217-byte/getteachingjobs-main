@@ -7,12 +7,12 @@
         class="job-apply-drawer-aside"
         role="dialog"
         aria-modal="false"
-        aria-label="Hồ sơ ứng tuyển"
+        aria-label="Job Application"
       >
         <!-- Header Row (Compact & clean with inline close button) -->
         <div class="apply-modal-header">
           <div class="apply-modal-header-info">
-            <span class="apply-modal-eyebrow">Hồ sơ ứng tuyển</span>
+            <span class="apply-modal-eyebrow">Teaching Job Application</span>
             <h2 :title="job?.title">{{ job?.title || '' }}</h2>
             <p v-if="job?.companyName" :title="job.companyName">{{ job.companyName }}</p>
           </div>
@@ -20,7 +20,7 @@
           <button
             type="button"
             class="apply-modal-close"
-            aria-label="Đóng hồ sơ ứng tuyển"
+            aria-label="Close application drawer"
             @click="open = false"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
@@ -135,7 +135,7 @@ async function onSubmit(data: JobApplicationFormPayload) {
   try {
     const result = await submitApplication(props.job, data)
     if (!result.ok) {
-      submitError.value = result.error || 'Có lỗi xảy ra khi nộp hồ sơ'
+      submitError.value = result.error || 'An error occurred while submitting your application.'
       return
     }
 

@@ -18,12 +18,12 @@
         :class="{ 'is-loading': loading }"
         role="dialog"
         aria-modal="true"
-        aria-label="Đăng ký và đăng nhập"
+        aria-label="Sign In and Register"
       >
         <button
           type="button"
           class="auth-modal-close"
-          aria-label="Đóng form đăng ký và đăng nhập"
+          aria-label="Close dialog"
           :disabled="loading"
           @click.stop.prevent="!loading && deferClose()"
         >
@@ -40,10 +40,10 @@
         <section class="auth-view" data-auth-view="login" :hidden="view !== 'login'">
           <div class="auth-modal-head auth-modal-head-login">
             <h2>
-              Chào mừng bạn đến với<br />
+              Welcome to<br />
               <span class="auth-brand-wordmark">
-                <span class="auth-brand-main">TuyenGiaoVien</span>
-                <span class="auth-brand-dot">.vn</span>
+                <span class="auth-brand-main">GetTeachingJobs</span>
+                <span class="auth-brand-dot">.com</span>
               </span>
             </h2>
           </div>
@@ -54,8 +54,8 @@
                 <input
                   v-model="loginForm.state.email"
                   type="email"
-                  placeholder="Nhập email"
-                  aria-label="Nhập email"
+                  placeholder="Enter your email"
+                  aria-label="Enter email"
                   :disabled="loading"
                   autocomplete="email"
                   @blur="validateLoginFieldOnBlur('email')"
@@ -92,15 +92,15 @@
                 <input
                   v-model="loginForm.state.password"
                   :type="loginShowPassword ? 'text' : 'password'"
-                  placeholder="Nhập mật khẩu"
-                  aria-label="Nhập mật khẩu"
+                  placeholder="Enter your password"
+                  aria-label="Enter password"
                   :disabled="loading"
                   autocomplete="current-password"
                 />
                 <button
                   type="button"
                   class="auth-field-icon auth-field-icon-btn"
-                  :aria-label="loginShowPassword ? 'Ẩn mật khẩu' : 'Hiện mật khẩu'"
+                  :aria-label="loginShowPassword ? 'Hide password' : 'Show password'"
                   @click="loginShowPassword = !loginShowPassword"
                 >
                   <svg
@@ -165,11 +165,11 @@
             <div class="auth-meta-row">
               <label class="auth-check">
                 <input v-model="rememberMe" type="checkbox" :disabled="loading" />
-                <span>Duy trì đăng nhập</span>
+                <span>Remember me</span>
               </label>
 
               <button type="button" class="auth-text-link" @click="forgotPassword">
-                Quên mật khẩu
+                Forgot password?
               </button>
             </div>
 
@@ -180,18 +180,18 @@
               :disabled="loading"
             >
               <span v-if="loading && view === 'login'" class="auth-spinner" aria-hidden="true" />
-              <span>{{ loading && view === 'login' ? 'Đang đăng nhập...' : 'Đăng nhập' }}</span>
+              <span>{{ loading && view === 'login' ? 'Signing in...' : 'Sign In' }}</span>
             </button>
 
             <p class="auth-switch-copy">
-              <span>Bạn chưa có tài khoản?</span>
+              <span>Don't have an account?</span>
               <button
                 type="button"
                 class="auth-switch-link"
                 :disabled="loading"
                 @click="!loading && switchView('register', 'candidate')"
               >
-                Đăng ký ngay
+                Register now
               </button>
             </p>
           </form>
@@ -199,10 +199,10 @@
 
         <section class="auth-view" data-auth-view="register" :hidden="view !== 'register'">
           <div class="auth-modal-head">
-            <h2>Đăng ký thành viên</h2>
+            <h2>Create an Account</h2>
           </div>
 
-          <div class="auth-role-switch" role="tablist" aria-label="Loại tài khoản">
+          <div class="auth-role-switch" role="tablist" aria-label="Account type">
             <button
               type="button"
               class="auth-role-btn"
@@ -212,7 +212,7 @@
               :disabled="loading"
               @click="!loading && (registerForm.activeTab = 'candidate')"
             >
-              Ứng viên
+              Teacher / Educator
             </button>
             <button
               type="button"
@@ -223,7 +223,7 @@
               :disabled="loading"
               @click="!loading && (registerForm.activeTab = 'employer')"
             >
-              Nhà tuyển dụng
+              School / Employer
             </button>
           </div>
 
@@ -241,8 +241,8 @@
                   <input
                     v-model="registerForm.state.fullName"
                     type="text"
-                    placeholder="Họ và tên"
-                    aria-label="Họ và tên"
+                    placeholder="Full Name"
+                    aria-label="Full Name"
                     :disabled="loading"
                     autocomplete="name"
                     @input="onFullNameInput"
@@ -268,15 +268,15 @@
                   <input
                     v-model="registerForm.state.taxCode"
                     type="text"
-                    placeholder="Mã số thuế"
-                    aria-label="Mã số thuế"
+                    placeholder="Tax ID / Registration Code"
+                    aria-label="Tax ID"
                     :disabled="loading"
                     @blur="onEmployerTaxCodeBlur"
                     @input="onEmployerTaxCodeInput"
                   />
                 </span>
                 <p v-if="mstChecking" class="auth-field-hint">
-                  Đang kiểm tra...
+                  Verifying...
                 </p>
                 <p
                   v-else-if="mstBlurMessage"
@@ -294,8 +294,8 @@
                   <input
                     v-model="registerForm.state.email"
                     type="email"
-                    placeholder="Nhập email"
-                    aria-label="Nhập email"
+                    placeholder="Enter your email"
+                    aria-label="Enter email"
                     :disabled="loading"
                     autocomplete="email"
                     @blur="validateRegisterFieldOnBlur('email')"
@@ -332,8 +332,8 @@
                   <input
                     v-model="registerForm.state.phoneNumber"
                     type="tel"
-                    placeholder="Nhập số điện thoại"
-                    aria-label="Nhập số điện thoại"
+                    placeholder="Phone number"
+                    aria-label="Phone number"
                     :disabled="loading"
                     autocomplete="tel"
                     @blur="validateRegisterFieldOnBlur('phoneNumber')"
@@ -362,15 +362,15 @@
                 <input
                   v-model="registerForm.state.password"
                   :type="registerShowPassword ? 'text' : 'password'"
-                  placeholder="Nhập mật khẩu"
-                  aria-label="Nhập mật khẩu"
+                  placeholder="Create password"
+                  aria-label="Create password"
                   :disabled="loading"
                   autocomplete="new-password"
                 />
                 <button
                   type="button"
                   class="auth-field-icon auth-field-icon-btn"
-                  :aria-label="registerShowPassword ? 'Ẩn mật khẩu' : 'Hiện mật khẩu'"
+                  :aria-label="registerShowPassword ? 'Hide password' : 'Show password'"
                   @click="registerShowPassword = !registerShowPassword"
                 >
                   <svg
@@ -435,10 +435,10 @@
             <label class="auth-check auth-check-terms">
               <input v-model="agreeTerms" type="checkbox" :disabled="loading" />
               <span>
-                Tôi đồng ý với
-                <a href="/policy#dieu-khoan-dieu-kien" target="_blank" rel="noopener noreferrer" @click.stop>Điều khoản và Điều kiện</a>
-                và
-                <a href="/policy#chinh-sach-quyen-rieng-tu" target="_blank" rel="noopener noreferrer" @click.stop>Chính sách quyền riêng tư</a>
+                I agree to the
+                <a href="/policy#dieu-khoan-dieu-kien" target="_blank" rel="noopener noreferrer" @click.stop>Terms and Conditions</a>
+                and
+                <a href="/policy#chinh-sach-quyen-rieng-tu" target="_blank" rel="noopener noreferrer" @click.stop>Privacy Policy</a>
               </span>
             </label>
 
@@ -452,18 +452,18 @@
               :disabled="!agreeTerms || loading"
             >
               <span v-if="loading && view === 'register'" class="auth-spinner" aria-hidden="true" />
-              <span>{{ loading && view === 'register' ? 'Đang đăng ký...' : 'Đăng ký' }}</span>
+              <span>{{ loading && view === 'register' ? 'Registering...' : 'Register' }}</span>
             </button>
 
             <p class="auth-switch-copy">
-              <span>Bạn đã có tài khoản?</span>
+              <span>Already have an account?</span>
               <button
                 type="button"
                 class="auth-switch-link"
                 :disabled="loading"
                 @click="!loading && switchView('login')"
               >
-                Đăng nhập ngay
+                Sign in now
               </button>
             </p>
           </form>
@@ -691,7 +691,7 @@ function forgotPassword() {
 
 function firstZodMessage(result: { success: boolean; error?: { issues: { message: string }[] } }) {
   if (result.success) return ''
-  return result.error?.issues[0]?.message || 'Vui lòng kiểm tra lại thông tin.'
+  return result.error?.issues[0]?.message || 'Please check your information.'
 }
 
 async function onSubmitLogin() {
@@ -719,10 +719,10 @@ async function onSubmitLogin() {
       return
     }
 
-    loginError.value = 'Email hoặc mật khẩu chưa đúng.'
+    loginError.value = 'Incorrect email or password.'
   } catch (error: any) {
     loginError.value =
-      error?.message || 'Email hoặc mật khẩu chưa đúng.'
+      error?.message || 'Incorrect email or password.'
   } finally {
     loading.value = false
   }
@@ -780,7 +780,7 @@ async function onSubmitRegister() {
 
       useNotify({
         type: 'success',
-        message: 'Đăng ký thành công.',
+        message: 'Registration successful.',
       })
       close()
       await router.push(ROUTE_PAGE.DASHBOARD.COMPANY)
@@ -814,16 +814,16 @@ async function onSubmitRegister() {
 
       useNotify({
         type: 'success',
-        message: 'Đăng ký thành công.',
+        message: 'Registration successful.',
       })
       close()
       await redirectToRoleDashboard(authStore.user?.role)
       return
     }
 
-    registerError.value = 'Đăng ký thất bại. Vui lòng thử lại.'
+    registerError.value = 'Registration failed. Please try again.'
   } catch (error: any) {
-    registerError.value = error?.message || 'Đăng ký thất bại. Vui lòng thử lại.'
+    registerError.value = error?.message || 'Registration failed. Please try again.'
   } finally {
     loading.value = false
   }

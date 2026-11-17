@@ -7,11 +7,11 @@
           :class="{ 'blog-featured-media-one': !blog?.image }"
           :style="bannerStyle"
           role="img"
-          :aria-label="blog?.title || 'Ảnh bài viết'"
+          :aria-label="blog?.title || 'Article image'"
         />
         <div class="blog-detail-heading">
           <div v-if="preview" class="blog-detail-heading-top">
-            <span class="detail-preview-badge">Nháp</span>
+            <span class="detail-preview-badge">Draft</span>
           </div>
           <h1>{{ blog?.title || '' }}</h1>
         </div>
@@ -23,7 +23,7 @@
         <div class="blog-detail-layout">
           <article class="blog-detail-article">
             <div v-if="loading" class="blog-detail-loading">
-              Đang tải bài viết...
+              Loading article...
             </div>
             <template v-else-if="blog">
               <p v-if="blog.description" class="blog-detail-lead">
@@ -36,21 +36,21 @@
               />
             </template>
             <div v-else class="blog-detail-empty">
-              Không tìm thấy bài viết.
+              Article not found.
             </div>
           </article>
 
           <aside v-if="showSidebar" class="blog-detail-sidebar">
             <div class="blog-detail-sidebar-card blog-detail-sidebar-card-primary">
-              <span class="blog-detail-sidebar-kicker">Bạn đang tìm việc?</span>
-              <h3>Tìm công việc giáo viên phù hợp</h3>
+              <span class="blog-detail-sidebar-kicker">Looking for teaching jobs?</span>
+              <h3>Find your ideal teaching position in Vietnam</h3>
               <NuxtLink to="/jobs/search" class="primary-btn blog-detail-sidebar-btn">
-                Xem việc làm
+                Browse Jobs
               </NuxtLink>
             </div>
 
             <div v-if="showRelated && relatedBlogs.length" class="blog-detail-sidebar-card">
-              <h3>Bài viết liên quan</h3>
+              <h3>Related Articles</h3>
               <div class="blog-detail-related-list">
                 <NuxtLink
                   v-for="r in relatedBlogs"
@@ -66,10 +66,10 @@
             </div>
 
             <div class="blog-detail-sidebar-card blog-detail-sidebar-card-employer">
-              <span class="blog-detail-sidebar-kicker">Nhà tuyển dụng</span>
-              <h3>Đăng tin tuyển giáo viên</h3>
+              <span class="blog-detail-sidebar-kicker">Schools &amp; Recruiters</span>
+              <h3>Post a teaching vacancy</h3>
               <NuxtLink to="/jobs/upload" class="blog-detail-text-link">
-                Đăng tin miễn phí
+                Post a Free Job
               </NuxtLink>
             </div>
           </aside>
@@ -78,7 +78,7 @@
         <div v-if="showBackLink" class="blog-detail-back">
           <NuxtLink to="/blog">
             <UIcon name="i-lucide-arrow-left" class="w-4 h-4" />
-            Quay lại
+            Back to Blog
           </NuxtLink>
         </div>
       </div>

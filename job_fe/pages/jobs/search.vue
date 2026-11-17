@@ -17,7 +17,7 @@
                 v-model="searchParams.keyword"
                 type="text"
                 name="keyword"
-                placeholder="Tên vị trí, trường học hoặc từ khóa..."
+                placeholder="Job title, school or keywords..."
               >
             </div>
 
@@ -35,7 +35,7 @@
                   multiple
                   searchable
                   class="w-full text-sm"
-                  placeholder="Bộ môn"
+                  placeholder="Subject / Category"
                   label="label"
                   :clear-search-on-blur="() => true"
                   @open="onMultiSelectOpen"
@@ -50,7 +50,7 @@
                       <button
                         type="button"
                         class="vs__deselect"
-                        :title="`Bỏ chọn ${option.label}`"
+                        :title="`Remove ${option.label}`"
                         @click.stop="deselect(option)"
                       >
                         ✕
@@ -84,7 +84,7 @@
                   multiple
                   searchable
                   class="w-full text-sm"
-                  placeholder="Tỉnh thành"
+                  placeholder="City / Province"
                   label="label"
                   :clear-search-on-blur="() => true"
                   @open="onMultiSelectOpen"
@@ -99,7 +99,7 @@
                       <button
                         type="button"
                         class="vs__deselect"
-                        :title="`Bỏ chọn ${option.label}`"
+                        :title="`Remove ${option.label}`"
                         @click.stop="deselect(option)"
                       >
                         ✕
@@ -121,7 +121,7 @@
             <button
               type="submit"
               class="primary-btn jobs-directory-submit"
-              aria-label="Tìm việc làm"
+              aria-label="Search jobs"
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <path d="M21 21L16.65 16.65M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
@@ -144,15 +144,15 @@
                 class="sidebar-clear-btn"
                 @click="clearFilters"
               >
-                <span>Xóa bộ lọc đã chọn</span>
+                <span>Clear selected filters</span>
                 <span class="clear-icon" aria-hidden="true">✕</span>
               </button>
             </div>
 
-            <!-- Group 1: Hình thức làm việc -->
+            <!-- Group 1: Employment Type -->
             <div class="filter-group">
               <div class="filter-group-title">
-                <span>Hình thức làm việc</span>
+                <span>Employment Type</span>
                 <span v-if="selectedFilters.employmentType.length" class="text-xs font-semibold text-emerald-600">
                   ({{ selectedFilters.employmentType.length }})
                 </span>
@@ -173,10 +173,10 @@
               </div>
             </div>
 
-            <!-- Group 2: Kinh nghiệm -->
+            <!-- Group 2: Experience Level -->
             <div class="filter-group">
               <div class="filter-group-title">
-                <span>Kinh nghiệm</span>
+                <span>Experience Level</span>
                 <span v-if="selectedFilters.experienceLevel.length" class="text-xs font-semibold text-emerald-600">
                   ({{ selectedFilters.experienceLevel.length }})
                 </span>
@@ -197,10 +197,10 @@
               </div>
             </div>
 
-            <!-- Group 3: Cấp học -->
+            <!-- Group 3: Grade Level -->
             <div class="filter-group">
               <div class="filter-group-title">
-                <span>Cấp học</span>
+                <span>Grade / Level</span>
                 <span v-if="selectedFilters.grade.length" class="text-xs font-semibold text-emerald-600">
                   ({{ selectedFilters.grade.length }})
                 </span>
@@ -232,7 +232,7 @@
             <div v-else-if="filteredJobs.length > 0" class="jobs-directory-results space-y-4">
               <p class="job-results-count">
                 <span class="job-results-count__number">{{ filteredJobs.length }}</span>
-                <span class="job-results-count__label">việc làm phù hợp</span>
+                <span class="job-results-count__label">matching teaching jobs</span>
               </p>
 
               <div class="job-list-urgent">
@@ -302,7 +302,7 @@
                   </div>
 
                   <div class="job-row-side">
-                    <span v-if="shouldShowUrgentTag(job)" class="job-fire-icon" title="Tuyển gấp" aria-label="Tuyển gấp">
+                    <span v-if="shouldShowUrgentTag(job)" class="job-fire-icon" title="Urgent" aria-label="Urgent">
                       <svg viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true">
                         <path fill="#ea580c" d="M12 23c-4.97 0-9-4.03-9-9 0-4.92 3.84-9.36 6.89-12.06.4-.35.99-.21 1.2.29.98 2.27 2.7 4.09 3.91 5.37.28.29.74.22.92-.14.73-1.42 1.61-3.66 1.15-5.96-.08-.41.28-.78.7-.72 4.16.59 7.23 4.8 7.23 8.22 0 4.97-4.03 9-9 9z" />
                         <path fill="#f59e0b" d="M11.5 17.5c1.93 0 3.5-1.57 3.5-3.5 0-1.88-1.55-3.41-3.23-4.88-.23-.2-.58-.09-.67.19-.51 1.63-1.6 3.19-1.6 4.69 0 1.93 1.57 3.5 2 3.5z" />
@@ -315,7 +315,7 @@
                       class="job-row-apply"
                       @click.stop
                     >
-                      <span>Ứng tuyển</span>
+                      <span>Apply Now</span>
                       <span class="apply-arrow" aria-hidden="true">→</span>
                     </NuxtLink>
                   </div>
@@ -326,13 +326,13 @@
               <nav
                 v-if="totalPages > 1"
                 class="jobs-search-pagination"
-                aria-label="Phân trang việc làm"
+                aria-label="Jobs pagination"
               >
                 <button
                   type="button"
                   class="pagination-nav-btn"
                   :disabled="currentPage <= 1"
-                  aria-label="Trang trước"
+                  aria-label="Previous page"
                   @click="goToPage(currentPage - 1)"
                 >
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -348,7 +348,7 @@
                       type="button"
                       class="pagination-page-btn"
                       :class="{ 'is-active': item === currentPage }"
-                      :aria-label="`Trang ${item}`"
+                      :aria-label="`Page ${item}`"
                       :aria-current="item === currentPage ? 'page' : undefined"
                       @click="goToPage(item)"
                     >
@@ -361,7 +361,7 @@
                   type="button"
                   class="pagination-nav-btn"
                   :disabled="currentPage >= totalPages"
-                  aria-label="Trang tiếp theo"
+                  aria-label="Next page"
                   @click="goToPage(currentPage + 1)"
                 >
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -395,7 +395,7 @@
                   <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
                   <path d="M3 3v5h5" />
                 </svg>
-                <span>Xóa bộ lọc & tìm kiếm lại</span>
+                <span>Reset filters & search again</span>
               </button>
             </div>
           </main>
@@ -475,12 +475,12 @@ const {
   requiredQualificationLabel,
 } = useJobFilters()
 
-const URGENT_TAG_LABEL = 'Tuyển gấp'
+const URGENT_TAG_LABEL = 'Urgent'
 
 const getJobPostTypeLabel = (postType?: string | null): string => {
   const raw = (postType ?? '').trim()
   if (!raw) return ''
-  if (raw === URGENT_TAG_LABEL) return URGENT_TAG_LABEL
+  if (raw === URGENT_TAG_LABEL || raw === 'Tuyển gấp') return URGENT_TAG_LABEL
 
   const opt = postTypeOptions.find(
     (p) => p.value.toLowerCase() === raw.toLowerCase(),
@@ -489,8 +489,10 @@ const getJobPostTypeLabel = (postType?: string | null): string => {
   return opt?.label ?? ''
 }
 
-const shouldShowUrgentTag = (job: JobModel) =>
-  getJobPostTypeLabel(job.postType) === URGENT_TAG_LABEL
+const shouldShowUrgentTag = (job: JobModel) => {
+  const label = getJobPostTypeLabel(job.postType)
+  return label === URGENT_TAG_LABEL || String(job.postType).toLowerCase() === 'urgent'
+}
 
 const getEmploymentTypeText = (job: JobModel) => {
   const key = job.typeOfEmployment
@@ -512,7 +514,7 @@ const getExperienceText = (job: JobModel) => {
 }
 
 useHead({
-  title: 'Tìm việc',
+  title: 'Search Teaching Jobs - GetTeachingJobs',
 })
 
 // Route
@@ -828,7 +830,7 @@ const clearSearch = async () => {
 
 // Function to get location label
 const getLocationLabel = (locationValue: string): string => {
-  if (locationValue === '0') return 'Toàn Quốc'
+  if (locationValue === '0') return 'All Vietnam'
 
   return (locationEnumLabel as any)?.[locationValue] ?? (locationEnumLabel as any)?.[Number(locationValue)] ?? locationValue
 }
@@ -927,11 +929,11 @@ const timeAgo = (d: Date | string) => {
   const date = d instanceof Date ? d : new Date(d)
   const diffMs = Date.now() - date.getTime()
   const diffMins = Math.floor(diffMs / 60000)
-  if (diffMins < 60) return `${Math.max(diffMins, 1)} phút trước`
+  if (diffMins < 60) return `${Math.max(diffMins, 1)}m ago`
   const diffHours = Math.floor(diffMins / 60)
-  if (diffHours < 24) return `${diffHours} giờ trước`
+  if (diffHours < 24) return `${diffHours}h ago`
   const diffDays = Math.floor(diffHours / 24)
-  return `${diffDays} ngày trước`
+  return `${diffDays}d ago`
 }
 
 // Initialize search from route query

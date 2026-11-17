@@ -1,0 +1,1162 @@
+{
+  "app": {
+    "name": "GetTeachingJobs"
+  },
+  "auth": {
+    "login": "Sign In",
+    "loginFailed": "Sign in failed",
+    "welcomeBack": "Welcome back!",
+    "emailAddress": "Email address",
+    "password": "Password",
+    "continue": "Continue",
+    "forgotPassword": "Forgot password",
+    "forgotPasswordTitle": "Forgot Password",
+    "forgotPasswordDescription": "Enter your registered email address. We will send a password reset link if the email exists in our system.",
+    "forgotPasswordSubmit": "Send Reset Link",
+    "forgotPasswordSending": "Sending...",
+    "forgotPasswordSuccess": "If your email is registered, you will receive password reset instructions shortly.",
+    "resetPasswordTitle": "Reset Password",
+    "resetPasswordDescription": "Enter a new password for your account.",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm Password",
+    "resetPasswordSubmit": "Reset Password",
+    "resetPasswordSubmitting": "Processing...",
+    "resetPasswordSuccess": "Your password has been reset successfully. Please sign in.",
+    "resetPasswordInvalidToken": "Invalid or expired password reset link.",
+    "backToLogin": "Back to Sign In",
+    "newToJobster": "New to GetTeachingJobs?",
+    "createAccount": "Create an account",
+    "fullName": "Full Name",
+    "createPassword": "Create password",
+    "alreadyHaveAccount": "Already have an account?",
+    "signIn": "Sign In",
+    "registerSuccess": "Account created successfully!",
+    "registerFailed": "Registration failed. Please try again later.",
+    "sessionExpired": "Session expired. Please sign in again.",
+    "pleaseLogin": "Please sign in to continue.",
+    "candidate": "Teacher / Educator",
+    "recruiter": "School / Employer",
+    "taxCode": "Tax ID / School License",
+    "mstNotFound": "School or institution not found with the provided Tax ID."
+  },
+  "common": {
+    "crop": "Crop",
+    "cropImage": "Crop Image",
+    "zoomIn": "Zoom In",
+    "zoomOut": "Zoom Out",
+    "rotate": "Rotate",
+    "cancel": "Cancel",
+    "close": "Close",
+    "logout": "Sign Out",
+    "confirm": "Confirm",
+    "processing": "Processing...",
+    "dragToMove": "Drag to reposition",
+    "actions": {
+      "ok": "OK"
+    },
+    "fields": {
+      "email": "Email address",
+      "password": "Password"
+    },
+    "validate": {
+      "required": "{field} is required",
+      "email": "{field} is invalid",
+      "passwordMin": "{field} must be at least 6 characters",
+      "passwordSpecial": "{field} must contain at least one special character",
+      "passwordConfirmMatch": "Confirm password does not match",
+      "dateInvalid": "{field} is not a valid date",
+      "dateFuture": "{field} must be a future date",
+      "datePast": "{field} must be a past date",
+      "phone": "{field} is invalid",
+      "invalid": "{field} is invalid"
+    },
+    "error": {
+      "title": "An error occurred",
+      "retry": "Try again"
+    },
+    "masterData": {
+      "category": {
+        "giaovienmamnon": "Kindergarten / Preschool Teacher",
+        "giaovientieuhoc": "Primary / Elementary School Teacher",
+        "giaoviennguvan": "English Literature / Language Arts Teacher",
+        "giaovientoan": "Math Teacher",
+        "giaovientienganh": "English Teacher (ESL / EFL / IELTS)",
+        "giaoviengdcd": "Social Studies / Civics Teacher",
+        "giaovienlichsu": "History Teacher",
+        "giaoviendiali": "Geography Teacher",
+        "giaovienkhoahoctn": "Science Teacher (General Science)",
+        "giaoviencongnghe": "Design & Technology Teacher",
+        "giaovientinhoc": "Computer Science / ICT Teacher",
+        "giaovienthechat": "Physical Education (PE) Teacher",
+        "giaoviennghethuat": "Arts & Music Teacher",
+        "giaovienhoatdongtrainghiem": "Experiential Learning / Life Skills Teacher",
+        "giaovienvatly": "Physics Teacher",
+        "giaovienhoahoc": "Chemistry Teacher",
+        "giaoviengdiaphuong": "Vietnamese Studies / Culture Teacher",
+        "giaovientiengphap": "French Language Teacher",
+        "giaovientienhduc": "German Language Teacher",
+        "giaovientiengnga": "Russian Language Teacher",
+        "giaovientiengnhat": "Japanese Language Teacher",
+        "giaovientienghan": "Korean Language Teacher",
+        "giaovientiengtrung": "Chinese (Mandarin) Teacher",
+        "giaovientiengtbn": "Spanish Language Teacher",
+        "giaovienstem": "STEM / STEAM Teacher",
+        "trogiang": "Teaching Assistant",
+        "trogiangtienhanh": "English Teaching Assistant",
+        "trogiangtoan": "Math Teaching Assistant"
+      },
+      "location": {
+        "tuyenquang": "Tuyen Quang",
+        "caobang": "Cao Bang",
+        "laichau": "Lai Chau",
+        "laocai": "Lao Cai (Sa Pa)",
+        "thainguyen": "Thai Nguyen",
+        "dienbien": "Dien Bien",
+        "langson": "Lang Son",
+        "sonla": "Son La",
+        "phutho": "Phu Tho",
+        "bacninh": "Bac Ninh",
+        "quangninh": "Quang Ninh (Ha Long)",
+        "hanoi": "Hanoi",
+        "haiphong": "Hai Phong",
+        "hungyen": "Hung Yen",
+        "ninhbinh": "Ninh Binh",
+        "thanhhoa": "Thanh Hoa",
+        "nghean": "Nghe An (Vinh)",
+        "hatinh": "Ha Tinh",
+        "quangtri": "Quang Tri",
+        "hue": "Thua Thien Hue",
+        "danang": "Da Nang",
+        "quangngai": "Quang Ngai",
+        "gialai": "Gia Lai (Pleiku)",
+        "daklak": "Dak Lak (Buon Ma Thuot)",
+        "khanhhoa": "Khanh Hoa (Nha Trang)",
+        "lamdong": "Lam Dong (Da Lat)",
+        "dongnai": "Dong Nai (Bien Hoa)",
+        "tayninh": "Tay Ninh",
+        "hochiminh": "Ho Chi Minh City",
+        "dongthap": "Dong Thap",
+        "angiang": "An Giang",
+        "vinhlong": "Vinh Long",
+        "cantho": "Can Tho",
+        "camau": "Ca Mau"
+      },
+      "jobBenefits": {
+        "insurance": "Health & Medical Insurance",
+        "travel": "Annual Flight & Travel Allowance",
+        "bonus": "Performance & Retention Bonus",
+        "healthcare": "International Health Insurance",
+        "training": "Professional Development (PD)",
+        "salaryincrease": "Annual Salary Increment",
+        "laptop": "Laptop & Teaching Equipment",
+        "lunchallowance": "School Lunch Provided / Allowance",
+        "transportallowance": "Transportation / Flight Reimbursement",
+        "paidleave": "Paid Annual Leave & Public Holidays",
+        "housingsupport": "Housing Allowance or Accommodation",
+        "uniform": "School Uniform Provided",
+        "teambuilding": "Team Retreats & Social Events",
+        "performancebonus": "Contract Completion Bonus",
+        "annualhealthcheck": "Annual Medical Checkup & Work Permit Support"
+      },
+      "experienceLevel": {
+        "underoneyear": "Under 1 year",
+        "twoyears": "1 - 2 years",
+        "threeyears": "2 - 3 years",
+        "fouryears": "3 - 4 years",
+        "fiveyears": "4 - 5 years",
+        "sixyearsplus": "5+ years",
+        "notrequired": "No experience required"
+      },
+      "typeOfEmployment": {
+        "intern": "Internship / Trainee",
+        "fulltime": "Full-time",
+        "parttime": "Part-time",
+        "remote": "Online / Remote",
+        "temporary": "Contract / Temporary"
+      },
+      "organizationType": {
+        "truongconglap": "Public School",
+        "truongtuthuc": "Private / Bilingual School",
+        "truongquocte": "International School",
+        "truongconggiao": "Faith-based / Religious School",
+        "trungtam": "Language Center / Academy",
+        "truonggiaoducdacbiet": "Special Needs Education Center",
+        "truongdaynghe": "Vocational / Technical College",
+        "khac": "Other Educational Institution"
+      },
+      "salaryType": {
+        "month": "Per month",
+        "week": "Per week",
+        "hour": "Per hour",
+        "contract": "Per contract",
+        "more": "Negotiable"
+      },
+      "gender": {
+        "male": "Male",
+        "female": "Female"
+      },
+      "grade": {
+        "preschool": "Kindergarten / Preschool",
+        "primaryschool": "Primary / Elementary School",
+        "secondaryschool": "Middle / Secondary School",
+        "highschool": "High School",
+        "college": "College",
+        "university": "University",
+        "postgraduate": "Postgraduate",
+        "other": "Other Level"
+      },
+      "requiredQualification": {
+        "incomplete": "High School Diploma",
+        "associatedegree": "Associate Degree",
+        "bachelordegree": "Bachelor's Degree",
+        "teachingdegree": "Teaching Certificate (TEFL / TESOL / CELTA / PGCE)",
+        "masterdegree": "Master's Degree",
+        "postdoctoral": "Postdoctoral",
+        "doctorate": "Doctorate / Ph.D"
+      }
+    },
+    "separator": "•",
+    "nanValue": "N/A",
+    "requiredMark": "*",
+    "remove": "Remove",
+    "messages": {
+      "undefinedError": "An unexpected error occurred. Please try again."
+    },
+    "pagination": {
+      "showing": "Showing",
+      "to": "to",
+      "of": "of",
+      "results": "results",
+      "page": "Page"
+    },
+    "upload": {
+      "image": "Upload Image",
+      "selectFile": "Choose File",
+      "selectImage": "Choose Image",
+      "dropHere": "Drop image here or click to browse",
+      "guidelines": "PNG, JPG, WEBP up to 5MB"
+    }
+  },
+  "companies": {
+    "search": {
+      "placeholder": "Search schools, language centers, academies...",
+      "organizationType": "Institution Type"
+    },
+    "jobs": "Jobs",
+    "noJobs": "No active job openings",
+    "noResults": {
+      "title": "No schools or institutions found",
+      "clearSearch": "Clear search",
+      "noDescriptionAvailable": "No description available"
+    }
+  },
+  "homePage": {
+    "header": {
+      "signIn": "Sign In",
+      "signUp": "Register"
+    },
+    "heroImage": {
+      "title1": "Get teaching jobs",
+      "title2": "in Vietnam?",
+      "subtitle": "The leading teaching job portal in Vietnam. Connect with top accredited international schools, bilingual academies, and language centers nationwide.",
+      "searchPlaceholder": "Search job titles, subjects, keywords...",
+      "searchButton": "Search",
+      "allLocations": "All Locations"
+    },
+    "searchByCategory": {
+      "title1": "Explore Teaching Subjects",
+      "title2": "Find career opportunities tailored to your teaching specialization",
+      "allCategories": "View All",
+      "openPosition": "openings"
+    },
+    "featuredJobOffers": {
+      "title": "Featured Teaching Jobs",
+      "by": "by",
+      "uploadBy": "Posted on "
+    },
+    "featuredCities": {
+      "title1": "Teaching Jobs by City",
+      "title2": "Explore opportunities across key educational hubs"
+    },
+    "blog": {
+      "title1": "Teacher Guides & Living in Vietnam",
+      "readMore": "Read more >"
+    },
+    "lastBanner": {
+      "title1": "Start your teaching journey in Vietnam today",
+      "title2": "Join thousands of international educators who found their dream role with",
+      "url": "GetTeachingJobs.com",
+      "button1": "Browse Teaching Jobs",
+      "button2": "Post a Job Opening"
+    },
+    "footer": {
+      "subscription": "Vietnam's premier teaching job board. Connecting international educators with verified schools and academies nationwide.",
+      "titleCandidate": "For Teachers",
+      "featureCandidate1": "Find Teaching Jobs",
+      "featureCandidate2": "Application Guide",
+      "featureCandidate3": "Living & Teaching in Vietnam",
+      "titleRecruit": "For Employers",
+      "featureRecruit1": "Post a Job",
+      "featureRecruit2": "Pricing & Packages",
+      "featureRecruit3": "Recruitment Support",
+      "copyRight": "© 2026 GetTeachingJobs.com. All rights reserved.",
+      "policies": "Terms of Service",
+      "sercurity": "Privacy Policy",
+      "contact": "Contact & Support"
+    },
+    "buttonContent": {
+      "seeAll": "View All",
+      "detailCompany": "View School Profile"
+    }
+  },
+  "home": {
+    "tabs": {
+      "demos": "Demos",
+      "findJobs": "Find Jobs",
+      "companies": "Schools & Centers",
+      "candidates": "Teachers",
+      "blog": "Blog",
+      "pages": "Post a Free Job"
+    },
+    "signIn": "Sign in",
+    "headline": "Find the perfect job for you",
+    "subheadline": "Search your career opportunity through 12,800 jobs",
+    "search": {
+      "placeholderKeyword": "Enter job title, keywords or school",
+      "placeholderCategory": "Subject / Category",
+      "placeholderLocation": "City / Province",
+      "placeholderOrganizationType": "Institution Type",
+      "button": "Search",
+      "placeholderOrganizationTypeAll": "Select institution type"
+    },
+    "popularTags": {
+      "designer": "Designer",
+      "webDeveloper": "Web Developer",
+      "writer": "Writer",
+      "teamLeader": "Team Leader",
+      "fullstack": "Fullstack",
+      "web": "Web",
+      "financialAnalyst": "Financial Analyst",
+      "senior": "Senior",
+      "software": "Software"
+    },
+    "stats": {
+      "businessDevelopment": "job offers in Business Development",
+      "marketing": "job offers in Marketing & Communication",
+      "projectManagement": "job offers in Project Management"
+    }
+  },
+  "jobs": {
+    "tabs": {
+      "demos": "Demos",
+      "findJobs": "Find Jobs",
+      "companies": "Companies",
+      "candidates": "Candidates",
+      "blog": "Blog",
+      "pages": "Pages"
+    },
+    "signIn": "Sign in",
+    "header": {
+      "title": "Find Jobs",
+      "subtitle": "Search your career opportunity through 12,800 jobs"
+    },
+    "filters": {
+      "searchByKeywords": "Search by Keywords",
+      "placeholderKeyword": "Enter job title, keywords or school",
+      "placeholderCategory": "Subject / Category",
+      "placeholderLocation": "City / Province"
+    },
+    "results": {
+      "showingJobs": "Showing {count} jobs",
+      "loading": "Loading jobs...",
+      "error": "Unable to load jobs list!",
+      "noJobs": "No teaching jobs found."
+    }
+  },
+  "search": {
+    "results": "Search Results",
+    "searchFound": "Found",
+    "searchResults": "teaching jobs",
+    "filters": "Filters",
+    "employmentType": "Employment Type",
+    "experienceLevel": "Experience Level",
+    "clearFilters": "Clear Filters",
+    "viewJob": "View Job",
+    "noResults": "No teaching jobs found",
+    "noResultsDescription": "Try adjusting your search criteria or filters to discover more teaching opportunities.",
+    "clearSearch": "Reset Search"
+  },
+  "job": {
+    "detail": {
+      "title": "Job Details",
+      "featured": "Featured",
+      "applyNow": "Apply Now",
+      "share": "Share",
+      "linkCopied": "Link copied to clipboard!",
+      "negotiable": "Negotiable",
+      "salary": "Salary",
+      "experience": "Experience",
+      "employmentType": "Employment Type",
+      "location": "Location",
+      "description": "Job Description",
+      "requirements": "Qualifications & Requirements",
+      "requirement1": "Bachelor's Degree in Education, English, or related subject",
+      "requirement2": "Teaching Certificate (TEFL / TESOL / CELTA / PGCE / Teaching License)",
+      "requirement3": "Native or fluent English speaker with clear pronunciation",
+      "requirement4": "Clean criminal background check & valid passport",
+      "benefits": "Benefits & Compensation",
+      "benefit1": "Competitive salary with annual performance review",
+      "benefit2": "Work permit and business visa / TRC sponsorship",
+      "benefit3": "Paid holidays, annual leave and flight allowance",
+      "benefit4": "Comprehensive health and medical insurance",
+      "aboutCompany": "About the School / Institution",
+      "companyDescription": "Institution Profile",
+      "viewCompany": "View School Profile",
+      "jobOverview": "Job Overview",
+      "postedDate": "Date Posted",
+      "deadline": "Application Deadline",
+      "category": "Subject / Level",
+      "similarJobs": "Similar Teaching Jobs",
+      "notFound": "Job Not Found",
+      "notFoundDescription": "This job posting may have expired or been removed.",
+      "goBack": "Back to Job Search",
+      "applicationSubmitted": "Application Submitted",
+      "applicationSuccess": "Your application has been successfully submitted to the school!"
+    },
+    "listJobUser": {
+      "title": "Teaching Jobs",
+      "foundResults": "Total {count} teaching jobs",
+      "addJob": "Edit Job",
+      "updateJob": "Edit Job",
+      "deleteJob": "Delete Job",
+      "waitingJob": "Chờ duyệt"
+    },
+    "uploadJob": {
+      "title": "Post a Teaching Job",
+      "stepCompanyInfo": "School Information",
+      "stepPostDetail": "Job Details",
+      "mstLabel": "Tax ID / Registration Code",
+      "lookupMst": "Verify Code",
+      "lookupFoundTitle": "School Verified",
+      "optionalMoreInfo": "Additional School Details",
+      "optionalMoreInfoHint": "Fill in more details about your school or campus",
+      "continueNext": "Continue to Job Details",
+      "detailAddressLabel": "Detailed Address / Campus",
+      "mandatoryChar": "*",
+      "nameJobLabel": "Job Title",
+      "nameJobPlaceHolder": "e.g. Native English Teacher (Full-time / High School)",
+      "detailJobLabel": "Job Description & Responsibilities",
+      "emailJobLabel": "Contact / HR Email",
+      "emailJobPlaceholder": "hr@school.edu.vn",
+      "phoneJobLabel": "Contact Phone Number",
+      "phoneJobPlaceholder": "+84 ...",
+      "companyNameLabel": "School / Institution Name",
+      "deadlineLabel": "Application Deadline",
+      "categoryLabel": "Teaching Subject / Category",
+      "typeJobLabel": "Employment Type",
+      "currentSalaryLabel": "Currency",
+      "minSalaryLabel": "Minimum Salary",
+      "maxSalaryLabel": "Maximum Salary",
+      "experienceLabel": "Experience Required",
+      "benefitLabel": "Teacher Benefits",
+      "addressJobLabel": "Work Location / Campus Address",
+      "addressJobPlaceholder": "e.g. 123 Nguyen Thi Minh Khai, District 1, HCMC",
+      "subAddressJobLabel": "Specific Ward / District",
+      "locationJobLabel": "City / Province",
+      "agreeUploadJobLabel": "I agree to the",
+      "agreePolicy": "Terms of Service",
+      "agreePrivacy": "Privacy Policy",
+      "and": "and",
+      "uploadJobContent": "Publish Job",
+      "updateJobContent": "Update Job",
+      "uploadJobComplete": "Job posted successfully!",
+      "uploadJobFailed": "Failed to post job. Please check your information.",
+      "chooseSchool": "Select School",
+      "viewJob": "View Posting",
+      "chooseDate": "Select date",
+      "chooseCategory": "Select teaching subject",
+      "chooseTypeOfEmployment": "Select employment type",
+      "moreInformation": "Additional Information",
+      "requiredQualificationLabel": "Required Qualification",
+      "genderLabel": "Gender Preference",
+      "gradeLabel": "Grade / Student Level",
+      "chooseSalaryType": "Select salary frequency",
+      "enterSalary": "Enter salary amount",
+      "minSalary": "Min salary",
+      "maxSalary": "Max salary",
+      "chooseExperienceLevel": "Select experience level",
+      "chooseBenefitLevel": "Select benefits",
+      "chooseGender": "Select gender preference",
+      "chooseGradeLevel": "Select grade level",
+      "chooseLocation": "Select city / province"
+    },
+    "editJob": {
+      "title": "Edit Job Posting",
+      "editJobContent": "Update Job",
+      "editJobComplete": "Job updated successfully!"
+    },
+    "preview": {
+      "title": "Preview Job Posting",
+      "previewMode": "Preview Mode",
+      "actions": "Actions",
+      "backToEdit": "Back to Edit",
+      "confirmAndPublish": "Confirm & Publish",
+      "publishSuccess": "Job published successfully!",
+      "noData": "No preview data available",
+      "noDataDescription": "Please fill in the job details before previewing.",
+      "loadError": "Error loading preview data."
+    },
+    "application": {
+      "title": "Apply for Teaching Position",
+      "personalInfo": "Teacher Information",
+      "fullName": "Full Name",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "phone": "Phone Number (with country code)",
+      "email": "Email Address",
+      "fullNamePlaceholder": "e.g. John Smith",
+      "firstNamePlaceholder": "John",
+      "lastNamePlaceholder": "Smith",
+      "phonePlaceholder": "+84 ...",
+      "emailPlaceholder": "john.smith@email.com",
+      "required": "Required",
+      "cvUpload": "Resume / CV",
+      "cvUploadDescription": "Upload your updated Resume / CV (PDF, DOCX up to 5MB)",
+      "cvUploadLimit": "Max file size: 5MB",
+      "or": "or",
+      "cvUploadButton": "Choose Resume File",
+      "coverLetter": "Cover Letter / Introduction",
+      "coverLetterPlaceholder": "Introduce your teaching experience, philosophy, certifications, and availability...",
+      "coverLetterUpload": "Upload Cover Letter (Optional)",
+      "coverLetterUploadLimit": "Max file size: 5MB",
+      "termsAgreement": "By submitting, you agree to our",
+      "termsAndConditions": "Terms & Conditions",
+      "and": "and",
+      "privacyPolicy": "Privacy Policy",
+      "cancel": "Cancel",
+      "submit": "Submit Application",
+      "submitSuccess": "Your application has been sent successfully to the school!",
+      "submitError": "Failed to submit application. Please check your information."
+    }
+  },
+  "company": {
+    "detail": {
+      "title": "School / Institution Profile",
+      "about": "About",
+      "images": "Campus & Facility Photos",
+      "availableJobs": "Open Teaching Positions",
+      "details": "School Details",
+      "industry": "Institution Type",
+      "companySize": "Faculty / School Size",
+      "employees": "educators & staff",
+      "foundedIn": "Established In",
+      "location": "Campus Address",
+      "website": "Official Website",
+      "email": "Contact Email",
+      "socialLinks": "Social Media",
+      "showMore": "Show More",
+      "showLess": "Show Less"
+    },
+    "listCompanyUser": {
+      "title": "Schools & Centers",
+      "foundResults": "Found {count} schools & centers",
+      "orgTypeUnknown": "Unknown organization type"
+    },
+    "actions": {
+      "edit": "Edit Profile",
+      "save": "Save Changes",
+      "cancel": "Cancel"
+    },
+    "toasts": {
+      "updateSuccess": "School profile updated successfully!",
+      "updateError": "Failed to update school profile."
+    },
+    "errors": {
+      "loadFailed": "Unable to load schools list.",
+      "deleteFailed": "Failed to delete school.",
+      "approveFailed": "Failed to approve school."
+    },
+    "name": "Tên công ty",
+    "mst": "Tax ID / Code",
+    "taxAddress": "Tax Address",
+    "email": "Email",
+    "industry": "Institution Type",
+    "founded": "Founded Year",
+    "address": "Campus Address",
+    "size": "Quy mô",
+    "socialMedia": "Social Media",
+    "social": {
+      "facebook": "Facebook",
+      "twitter": "Twitter",
+      "linkedin": "LinkedIn",
+      "instagram": "Instagram"
+    },
+    "website": "Website",
+    "action": {
+      "inputMST": "School / Institution Tax Code",
+      "placeHolderMST": "Enter Tax Code",
+      "placeHolderInputName": "Nhập tên công ty"
+    },
+    "form": {
+      "stepCompany": "School / Institution",
+      "stepConfirm": "Confirmation",
+      "createTitle": "Add School / Educational Institution",
+      "logoTitle": "Logo công ty",
+      "bannerTitle": "Cover Image",
+      "bannerDropHint": "Drag & drop cover image here or click to select",
+      "imagesTitleAdditional": "Campus Photos",
+      "dropHintLogo": "Drag & drop logo here or click to select",
+      "dropHint": "Drag & drop photos here or click to select (multiple)",
+      "addMore": "Add more photos",
+      "logoBadge": "Logo",
+      "insightLabel": "Mission & Vision",
+      "descLabel": "Giới thiệu công ty",
+      "descPlaceholder": "Brief overview of school mission, curriculum, teaching environment, and highlights...",
+      "overviewLabel": "Tổng quan",
+      "overviewPlaceholder": "Detailed overview: student body, school facilities, faculty, academic goals...",
+      "confirmNext": "Confirm & Continue",
+      "createSuccess": "School profile created successfully.",
+      "createFailed": "Failed to create school profile. Please try again.",
+      "backToList": "Back to List",
+      "createBtn": "Create School Profile",
+      "placeholderInsight": "School Mission & Vision",
+      "placeholderName": "Nhập tên công ty",
+      "placeholderAddress": "Enter campus address or main office...",
+      "placeholderFounded": "VD: 2008",
+      "placeholderCompanySize": "Select school size",
+      "placeholderEmail": "Enter your email",
+      "placeholderWebsite": "https://your-company.com",
+      "placeholderFacebook": "https://facebook.com/your-company",
+      "placeholderTwitter": "https://twitter.com/your-company",
+      "placeholderInstagram": "https://instagram.com/your-company",
+      "placeholderLinkedIn": "https://linkedin.com/company/your-company",
+      "videoTitle": "Video giới thiệu công ty",
+      "placeholderVideo": "https://youtube.com/watch?v=...",
+      "errName": "School name cannot be empty.",
+      "errAddress": "Address cannot be empty.",
+      "errOrgType": "Please select institution type.",
+      "errEmail": "Email không hợp lệ.",
+      "errWebsite": "Website không hợp lệ.",
+      "errCompanySize": "Please select a valid school size."
+    },
+    "editCompany": {
+      "title": "Edit School Profile",
+      "editCompanyContent": "Save thông tin",
+      "editCompanyComplete": "School profile updated successfully",
+      "noPermission": "You do not have permission to edit school information. Only the institution host can perform this action."
+    }
+  },
+  "dashboard": {
+    "header": {
+      "logo": "GetTeachingJobs",
+      "postJob": "Post a Job"
+    },
+    "sidebar": {
+      "adminTools": "Admin Tools",
+      "dashboard": "Dashboard",
+      "editProfile": "School Profile",
+      "newJob": "Post a Job",
+      "manageJobs": "Manage Jobs",
+      "candidates": "Applicant Pool",
+      "settings": "Settings",
+      "changePassword": "Change Password",
+      "insights": "Analytics",
+      "notifications": "Notifications",
+      "overview": "Overview",
+      "accountInfo": "Account Profile",
+      "appliedJobs": "My Applications",
+      "options": "Options",
+      "deleteAccount": "Delete Account",
+      "adminDashboard": "Admin Overview",
+      "adminCompanies": "Schools Management",
+      "adminManageJobs": "Jobs Moderation",
+      "adminCandidates": "Teachers Database",
+      "adminUsers": "Users Management",
+      "adminBlogs": "Articles & Guides",
+      "adminSettings": "System Settings",
+      "adminEmailSettings": "Email Configurations",
+      "adminImportExcel": "Import Excel Data"
+    },
+    "admin": {
+      "importExcel": "Bulk Import Excel",
+      "overview": {
+        "welcome": "Welcome, System Admin"
+      },
+      "stats": {
+        "companies": "Companies",
+        "jobs": "Jobs",
+        "applications": "Applications",
+        "users": "Users"
+      },
+      "companies": {
+        "title": "Company",
+        "description": "Manage all registered schools and institutions in the system",
+        "welcome": "Welcome, System Admin",
+        "searchPlaceholder": "Search by school name, Tax ID, or Email",
+        "filterFeature": "Feature",
+        "filterBanner": "Banner",
+        "newCompany": "Thêm công ty",
+        "total": "Tổng số công ty",
+        "pendingLabel": "Chờ duyệt",
+        "table": {
+          "name": "Tên công ty",
+          "description": "Description",
+          "email": "Email",
+          "address": "Campus Address",
+          "status": "Status",
+          "featured": "Nổi bật",
+          "totalJobs": "Tổng số job",
+          "mst": "MST",
+          "phone": "Phone Number",
+          "province": "Province / City",
+          "registrationDate": "Registration Date",
+          "companyType": "Approval Status"
+        },
+        "status": {
+          "active": "Active",
+          "pending": "Chờ duyệt",
+          "approved": "Approved",
+          "rejected": "Từ chối",
+          "inactive": "Inactive"
+        },
+        "actions": {
+          "approve": "Confirm duyệt",
+          "feature": "Feature",
+          "unfeature": "Unfeature",
+          "show": "Show",
+          "hide": "Hide",
+          "delete": "Delete",
+          "view": "Xem",
+          "edit": "Sửa"
+        },
+        "approveSuccess": "School profile approved successfully! The institution has been activated.",
+        "approveConfirm": "Confirm approval for this school?",
+        "featureSuccess": "School marked as featured",
+        "unfeatureSuccess": "School unfeatured",
+        "showSuccess": "School made visible",
+        "hideSuccess": "School hidden",
+        "deleteSuccess": "School deleted successfully",
+        "deleteConfirm": "Are you sure you want to delete this school?",
+        "loading": "Loading...",
+        "noCompanies": "No schools found"
+      },
+      "jobs": {
+        "title": "Manage công việc",
+        "welcome": "Welcome, System Admin",
+        "description": "Review and manage all teaching vacancies",
+        "searchPlaceholder": "Search by job title...",
+        "total": "Tổng số tin",
+        "pendingLabel": "Chờ duyệt",
+        "table": {
+          "title": "Job Title",
+          "company": "Công ty",
+          "status": "Status",
+          "postedDate": "Date Posted"
+        },
+        "status": {
+          "pending": "Chờ duyệt",
+          "approved": "Approved"
+        },
+        "actions": {
+          "approve": "Duyệt tin"
+        },
+        "approveSuccess": "Job approved successfully",
+        "approveConfirm": "Confirm approval for this job?",
+        "loading": "Loading...",
+        "noJobs": "No jobs found"
+      },
+      "candidates": {
+        "title": "Teachers & Educators",
+        "description": "View applicants by school in the Schools directory section."
+      },
+      "applications": {
+        "title": "Applications",
+        "welcome": "Welcome, System Admin",
+        "searchPlaceholder": "Search by applicant name, position, school, email, phone...",
+        "filterExpertise": "CANDIDATE EXPERTISE",
+        "filterLocation": "LOCATION",
+        "filterAll": "All",
+        "table": {
+          "jobPosition": "JOB POSITION",
+          "candidate": "CANDIDATE",
+          "email": "EMAIL",
+          "cv": "CV",
+          "candidateExpertise": "CANDIDATE EXPERTISE",
+          "location": "LOCATION",
+          "createdAt": "CREATED AT",
+          "status": "STATUS",
+          "applicationCount": "SỐ HỒ SƠ",
+          "latestApplication": "ỨNG TUYỂN GẦN NHẤT",
+          "actions": "ACTION"
+        },
+        "deleteConfirm": "Are you sure you want to delete this job application?",
+        "deleteSuccess": "Job application deleted successfully."
+      },
+      "settings": {
+        "title": "Settings",
+        "welcome": "Welcome, System Admin",
+        "description": "Settings hệ thống.",
+        "account": {
+          "title": "Account Information",
+          "emailReadonlyNote": "Your account email address cannot be changed",
+          "fullName": "Full Name",
+          "fullNamePlaceholder": "Enter full name",
+          "username": "Username",
+          "usernamePlaceholder": "Enter username",
+          "phone": "Phone Number",
+          "phonePlaceholder": "Enter phone number",
+          "save": "Save thông tin",
+          "saving": "Saving..."
+        },
+        "password": {
+          "title": "Change Your Password",
+          "current": "Current Password",
+          "currentPlaceholder": "Current password",
+          "new": "Mật khẩu mới",
+          "newPlaceholder": "Mật khẩu mới",
+          "confirm": "Confirm mật khẩu mới",
+          "confirmPlaceholder": "Confirm mật khẩu mới",
+          "change": "Change Password",
+          "changing": "Changing..."
+        }
+      },
+      "emailSettings": "SMTP Email Settings",
+      "users": {
+        "title": "Users",
+        "welcome": "Welcome, System Admin",
+        "description": "Manage all system users and accounts",
+        "searchPlaceholder": "Search...",
+        "newUser": "Add User",
+        "total": "Tổng số users",
+        "table": {
+          "avatar": "AVATAR",
+          "name": "NAME",
+          "email": "EMAIL",
+          "phoneNumber": "PHONE NUMBER",
+          "userType": "USER TYPE",
+          "createdDate": "CREATED DATE",
+          "action": "ACTION"
+        },
+        "userTypes": {
+          "admin": "ADMIN",
+          "candidate": "CANDIDATE",
+          "employer": "EMPLOYER",
+          "hostCompany": "HOST_COMPANY"
+        },
+        "roles": {
+          "user": "User thường",
+          "company": "User công ty",
+          "admin": "Administrator"
+        },
+        "status": {
+          "active": "Active",
+          "inactive": "Inactive"
+        },
+        "actions": {
+          "approve": "Duyệt",
+          "delete": "Delete",
+          "upgradeToCompany": "Upgrade to Employer Account",
+          "linkCompany": "Liên kết công ty"
+        },
+        "upgradeSuccess": "User upgraded successfully",
+        "linkCompanySuccess": "School account linked successfully",
+        "deleteSuccess": "User deleted successfully",
+        "deleteConfirm": "Are you sure you want to delete this user?",
+        "selectCompany": "Select School",
+        "selectCompanyPlaceholder": "Select a school...",
+        "noCompaniesWarning": "⚠️ No approved schools found. Please approve a school first.",
+        "selectedCompany": "✓ Selected",
+        "loading": "Loading...",
+        "noUsers": "No users found"
+      },
+      "blogs": {
+        "title": "Manage Blog",
+        "welcome": "Welcome, System Admin",
+        "description": "Manage all articles and blog posts",
+        "searchPlaceholder": "Search blog...",
+        "total": "Total Articles",
+        "addNew": "Thêm blog mới",
+        "edit": "Edit",
+        "delete": "Delete",
+        "createTitle": "Create New Blog Post",
+        "editTitle": "Edit Blog Post",
+        "form": {
+          "title": "Title",
+          "titlePlaceholder": "Enter article title...",
+          "content": "Nội dung",
+          "contentPlaceholder": "Nhập nội dung blog...",
+          "thumbnail": "Featured Image",
+          "category": "Category",
+          "tags": "Tags",
+          "status": "Status",
+          "published": "Published",
+          "draft": "Draft"
+        },
+        "createSuccess": "Blog article created successfully",
+        "updateSuccess": "Blog article updated successfully",
+        "deleteSuccess": "Blog article deleted successfully",
+        "deleteConfirm": "Are you sure you want to delete this article?",
+        "loading": "Loading...",
+        "noBlogs": "No blog articles found",
+        "save": "Save",
+        "cancel": "Cancel"
+      }
+    },
+    "applicationStatus": {
+      "column": "Status",
+      "latestStatusColumn": "Latest Status",
+      "latestStatusHint": "Status of the most recent application. Each position has its own status — view and update inside candidate details.",
+      "updateLabel": "Update Status",
+      "messagePlaceholder": "Optional notes sent along with email to candidate...",
+      "save": "Save",
+      "saveNote": "Send Note",
+      "saving": "Saving...",
+      "updateSuccess": "Application status updated",
+      "updateFailed": "Unable to update application status",
+      "labels": {
+        "SUBMITTED": "Application Submitted",
+        "REVIEWING": "Under Review",
+        "INTERVIEW": "Interview Invited",
+        "ACCEPTED": "Accepted / Offered",
+        "REJECTED": "Not Selected"
+      }
+    },
+    "appliedJobs": {
+      "title": "Applied Jobs",
+      "searchPlaceholder": "Search applied jobs...",
+      "totalApplications": "Total Applications",
+      "loading": "Loading...",
+      "noApplications": "You haven't submitted any job applications yet.",
+      "table": {
+        "position": "Applied Position",
+        "location": "Province / City",
+        "category": "Category / Subject",
+        "type": "Type",
+        "appliedDate": "Date Applied"
+      },
+      "actions": {
+        "view": "View Details",
+        "delete": "Delete"
+      },
+      "pagination": {
+        "showing": "Showing",
+        "of": "of",
+        "results": "results",
+        "previous": "Trước",
+        "next": "Sau"
+      },
+      "deleteConfirm": "Are you sure you want to delete this application?",
+      "deleteSuccess": "Application deleted successfully",
+      "deleteFailed": "Unable to delete application",
+      "fetchFailed": "Unable to load applications list"
+    },
+    "main": {
+      "title": "Tổng quan",
+      "welcome": "Welcome back",
+      "recentApplications": "Recent Applications",
+      "metrics": {
+        "postedJobs": "Posted Jobs",
+        "pendingJobs": "Pending Jobs",
+        "expiredJobs": "Expired Jobs",
+        "expiringSoonJobs": "Expiring Soon"
+      },
+      "applicationsTable": {
+        "position": "APPLIED POSITION",
+        "applicant": "ỨNG VIÊN",
+        "email": "EMAIL ADDRESS",
+        "cv": "CV",
+        "applicationDate": "APPLICATION DATE",
+        "actions": "ACTIONS",
+        "noApplications": "No applications received yet"
+      },
+      "charts": {
+        "jobPosting": "Teaching Job Postings",
+        "candidateApplications": "Teacher Applications",
+        "vsLastWeek": "vs previous 7 days"
+      },
+      "timeRange": {
+        "last7Days": "Last 7 days",
+        "last30Days": "Last 30 days",
+        "last3Months": "Last 3 months",
+        "lastYear": "1 năm qua"
+      }
+    },
+    "userMenu": {
+      "dashboard": "Dashboard",
+      "editProfile": "Edit Profile",
+      "createCompany": "Create School Profile",
+      "postJob": "Post a Job",
+      "logout": "Sign Out"
+    },
+    "manageJobs": {
+      "title": "Manage Teaching Jobs",
+      "description": "Review, track and update your active teaching vacancies.",
+      "totalJobs": "Total Jobs",
+      "jobs": "jobs",
+      "deadline": "Deadline",
+      "approve": "Duyệt",
+      "viewDetail": "View Details",
+      "view": "Xem",
+      "edit": "Edit",
+      "delete": "Delete",
+      "noJobs": "No jobs found.",
+      "noJobsDescription": "You haven't posted any teaching vacancies yet.",
+      "createNewJob": "Post New Job",
+      "searchPlaceholder": "Search jobs by title or keyword...",
+      "filterByStatus": "Filter by status",
+      "clearFilter": "Clear filter",
+      "loading": "Loading...",
+      "noJobsFound": "No jobs found",
+      "table": {
+        "title": "Job Title",
+        "company": "Công ty",
+        "deadline": "Deadline",
+        "status": "Status",
+        "actions": "Actions"
+      },
+      "status": "Status",
+      "cards": {
+        "all": "All Postings",
+        "pendingReview": "Chờ duyệt",
+        "approved": "Approved",
+        "expiringSoon": "Expiring Soon",
+        "expired": "Expired",
+        "trash": "Trash"
+      },
+      "rowStatus": {
+        "approved": "Approved",
+        "adminReview": "Chờ duyệt",
+        "pending": "Chờ duyệt",
+        "rejected": "Từ chối"
+      },
+      "pagination": {
+        "showing": "Showing",
+        "in": "trong",
+        "of": "of",
+        "total": "tổng số",
+        "jobs": "công việc",
+        "previous": "Trước",
+        "next": "Sau"
+      },
+      "deleteConfirm": "Are you sure you want to delete this job?",
+      "deleteSuccess": "Job deleted successfully.",
+      "deleteFailed": "Failed to delete job.",
+      "fetchFailed": "Unable to load jobs list",
+      "deleteModal": {
+        "title": "Delete Job Posting?",
+        "message": "Are you sure you want to delete the job",
+        "irreversible": "This action cannot be undone.",
+        "cancel": "Cancel",
+        "confirm": "Delete"
+      },
+      "approveModal": {
+        "title": "Confirm Job Approval",
+        "subtitle": "Are you sure you want to approve this job posting?",
+        "jobTitle": "Job Posting",
+        "warning": "Once approved, this job posting will be published publicly on the platform.",
+        "cancel": "Cancel",
+        "confirm": "Confirm duyệt"
+      }
+    },
+    "newJob": {
+      "description": "Create a new teaching vacancy for your school"
+    },
+    "favouriteJobs": {
+      "title": "Saved Jobs",
+      "description": "Your saved teaching jobs list",
+      "comingSoon": "Content is being updated soon..."
+    },
+    "resume": {
+      "title": "Teacher Resume & Profile",
+      "description": "Manage your CV, teaching credentials, certifications, and cover letters.",
+      "coverLetterTitle": "Default Cover Letter",
+      "coverLetterDescription": "Write a compelling introduction for your teaching applications.",
+      "coverLetterPlaceholder": "Introduce your educational philosophy, teaching experience, and qualifications...",
+      "saveCoverLetter": "Save Cover Letter",
+      "cvTitle": "Resume / Curriculum Vitae",
+      "lastModified": "Last updated",
+      "noCvUploaded": "No CV uploaded yet.",
+      "uploadCv": "Upload Resume",
+      "uploadGuidelines": "Supported formats: PDF, DOC, DOCX up to 5MB",
+      "coverLetterFileTitle": "Cover Letter Document",
+      "noCoverLetterUploaded": "No cover letter document uploaded.",
+      "uploadCoverLetter": "Upload Document",
+      "fileTypeError": "Invalid file format. Please upload PDF or Word document.",
+      "fileSizeError": "File size exceeds 5MB limit.",
+      "uploadCvSuccess": "Resume uploaded successfully!",
+      "uploadCvFailed": "Failed to upload resume. Please try again.",
+      "saveCoverLetterSuccess": "Cover letter saved successfully!",
+      "saveCoverLetterFailed": "Failed to save cover letter.",
+      "uploadCoverLetterSuccess": "Cover letter file uploaded successfully!",
+      "uploadCoverLetterFailed": "Failed to upload cover letter file."
+    },
+    "candidates": {
+      "description": "View applicants who applied to your teaching jobs",
+      "searchPlaceholder": "Search by candidate name, email, or position...",
+      "fetchFailed": "Unable to load applicants list",
+      "viewDetailFeature": "Applicant detail view is under active development",
+      "deleteConfirm": "Are you sure you want to delete this application?",
+      "deleteSuccess": "Application deleted successfully",
+      "deleteFailed": "Unable to delete application",
+      "deleteModal": {
+        "title": "Delete Application?",
+        "message": "Are you sure you want to delete the application of",
+        "forJob": "for position",
+        "irreversible": "This action cannot be undone.",
+        "cancel": "Cancel",
+        "confirm": "Delete"
+      }
+    },
+    "settings": {
+      "description": "Manage your account preferences and security",
+      "accountInfo": {
+        "title": "Account Information",
+        "email": "Email:",
+        "emailWarning": "Your account email address cannot be changed",
+        "fullName": "Full Name",
+        "fullNamePlaceholder": "Enter full name",
+        "username": "Username",
+        "usernamePlaceholder": "Enter username",
+        "phoneNumber": "Phone Number",
+        "phoneNumberPlaceholder": "Enter phone number",
+        "save": "Save thông tin"
+      },
+      "changePassword": "Change Password",
+      "deleteAccount": {
+        "title": "Delete Account",
+        "pageTitle": "Delete Account",
+        "pageDescription": "This action will permanently delete your account",
+        "warningTitle": "Warning: This action cannot be reversed",
+        "warningMessage": "When you delete your account, all your data will be permanently removed, including:",
+        "dataList": {
+          "personalInfo": "Personal information and credentials",
+          "cvCoverLetter": "Resume / Profile ứng tuyển (CV, Cover Letter)",
+          "applicationHistory": "Application history and CV records",
+          "savedJobs": "Saved teaching jobs"
+        },
+        "button": "Delete Account",
+        "modalTitle": "Are you sure you want to delete your profile?",
+        "modalSubtitle": "This action is permanent and cannot be undone",
+        "passwordLabel": "Please enter your password to confirm:",
+        "passwordPlaceholder": "Nhập mật khẩu ...",
+        "passwordError": "Please enter password to confirm",
+        "passwordIncorrect": "Incorrect password",
+        "agreeTerms": "By clicking here, I agree to the",
+        "termsAndConditions": "Terms & Conditions",
+        "and": "and",
+        "privacyPolicy": "Privacy Policy",
+        "termsError": "Please agree to the terms to proceed",
+        "deleteButton": "Delete Profile",
+        "deleting": "Deleting...",
+        "deleteSuccess": "Account has been successfully deleted",
+        "deleteFailed": "Unable to delete account"
+      }
+    },
+    "charts": {
+      "jobPostings": "Job Postings Overview",
+      "candidates": "Applicant Growth",
+      "growth": "↑",
+      "growthText": "% vs previous 7 days"
+    }
+  }
+}

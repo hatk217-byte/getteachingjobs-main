@@ -2,9 +2,9 @@
   <header v-if="!headerStore.hideHeader" class="app-header site-header">
     <div class="topbar app-header__container">
       <div class="topbar-inner app-header__inner">
-        <NuxtLink to="/" class="wordmark" aria-label="Trang chủ" @click="closeMobileNav">
-          <span class="wordmark-main">TuyenGiaoVien</span>
-          <span class="wordmark-dot">.vn</span>
+        <NuxtLink to="/" class="wordmark" aria-label="Home" @click="closeMobileNav">
+          <span class="wordmark-main">GetTeachingJobs</span>
+          <span class="wordmark-dot">.com</span>
         </NuxtLink>
 
         <button
@@ -63,7 +63,7 @@
                 @click="goAccountFromMobile"
               >
                 <UIcon name="i-lucide-user" class="size-4 shrink-0" />
-                Thông tin tài khoản
+                Account Settings
               </button>
               <button
                 type="button"
@@ -71,7 +71,7 @@
                 @click="logoutFromMobile"
               >
                 <UIcon name="i-lucide-log-out" class="size-4 shrink-0" />
-                Đăng xuất
+                Sign Out
               </button>
             </template>
             <template v-else>
@@ -82,7 +82,7 @@
                 data-auth-view-target="login"
                 @click="openAuthFromMobile('login')"
               >
-                Đăng ký / Đăng nhập
+                Sign In / Register
               </button>
               <button
                 v-if="showPostButton"
@@ -90,7 +90,7 @@
                 class="site-mobile-menu__action site-mobile-menu__action--post"
                 @click="handlePostJobFree"
               >
-                Đăng tin miễn phí
+                Post a Free Job
               </button>
             </template>
           </div>
@@ -119,7 +119,7 @@
               data-auth-view-target="login"
               @click="openAuthModal('login')"
             >
-              Đăng ký / Đăng nhập
+              Sign In / Register
             </button>
           </template>
 
@@ -129,7 +129,7 @@
             class="topbar-actions__post small-btn"
             @click="handlePostJobFree"
           >
-            Đăng tin miễn phí
+            Post a Free Job
           </button>
         </div>
       </div>
@@ -146,7 +146,7 @@
       v-if="isMobileNavOpen"
       type="button"
       class="app-header__backdrop"
-      aria-label="Đóng menu"
+      aria-label="Close menu"
       tabindex="-1"
       @click="closeMobileNav"
     />
@@ -194,10 +194,10 @@ const closeMobileNav = () => {
 }
 
 const menuItems = computed(() => [
-  { label: 'Công ty', to: ROUTE_PAGE.COMPANY.GET },
-  { label: 'Tìm việc làm', to: ROUTE_PAGE.SEARCH },
+  { label: 'Schools & Centers', to: ROUTE_PAGE.COMPANY.GET },
+  { label: 'Find Jobs', to: ROUTE_PAGE.SEARCH },
   { label: 'Blog', to: '/blog' },
-  { label: 'Liên hệ', to: '/contact' },
+  { label: 'Contact', to: '/contact' },
 ])
 
 const isActive = (item: { to: string }) => {
@@ -249,7 +249,7 @@ const userDropdownItems = computed(() => {
 
   items.push([
     {
-      label: 'Thông tin tài khoản',
+      label: 'Account Settings',
       icon: 'i-lucide-user',
       onSelect: () =>
         goDashboard(accountPageTarget.value.path, accountPageTarget.value.query),
@@ -258,7 +258,7 @@ const userDropdownItems = computed(() => {
 
   items.push([
     {
-      label: 'Đăng xuất',
+      label: 'Sign Out',
       icon: 'i-lucide-log-out',
       onSelect: () => authStore.logout(),
     },

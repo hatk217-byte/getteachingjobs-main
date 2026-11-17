@@ -7,12 +7,12 @@
       :data-account-url="accountDashboardUrl"
     >
       <aside class="candidate-sidebar">
-        <NuxtLink to="/" class="candidate-brand wordmark" aria-label="Trang chủ">
-          <span class="wordmark-main">TuyenGiaoVien</span>
-          <span class="wordmark-dot">.vn</span>
+        <NuxtLink to="/" class="candidate-brand wordmark" aria-label="Home">
+          <span class="wordmark-main">GetTeachingJobs</span>
+          <span class="wordmark-dot">.com</span>
         </NuxtLink>
 
-        <nav class="candidate-sidebar-nav" aria-label="Dashboard ứng viên">
+        <nav class="candidate-sidebar-nav" aria-label="Teacher Dashboard">
           <NuxtLink
             :to="{ path: '/users/dashboard', query: { view: 'dashboard' } }"
             class="candidate-nav-link"
@@ -28,7 +28,7 @@
                 />
               </svg>
             </span>
-            <span>Tổng quan</span>
+            <span>Overview</span>
           </NuxtLink>
 
           <NuxtLink
@@ -53,7 +53,7 @@
                 />
               </svg>
             </span>
-            <span>Hồ sơ ứng tuyển</span>
+            <span>My Resume &amp; CV</span>
           </NuxtLink>
 
           <NuxtLink
@@ -80,7 +80,7 @@
                 />
               </svg>
             </span>
-            <span>Công việc đã ứng tuyển</span>
+            <span>Applied Jobs</span>
           </NuxtLink>
 
           <NuxtLink
@@ -103,7 +103,7 @@
                 />
               </svg>
             </span>
-            <span>Thông tin Tài Khoản</span>
+            <span>Account Settings</span>
           </NuxtLink>
 
         </nav>
@@ -210,7 +210,7 @@ definePageMeta({
 })
 
 useHead({
-  title: 'Tài khoản ứng viên',
+  title: 'Teacher Dashboard - GetTeachingJobs',
 })
 
 // Composables
@@ -231,7 +231,7 @@ const showUserDropdown = ref(false)
 const overviewRef = ref<InstanceType<typeof DashboardUserOverview> | null>(null)
 
 const displayName = computed(() => {
-  return authStore.user?.fullName?.trim() || authStore.user?.email || 'Ứng viên'
+  return authStore.user?.fullName?.trim() || authStore.user?.email || 'Educator'
 })
 
 const avatarInitial = computed(() => {

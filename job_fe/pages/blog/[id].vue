@@ -3,8 +3,8 @@
     <DetailPreviewOverlay
       v-if="isDraft"
       open
-      title="Blog nháp - Chỉ preview"
-      message="Bạn chỉ đang xem bản nháp. Nội dung chưa hiển thị công khai."
+      title="Draft Post - Preview Only"
+      message="You are previewing a draft. This content is not publicly published."
     />
 
     <DetailBlogDetailBody
@@ -27,7 +27,7 @@ const relatedBlogs = ref<BlogEntity[]>([])
 useHead({
   title: computed(() => {
     const t = blog.value?.title?.trim()
-    return t && t.length > 0 ? t : 'Bài viết'
+    return t && t.length > 0 ? t : 'Blog Article'
   }),
 })
 

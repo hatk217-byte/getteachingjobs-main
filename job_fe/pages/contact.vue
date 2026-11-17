@@ -4,19 +4,19 @@
       <div class="contact-vldl-grid">
         <!-- 1. Left Column: Form (Full width rows) -->
         <div class="contact-vldl-form-col">
-          <h1 class="contact-vldl-title">Gửi tin nhắn</h1>
+          <h1 class="contact-vldl-title">Send a Message</h1>
 
           <form class="contact-vldl-form" @submit.prevent="submit">
             <!-- Họ và tên của bạn -->
             <div class="contact-vldl-field">
               <label for="contact-fullname">
-                Họ và tên của bạn <span class="req">*</span>
+                Your Full Name <span class="req">*</span>
               </label>
               <input
                 id="contact-fullname"
                 v-model="form.fullName"
                 type="text"
-                placeholder="Nhập họ và tên"
+                placeholder="Enter your full name"
                 autocomplete="name"
                 :disabled="submitting"
               />
@@ -25,7 +25,7 @@
             <!-- Email liên hệ -->
             <div class="contact-vldl-field">
               <label for="contact-email">
-                Email liên hệ <span class="req">*</span>
+                Contact Email <span class="req">*</span>
               </label>
               <input
                 id="contact-email"
@@ -40,14 +40,14 @@
             <!-- Chủ đề -->
             <div class="contact-vldl-field">
               <label for="contact-subject">
-                Chủ đề <span class="req">*</span>
+                Subject <span class="req">*</span>
               </label>
               <select
                 id="contact-subject"
                 v-model="form.subject"
                 :disabled="submitting"
               >
-                <option value="" disabled>Chọn chủ đề</option>
+                <option value="" disabled>Select a topic</option>
                 <option
                   v-for="item in subjectItems"
                   :key="item.value"
@@ -61,14 +61,14 @@
             <!-- Lời nhắn của bạn -->
             <div class="contact-vldl-field">
               <label for="contact-message">
-                Lời nhắn của bạn <span class="req">*</span>
+                Your Message <span class="req">*</span>
               </label>
               <textarea
                 id="contact-message"
                 v-model="form.message"
                 rows="6"
                 maxlength="1000"
-                placeholder="Nhập nội dung tin nhắn..."
+                placeholder="Type your message here..."
                 :disabled="submitting"
               />
             </div>
@@ -88,14 +88,14 @@
                 <line x1="22" y1="2" x2="11" y2="13" />
                 <polygon points="22 2 15 22 11 13 2 9 22 2" />
               </svg>
-              <span>{{ submitting ? 'Đang gửi...' : 'Gửi Tin Nhắn' }}</span>
+              <span>{{ submitting ? 'Sending...' : 'Send Message' }}</span>
             </button>
           </form>
         </div>
 
         <!-- 2. Right Column: Info & Socials -->
         <div class="contact-vldl-info-col">
-          <h2 class="contact-vldl-title">Thông tin liên hệ</h2>
+          <h2 class="contact-vldl-title">Contact Information</h2>
 
           <div class="contact-vldl-channel-list">
             <!-- Email -->
@@ -128,7 +128,7 @@
                 </svg>
               </span>
               <span class="contact-vldl-channel-text">
-                <span class="label">Hotline</span>
+                <span class="label">Phone / WhatsApp</span>
                 <span class="value">{{ phoneNumber }}</span>
               </span>
             </a>
@@ -142,16 +142,16 @@
                 </svg>
               </span>
               <span class="contact-vldl-channel-text">
-                <span class="label">Thời gian làm việc</span>
-                <span class="value">Thứ Hai - Thứ Sáu, 8:00 - 18:00</span>
+                <span class="label">Working Hours</span>
+                <span class="value">Monday - Friday, 8:00 AM - 6:00 PM (GMT+7)</span>
               </span>
             </div>
           </div>
 
           <!-- Social Links -->
           <div class="contact-vldl-social-wrap">
-            <h3>Theo dõi chúng tôi</h3>
-            <p>Theo dõi chúng tôi trên mạng xã hội để cập nhật tin tức và cơ hội mới nhất.</p>
+            <h3>Connect With Us</h3>
+            <p>Follow us on social channels to stay updated on the latest teaching openings in Vietnam.</p>
 
             <div class="contact-vldl-social-row">
               <a
@@ -214,7 +214,7 @@
 </template>
 
 <script setup lang="ts">
-useHead({ title: 'Liên hệ - TuyenGiaoVien.vn' })
+useHead({ title: 'Contact Us - GetTeachingJobs' })
 
 const { email, phoneNumber, mailtoHref, telHref, loading } = useAdminContactInfo()
 
@@ -228,11 +228,11 @@ const form = reactive({
 })
 
 const subjectItems = [
-  { label: 'Hỗ trợ ứng viên', value: 'candidate_support' },
-  { label: 'Hỗ trợ nhà tuyển dụng', value: 'employer_support' },
-  { label: 'Góp ý website', value: 'website_feedback' },
-  { label: 'Hợp tác kinh doanh', value: 'business_partnership' },
-  { label: 'Khác', value: 'other' },
+  { label: 'Teacher / Candidate Support', value: 'candidate_support' },
+  { label: 'School / Employer Support', value: 'employer_support' },
+  { label: 'Website Feedback & Inquiries', value: 'website_feedback' },
+  { label: 'Partnership & Advertising', value: 'business_partnership' },
+  { label: 'Other', value: 'other' },
 ]
 
 const messageCount = computed(() => Math.min(1000, (form.message || '').length))
@@ -254,12 +254,12 @@ const submit = async () => {
   const message = form.message.trim()
 
   if (!name || !email || !subject || !message) {
-    useNotify({ type: 'error', message: 'Vui lòng điền đầy đủ các thông tin bắt buộc (*).' })
+    useNotify({ type: 'error', message: 'Please fill in all required fields (*).' })
     return
   }
 
   if (!isEmail(email)) {
-    useNotify({ type: 'error', message: 'Email không hợp lệ.' })
+    useNotify({ type: 'error', message: 'Please enter a valid email address.' })
     return
   }
 
@@ -272,7 +272,7 @@ const submit = async () => {
       subject,
       message,
     })
-    useNotify({ type: 'success', message: 'Đã gửi tin nhắn! Chúng tôi sẽ phản hồi sớm nhất.' })
+    useNotify({ type: 'success', message: 'Message sent! Our support team will respond shortly.' })
     form.fullName = ''
     form.email = ''
     form.subject = ''
@@ -281,7 +281,7 @@ const submit = async () => {
     const err = e as { message?: string | string[] }
     const msg = Array.isArray(err.message)
       ? err.message[0]
-      : err.message || 'Gửi tin nhắn thất bại. Vui lòng thử lại.'
+      : err.message || 'Failed to send message. Please try again.'
     useNotify({ type: 'error', message: String(msg) })
   } finally {
     submitting.value = false

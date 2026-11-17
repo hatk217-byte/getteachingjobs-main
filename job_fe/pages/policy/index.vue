@@ -2,13 +2,13 @@
   <section class="legal-page">
     <div class="container legal-shell">
       <header class="legal-hero">
-        <span class="legal-eyebrow">TuyenGiaoVien.vn</span>
-        <h1>Điều khoản &amp; Chính sách quyền riêng tư</h1>
-        <p>Đội ngũ Tuyển Giáo Viên cam kết bảo vệ và tôn trọng quyền riêng tư của mọi người dùng.</p>
-        <time datetime="2025-10-20">Ngày cập nhật: 20/10/2025</time>
+        <span class="legal-eyebrow">GetTeachingJobs.com</span>
+        <h1>Terms of Service &amp; Privacy Policy</h1>
+        <p>GetTeachingJobs is committed to protecting and respecting the privacy of all educators and school partners.</p>
+        <time datetime="2025-10-20">Last updated: October 2025</time>
       </header>
 
-      <nav class="legal-index" aria-label="Mục lục chính sách">
+      <nav class="legal-index" aria-label="Policy index">
         <a
           v-for="item in navItems"
           :key="item.id"
@@ -22,177 +22,151 @@
 
       <article class="legal-card">
         <section class="legal-section" id="dieu-khoan-dieu-kien">
-          <h2>Điều khoản &amp; Điều kiện</h2>
+          <h2>Terms &amp; Conditions</h2>
           <p>
-            Bằng việc truy cập hoặc sử dụng TuyenGiaoVien.vn, bạn đồng ý tuân thủ các điều khoản được nêu
-            dưới đây. Nếu bạn không đồng ý với bất kỳ nội dung nào, vui lòng ngừng sử dụng dịch vụ.
+            By accessing or using GetTeachingJobs.com, you agree to comply with and be bound by the terms
+            and conditions outlined below. If you do not agree with any part of these terms, please discontinue use of our service.
           </p>
 
-          <h3>Phạm vi dịch vụ</h3>
+          <h3>Scope of Service</h3>
           <p>
-            TuyenGiaoVien.vn là nền tảng kết nối ứng viên trong lĩnh vực giáo dục với trường học, trung
-            tâm và các đơn vị tuyển dụng. Chúng tôi cung cấp công cụ đăng tin, tìm kiếm việc làm, quản lý
-            hồ sơ và nộp đơn ứng tuyển.
+            GetTeachingJobs.com is a specialized platform connecting international educators and teachers with
+            schools, language centers, and educational institutions across Vietnam. We provide tools for job posting,
+            job search, candidate profiles, and direct applications.
           </p>
 
-          <h3>Tài khoản người dùng</h3>
+          <h3>User Accounts</h3>
           <ul>
             <li>
-              Bạn chịu trách nhiệm về tính chính xác của thông tin cung cấp khi đăng ký hoặc sử dụng tài
-              khoản.
+              You are responsible for ensuring the accuracy and validity of all information provided when creating or updating your account.
             </li>
             <li>
-              Bạn có trách nhiệm bảo mật thông tin đăng nhập và thông báo cho đội ngũ Tuyển Giáo Viên nếu phát hiện truy
-              cập trái phép.
+              You are responsible for maintaining the confidentiality of your login credentials and must notify us immediately if you suspect unauthorized access.
             </li>
             <li>
-              Chúng tôi có quyền tạm ngưng hoặc chấm dứt tài khoản có hành vi gian lận, lạm dụng hoặc vi
-              phạm pháp luật.
+              We reserve the right to suspend or terminate accounts that engage in fraudulent behavior, misrepresentation, or violation of applicable laws.
             </li>
           </ul>
 
-          <h3>Trách nhiệm của ứng viên</h3>
+          <h3>Responsibilities of Educators &amp; Applicants</h3>
           <ul>
-            <li>Ứng viên cần cung cấp thông tin hồ sơ trung thực, đầy đủ và cập nhật.</li>
+            <li>Applicants must provide honest, accurate, and up-to-date resume and qualification details.</li>
             <li>
-              Ứng viên không được đăng tải nội dung giả mạo, xúc phạm, vi phạm bản quyền hoặc gây ảnh
-              hưởng đến quyền lợi của bên thứ ba.
+              Applicants must not upload misleading, offensive, or copyright-infringing content, or violate any third-party rights.
             </li>
           </ul>
 
-          <h3>Trách nhiệm của nhà tuyển dụng</h3>
+          <h3>Responsibilities of Schools &amp; Employers</h3>
           <ul>
             <li>
-              Nhà tuyển dụng cần đăng thông tin tuyển dụng chính xác, minh bạch và phù hợp với quy định
-              pháp luật.
+              Employers must publish genuine, transparent, and accurate job descriptions complying with Vietnamese labor and education regulations.
             </li>
             <li>
-              Nhà tuyển dụng không được sử dụng dữ liệu ứng viên cho mục đích ngoài tuyển dụng nếu chưa có
-              sự đồng ý phù hợp.
+              Employers must respect candidate privacy and not use candidate information for purposes unrelated to recruitment without prior consent.
             </li>
           </ul>
 
-          <h3>Thay đổi điều khoản</h3>
+          <h3>Changes to Terms</h3>
           <p>
-            Đội ngũ Tuyển Giáo Viên có thể cập nhật Điều khoản &amp; Điều kiện theo thời gian. Phiên bản mới sẽ được
-            công bố trên trang này và có hiệu lực kể từ ngày cập nhật.
+            GetTeachingJobs may update these Terms &amp; Conditions periodically. Any updates will be posted on this page and become effective upon publication.
           </p>
         </section>
 
         <section class="legal-section" id="chinh-sach-quyen-rieng-tu">
-          <h2>Chính sách quyền riêng tư</h2>
-          <p>Bằng việc sử dụng dịch vụ tại TuyenGiaoVien.vn, bạn đồng ý với các điều khoản được nêu ra dưới đây.</p>
+          <h2>Privacy Policy</h2>
+          <p>By using GetTeachingJobs.com, you consent to the collection and use of information in accordance with this Privacy Policy.</p>
 
-          <h3>Dữ liệu chúng tôi thu thập</h3>
-          <h4>Đối với ứng viên</h4>
+          <h3>Data We Collect</h3>
+          <h4>For Teachers &amp; Candidates</h4>
           <ul>
             <li>
-              Thông tin cá nhân: Họ tên, ngày sinh, số điện thoại, địa chỉ email, địa chỉ thường trú.
+              Personal Details: Full name, date of birth, phone number, email address, nationality, current location.
             </li>
             <li>
-              Hồ sơ xin việc: Sơ yếu lý lịch (CV), kinh nghiệm làm việc, học vấn, kỹ năng, chứng chỉ, ảnh
-              đại diện.
+              Professional Profile: Curriculum Vitae (CV/Resume), teaching experience, education, certifications (TEFL/TESOL/CELTA), and profile photo.
             </li>
             <li>
-              Thông tin khác: Các thông tin bạn cung cấp khi điền đơn ứng tuyển, tham gia khảo sát hoặc
-              liên hệ với đội ngũ Tuyển Giáo Viên.
+              Application Data: Information submitted through application drawers, cover letters, and communications with our support team.
             </li>
           </ul>
 
-          <h4>Đối với nhà tuyển dụng</h4>
+          <h4>For Schools &amp; Employers</h4>
           <ul>
-            <li>Thông tin doanh nghiệp: Tên công ty, mã số thuế, địa chỉ, số điện thoại, email.</li>
-            <li>Thông tin người liên hệ: Họ tên, chức vụ của người phụ trách tuyển dụng.</li>
-            <li>Nội dung tuyển dụng: Thông tin về vị trí công việc, yêu cầu, mô tả công việc.</li>
+            <li>Organization Info: School name, business registration/tax code, campus address, official phone number, contact email.</li>
+            <li>Contact Representative: Name and title of the authorized hiring manager.</li>
+            <li>Job Postings: Details regarding vacant teaching positions, requirements, and compensation.</li>
           </ul>
 
-          <h4>Đối với mọi người truy cập</h4>
+          <h4>For All Visitors</h4>
           <ul>
             <li>
-              Dữ liệu kỹ thuật: Địa chỉ IP, loại trình duyệt, hệ điều hành, thời gian truy cập, các trang
-              bạn đã xem.
+              Technical Data: IP address, browser type, operating system, visit duration, pages viewed.
             </li>
-            <li>Dữ liệu Cookie: Như được giải thích trong mục Cookie và Công nghệ Theo dõi bên dưới.</li>
+            <li>Cookie Data: As explained in the Cookies and Tracking Technologies section below.</li>
           </ul>
 
-          <h3>Mục đích sử dụng dữ liệu</h3>
+          <h3>How We Use Your Data</h3>
           <ul>
             <li>
-              Cung cấp và vận hành dịch vụ: Tạo và quản lý tài khoản, đăng tin tuyển dụng, nộp đơn ứng
-              tuyển.
+              Providing Core Services: Creating and maintaining accounts, posting jobs, and facilitating job applications.
             </li>
             <li>
-              Kết nối ứng viên và nhà tuyển dụng: Hiển thị hồ sơ ứng viên cho nhà tuyển dụng, gửi thông
-              báo việc làm phù hợp cho ứng viên.
+              Connecting Teachers &amp; Schools: Displaying applicant profiles to hiring schools and notifying teachers of relevant job openings.
             </li>
             <li>
-              Cải thiện dịch vụ: Phân tích dữ liệu để hiểu rõ hơn nhu cầu người dùng và nâng cao trải
-              nghiệm trên website.
+              Service Improvement: Analyzing usage patterns to enhance platform speed, responsiveness, and user experience.
             </li>
             <li>
-              Giao tiếp và hỗ trợ: Phản hồi các thắc mắc, gửi thông báo quan trọng về dịch vụ.
+              Communication &amp; Support: Answering support requests and delivering essential service notifications.
             </li>
             <li>
-              Đảm bảo an toàn: Ngăn chặn các hành vi gian lận, lạm dụng và bảo vệ sự an toàn cho cộng
-              đồng người dùng.
+              Security &amp; Compliance: Preventing fraud, spam, and ensuring community integrity.
             </li>
           </ul>
 
-          <h3>Chia sẻ và tiết lộ dữ liệu</h3>
+          <h3>Data Sharing &amp; Disclosure</h3>
           <p>
-            Đội ngũ Tuyển Giáo Viên cam kết không bán, thuê hay cho thuê thông tin cá nhân của bạn cho bên thứ ba.
-            Thông tin của bạn có thể được chia sẻ trong các trường hợp sau:
+            GetTeachingJobs does not sell, rent, or trade your personal information to third parties. Your data is shared strictly under the following conditions:
           </p>
           <ul>
             <li>
-              Giữa ứng viên và nhà tuyển dụng: Hồ sơ của bạn, sau khi bạn ứng tuyển hoặc cho phép hiển thị
-              công khai, sẽ được chia sẻ với nhà tuyển dụng đang có nhu cầu.
+              Between Applicants and Employers: When you apply for a job or enable profile visibility, your submitted materials are shared with the prospective school.
             </li>
             <li>
-              Bên thứ ba cung cấp dịch vụ: Chúng tôi có thể sử dụng các đối tác để hỗ trợ vận hành, ví dụ
-              dịch vụ lưu trữ web hoặc gửi email. Các đối tác này chỉ được quyền truy cập thông tin cần
-              thiết để hoàn thành công việc và bị ràng buộc bởi nghĩa vụ bảo mật.
+              Trusted Service Providers: We partner with trusted cloud hosting and transactional email providers who adhere to strict data security agreements.
             </li>
             <li>
-              Theo yêu cầu pháp luật: Khi có yêu cầu từ cơ quan chức năng có thẩm quyền hoặc để bảo vệ
-              quyền lợi hợp pháp của chúng tôi.
+              Legal Requirements: If required by law enforcement or competent Vietnamese authorities to protect legal rights and public safety.
             </li>
           </ul>
 
-          <h3>Bảo mật dữ liệu</h3>
+          <h3>Data Security</h3>
           <p>
-            Chúng tôi áp dụng các biện pháp an toàn kỹ thuật và quản lý phù hợp để bảo vệ thông tin của
-            bạn khỏi mất mát, truy cập trái phép, thay đổi hoặc tiết lộ không hợp pháp. Tuy nhiên, không có
-            phương pháp nào là 100% an toàn trên internet.
+            We implement industry-standard encryption, SSL protection, and access controls to safeguard your data. While we strive to maintain top-tier security, no digital transmission over the internet is completely infallible.
           </p>
 
-          <h3>Quyền của bạn</h3>
+          <h3>Your Rights</h3>
           <ul>
-            <li>Truy cập: Yêu cầu một bản sao các dữ liệu cá nhân mà chúng tôi lưu trữ về bạn.</li>
-            <li>Chỉnh sửa: Cập nhật hoặc sửa đổi các thông tin không chính xác trong tài khoản của bạn.</li>
-            <li>Xóa bỏ: Yêu cầu xóa tài khoản và các dữ liệu cá nhân liên quan.</li>
-            <li>Từ chối: Ngừng nhận các email thông tin, tuyển dụng từ TuyenGiaoVien.vn.</li>
+            <li>Access: Request a copy of the personal information we hold about you.</li>
+            <li>Correction: Update or amend inaccurate profile and account details anytime.</li>
+            <li>Deletion: Request full deletion of your account and related records.</li>
+            <li>Opt-Out: Unsubscribe from marketing communications at any time.</li>
           </ul>
           <p>
-            Để thực hiện các quyền này, bạn có thể trực tiếp chỉnh sửa trong phần cài đặt tài khoản hoặc
-            gửi yêu cầu qua email
-            <a v-if="email" :href="mailtoHref">{{ email }}</a><template v-else>admin</template>.
+            To exercise your rights, manage your account settings or contact us directly at
+            <a v-if="email" :href="mailtoHref">{{ email }}</a><template v-else>support</template>.
           </p>
 
-          <h3>Cookie và công nghệ theo dõi</h3>
+          <h3>Cookies and Tracking Technologies</h3>
           <p>
-            Chúng tôi sử dụng Cookie để cải thiện trải nghiệm của bạn. Cookie là các file nhỏ được lưu
-            trên trình duyệt, giúp chúng tôi nhận biết thiết bị của bạn khi quay lại truy cập, ghi nhớ các
-            cài đặt và phân tích lưu lượng truy cập website. Bạn có thể chọn để chấp nhận hoặc từ chối
-            Cookie thông qua cài đặt trình duyệt của mình.
+            We use essential and analytics cookies to personalize your browsing experience, remember session state, and understand user traffic. You may manage or disable cookies via your browser preferences.
           </p>
         </section>
 
         <section class="legal-section" id="lien-he-phap-ly">
-          <h2>Liên hệ</h2>
+          <h2>Contact Us</h2>
           <p>
-            Nếu bạn có bất kỳ câu hỏi hoặc thắc mắc nào về Điều khoản &amp; Chính sách quyền riêng tư này,
-            vui lòng liên hệ với đội ngũ Tuyển Giáo Viên.
+            If you have any questions or feedback regarding our Terms &amp; Privacy Policy, please get in touch with our support team.
           </p>
           <dl class="legal-contact-list">
             <div>
@@ -200,12 +174,12 @@
               <dd><a v-if="email" :href="mailtoHref">{{ email }}</a><span v-else>—</span></dd>
             </div>
             <div v-if="phoneNumber">
-              <dt>Hotline</dt>
+              <dt>Phone / WhatsApp</dt>
               <dd><a :href="telHref">{{ phoneNumber }}</a></dd>
             </div>
             <div>
               <dt>Website</dt>
-              <dd><NuxtLink to="/">tuyengiaovien.vn</NuxtLink></dd>
+              <dd><NuxtLink to="/">getteachingjobs.com</NuxtLink></dd>
             </div>
           </dl>
         </section>
@@ -220,9 +194,9 @@ const route = useRoute()
 const { email, phoneNumber, mailtoHref, telHref } = useAdminContactInfo()
 
 const navItems = [
-  { id: 'dieu-khoan-dieu-kien', label: 'Điều khoản & Điều kiện' },
-  { id: 'chinh-sach-quyen-rieng-tu', label: 'Chính sách quyền riêng tư' },
-  { id: 'lien-he-phap-ly', label: 'Liên hệ' },
+  { id: 'dieu-khoan-dieu-kien', label: 'Terms & Conditions' },
+  { id: 'chinh-sach-quyen-rieng-tu', label: 'Privacy Policy' },
+  { id: 'lien-he-phap-ly', label: 'Contact Us' },
 ] as const
 
 type SectionId = (typeof navItems)[number]['id']
@@ -294,12 +268,12 @@ watch(
 )
 
 useHead({
-  title: 'Điều khoản & Chính sách quyền riêng tư',
+  title: 'Terms of Service & Privacy Policy - GetTeachingJobs',
   meta: [
     {
       name: 'description',
       content:
-        'Điều khoản sử dụng, chính sách quyền riêng tư và thông tin liên hệ TuyenGiaoVien.vn',
+        'Terms of Service, Privacy Policy, and contact information for GetTeachingJobs.com',
     },
   ],
 })

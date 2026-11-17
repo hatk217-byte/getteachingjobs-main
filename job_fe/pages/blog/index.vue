@@ -4,8 +4,8 @@
     <section class="blog-directory-hero">
       <div class="container blog-directory-shell">
         <div class="blog-directory-heading">
-          <h1 class="blog-directory-title">Blog & Cẩm nang nghề giáo</h1>
-          <p class="blog-directory-subtitle">Khám phá những bài viết hữu ích về phương pháp giảng dạy, kỹ năng sư phạm và cơ hội nghề nghiệp.</p>
+          <h1 class="blog-directory-title">Teaching in Vietnam Blog & Guides</h1>
+          <p class="blog-directory-subtitle">Explore expert guides, visa tips, school reviews, and teaching resources for educators in Vietnam.</p>
         </div>
 
         <form class="blog-directory-search-card" @submit.prevent="applySearch">
@@ -19,11 +19,11 @@
             <input
               v-model="searchKeyword"
               type="text"
-              placeholder="Nhập tiêu đề bài viết, chủ đề hoặc từ khóa..."
+              placeholder="Search blog articles, topics, or guides..."
             />
           </div>
           <button type="submit" class="blog-search-btn">
-            Tìm kiếm
+            Search
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
               <line x1="5" y1="12" x2="19" y2="12" />
               <polyline points="12 5 19 12 12 19" />
@@ -45,7 +45,7 @@
               :class="{ 'is-active': selectedBadges.size === 0 }"
               @click="selectedBadges.clear(); currentPage = 1"
             >
-              Tất cả
+              All
             </button>
             <button
               v-for="b in blogBadges"
@@ -133,7 +133,7 @@
                   </p>
 
                   <span class="blog-directory-card__more">
-                    Đọc tiếp
+                    Read More
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                       <line x1="5" y1="12" x2="19" y2="12" />
                       <polyline points="12 5 19 12 12 19" />
@@ -150,7 +150,7 @@
                   type="button"
                   class="blog-directory-pagination__btn"
                   :disabled="currentPage <= 1"
-                  aria-label="Trang trước"
+                  aria-label="Previous"
                   @click="goToPage(currentPage - 1)"
                 >
                   ‹
@@ -171,7 +171,7 @@
                   type="button"
                   class="blog-directory-pagination__btn"
                   :disabled="currentPage >= totalPages"
-                  aria-label="Trang sau"
+                  aria-label="Next"
                   @click="goToPage(currentPage + 1)"
                 >
                   ›
@@ -183,11 +183,11 @@
           <!-- Right: Sidebar -->
           <aside class="blog-directory-main__sidebar">
             <div class="blog-sidebar-card">
-              <span class="blog-sidebar-badge">Dành cho giáo viên</span>
-              <h3>Tìm việc làm giáo dục</h3>
-              <p>Hàng ngàn cơ hội việc làm tại các trường học, trung tâm uy tín trên toàn quốc.</p>
+              <span class="blog-sidebar-badge">For Teachers</span>
+              <h3>Find Teaching Jobs</h3>
+              <p>Explore openings across Vietnam's top international and bilingual schools.</p>
               <NuxtLink to="/jobs/search" class="blog-sidebar-cta-btn">
-                Xem việc làm mới
+                Explore Jobs
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <line x1="5" y1="12" x2="19" y2="12" />
                   <polyline points="12 5 19 12 12 19" />
@@ -196,11 +196,11 @@
             </div>
 
             <div class="blog-sidebar-card">
-              <span class="blog-sidebar-badge blog-sidebar-badge-employer">Dành cho nhà tuyển dụng</span>
-              <h3>Đăng tin tuyển dụng</h3>
-              <p>Tiếp cận nhanh chóng với mạng lưới hàng ngàn giáo viên tài năng, phù hợp.</p>
+              <span class="blog-sidebar-badge blog-sidebar-badge-employer">For Schools &amp; Recruiters</span>
+              <h3>Post a Teaching Job</h3>
+              <p>Reach thousands of qualified native English speakers and international teachers.</p>
               <NuxtLink to="/jobs/upload" class="blog-sidebar-outline-btn">
-                Đăng tin miễn phí
+                Post a Free Job
               </NuxtLink>
             </div>
           </aside>
@@ -218,17 +218,17 @@
               </svg>
             </div>
 
-            <h2 class="blog-empty-title">Chưa có bài viết nào</h2>
+            <h2 class="blog-empty-title">No Articles Found</h2>
             <p class="blog-empty-desc">
-              Chuyên mục Blog đang được ban biên tập cập nhật những bài viết và cẩm nang giáo dục mới nhất. Bạn hãy quay lại sau hoặc khám phá các cơ hội việc làm hấp dẫn nhé!
+              Our team is publishing fresh guides and articles for international teachers. Please check back soon or explore open positions!
             </p>
 
             <div class="blog-empty-actions">
               <NuxtLink to="/jobs/search" class="blog-empty-primary-btn">
-                Khám phá việc làm
+                Search Teaching Jobs
               </NuxtLink>
               <NuxtLink to="/" class="blog-empty-secondary-btn">
-                Quay lại trang chủ
+                Back to Homepage
               </NuxtLink>
             </div>
           </div>
@@ -244,7 +244,7 @@ import type { BlogEntity } from '~/entities/blog'
 const { $api } = useNuxtApp()
 
 useHead({
-  title: 'Blog & Cẩm nang nghề giáo - TuyenGiaoVien.vn',
+  title: 'Blog & Teacher Guides - GetTeachingJobs',
 })
 
 const blogs = ref<BlogEntity[]>([])

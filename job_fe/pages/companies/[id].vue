@@ -41,7 +41,7 @@ const { resetMediaState } = useCompanyDetailView(company)
 useHead({
   title: computed(() => {
     const n = formatCompanyName(company.value?.name)
-    return n && n.length > 0 ? n : 'Nhà tuyển dụng'
+    return n && n.length > 0 ? n : 'School & Employer Profile'
   }),
 })
 
@@ -52,13 +52,13 @@ async function fetchCompanyDetail() {
   try {
     const companyId = Number(route.params.id)
     if (Number.isNaN(companyId)) {
-      throw new Error('Mã công ty không hợp lệ')
+      throw new Error('Invalid school ID')
     }
 
     company.value = await $api.company.getCompanyDetail(companyId)
     resetMediaState()
   } catch (err: unknown) {
-    const message = err instanceof Error ? err.message : 'Không tải được thông tin công ty'
+    const message = err instanceof Error ? err.message : 'Unable to load school details'
     error.value = message
   } finally {
     loading.value = false

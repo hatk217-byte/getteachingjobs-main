@@ -10,14 +10,14 @@
     >
       <aside class="employer-sidebar employer-sidebar-with-footer">
         <div class="employer-sidebar-brand-wrap">
-          <a :href="config.public.baseUrl || '/'" class="employer-sidebar-brand wordmark" aria-label="Trang chủ">
-            <span class="wordmark-main">TuyenGiaoVien</span>
-            <span class="wordmark-dot">.vn</span>
+          <a :href="config.public.baseUrl || '/'" class="employer-sidebar-brand wordmark" aria-label="Home">
+            <span class="wordmark-main">GetTeachingJobs</span>
+            <span class="wordmark-dot">.com</span>
           </a>
         </div>
 
-        <nav class="employer-sidebar-nav" aria-label="Dashboard quản trị">
-          <p class="employer-sidebar-section-title">Quản trị viên</p>
+        <nav class="employer-sidebar-nav" aria-label="Admin Dashboard">
+          <p class="employer-sidebar-section-title">Administrator</p>
           <button
             type="button"
             class="employer-sidebar-link"
@@ -175,9 +175,9 @@
             :company-name="companyManagementCompanyName"
           />
               <div v-else class="employer-admin-empty-panel">
-                Thiếu thông tin công ty.
+                Missing company details.
                 <button type="button" class="employer-admin-empty-link" @click="setActiveView('adminCompanies')">
-                  Quay lại Companies
+                  Back to Companies
                 </button>
               </div>
             </template>
@@ -208,7 +208,7 @@ definePageMeta({
 })
 
 useHead({
-  title: 'Quản trị hệ thống',
+  title: 'Admin Dashboard - GetTeachingJobs',
 })
 
 type AdminView =

@@ -1,5 +1,5 @@
 export const NEGOTIABLE_SALARY_TYPE = 5
-export const SALARY_NEGOTIABLE_LABEL = 'Thương lượng'
+export const SALARY_NEGOTIABLE_LABEL = 'Negotiable'
 
 export type SalaryLike = {
   salaryType?: number | string | null
@@ -60,11 +60,11 @@ export function formatSalaryRange(job: SalaryLike | null | undefined): string {
 
   if (min != null && max != null) {
     if (min === max) {
-      return `${formatMillionPart(min)} triệu`
+      return `${formatMillionPart(min)} million VND`
     }
-    return `${formatMillionPart(min)}${EN_DASH}${formatMillionPart(max)} triệu`
+    return `${formatMillionPart(min)}${EN_DASH}${formatMillionPart(max)} million VND`
   }
 
   const single = min ?? max!
-  return `${formatMillionPart(single)} triệu`
+  return `${formatMillionPart(single)} million VND`
 }

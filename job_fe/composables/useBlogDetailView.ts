@@ -68,7 +68,7 @@ export function useBlogDetailView(blog: Ref<BlogEntity | null>) {
     const minutes = estimateMinutes(
       `${b.title ?? ''} ${b.description ?? ''} ${b.content ?? ''}`,
     )
-    return `${minutes} phút đọc`
+    return `${minutes} min read`
   }
 
   return {

@@ -32,7 +32,7 @@
           </div>
           <div class="content-end">
             <UButton
-              label="Thêm mới job"
+              label="Post a New Job"
               block
               @click="router.push('/jobs/upload')"
             />
@@ -220,7 +220,7 @@ const { $api } = useNuxtApp()
 const authStore = useAuthStore()
 
 useHead({
-  title: 'Việc làm của tôi',
+  title: 'My Jobs - GetTeachingJobs',
 })
 
 // Reactive data

@@ -80,12 +80,12 @@ export function useJobDetailView(job: Ref<JobModel | null>) {
     const diff = Date.now() - d.getTime()
     if (Number.isNaN(diff) || diff < 0) return formatDate(d)
     const minutes = Math.floor(diff / 60000)
-    if (minutes < 60) return `${Math.max(minutes, 1)} phút trước`
+    if (minutes < 60) return `${Math.max(minutes, 1)}m ago`
     const hours = Math.floor(minutes / 60)
-    if (hours < 24) return `${hours} giờ trước`
+    if (hours < 24) return `${hours}h ago`
     const days = Math.floor(hours / 24)
-    if (days === 1) return 'Hôm qua'
-    if (days < 7) return `${days} ngày trước`
+    if (days === 1) return 'Yesterday'
+    if (days < 7) return `${days}d ago`
     return formatDate(d)
   })
 
@@ -120,13 +120,13 @@ export function useJobDetailView(job: Ref<JobModel | null>) {
 
   const genderText = computed(() => {
     const raw = (job.value?.gender || '').trim()
-    if (!raw) return 'Không yêu cầu'
+    if (!raw) return 'Any'
     const labels = raw
       .split(',')
       .map((g) => g.trim())
       .filter(Boolean)
       .map((g) => genderLabel[g] ?? genderLabel[Number(g)] ?? g)
-    return labels.length ? labels.join(', ') : 'Không yêu cầu'
+    return labels.length ? labels.join(', ') : 'Any'
   })
 
   const experienceText = computed(() => {
@@ -172,16 +172,16 @@ export function useJobDetailView(job: Ref<JobModel | null>) {
 
     const items: string[] = []
     if (qualificationText.value && qualificationText.value !== t('common.nanValue')) {
-      items.push(`Trình độ: ${qualificationText.value}`)
+      items.push(`Degree: ${qualificationText.value}`)
     }
     if (job.value.experienceLevel && experienceText.value !== t('common.nanValue')) {
-      items.push(`Kinh nghiệm: ${experienceText.value}`)
+      items.push(`Experience: ${experienceText.value}`)
     }
     if (job.value.gender) {
-      items.push(`Giới tính: ${genderText.value}`)
+      items.push(`Gender: ${genderText.value}`)
     }
     if (job.value.grade && gradeText.value !== t('common.nanValue')) {
-      items.push(`Khối: ${gradeText.value}`)
+      items.push(`Grade: ${gradeText.value}`)
     }
 
     return items
@@ -192,34 +192,34 @@ export function useJobDetailView(job: Ref<JobModel | null>) {
 
     return [
       {
-        label: 'Địa điểm',
+        label: 'Location',
         value: fullLocationText.value || t('common.nanValue'),
         tooltip: fullLocationText.value || undefined,
       },
-      { label: 'Lương', value: salaryText.value },
-      { label: 'Loại lương', value: salaryTypeText.value },
+      { label: 'Salary', value: salaryText.value },
+      { label: 'Salary Frequency', value: salaryTypeText.value },
       {
-        label: 'Hình thức',
+        label: 'Employment Type',
         value: employmentTypeText.value,
       },
       {
-        label: 'Lĩnh vực',
+        label: 'Subject',
         value: getCategoryLabels(job.value.category) || t('common.nanValue'),
       },
-      { label: 'Khối', value: gradeText.value },
-      { label: 'Bằng cấp', value: qualificationText.value },
-      { label: 'Kinh nghiệm', value: experienceText.value },
-      { label: 'Giới tính', value: genderText.value },
+      { label: 'Grade', value: gradeText.value },
+      { label: 'Degree', value: qualificationText.value },
+      { label: 'Experience', value: experienceText.value },
+      { label: 'Gender', value: genderText.value },
       {
-        label: 'Hạn nộp',
+        label: 'Deadline',
         value: job.value.deadline ? formatDate(new Date(job.value.deadline)) : t('common.nanValue'),
       },
       {
-        label: 'Phúc lợi',
+        label: 'Benefits',
         value: benefitsPreview.value,
         tooltip: processedBenefits.value.join(', ') || undefined,
       },
-      { label: 'Đăng', value: postedText.value },
+      { label: 'Posted', value: postedText.value },
     ]
   })
 
@@ -254,12 +254,12 @@ export function useJobDetailView(job: Ref<JobModel | null>) {
     const date = d instanceof Date ? d : new Date(d)
     const diffMs = Date.now() - date.getTime()
     const diffMins = Math.floor(diffMs / 60000)
-    if (diffMins < 60) return `${Math.max(diffMins, 1)} phút trước`
+    if (diffMins < 60) return `${Math.max(diffMins, 1)}m ago`
     const diffHours = Math.floor(diffMins / 60)
-    if (diffHours < 24) return `${diffHours} giờ trước`
+    if (diffHours < 24) return `${diffHours}h ago`
     const diffDays = Math.floor(diffHours / 24)
-    if (diffDays === 1) return 'Hôm qua'
-    return `${diffDays} ngày trước`
+    if (diffDays === 1) return 'Yesterday'
+    return `${diffDays}d ago`
   }
 
   const getJobRowDelay = (index: number) => {

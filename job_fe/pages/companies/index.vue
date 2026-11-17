@@ -4,8 +4,8 @@
     <section class="school-directory-hero">
       <div class="container school-directory-shell">
         <div class="school-directory-heading">
-          <h1 class="school-directory-title">Nhà tuyển dụng & Cơ sở Giáo dục</h1>
-          <p class="school-directory-subtitle">Khám phá hàng ngàn cơ hội việc làm từ các cơ sở giáo dục hàng đầu.</p>
+          <h1 class="school-directory-title">Schools & Educational Centers</h1>
+          <p class="school-directory-subtitle">Discover top international schools, bilingual academies, and language centers in Vietnam.</p>
         </div>
 
         <form
@@ -24,7 +24,7 @@
                 v-model="searchParams.keyword"
                 type="text"
                 name="keyword"
-                placeholder="Nhập trường học, trung tâm hoặc từ khóa..."
+                placeholder="Search school name, center, or keyword..."
               >
             </div>
 
@@ -43,7 +43,7 @@
                 variant="none"
                 class="school-directory-select"
                 :placeholder="$t('home.search.placeholderLocation')"
-                :search-input="{ placeholder: 'Tìm tỉnh thành...', variant: 'none' }"
+                :search-input="{ placeholder: 'Search city/province...', variant: 'none' }"
                 :ui="companyDirectorySelectUi"
                 @update:open="onCompanySelectMenuOpenChange"
               />
@@ -64,7 +64,7 @@
                 variant="none"
                 class="school-directory-select"
                 :placeholder="$t('companies.search.organizationType')"
-                :search-input="{ placeholder: 'Tìm loại hình...', variant: 'none' }"
+                :search-input="{ placeholder: 'Search school type...', variant: 'none' }"
                 :ui="companyDirectorySelectUi"
                 @update:open="onCompanySelectMenuOpenChange"
               />
@@ -75,9 +75,9 @@
             <button
               type="submit"
               class="school-directory-submit"
-              aria-label="Tìm kiếm"
+              aria-label="Search"
             >
-              <span>Tìm kiếm</span>
+              <span>Search</span>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <line x1="5" y1="12" x2="19" y2="12" />
                 <polyline points="12 5 19 12 12 19" />
@@ -96,9 +96,9 @@
           v-if="!loading && filteredCompanies.length > 0"
           class="company-results-count"
         >
-          <span>Đang hiển thị </span>
+          <span>Showing </span>
           <strong class="company-results-count__number">{{ filteredCompanies.length }}</strong>
-          <span class="company-results-count__label"> công ty</span>
+          <span class="company-results-count__label"> institutions</span>
         </div>
 
         <!-- Loading Skeleton -->
@@ -145,12 +145,12 @@
                   <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
                   <circle cx="12" cy="10" r="3" />
                 </svg>
-                <span>{{ getCompanyLocationLabel(company) || 'Toàn quốc' }}</span>
+                <span>{{ getCompanyLocationLabel(company) || 'All Vietnam' }}</span>
               </div>
 
               <!-- 4. Centered Jobs Open Pill -->
               <div class="school-company-jobs-pill">
-                <span>{{ company.openPositions || 0 }} việc làm</span>
+                <span>{{ company.openPositions || 0 }} openings</span>
               </div>
             </article>
           </div>
@@ -165,7 +165,7 @@
                 v-if="currentPage > 1"
                 type="button"
                 class="company-pagination__btn"
-                title="Trang trước"
+                title="Previous page"
                 @click="goToPage(currentPage - 1)"
               >
                 <UIcon name="i-heroicons-chevron-left" class="company-pagination__icon" />
@@ -186,7 +186,7 @@
                 v-if="currentPage < totalPages"
                 type="button"
                 class="company-pagination__btn"
-                title="Trang tiếp"
+                title="Next page"
                 @click="goToPage(currentPage + 1)"
               >
                 <UIcon name="i-heroicons-chevron-right" class="company-pagination__icon" />
@@ -219,7 +219,7 @@ import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { MasterDataItem } from '#imports'
 
 useHead({
-  title: 'Nhà tuyển dụng',
+  title: 'Schools & Centers - GetTeachingJobs',
 })
 
 // Basic interfaces for now

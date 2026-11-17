@@ -13,15 +13,15 @@
     >
       <aside class="employer-sidebar employer-sidebar-with-footer">
         <div class="employer-sidebar-brand-wrap">
-          <NuxtLink to="/" class="employer-sidebar-brand wordmark" aria-label="Trang chủ">
-            <span class="wordmark-main">TuyenGiaoVien</span>
-            <span class="wordmark-dot">.vn</span>
+          <NuxtLink to="/" class="employer-sidebar-brand wordmark" aria-label="Home">
+            <span class="wordmark-main">GetTeachingJobs</span>
+            <span class="wordmark-dot">.com</span>
           </NuxtLink>
         </div>
 
-        <nav class="employer-sidebar-nav" :aria-label="isAdmin ? 'Dashboard quản trị' : 'Dashboard nhà tuyển dụng'">
+        <nav class="employer-sidebar-nav" :aria-label="isAdmin ? 'Admin Dashboard' : 'Employer Dashboard'">
           <template v-if="isAdmin">
-            <p class="employer-sidebar-section-title">Quản trị viên</p>
+            <p class="employer-sidebar-section-title">Administrator</p>
             <button
               type="button"
               class="employer-sidebar-link"
@@ -127,7 +127,7 @@
                   <rect x="14" y="14" width="7" height="7" rx="2" stroke="currentColor" stroke-width="2" />
                 </svg>
               </span>
-              <span>Tổng quan</span>
+              <span>Overview</span>
             </button>
             <button
               type="button"
@@ -142,7 +142,7 @@
                   <path d="M4 10a2.5 2.5 0 0 1 2.5-2.5M20 10a2.5 2.5 0 0 0-2.5-2.5M7 6a2 2 0 0 0-2-2M17 6a2 2 0 0 1 2-2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" opacity="0.65" />
                 </svg>
               </span>
-              <span>Hồ sơ công ty</span>
+              <span>School Profile</span>
             </button>
             <button
               type="button"
@@ -158,7 +158,7 @@
                   <path d="M12 11v5M9.5 13.5h5" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                 </svg>
               </span>
-              <span>Đăng tin mới</span>
+              <span>Post a New Job</span>
             </button>
             <button
               type="button"
@@ -173,7 +173,7 @@
                   <path d="M9 12h6M9 16h6M9 8.5h2" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                 </svg>
               </span>
-              <span>Quản lí tin đăng</span>
+              <span>Manage Jobs</span>
             </button>
             <button
               type="button"
@@ -189,7 +189,7 @@
                   <path d="M16.5 5.2a3 3 0 0 1 0 5.6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                 </svg>
               </span>
-              <span>Quản lý ứng viên</span>
+              <span>Candidates</span>
             </button>
             <button
               type="button"
@@ -203,7 +203,7 @@
                   <path d="M5 18a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                 </svg>
               </span>
-              <span>Thông tin tài khoản</span>
+              <span>Account Settings</span>
             </button>
           </template>
         </nav>
@@ -541,7 +541,7 @@ definePageMeta({
 })
 
 useHead({
-  title: 'Hồ sơ công ty',
+  title: 'Employer Dashboard - GetTeachingJobs',
 })
 
 // Composables

@@ -15,15 +15,15 @@ export default defineNuxtConfig({
   app: {
     head: {
       htmlAttrs: {
-        lang: 'vi',
+        lang: 'en',
       },
 
       charset: 'utf-8',
-      title: 'TuyenGiaoVien.com',
+      title: 'GetTeachingJobs.com',
       titleTemplate: (titleChunk?: string) =>
         titleChunk && String(titleChunk).trim().length > 0
-          ? `${String(titleChunk).trim()} - TuyenGiaoVien.com`
-          : 'TuyenGiaoVien.com',
+          ? `${String(titleChunk).trim()} - GetTeachingJobs.com`
+          : 'GetTeachingJobs.com - Teaching Jobs in Vietnam',
       viewport:
         'width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0',
       link: [
@@ -126,8 +126,8 @@ export default defineNuxtConfig({
     disable: process.env.NODE_ENV === 'development',
     registerType: 'autoUpdate',
     manifest: {
-      name: 'Female Deet App',
-      short_name: 'Deet',
+      name: 'GetTeachingJobs',
+      short_name: 'GetTeachingJobs',
       start_url: import.meta.env.NUXT_APP_BASE_URL,
       display: 'standalone',
       background_color: '#ffffff',
@@ -192,7 +192,7 @@ export default defineNuxtConfig({
   },
 
   i18n: {
-    defaultLocale: 'ja',
+    defaultLocale: 'en',
     detectBrowserLanguage: {
       useCookie: true,
       cookieKey: 'i18n_redirected',

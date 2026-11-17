@@ -57,7 +57,7 @@ const applyDrawerOpen = ref(false)
 const applyingJob = ref<JobModel | null>(null)
 
 useHead({
-  title: computed(() => job.value?.title?.trim() || 'Chi tiết công việc'),
+  title: computed(() => job.value?.title?.trim() || 'Teaching Job Details'),
 })
 
 const goBack = () => router.back()
@@ -129,7 +129,7 @@ const loadJobDetail = async () => {
       await Promise.all([loadSimilarJobs(), loadCompanyOtherJobs()])
     }
   } catch (error: unknown) {
-    const message = error instanceof Error ? error.message : 'Không tải được tin tuyển dụng'
+    const message = error instanceof Error ? error.message : 'Failed to load job posting'
     useNotify({ message, type: 'error' })
     job.value = null
   } finally {
