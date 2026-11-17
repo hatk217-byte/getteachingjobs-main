@@ -17,8 +17,14 @@
   position: relative;
   min-height: var(--hero-frame-height);
   padding: 0;
-  background-color: #ffffff;
-  background-image: none;
+  background-color: #f8fafc;
+  background-image:
+    radial-gradient(ellipse 75% 65% at 50% 48%, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.91) 55%, rgba(255, 255, 255, 0.82) 100%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.86) 30%, rgba(255, 255, 255, 0.86) 70%, rgba(255, 255, 255, 0.98) 100%),
+    url('/images/hero-classroom.jpg');
+  background-size: cover;
+  background-position: center 35%;
+  background-repeat: no-repeat;
   overflow: hidden;
   display: flex;
   align-items: center;
