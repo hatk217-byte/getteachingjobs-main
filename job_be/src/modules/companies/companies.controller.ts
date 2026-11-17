@@ -1,0 +1,219 @@
+import {
+  Controller,
+  Post,
+  Get,
+  Param,
+  Body,
+  Query,
+  Put,
+  Delete,
+  UseGuards,
+  ParseIntPipe,
+  Patch,
+  BadRequestException,
+  Request,
+} from '@nestjs/common';
+import { ApiTags, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
+import { CompaniesService } from './companies.service';
+import { CreateCompanyDto } from './dto/request/create-company.dto';
+import { SearchCompanyDto } from './dto/request/search-company.dto';
+import { CompanyDetailDto } from './dto/response/company-detail.dto';
+import { CompanyResponseDto } from './dto/response/company-response.dto';
+import { JwtAuthGuard } from '@/modules/auth/guards/jwt-auth.guard';
+import { RolesGuard } from '@/modules/auth/guards/roles.guard';
+import { Roles } from '@/modules/constants/roles.decorator';
+import { RoleStatus } from '@/enum/role';
+import { SearchCompanyAdminDto } from './dto/request/search-company-admin.dto';
+import { GetApplicationsDto } from './dto/request/get-applications.dto';
+import { JobApplicationResponseDto } from './dto/response/job-application-response.dto';
+
+@ApiTags('companies')
+@Controller('companies')
+export class CompaniesController {
+  constructor(private readonly companiesService: CompaniesService) {}
+
+  @Post()
+  // Không yêu cầu auth vì đây là flow đăng ký - user chưa có token
+  @ApiResponse({
+    status: 201,
+    description: 'Company created successfully',
+    type: CompanyResponseDto,
+  })
+  async create(@Body() createCompanyDto: CreateCompanyDto) {
+    return this.companiesService.create(createCompanyDto);
+  }
+
+  @Get()
+  async searchCompanies(
+    @Query() query: SearchCompanyDto,
+  ): Promise<CompanyResponseDto[]> {
+    return this.companiesService.searchCompanies(query);
+  }
+
+  @Get('admin')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(RoleStatus.ADMIN)
+  @ApiBearerAuth()
+  @ApiResponse({
+    status: 200,
+    description: 'Admin list companies ( filter by isWaiting )',
+  })
+  async adminList(@Query() query: SearchCompanyAdminDto) {
+    return this.companiesService.listForAdmin(query);
+  }
+
+  @Get('admin/:id')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(RoleStatus.ADMIN)
+  @ApiBearerAuth()
+  @ApiResponse({
+    status: 200,
+    description: 'Admin get company detail by id (for edit, any status)',
+    type: CompanyDetailDto,
+  })
+  @ApiResponse({ status: 404, description: 'Không tìm thấy công ty' })
+  async adminGetCompanyDetail(
+    @Param('id', ParseIntPipe) companyId: number,
+  ): Promise<CompanyDetailDto> {
+    return this.companiesService.getCompanyDetailForAdmin(companyId);
+  }
+
+  @Get('applications')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(RoleStatus.COMPANY, RoleStatus.ADMIN, RoleStatus.USER)
+  @ApiBearerAuth()
+  @ApiResponse({
+    status: 200,
+    description: 'Get applications for jobs owned by user',
+    type: [JobApplicationResponseDto],
+  })
+  async getMyJobApplications(
+    @Query() query: GetApplicationsDto,
+  ): Promise<JobApplicationResponseDto[]> {
+    if (!query.userId) {
+      throw new BadRequestException('Mã người dùng là bắt buộc');
+    }
+    return this.companiesService.getApplicationsByJobOwner(query.userId);
+  }
+
+  @Get('/mst/:mst')
+  @ApiResponse({
+    status: 200,
+    description: 'Company detail information by MST',
+    type: CompanyDetailDto,
+  })
+  async getCompanyByMst(@Param('mst') mst: string): Promise<CompanyDetailDto> {
+    return this.companiesService.getCompanyDetailByMst(mst);
+  }
+
+  @Get(':id')
+  @ApiResponse({
+    status: 200,
+    description: 'Company detail information (public)',
+    type: CompanyDetailDto,
+  })
+  @ApiResponse({ status: 404, description: 'Không tìm thấy công ty' })
+  async getCompanyDetail(
+    @Param('id', ParseIntPipe) companyId: number,
+  ): Promise<CompanyDetailDto> {
+    return this.companiesService.getCompanyDetail(companyId);
+  }
+
+  @Get(':id/detail')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiResponse({
+    status: 200,
+    description: 'Company detail for owner/admin (protected)',
+    type: CompanyDetailDto,
+  })
+  @ApiResponse({ status: 404, description: 'Không tìm thấy công ty' })
+  async getCompanyDetailProtected(
+    @Param('id', ParseIntPipe) companyId: number,
+    @Request() req,
+  ): Promise<CompanyDetailDto> {
+    return this.companiesService.getCompanyDetail(companyId, req.user);
+  }
+
+  @Put(':id')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(RoleStatus.ADMIN, RoleStatus.COMPANY)
+  @ApiBearerAuth()
+  @ApiResponse({
+    status: 200,
+    description: 'Company updated successfully',
+    type: CompanyDetailDto,
+  })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  @ApiResponse({ status: 404, description: 'Không tìm thấy công ty' })
+  async updateCompany(
+    @Param('id', ParseIntPipe) companyId: number,
+    @Body() updateCompanyDto: CreateCompanyDto,
+    @Request() req,
+  ) {
+    return this.companiesService.update(companyId, updateCompanyDto, req.user);
+  }
+
+  @Delete(':id')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(RoleStatus.ADMIN, RoleStatus.COMPANY)
+  @ApiBearerAuth()
+  @ApiResponse({
+    status: 200,
+    description: 'Company deleted successfully',
+  })
+  @ApiResponse({ status: 404, description: 'Không tìm thấy công ty' })
+  async deleteCompany(@Param('id', ParseIntPipe) companyId: number) {
+    await this.companiesService.delete(companyId);
+    return { message: `Company with ID ${companyId} deleted successfully` };
+  }
+
+  @Patch(':id/approve')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(RoleStatus.ADMIN)
+  @ApiBearerAuth()
+  @ApiResponse({
+    status: 200,
+    description: 'Company approved successfully',
+  })
+  async approveCompany(@Param('id', ParseIntPipe) companyId: number) {
+    return this.companiesService.approve(companyId);
+  }
+
+  @Patch(':id/reject')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(RoleStatus.ADMIN)
+  @ApiBearerAuth()
+  @ApiResponse({
+    status: 200,
+    description: 'Company rejected successfully',
+  })
+  async rejectCompany(@Param('id', ParseIntPipe) companyId: number) {
+    return this.companiesService.reject(companyId);
+  }
+
+  @Patch(':id/feature')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(RoleStatus.ADMIN)
+  @ApiBearerAuth()
+  @ApiResponse({
+    status: 200,
+    description: 'Company featured successfully',
+  })
+  async featureCompany(@Param('id', ParseIntPipe) companyId: number) {
+    return this.companiesService.setFeatured(companyId, true);
+  }
+
+  @Patch(':id/unfeature')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(RoleStatus.ADMIN)
+  @ApiBearerAuth()
+  @ApiResponse({
+    status: 200,
+    description: 'Company unfeatured successfully',
+  })
+  async unfeatureCompany(@Param('id', ParseIntPipe) companyId: number) {
+    return this.companiesService.setFeatured(companyId, false);
+  }
+
+}
