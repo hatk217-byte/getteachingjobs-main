@@ -9,7 +9,7 @@
       <div class="hero-shell">
         <div class="hero-banner" data-hero>
           <div class="hero-copy">
-            <h1>Get teaching jobs <span class="highlight-text">in Vietnam?</span></h1>
+            <h1>Get teaching jobs <span class="highlight-text">in Vietnam</span></h1>
             <p>
               Over <strong>700+</strong> teaching positions, <strong>200+</strong> verified international schools & language academies across Vietnam.
             </p>
