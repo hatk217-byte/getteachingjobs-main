@@ -1,0 +1,289 @@
+<template>
+  <header v-if="!headerStore.hideHeader" class="app-header site-header">
+    <div class="topbar app-header__container">
+      <div class="topbar-inner app-header__inner">
+        <NuxtLink to="/" class="wordmark" aria-label="Trang chủ" @click="closeMobileNav">
+          <span class="wordmark-main">TuyenGiaoVien</span>
+          <span class="wordmark-dot">.vn</span>
+        </NuxtLink>
+
+        <button
+          type="button"
+          class="mobile-toggle"
+          data-mobile-toggle
+          :aria-expanded="isMobileNavOpen"
+          aria-controls="site-mobile-menu"
+          aria-label="Menu"
+          @click="toggleMobileNav"
+        >
+          <span aria-hidden="true">{{ isMobileNavOpen ? '✕' : '☰' }}</span>
+        </button>
+
+        <nav
+          id="site-primary-nav"
+          class="site-nav site-nav--desktop"
+          aria-label="Primary"
+        >
+          <NuxtLink
+            v-for="item in menuItems"
+            :key="item.to"
+            :to="item.to"
+            :class="{ 'is-active': isActive(item) }"
+          >
+            {{ item.label }}
+          </NuxtLink>
+        </nav>
+
+        <div
+          id="site-mobile-menu"
+          class="site-mobile-menu"
+          :class="{ 'is-open': isMobileNavOpen }"
+          data-mobile-nav
+        >
+          <nav class="site-mobile-menu__nav" aria-label="Primary">
+            <NuxtLink
+              v-for="item in menuItems"
+              :key="`mobile-${item.to}`"
+              :to="item.to"
+              :class="{ 'is-active': isActive(item) }"
+              @click="closeMobileNav"
+            >
+              {{ item.label }}
+            </NuxtLink>
+          </nav>
+
+          <div class="site-mobile-menu__actions">
+            <template v-if="authStore.isLoggedIn">
+              <p class="site-mobile-menu__user">
+                {{ authStore.user?.fullName || authStore.user?.email || 'User' }}
+              </p>
+              <button
+                type="button"
+                class="site-mobile-menu__action"
+                @click="goAccountFromMobile"
+              >
+                <UIcon name="i-lucide-user" class="size-4 shrink-0" />
+                Thông tin tài khoản
+              </button>
+              <button
+                type="button"
+                class="site-mobile-menu__action site-mobile-menu__action--danger"
+                @click="logoutFromMobile"
+              >
+                <UIcon name="i-lucide-log-out" class="size-4 shrink-0" />
+                Đăng xuất
+              </button>
+            </template>
+            <template v-else>
+              <button
+                type="button"
+                class="site-mobile-menu__action site-mobile-menu__action--auth"
+                data-auth-open
+                data-auth-view-target="login"
+                @click="openAuthFromMobile('login')"
+              >
+                Đăng ký / Đăng nhập
+              </button>
+              <button
+                v-if="showPostButton"
+                type="button"
+                class="site-mobile-menu__action site-mobile-menu__action--post"
+                @click="handlePostJobFree"
+              >
+                Đăng tin miễn phí
+              </button>
+            </template>
+          </div>
+        </div>
+
+        <div class="topbar-actions topbar-actions--desktop app-header__cluster app-header__cluster--end">
+          <template v-if="authStore.isLoggedIn">
+            <UDropdownMenu
+              :items="userDropdownItems"
+              :content="{ align: 'end', side: 'bottom', sideOffset: 8 }"
+              :ui="{ content: 'z-[70] w-56' }"
+            >
+              <button type="button" class="primary-btn small-btn topbar-actions__user">
+                <span class="topbar-actions__userLabel">
+                  {{ authStore.user?.fullName || authStore.user?.email || 'User' }}
+                </span>
+                <UIcon name="i-lucide-chevron-down" class="size-4 shrink-0" />
+              </button>
+            </UDropdownMenu>
+          </template>
+          <template v-else>
+            <button
+              type="button"
+              class="topbar-actions__auth small-btn"
+              data-auth-open
+              data-auth-view-target="login"
+              @click="openAuthModal('login')"
+            >
+              Đăng ký / Đăng nhập
+            </button>
+          </template>
+
+          <button
+            v-if="showPostButton"
+            type="button"
+            class="topbar-actions__post small-btn"
+            @click="handlePostJobFree"
+          >
+            Đăng tin miễn phí
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <AuthModal
+      v-if="!authStore.isLoggedIn"
+      v-model="authModalOpen"
+      :initial-view="authModalView"
+      @closed="onAuthModalClosed"
+    />
+
+    <button
+      v-if="isMobileNavOpen"
+      type="button"
+      class="app-header__backdrop"
+      aria-label="Đóng menu"
+      tabindex="-1"
+      @click="closeMobileNav"
+    />
+  </header>
+</template>
+
+<script setup lang="ts">
+defineComponent({
+  name: 'AppHeader',
+})
+
+import { USER_ROLES } from '~/constants/roles'
+
+const headerStore = useHeaderStore()
+const authStore = useAuthStore()
+const router = useRouter()
+const config = useRuntimeConfig()
+
+const authModalOpen = ref(false)
+const authModalView = ref<'login' | 'register'>('login')
+const suppressAuthModalOpenUntil = ref(0)
+const isMobileNavOpen = ref(false)
+
+const openAuthModal = (view: 'login' | 'register') => {
+  if (Date.now() < suppressAuthModalOpenUntil.value) return
+  authModalView.value = view
+  authModalOpen.value = true
+}
+
+const openAuthFromMobile = (view: 'login' | 'register') => {
+  closeMobileNav()
+  openAuthModal(view)
+}
+
+const onAuthModalClosed = () => {
+  suppressAuthModalOpenUntil.value = Date.now() + 250
+}
+
+const toggleMobileNav = () => {
+  isMobileNavOpen.value = !isMobileNavOpen.value
+}
+
+const closeMobileNav = () => {
+  isMobileNavOpen.value = false
+}
+
+const menuItems = computed(() => [
+  { label: 'Công ty', to: ROUTE_PAGE.COMPANY.GET },
+  { label: 'Tìm việc làm', to: ROUTE_PAGE.SEARCH },
+  { label: 'Blog', to: '/blog' },
+  { label: 'Liên hệ', to: '/contact' },
+])
+
+const isActive = (item: { to: string }) => {
+  return router.currentRoute.value.path === item.to
+}
+
+const userRole = computed(() => authStore.user?.role)
+const isAdmin = computed(() => userRole.value === USER_ROLES.ADMIN)
+const isCompany = computed(() => userRole.value === USER_ROLES.COMPANY)
+
+const showPostButton = computed(() => !authStore.isLoggedIn)
+
+const handlePostJobFree = () => {
+  closeMobileNav()
+  router.push(ROUTE_PAGE.PAGE)
+}
+
+const goDashboard = (path: string, query?: Record<string, any>) => {
+  closeMobileNav()
+  if (path === ROUTE_PAGE.DASHBOARD.ADMIN && config.public.adminUrl) {
+    const queryStr = query ? '?' + new URLSearchParams(query).toString() : ''
+    window.location.href = `${config.public.adminUrl}${path}${queryStr}`
+  } else {
+    router.push({ path, query: query ?? {} })
+  }
+}
+
+const accountPageTarget = computed(() => {
+  if (isAdmin.value) {
+    return { path: ROUTE_PAGE.DASHBOARD.ADMIN, query: { view: 'adminSettings' } }
+  }
+  if (isCompany.value) {
+    return { path: ROUTE_PAGE.DASHBOARD.COMPANY, query: { view: 'settings' } }
+  }
+  return { path: ROUTE_PAGE.DASHBOARD.USER, query: { view: 'editProfile' } }
+})
+
+const goAccountFromMobile = () => {
+  goDashboard(accountPageTarget.value.path, accountPageTarget.value.query)
+}
+
+const logoutFromMobile = () => {
+  closeMobileNav()
+  authStore.logout()
+}
+
+const userDropdownItems = computed(() => {
+  const items: any[] = []
+
+  items.push([
+    {
+      label: 'Thông tin tài khoản',
+      icon: 'i-lucide-user',
+      onSelect: () =>
+        goDashboard(accountPageTarget.value.path, accountPageTarget.value.query),
+    },
+  ])
+
+  items.push([
+    {
+      label: 'Đăng xuất',
+      icon: 'i-lucide-log-out',
+      onSelect: () => authStore.logout(),
+    },
+  ])
+
+  return items
+})
+
+watch(
+  () => router.currentRoute.value.fullPath,
+  () => closeMobileNav(),
+)
+
+watch(isMobileNavOpen, (open) => {
+  if (!import.meta.client) return
+  document.body.style.overflow = open ? 'hidden' : ''
+})
+
+onUnmounted(() => {
+  if (import.meta.client) {
+    document.body.style.overflow = ''
+  }
+})
+</script>
+
+<style lang="scss">
+@use '@/assets/styles/components/app-header.scss';
+</style>

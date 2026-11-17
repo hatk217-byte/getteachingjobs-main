@@ -1,0 +1,1601 @@
+<template>
+  <main class="employer-dashboard-content employer-company-content">
+    <!-- Loading state -->
+    <section v-if="loading" class="employer-company-card">
+      <div class="text-center py-8 text-gray-500">
+        {{ $t('jobs.results.loading') }}
+      </div>
+    </section>
+
+    <!-- Error state -->
+    <section v-else-if="error" class="employer-company-card">
+      <div class="text-center py-8">
+        <UIcon name="i-heroicons-exclamation-triangle" class="w-12 h-12 text-red-500 mx-auto mb-4" />
+        <p class="text-gray-600 mb-4">{{ error }}</p>
+        <UButton @click="handleRetry">
+          {{ $t('common.error.retry') }}
+        </UButton>
+      </div>
+    </section>
+
+    <!-- Form -->
+    <section v-else class="employer-company-card">
+      <form
+        class="employer-company-form"
+        data-company-profile-form=""
+        @submit.prevent="saveCompany"
+      >
+        <div class="employer-company-section">
+          <div class="employer-grid employer-grid-two">
+          <label class="employer-field">
+            <span>{{ $t('company.name') }} <span class="employer-required-star">{{ $t('common.requiredMark') }}</span></span>
+            <UInput
+              id="company-name"
+              v-model.trim="companyForm.name"
+              class="w-full"
+              :ui="{ base: 'h-10 rounded-xl text-[13px]' }"
+              :disabled="formDisabled"
+              :placeholder="$t('company.form.placeholderName')"
+              @input="companyErrors.name = ''"
+            />
+            <p v-if="companyErrors.name" class="employer-field-error">{{ companyErrors.name }}</p>
+          </label>
+
+          <label class="employer-field">
+            <span>{{ $t('company.mst') }}</span>
+            <UInput
+              :model-value="companyForm.mst || ''"
+              class="w-full"
+              disabled
+              :ui="{ base: 'h-10 rounded-xl text-[13px] bg-[#f3f6fb]' }"
+              :placeholder="$t('company.mst')"
+            />
+          </label>
+        </div>
+
+          <label class="employer-field employer-field-full">
+            <span>Địa chỉ thuế</span>
+          <UInput
+            v-model.trim="companyForm.taxAddress"
+            class="w-full"
+            :ui="{ base: 'h-10 rounded-xl text-[13px]' }"
+            placeholder="Địa chỉ thuế"
+            :disabled="formDisabled"
+            readonly
+          />
+          </label>
+
+          <label class="employer-field employer-field-full employer-field-editor">
+            <span>{{ $t('company.form.descLabel') }}</span>
+            <div class="employer-editor rich-text-output">
+            <RichTextEditor
+              :model-value="companyForm.description || undefined"
+              class="w-full rich-text-content"
+              :placeholder="$t('company.form.descPlaceholder')"
+              :disabled="formDisabled"
+              @update:model-value="
+                (val) => (companyForm.description = val || null)
+              "
+            />
+            </div>
+          </label>
+
+          <label class="employer-field employer-field-full employer-field-editor employer-field-editor--address">
+            <span>{{ $t('job.uploadJob.detailAddressLabel') }} <span class="employer-required-star">{{ $t('common.requiredMark') }}</span></span>
+            <div class="employer-editor rich-text-output">
+          <RichTextEditor
+            id="company-address"
+            v-model="companyForm.address"
+            class="w-full rich-text-content"
+            :class="{ 'border-red-500': companyErrors.address }"
+            :placeholder="$t('company.form.placeholderAddress')"
+            :disabled="formDisabled"
+            @update:model-value="companyErrors.address = ''"
+          />
+            </div>
+          <p v-if="companyErrors.address" class="employer-field-error">{{ companyErrors.address }}</p>
+          </label>
+        </div>
+
+        <div class="employer-company-section">
+          <div class="employer-grid employer-grid-two">
+          <label class="employer-field">
+            <span>{{ $t('company.industry') }} <span class="employer-required-star">{{ $t('common.requiredMark') }}</span></span>
+            <USelectMenu
+              id="company-organization-type"
+              :items="organizationTypeItemsSearchable"
+              :model-value="companyForm.organizationType?.toString() || undefined"
+              value-key="value"
+              class="w-full employer-org-type-select employer-field-control"
+              :class="{
+                'employer-field-select--placeholder': !companyForm.organizationType,
+                'employer-field-select--error': !!companyErrors.organizationType,
+              }"
+              :ui="orgTypeSelectUi"
+              :content="{ side: 'bottom' }"
+              :disabled="formDisabled"
+              :placeholder="$t('company.industry')"
+              :search-input="{ placeholder: 'Tìm loại hình...', variant: 'none' }"
+              @update:model-value="
+                (v) => { companyForm.organizationType = Number(v ?? 0); companyErrors.organizationType = '' }
+              "
+            />
+            <p v-if="companyErrors.organizationType" class="employer-field-error">{{ companyErrors.organizationType }}</p>
+          </label>
+          <label class="employer-field">
+            <span>{{ $t('company.founded') }}</span>
+            <UInput
+              id="company-founded-year"
+              v-model.number="companyForm.foundedYear"
+              type="number"
+              min="1800"
+              max="2100"
+              class="w-full"
+              :ui="{
+                base:
+                  'h-10 rounded-xl text-[13px]' +
+                  (companyErrors.foundedYear ? ' !ring-1 !ring-inset !ring-red-500' : ''),
+              }"
+              :disabled="formDisabled"
+              :placeholder="
+                $t('company.form.placeholderFounded') as string
+              "
+              @input="companyErrors.foundedYear = ''"
+            />
+            <p v-if="companyErrors.foundedYear" class="employer-field-error">{{ companyErrors.foundedYear }}</p>
+          </label>
+        </div>
+
+          <label class="employer-field employer-field-full">
+            <span>{{ $t('company.size') }}</span>
+            <USelect
+              id="company-size"
+              :items="companySizeSelectItems"
+              :model-value="companyForm.companySize?.toString() ?? ''"
+              class="w-full employer-field-select employer-field-control"
+              :class="{
+                'employer-field-select--placeholder': !companyForm.companySize,
+                'employer-field-select--error': !!companyErrors.companySize,
+              }"
+              :ui="orgTypeSelectUi"
+              :content="{ side: 'bottom' }"
+              :disabled="formDisabled"
+              :placeholder="$t('company.form.placeholderCompanySize')"
+              @update:model-value="
+                (v) => {
+                  companyForm.companySize = v ? Number(v) : null
+                  companySizeDirty = true
+                  companyErrors.companySize = ''
+                }
+              "
+            />
+            <p v-if="companyErrors.companySize" class="employer-field-error">{{ companyErrors.companySize }}</p>
+          </label>
+
+          <label class="employer-field employer-field-full">
+            <span>{{ $t('company.website') }}</span>
+          <UInput
+            id="company-website"
+            v-model.trim="companyForm.website"
+            type="url"
+            class="w-full"
+            :ui="{
+              base:
+                'h-10 rounded-xl text-[13px]' +
+                (companyErrors.website ? ' !ring-1 !ring-inset !ring-red-500' : ''),
+            }"
+            :disabled="formDisabled"
+            :placeholder="$t('company.form.placeholderWebsite')"
+            @input="companyErrors.website = ''"
+          />
+          <p v-if="companyErrors.website" class="employer-field-error">{{ companyErrors.website }}</p>
+          </label>
+
+          <div class="employer-grid employer-grid-two">
+          <label class="employer-field">
+            <span>{{ $t('company.social.facebook') }}</span>
+            <UInput
+              id="company-facebook"
+              v-model.trim="companyForm.facebookLink"
+              class="w-full"
+            :ui="{
+              base:
+                'h-10 rounded-xl text-[13px]' +
+                (companyErrors.facebookLink ? ' !ring-1 !ring-inset !ring-red-500' : ''),
+            }"
+              :disabled="formDisabled"
+              :placeholder="$t('company.form.placeholderFacebook')"
+              @input="companyErrors.facebookLink = ''"
+            />
+            <p v-if="companyErrors.facebookLink" class="employer-field-error">{{ companyErrors.facebookLink }}</p>
+          </label>
+          <label class="employer-field">
+            <span>{{ $t('company.social.twitter') }}</span>
+            <UInput
+              id="company-twitter"
+              v-model.trim="companyForm.twitterLink"
+              class="w-full"
+            :ui="{
+              base:
+                'h-10 rounded-xl text-[13px]' +
+                (companyErrors.twitterLink ? ' !ring-1 !ring-inset !ring-red-500' : ''),
+            }"
+              :disabled="formDisabled"
+              :placeholder="$t('company.form.placeholderTwitter')"
+              @input="companyErrors.twitterLink = ''"
+            />
+            <p v-if="companyErrors.twitterLink" class="employer-field-error">{{ companyErrors.twitterLink }}</p>
+          </label>
+          <label class="employer-field">
+            <span>{{ $t('company.social.instagram') }}</span>
+            <UInput
+              id="company-instagram"
+              v-model.trim="companyForm.instagramLink"
+              class="w-full"
+            :ui="{
+              base:
+                'h-10 rounded-xl text-[13px]' +
+                (companyErrors.instagramLink ? ' !ring-1 !ring-inset !ring-red-500' : ''),
+            }"
+              :disabled="formDisabled"
+              :placeholder="$t('company.form.placeholderInstagram')"
+              @input="companyErrors.instagramLink = ''"
+            />
+            <p v-if="companyErrors.instagramLink" class="employer-field-error">{{ companyErrors.instagramLink }}</p>
+          </label>
+          <label class="employer-field">
+            <span>{{ $t('company.social.linkedin') }}</span>
+            <UInput
+              id="company-linkedin"
+              v-model.trim="companyForm.linkedInLink"
+              class="w-full"
+            :ui="{
+              base:
+                'h-10 rounded-xl text-[13px]' +
+                (companyErrors.linkedInLink ? ' !ring-1 !ring-inset !ring-red-500' : ''),
+            }"
+              :disabled="formDisabled"
+              :placeholder="$t('company.form.placeholderLinkedIn')"
+              @input="companyErrors.linkedInLink = ''"
+            />
+            <p v-if="companyErrors.linkedInLink" class="employer-field-error">{{ companyErrors.linkedInLink }}</p>
+          </label>
+          </div>
+
+          <label class="employer-field employer-field-full">
+            <span>{{ $t('company.form.videoTitle') }}</span>
+          <UInput
+            id="company-video"
+            v-model.trim="companyForm.videoUrl"
+            type="url"
+            class="w-full"
+            :ui="{
+              base:
+                'h-10 rounded-xl text-[13px]' +
+                (companyErrors.videoUrl ? ' !ring-1 !ring-inset !ring-red-500' : ''),
+            }"
+            :disabled="formDisabled"
+            :placeholder="$t('company.form.placeholderVideo')"
+            @input="companyErrors.videoUrl = ''"
+          />
+          <p v-if="companyErrors.videoUrl" class="employer-field-error">{{ companyErrors.videoUrl }}</p>
+          </label>
+        </div>
+
+        <div class="employer-company-section">
+          <div class="employer-company-media-stack">
+          <div class="employer-company-media-field">
+            <div class="employer-company-media-label">
+              <strong>{{ $t('company.form.logoTitle') }} <span class="employer-required-star">{{ $t('common.requiredMark') }}</span></strong>
+            </div>
+
+          <div
+            class="employer-company-media-shell is-logo employer-company-upload-zone"
+            :class="[
+              isDraggingLogo && !formDisabled
+                ? 'is-dragging'
+                : '',
+              formDisabled ? 'is-disabled' : 'is-clickable',
+            ]"
+            @click="!formDisabled && logoFileEl?.click()"
+            @dragenter.prevent="!formDisabled && onDragEnterLogo()"
+            @dragover.prevent
+            @dragleave.prevent="!formDisabled && onDragLeaveLogo()"
+            @drop="!formDisabled && onDropLogo($event)"
+          >
+            <input
+              ref="logoFileEl"
+              type="file"
+              :accept="IMAGE_UPLOAD_ACCEPT"
+              class="hidden"
+              @change="onPickLogo"
+            />
+
+            <div v-if="logoPreview" class="flex flex-col gap-4">
+              <div class="flex justify-center">
+                <div
+                  class="relative p-3 bg-white rounded-xl border border-gray-200 shadow-sm inline-flex items-center justify-center min-w-[160px] min-h-[160px] w-44 h-44 overflow-hidden"
+                >
+                  <img
+                    :src="logoPreview"
+                    class="w-full h-full object-contain rounded-lg"
+                    draggable="false"
+                  />
+                  <span
+                    class="absolute top-2 left-2 px-2 py-0.5 text-xs font-semibold rounded-md bg-blue-600 text-white shadow-sm"
+                  >
+                    {{ $t('company.form.logoBadge') }}
+                  </span>
+                  <div class="absolute bottom-2 right-2 flex items-center gap-1.5">
+                    <UButton
+                      icon="i-lucide-crop"
+                      color="primary"
+                      size="xs"
+                      variant="solid"
+                      class="shadow-sm"
+                      :disabled="formDisabled"
+                      :aria-label="$t('common.cropImage')"
+                      @click.stop="openCropModal"
+                    />
+                    <UButton
+                      icon="i-lucide-trash-2"
+                      color="error"
+                      size="xs"
+                      variant="solid"
+                      class="shadow-sm"
+                      :disabled="formDisabled"
+                      :aria-label="$t('common.remove')"
+                      @click.stop="removeLogo"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div v-else class="grid place-items-center">
+              <div
+                class="h-9 w-9 rounded-xl bg-[#eef5ff] grid place-items-center"
+                style="border: 1px solid rgba(29, 36, 51, 0.10)"
+              >
+                <UIcon name="i-lucide-upload" class="w-5 h-5 text-emerald-600" />
+              </div>
+            </div>
+          </div>
+          <p v-if="companyErrors.logo" class="employer-field-error">{{ companyErrors.logo }}</p>
+          </div>
+
+          <div class="employer-company-media-field">
+            <div class="employer-company-media-label">
+              <strong>{{ $t('company.form.bannerTitle') }}</strong>
+            </div>
+
+          <div
+            class="employer-company-media-shell is-cover employer-company-upload-zone"
+            :class="[
+              isDraggingBanner && !formDisabled
+                ? 'is-dragging'
+                : '',
+              formDisabled ? 'is-disabled' : 'is-clickable',
+            ]"
+            @click="!formDisabled && bannerFileEl?.click()"
+            @dragenter.prevent="!formDisabled && onDragEnterBanner()"
+            @dragover.prevent
+            @dragleave.prevent="!formDisabled && onDragLeaveBanner()"
+            @drop="!formDisabled && onDropBanner($event)"
+          >
+            <input
+              ref="bannerFileEl"
+              type="file"
+              :accept="IMAGE_UPLOAD_ACCEPT"
+              class="hidden"
+              @change="onPickBanner"
+            />
+
+            <div v-if="bannerPreview && bannerPreview.trim() !== ''" class="flex flex-col gap-4">
+              <div class="flex justify-center">
+                <div
+                  class="relative p-2 bg-white rounded-xl border border-gray-200 shadow-sm flex items-center justify-center min-w-[240px] min-h-[120px] max-w-full h-44 overflow-hidden"
+                >
+                  <img
+                    :src="bannerPreview"
+                    class="w-full h-full object-contain rounded-lg"
+                    draggable="false"
+                  />
+                  <UButton
+                    icon="i-lucide-trash-2"
+                    color="error"
+                    size="xs"
+                    variant="solid"
+                    class="absolute top-2 right-2 shadow-sm"
+                    :disabled="formDisabled"
+                    :aria-label="$t('common.remove')"
+                    @click.stop="removeBanner"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div v-else class="grid place-items-center">
+              <div
+                class="h-9 w-9 rounded-xl bg-[#eef5ff] grid place-items-center"
+                style="border: 1px solid rgba(29, 36, 51, 0.10)"
+              >
+                <UIcon name="i-lucide-upload" class="w-5 h-5 text-emerald-600" />
+              </div>
+            </div>
+          </div>
+          </div>
+
+          <div class="employer-company-media-field">
+            <div class="employer-company-media-label">
+              <strong>{{ $t('company.form.imagesTitleAdditional') }}</strong>
+            </div>
+
+          <div
+            class="employer-company-media-shell is-gallery employer-company-upload-zone"
+            :class="[
+              isDraggingImages && !formDisabled
+                ? 'is-dragging'
+                : '',
+              formDisabled ? 'is-disabled' : 'is-clickable',
+            ]"
+            @click="!formDisabled && imagesFileEl?.click()"
+            @dragenter.prevent="!formDisabled && onDragEnterImages()"
+            @dragover.prevent
+            @dragleave.prevent="!formDisabled && onDragLeaveImages()"
+            @drop="!formDisabled && onDropImages($event)"
+          >
+            <input
+              ref="imagesFileEl"
+              type="file"
+              :accept="IMAGE_UPLOAD_ACCEPT"
+              multiple
+              class="hidden"
+              @change="onPickImages"
+            />
+
+            <div
+              v-if="imagePreviews.length > 0"
+              class="flex flex-col gap-4"
+            >
+              <div class="flex flex-wrap gap-4">
+                <template v-for="(src, idx) in imagePreviews" :key="src + idx">
+                  <div
+                    v-if="src && src.trim() !== ''"
+                    class="relative p-2 bg-white rounded-xl border border-gray-200 shadow-sm flex items-center justify-center min-w-[140px] min-h-[140px] w-40 h-40 overflow-hidden group"
+                  >
+                    <img
+                      :src="src"
+                      class="w-full h-full object-contain rounded-lg"
+                      draggable="false"
+                      @error="removeImage(idx)"
+                    />
+                    <UButton
+                      icon="i-lucide-trash-2"
+                      color="error"
+                      size="xs"
+                      variant="solid"
+                      class="absolute top-2 right-2 shadow-sm"
+                      :disabled="formDisabled"
+                      :aria-label="$t('common.remove')"
+                      @click.stop="removeImage(idx)"
+                    />
+                  </div>
+                </template>
+              </div>
+              <div class="flex justify-center">
+                <UButton
+                  size="xs"
+                  variant="soft"
+                  :disabled="formDisabled"
+                  @click.stop="imagesFileEl?.click()"
+                >
+                  {{ $t('company.form.addMore') }}
+                </UButton>
+              </div>
+            </div>
+
+            <div v-else class="grid place-items-center">
+              <div
+                class="h-9 w-9 rounded-xl bg-[#eef5ff] grid place-items-center"
+                style="border: 1px solid rgba(29, 36, 51, 0.10)"
+              >
+                <UIcon name="i-lucide-upload" class="w-5 h-5 text-emerald-600" />
+              </div>
+            </div>
+          </div>
+          </div>
+          </div>
+        </div>
+
+        <div v-if="!isHostCompanyUser" class="employer-company-permission-note">
+          <p class="text-amber-700 text-sm">
+            <UIcon name="i-heroicons-lock-closed" class="w-4 h-4 inline-block mr-1" />
+            {{ $t('company.editCompany.noPermission') }}
+          </p>
+        </div>
+
+        <div class="employer-settings-actions employer-company-actions">
+          <button
+            type="submit"
+            class="employer-settings-primary"
+            :disabled="!isHostCompanyUser || saving"
+          >
+            {{ saving ? $t('jobs.results.loading') : 'Lưu thông tin' }}
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Crop Modal -->
+    <Teleport to="body">
+      <div
+        v-if="showCropModal"
+        class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+        @click.self="closeCropModal"
+      >
+        <div
+          class="bg-white rounded-lg shadow-xl w-full sm:max-w-4xl max-h-[90vh] overflow-hidden flex flex-col"
+          @click.stop
+        >
+          <!-- Header -->
+          <div
+            class="flex items-center justify-between p-4 border-b border-gray-200"
+          >
+            <h3 class="text-lg font-semibold">{{ $t('common.cropImage') }}</h3>
+            <UButton
+              icon="i-heroicons-x-mark"
+              variant="ghost"
+              color="neutral"
+              @click="closeCropModal"
+            />
+          </div>
+
+          <!-- Body -->
+          <div class="p-4 overflow-auto flex-1 bg-gray-900/10">
+            <div
+              ref="cropContainer"
+              class="relative w-full bg-gray-900 rounded-lg overflow-hidden flex items-center justify-center select-none"
+              style="min-height: 420px; max-height: 560px"
+            >
+              <img
+                v-if="cropImageSrc"
+                ref="cropImage"
+                :src="cropImageSrc"
+                class="pointer-events-none select-none"
+                style="
+                  display: block;
+                  max-width: 100%;
+                  max-height: 500px;
+                  width: auto;
+                  height: auto;
+                "
+                draggable="false"
+                @load="initCrop"
+              />
+              <div
+                v-if="showCropArea"
+                ref="cropArea"
+                class="absolute border-2 border-orange-500 cursor-move shadow-[0_0_0_9999px_rgba(0,0,0,0.55)] rounded-lg overflow-visible"
+                :style="cropAreaStyle"
+                @mousedown.prevent="startCropDrag"
+                @touchstart.prevent="startCropDrag"
+              >
+                <!-- Rule-of-thirds grid -->
+                <div class="absolute inset-0 grid grid-cols-3 grid-rows-3 pointer-events-none opacity-40">
+                  <div class="border-r border-b border-white"></div>
+                  <div class="border-r border-b border-white"></div>
+                  <div class="border-b border-white"></div>
+                  <div class="border-r border-b border-white"></div>
+                  <div class="border-r border-b border-white"></div>
+                  <div class="border-b border-white"></div>
+                  <div class="border-r border-white"></div>
+                  <div class="border-r border-white"></div>
+                  <div></div>
+                </div>
+
+                <div
+                  class="absolute inset-0 flex items-center justify-center text-white text-xs font-semibold select-none pointer-events-none drop-shadow"
+                >
+                  <span class="bg-black/60 px-2 py-0.5 rounded text-[11px]">
+                    1 : 1
+                  </span>
+                </div>
+
+                <!-- Resize handles -->
+                <div
+                  class="absolute w-4 h-4 bg-orange-500 border-2 border-white rounded-full cursor-nwse-resize shadow-md -top-2 -left-2"
+                  @mousedown.stop.prevent="(e) => startResize('nw', e)"
+                  @touchstart.stop.prevent="(e) => startResize('nw', e)"
+                />
+                <div
+                  class="absolute w-4 h-4 bg-orange-500 border-2 border-white rounded-full cursor-nesw-resize shadow-md -top-2 -right-2"
+                  @mousedown.stop.prevent="(e) => startResize('ne', e)"
+                  @touchstart.stop.prevent="(e) => startResize('ne', e)"
+                />
+                <div
+                  class="absolute w-4 h-4 bg-orange-500 border-2 border-white rounded-full cursor-nwse-resize shadow-md -bottom-2 -right-2"
+                  @mousedown.stop.prevent="(e) => startResize('se', e)"
+                  @touchstart.stop.prevent="(e) => startResize('se', e)"
+                />
+                <div
+                  class="absolute w-4 h-4 bg-orange-500 border-2 border-white rounded-full cursor-nesw-resize shadow-md -bottom-2 -left-2"
+                  @mousedown.stop.prevent="(e) => startResize('sw', e)"
+                  @touchstart.stop.prevent="(e) => startResize('sw', e)"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Footer -->
+          <div class="flex justify-end gap-2 p-4 border-t border-gray-200">
+            <UButton
+              variant="ghost"
+              color="neutral"
+              :label="$t('common.cancel')"
+              @click="closeCropModal"
+            />
+            <UButton
+              color="primary"
+              :label="$t('common.confirm')"
+              @click="applyCrop"
+            />
+          </div>
+        </div>
+      </div>
+    </Teleport>
+  </main>
+</template>
+
+<script setup lang="ts">
+import { nextTick, watch } from 'vue'
+import type { CompanyAddUpdateEntity, CompanyEntity } from '~/entities/company'
+import RichTextEditor from '~/components/RichTextEditor.vue'
+import { adminJobDrawerCompanySelectControlUi } from '~/utils/admin-drawer-ui'
+import {
+  companySizeSelectItems,
+  resolveCompanySizeForSave,
+  resolveCompanySizeForSelect,
+} from '~/constants/company-size'
+import { normalizeCompanyLogo } from '~/utils/companyLogo'
+import { IMAGE_UPLOAD_ACCEPT, validateImageUploadFile } from '~/utils/imageUploadValidation'
+
+const orgTypeSelectUi = adminJobDrawerCompanySelectControlUi
+
+// Props
+const props = defineProps<{
+  companyData: CompanyEntity | null
+}>()
+
+const emit = defineEmits<{
+  back: []
+  companyUpdated: []
+}>()
+
+const { t } = useI18n()
+const { $api } = useNuxtApp()
+const authStore = useAuthStore()
+const { organizationTypeItemsSearchable } = useJobFilters()
+const { loadForCrop } = useImageCropSource()
+
+// Check if current user is the host company
+const isHostCompanyUser = computed(() => authStore.user?.isHostCompany === true)
+
+// Form disabled state
+const formDisabled = computed(() => !isHostCompanyUser.value)
+
+const loading = ref(false)
+const saving = ref(false)
+const error = ref<string | null>(null)
+
+/** Logo state (REQUIRED) */
+const logoFileEl = ref<HTMLInputElement | null>(null)
+const logoPreview = ref<string | null>(null)
+const logoCroppedFile = ref<File | null>(null) // Store cropped file for upload on submit
+const isDraggingLogo = ref(false)
+
+/** Crop modal state */
+const showCropModal = ref(false)
+const cropImageSrc = ref<string | null>(null)
+const cropContainer = ref<HTMLElement | null>(null)
+const cropImage = ref<HTMLImageElement | null>(null)
+const cropArea = ref<HTMLElement | null>(null)
+const showCropArea = ref(false)
+const currentCrop = ref({ left: 0, top: 0, size: 150 })
+const cropAreaStart = ref({ left: 0, top: 0, size: 0 })
+const cropAreaStyle = ref<Record<string, string>>({})
+const isDragging = ref(false)
+const isResizing = ref(false)
+const resizeDirection = ref('')
+const dragStart = ref({ x: 0, y: 0 })
+
+/** Company images state (OPTIONAL) */
+const imagesFileEl = ref<HTMLInputElement | null>(null)
+const imagePreviews = ref<string[]>([])
+const deletedImageUrls = ref<string[]>([]) // Track deleted image URLs for R2 cleanup
+const isDraggingImages = ref(false)
+
+/** Banner image state */
+const bannerFileEl = ref<HTMLInputElement | null>(null)
+const bannerFile = ref<File | null>(null)
+const bannerPreview = ref<string | null>(null)
+const isDraggingBanner = ref(false)
+
+const companyForm = ref<CompanyAddUpdateEntity>({
+  name: '',
+  mst: null, // MST can be null initially
+  address: '',
+  taxAddress: '',
+  website: '',
+  organizationType: 0,
+  companySize: null,
+  foundedYear: null,
+  description: '',
+  insight: '',
+  overview: '',
+  logo: '',
+  facebookLink: '',
+  twitterLink: '',
+  instagramLink: '',
+  linkedInLink: '',
+  videoUrl: '',
+  isWaiting: false,
+  companyImages: [],
+  bannerImage: null,
+})
+
+const companySizeFromDb = ref<number | null>(null)
+const companySizeDirty = ref(false)
+
+// Company field errors
+const companyErrors = ref<Record<string, string>>({})
+
+// Field ID map for scroll to error
+const companyFieldIdMap: Record<string, string> = {
+  name: 'company-name',
+  address: 'company-address',
+  organizationType: 'company-organization-type',
+  foundedYear: 'company-founded-year',
+  companySize: 'company-size',
+  website: 'company-website',
+  logo: 'company-logo',
+  facebookLink: 'company-facebook',
+  twitterLink: 'company-twitter',
+  instagramLink: 'company-instagram',
+  linkedInLink: 'company-linkedin',
+  videoUrl: 'company-video',
+}
+
+// Scroll to first error helper
+function scrollToFirstError(errors: Record<string, string>, fieldIdMap: Record<string, string>) {
+  const firstErrorField = Object.keys(errors)[0]
+
+  if (firstErrorField && fieldIdMap[firstErrorField]) {
+    const elementId = fieldIdMap[firstErrorField]
+    const element = document.getElementById(elementId) ||
+                    document.querySelector(`[id="${elementId}"]`) ||
+                    document.querySelector(`input[id*="${elementId}"], select[id*="${elementId}"], textarea[id*="${elementId}"]`)
+
+    if (element) {
+      setTimeout(() => {
+        element.scrollIntoView({ behavior: 'smooth', block: 'center' })
+        if (element instanceof HTMLInputElement || element instanceof HTMLSelectElement || element instanceof HTMLTextAreaElement) {
+          element.focus()
+        }
+      }, 100)
+    }
+  }
+}
+
+// Watch for companyData changes from parent
+watch(
+  () => props.companyData,
+  (newData) => {
+    if (newData) {
+      populateFormFromCompanyData(newData)
+    } else {
+      error.value = 'Bạn chưa có công ty. Vui lòng tạo công ty trước.'
+      loading.value = false
+    }
+  },
+  { immediate: true },
+)
+
+function populateFormFromCompanyData(res: CompanyEntity) {
+  loading.value = true
+  error.value = null
+
+  try {
+    // Populate form
+    companyForm.value.name = res.name || ''
+    companyForm.value.mst = res.mst ?? null // Keep MST as null if not provided, don't convert to empty string
+    companyForm.value.address = res.address || ''
+    companyForm.value.taxAddress = res.taxAddress || ''
+    companyForm.value.organizationType = res.organizationType ?? 0
+    companyForm.value.website = res.website || ''
+    companyForm.value.foundedYear = res.foundedYear ?? null
+    companySizeFromDb.value = res.companySize ?? null
+    companySizeDirty.value = false
+    companyForm.value.companySize = resolveCompanySizeForSelect(res.companySize)
+    companyForm.value.facebookLink = res.facebookLink || ''
+    companyForm.value.twitterLink = res.twitterLink || ''
+    companyForm.value.instagramLink = res.instagramLink || ''
+    companyForm.value.linkedInLink = res.linkedInLink || ''
+    companyForm.value.videoUrl = res.videoUrl || ''
+    companyForm.value.description = res.description || ''
+    companyForm.value.insight = res.insight || ''
+    companyForm.value.overview = res.overview || ''
+
+    // Load logo — bỏ URL placeholder / lỗi để hiện vùng upload
+    companyForm.value.logo = normalizeCompanyLogo(res.logo)
+    logoPreview.value = normalizeCompanyLogo(res.logo)
+
+    // Load banner image - set directly to form
+    bannerFile.value = null
+    companyForm.value.bannerImage = res.bannerImage || null
+    bannerPreview.value = res.bannerImage || null
+
+    // Load company images - set directly to form (excluding logo and invalid/empty urls)
+    const urls: string[] = []
+
+    if (Array.isArray(res.companyImages)) {
+      for (const it of res.companyImages as any[]) {
+        const u = typeof it === 'string' ? it.trim() : (it?.url ? String(it.url).trim() : '')
+        if (u && u.length > 0) {
+          if (!res.logo || u !== res.logo) {
+            urls.push(u)
+          }
+        }
+      }
+    }
+    companyForm.value.companyImages = urls.map((url) => ({ url }))
+    imagePreviews.value = urls
+    deletedImageUrls.value = [] // Reset deleted tracking
+  } catch (e: any) {
+    error.value = Array.isArray(e?.message)
+      ? e.message[0]
+      : e?.message || 'Không thể tải thông tin công ty'
+  } finally {
+    loading.value = false
+  }
+}
+
+// Handle retry button click
+function handleRetry() {
+  // Emit event to parent to reload company data
+  emit('companyUpdated')
+}
+
+// Logo handlers
+function onDragEnterLogo() {
+  isDraggingLogo.value = true
+}
+function onDragLeaveLogo() {
+  isDraggingLogo.value = false
+}
+
+function handleLogoFilePicked(file: File) {
+  const validationError = validateImageUploadFile(file)
+  if (validationError) {
+    useNotify({ type: 'error', message: validationError })
+    if (logoFileEl.value) logoFileEl.value.value = ''
+    return
+  }
+
+  // Tự động mở modal crop ảnh ngay khi người dùng chọn/kéo thả file
+  const reader = new FileReader()
+  reader.onload = (e) => {
+    const dataUrl = e.target?.result as string
+    if (dataUrl) {
+      cropImageSrc.value = dataUrl
+      showCropModal.value = true
+    }
+  }
+  reader.onerror = () => {
+    useNotify({ message: 'Không thể đọc tệp ảnh' })
+  }
+  reader.readAsDataURL(file)
+  if (logoFileEl.value) logoFileEl.value.value = ''
+}
+
+function onDropLogo(e: DragEvent) {
+  isDraggingLogo.value = false
+  const files = e.dataTransfer?.files
+  if (!files?.length) return
+  const file = files[0]
+  if (file) handleLogoFilePicked(file)
+}
+
+function onPickLogo(e: Event) {
+  const files = (e.target as HTMLInputElement).files
+  if (!files?.length) return
+  const file = files[0]
+  if (file) handleLogoFilePicked(file)
+}
+
+function setLogoFile(file: File) {
+  // Revoke old preview URL if exists (only blob URLs)
+  if (logoPreview.value?.startsWith('blob:')) {
+    URL.revokeObjectURL(logoPreview.value)
+  }
+  // Store file for upload on submit, set preview URL to form
+  logoCroppedFile.value = file
+  companyForm.value.logo = URL.createObjectURL(file)
+  logoPreview.value = companyForm.value.logo
+  companyErrors.value.logo = '' // Clear error when logo is selected
+}
+
+function removeLogo() {
+  // If there's an existing logo URL (not blob), track it for deletion
+  if (logoPreview.value && !logoPreview.value.startsWith('blob:')) {
+    deletedImageUrls.value.push(logoPreview.value)
+  }
+  if (logoPreview.value?.startsWith('blob:')) {
+    URL.revokeObjectURL(logoPreview.value)
+  }
+  logoPreview.value = null
+  companyForm.value.logo = null // Clear from form
+  logoCroppedFile.value = null
+}
+
+async function openCropModal() {
+  if (!logoPreview.value) return
+
+  try {
+    cropImageSrc.value = await loadForCrop(logoPreview.value)
+    showCropModal.value = true
+  } catch (err) {
+    console.error('Error loading image for crop:', err)
+    useNotify({ message: 'Không thể tải ảnh để cắt' })
+  }
+}
+
+function closeCropModal() {
+  showCropModal.value = false
+  cropImageSrc.value = null
+  showCropArea.value = false
+}
+
+function initCrop() {
+  if (!cropImage.value || !cropContainer.value) return
+
+  nextTick(() => {
+    const img = cropImage.value!
+    const container = cropContainer.value!
+    const containerRect = container.getBoundingClientRect()
+    const imgRect = img.getBoundingClientRect()
+
+    // Khóa tỉ lệ 1:1 cho logo: lấy 80% cạnh nhỏ nhất của ảnh
+    const size = Math.round(Math.min(imgRect.width, imgRect.height) * 0.8)
+    const cropLeft = Math.round(
+      imgRect.left - containerRect.left + (imgRect.width - size) / 2,
+    )
+    const cropTop = Math.round(
+      imgRect.top - containerRect.top + (imgRect.height - size) / 2,
+    )
+
+    currentCrop.value = {
+      left: cropLeft,
+      top: cropTop,
+      size,
+    }
+
+    cropAreaStyle.value = {
+      left: `${cropLeft}px`,
+      top: `${cropTop}px`,
+      width: `${size}px`,
+      height: `${size}px`,
+    }
+
+    showCropArea.value = true
+  })
+}
+
+function startCropDrag(e: MouseEvent | TouchEvent) {
+  e.preventDefault()
+  e.stopPropagation()
+
+  if (!cropContainer.value || !cropArea.value || !cropImage.value) return
+
+  isDragging.value = true
+  const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX
+  const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY
+
+  dragStart.value = { x: clientX, y: clientY }
+  cropAreaStart.value = {
+    left: currentCrop.value.left,
+    top: currentCrop.value.top,
+    size: currentCrop.value.size,
+  }
+
+  document.addEventListener('mousemove', handleCropDrag, { passive: false })
+  document.addEventListener('mouseup', stopCropDrag)
+  document.addEventListener('touchmove', handleCropDrag, { passive: false })
+  document.addEventListener('touchend', stopCropDrag)
+}
+
+function handleCropDrag(e: MouseEvent | TouchEvent) {
+  if (!isDragging.value || !cropContainer.value || !cropImage.value) return
+
+  e.preventDefault()
+  e.stopPropagation()
+
+  const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX
+  const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY
+
+  const deltaX = clientX - dragStart.value.x
+  const deltaY = clientY - dragStart.value.y
+
+  const containerRect = cropContainer.value.getBoundingClientRect()
+  const imgRect = cropImage.value.getBoundingClientRect()
+
+  // Giới hạn tuyệt đối trong phạm vi hiển thị của ảnh (imgRect)
+  const minLeft = imgRect.left - containerRect.left
+  const maxLeft = minLeft + imgRect.width - cropAreaStart.value.size
+  const minTop = imgRect.top - containerRect.top
+  const maxTop = minTop + imgRect.height - cropAreaStart.value.size
+
+  let newLeft = cropAreaStart.value.left + deltaX
+  let newTop = cropAreaStart.value.top + deltaY
+
+  newLeft = Math.max(minLeft, Math.min(maxLeft, newLeft))
+  newTop = Math.max(minTop, Math.min(maxTop, newTop))
+
+  currentCrop.value.left = newLeft
+  currentCrop.value.top = newTop
+
+  cropAreaStyle.value = {
+    left: `${newLeft}px`,
+    top: `${newTop}px`,
+    width: `${cropAreaStart.value.size}px`,
+    height: `${cropAreaStart.value.size}px`,
+  }
+}
+
+function stopCropDrag(e?: MouseEvent | TouchEvent) {
+  if (e) {
+    e.preventDefault()
+    e.stopPropagation()
+  }
+
+  isDragging.value = false
+  document.removeEventListener('mousemove', handleCropDrag)
+  document.removeEventListener('mouseup', stopCropDrag)
+  document.removeEventListener('touchmove', handleCropDrag)
+  document.removeEventListener('touchend', stopCropDrag)
+}
+
+function startResize(direction: string, e: MouseEvent | TouchEvent) {
+  e.preventDefault()
+  e.stopPropagation()
+
+  if (!cropContainer.value || !cropArea.value || !cropImage.value) return
+
+  isResizing.value = true
+  resizeDirection.value = direction
+
+  const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX
+  const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY
+
+  dragStart.value = { x: clientX, y: clientY }
+  cropAreaStart.value = {
+    left: currentCrop.value.left,
+    top: currentCrop.value.top,
+    size: currentCrop.value.size,
+  }
+
+  document.addEventListener('mousemove', handleResize, { passive: false })
+  document.addEventListener('mouseup', stopResize)
+  document.addEventListener('touchmove', handleResize, { passive: false })
+  document.addEventListener('touchend', stopResize)
+}
+
+function handleResize(e: MouseEvent | TouchEvent) {
+  if (!isResizing.value || !cropContainer.value || !cropImage.value) return
+
+  e.preventDefault()
+  e.stopPropagation()
+
+  const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX
+  const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY
+
+  const deltaX = clientX - dragStart.value.x
+  const deltaY = clientY - dragStart.value.y
+
+  const containerRect = cropContainer.value.getBoundingClientRect()
+  const imgRect = cropImage.value.getBoundingClientRect()
+
+  const imgLeft = imgRect.left - containerRect.left
+  const imgTop = imgRect.top - containerRect.top
+  const imgRight = imgLeft + imgRect.width
+  const imgBottom = imgTop + imgRect.height
+
+  const minSize = 60
+  let newSize = cropAreaStart.value.size
+  let newLeft = cropAreaStart.value.left
+  let newTop = cropAreaStart.value.top
+
+  // Khóa tỉ lệ vuông 1:1 và giới hạn không được vượt quá khung ảnh
+  if (resizeDirection.value === 'se') {
+    const anchorX = cropAreaStart.value.left
+    const anchorY = cropAreaStart.value.top
+    const maxAvailable = Math.min(imgRight - anchorX, imgBottom - anchorY)
+    const delta = (deltaX + deltaY) / 2
+    newSize = Math.max(minSize, Math.min(maxAvailable, cropAreaStart.value.size + delta))
+    newLeft = anchorX
+    newTop = anchorY
+  } else if (resizeDirection.value === 'nw') {
+    const anchorX = cropAreaStart.value.left + cropAreaStart.value.size
+    const anchorY = cropAreaStart.value.top + cropAreaStart.value.size
+    const maxAvailable = Math.min(anchorX - imgLeft, anchorY - imgTop)
+    const delta = (-deltaX - deltaY) / 2
+    newSize = Math.max(minSize, Math.min(maxAvailable, cropAreaStart.value.size + delta))
+    newLeft = anchorX - newSize
+    newTop = anchorY - newSize
+  } else if (resizeDirection.value === 'ne') {
+    const anchorX = cropAreaStart.value.left
+    const anchorY = cropAreaStart.value.top + cropAreaStart.value.size
+    const maxAvailable = Math.min(imgRight - anchorX, anchorY - imgTop)
+    const delta = (deltaX - deltaY) / 2
+    newSize = Math.max(minSize, Math.min(maxAvailable, cropAreaStart.value.size + delta))
+    newLeft = anchorX
+    newTop = anchorY - newSize
+  } else if (resizeDirection.value === 'sw') {
+    const anchorX = cropAreaStart.value.left + cropAreaStart.value.size
+    const anchorY = cropAreaStart.value.top
+    const maxAvailable = Math.min(anchorX - imgLeft, imgBottom - anchorY)
+    const delta = (-deltaX + deltaY) / 2
+    newSize = Math.max(minSize, Math.min(maxAvailable, cropAreaStart.value.size + delta))
+    newLeft = anchorX - newSize
+    newTop = anchorY
+  }
+
+  currentCrop.value = {
+    left: newLeft,
+    top: newTop,
+    size: newSize,
+  }
+
+  cropAreaStyle.value = {
+    left: `${newLeft}px`,
+    top: `${newTop}px`,
+    width: `${newSize}px`,
+    height: `${newSize}px`,
+  }
+}
+
+function stopResize(e?: MouseEvent | TouchEvent) {
+  if (e) {
+    e.preventDefault()
+    e.stopPropagation()
+  }
+
+  isResizing.value = false
+  resizeDirection.value = ''
+  document.removeEventListener('mousemove', handleResize)
+  document.removeEventListener('mouseup', stopResize)
+  document.removeEventListener('touchmove', handleResize)
+  document.removeEventListener('touchend', stopResize)
+}
+
+async function applyCrop() {
+  if (!cropImageSrc.value || !cropImage.value || !cropContainer.value) return
+
+  try {
+    const img = cropImage.value
+    const containerRect = cropContainer.value.getBoundingClientRect()
+    const imgRect = img.getBoundingClientRect()
+
+    const scaleX = img.naturalWidth / imgRect.width
+    const scaleY = img.naturalHeight / imgRect.height
+
+    // Tọa độ vùng cắt tương đối so với kích thước gốc của ảnh
+    const relLeft = currentCrop.value.left - (imgRect.left - containerRect.left)
+    const relTop = currentCrop.value.top - (imgRect.top - containerRect.top)
+
+    let cropX = Math.round(relLeft * scaleX)
+    let cropY = Math.round(relTop * scaleY)
+    let cropSize = Math.round(currentCrop.value.size * scaleX)
+
+    // Khóa chặt chẽ trong phạm vi ảnh gốc, không để số âm hoặc tràn
+    const maxNaturalSize = Math.min(img.naturalWidth, img.naturalHeight)
+    cropSize = Math.max(10, Math.min(cropSize, maxNaturalSize))
+    cropX = Math.max(0, Math.min(cropX, img.naturalWidth - cropSize))
+    cropY = Math.max(0, Math.min(cropY, img.naturalHeight - cropSize))
+
+    // Cắt ảnh bằng HTML Canvas chuẩn (hỗ trợ 100% trình duyệt, mượt và sắc nét)
+    const outputSize = Math.min(cropSize, 512)
+    const canvas = document.createElement('canvas')
+    canvas.width = outputSize
+    canvas.height = outputSize
+    const ctx = canvas.getContext('2d')
+    if (!ctx) throw new Error('Không thể khởi tạo canvas 2D')
+
+    ctx.imageSmoothingEnabled = true
+    ctx.imageSmoothingQuality = 'high'
+    ctx.drawImage(img, cropX, cropY, cropSize, cropSize, 0, 0, outputSize, outputSize)
+
+    const croppedBlob = await new Promise<Blob>((resolve, reject) => {
+      canvas.toBlob((b) => (b ? resolve(b) : reject(new Error('toBlob failed'))), 'image/png')
+    })
+
+    const croppedFile = new File([croppedBlob], 'logo.png', { type: 'image/png' })
+
+    if (logoPreview.value?.startsWith('blob:')) {
+      URL.revokeObjectURL(logoPreview.value)
+    }
+
+    logoCroppedFile.value = croppedFile
+    companyForm.value.logo = URL.createObjectURL(croppedBlob)
+    logoPreview.value = companyForm.value.logo
+    companyErrors.value.logo = ''
+
+    closeCropModal()
+  } catch (error) {
+    console.error('Error cropping image:', error)
+    useNotify({ message: 'Có lỗi xảy ra khi cắt ảnh. Vui lòng thử lại.' })
+  }
+}
+
+// Company images handlers
+function onDragEnterImages() {
+  isDraggingImages.value = true
+}
+function onDragLeaveImages() {
+  isDraggingImages.value = false
+}
+
+function onDropImages(e: DragEvent) {
+  isDraggingImages.value = false
+  const files = e.dataTransfer?.files
+
+  if (!files?.length) return
+  addImageFiles(Array.from(files))
+}
+
+function onPickImages(e: Event) {
+  const files = (e.target as HTMLInputElement).files
+
+  if (!files?.length) return
+  addImageFiles(Array.from(files))
+  if (imagesFileEl.value) imagesFileEl.value.value = ''
+}
+
+function addImageFiles(files: File[]) {
+  for (const f of files) {
+    if (!f || f.size === 0) continue
+    const validationError = validateImageUploadFile(f)
+    if (validationError) {
+      useNotify({ type: 'error', message: validationError })
+      continue
+    }
+    const blobUrl = URL.createObjectURL(f)
+    if (blobUrl) {
+      imagePreviews.value.push(blobUrl)
+      companyForm.value.companyImages.push({ url: blobUrl })
+    }
+  }
+}
+
+function removeImage(idx: number) {
+  const pv = imagePreviews.value[idx]
+
+  if (pv?.startsWith('blob:')) URL.revokeObjectURL(pv)
+
+  // Track URL for deletion if it exists (not blob)
+  if (pv && !pv.startsWith('blob:')) {
+    deletedImageUrls.value.push(pv)
+  }
+
+  // Remove from previews
+  imagePreviews.value.splice(idx, 1)
+
+  // Remove from form - must match the same index
+  if (idx >= 0 && idx < companyForm.value.companyImages.length) {
+    companyForm.value.companyImages.splice(idx, 1)
+  }
+}
+
+// Banner image handlers
+function onDragEnterBanner() {
+  isDraggingBanner.value = true
+}
+function onDragLeaveBanner() {
+  isDraggingBanner.value = false
+}
+function onDropBanner(e: DragEvent) {
+  isDraggingBanner.value = false
+  const files = e.dataTransfer?.files
+
+  if (!files?.length) return
+  const file = files[0]
+  if (!file) return
+
+  const validationError = validateImageUploadFile(file)
+  if (validationError) {
+    useNotify({ type: 'error', message: validationError })
+    return
+  }
+
+  if (bannerPreview.value?.startsWith('blob:')) {
+    URL.revokeObjectURL(bannerPreview.value)
+  }
+  bannerFile.value = file
+  companyForm.value.bannerImage = URL.createObjectURL(file)
+  bannerPreview.value = companyForm.value.bannerImage
+}
+function onPickBanner(e: Event) {
+  const files = (e.target as HTMLInputElement).files
+
+  if (!files?.length) return
+  const file = files[0]
+  if (!file) return
+
+  const validationError = validateImageUploadFile(file)
+  if (validationError) {
+    useNotify({ type: 'error', message: validationError })
+    if (bannerFileEl.value) bannerFileEl.value.value = ''
+    return
+  }
+
+  if (bannerPreview.value?.startsWith('blob:')) {
+    URL.revokeObjectURL(bannerPreview.value)
+  }
+  bannerFile.value = file
+  companyForm.value.bannerImage = URL.createObjectURL(file)
+  bannerPreview.value = companyForm.value.bannerImage
+  if (bannerFileEl.value) bannerFileEl.value.value = ''
+}
+function removeBanner() {
+  // Track URL for deletion if it exists (not blob)
+  if (bannerPreview.value && !bannerPreview.value.startsWith('blob:')) {
+    deletedImageUrls.value.push(bannerPreview.value)
+  }
+  if (bannerPreview.value?.startsWith('blob:')) {
+    URL.revokeObjectURL(bannerPreview.value)
+  }
+  bannerFile.value = null
+  bannerPreview.value = null
+  companyForm.value.bannerImage = null
+  if (bannerFileEl.value) bannerFileEl.value.value = ''
+}
+
+onBeforeUnmount(() => {
+  // Cleanup logo preview
+  if (logoPreview.value?.startsWith('blob:')) {
+    URL.revokeObjectURL(logoPreview.value)
+  }
+  // Cleanup banner preview
+  if (bannerPreview.value?.startsWith('blob:')) {
+    URL.revokeObjectURL(bannerPreview.value)
+  }
+  // Cleanup image previews
+  imagePreviews.value.forEach((pv) => {
+    if (pv?.startsWith('blob:')) URL.revokeObjectURL(pv)
+  })
+})
+
+function validateCompanyFields(): boolean {
+  companyErrors.value = {}
+  let isValid = true
+
+  if (!companyForm.value.name?.trim()) {
+    companyErrors.value.name = t('company.form.errName')
+    isValid = false
+  }
+
+  // Check if address is empty or only contains empty HTML tags
+  const addressHtml = companyForm.value.address || ''
+  const cleanAddress = addressHtml.replace(/<[^>]*>/g, '').trim()
+
+  if (cleanAddress.length === 0) {
+    companyErrors.value.address = t('company.form.errAddress')
+    isValid = false
+  }
+
+  if (!companyForm.value.organizationType) {
+    companyErrors.value.organizationType = t('company.form.errOrgType')
+    isValid = false
+  }
+
+  // Validate foundedYear format only if provided
+  if (companyForm.value.foundedYear != null && companyForm.value.foundedYear !== undefined) {
+    if (!Number.isFinite(companyForm.value.foundedYear) || companyForm.value.foundedYear < 1800 || companyForm.value.foundedYear > 2100) {
+      companyErrors.value.foundedYear = 'Năm thành lập phải là số hợp lệ từ 1800 đến 2100.'
+      isValid = false
+    }
+  }
+
+  // Validate logo
+  if (!companyForm.value.logo) {
+    companyErrors.value.logo = 'Logo công ty không được để trống.'
+    isValid = false
+  }
+
+  if (
+    companyForm.value.website &&
+    !/^https?:\/\/.+/i.test(companyForm.value.website)
+  ) {
+    companyErrors.value.website = t('company.form.errWebsite')
+    isValid = false
+  }
+
+  // Validate Facebook
+  if (
+    companyForm.value.facebookLink &&
+    !/^https?:\/\/.+/i.test(companyForm.value.facebookLink)
+  ) {
+    companyErrors.value.facebookLink = 'Facebook phải bắt đầu bằng http:// hoặc https://'
+    isValid = false
+  }
+
+  // Validate Twitter
+  if (
+    companyForm.value.twitterLink &&
+    !/^https?:\/\/.+/i.test(companyForm.value.twitterLink)
+  ) {
+    companyErrors.value.twitterLink = 'Twitter phải bắt đầu bằng http:// hoặc https://'
+    isValid = false
+  }
+
+  // Validate Instagram
+  if (
+    companyForm.value.instagramLink &&
+    !/^https?:\/\/.+/i.test(companyForm.value.instagramLink)
+  ) {
+    companyErrors.value.instagramLink = 'Instagram phải bắt đầu bằng http:// hoặc https://'
+    isValid = false
+  }
+
+  // Validate LinkedIn
+  if (
+    companyForm.value.linkedInLink &&
+    !/^https?:\/\/.+/i.test(companyForm.value.linkedInLink)
+  ) {
+    companyErrors.value.linkedInLink = 'LinkedIn phải bắt đầu bằng http:// hoặc https://'
+    isValid = false
+  }
+
+  // Validate Video URL
+  if (
+    companyForm.value.videoUrl &&
+    !/^https?:\/\/.+/i.test(companyForm.value.videoUrl)
+  ) {
+    companyErrors.value.videoUrl = 'Video URL phải bắt đầu bằng http:// hoặc https://'
+    isValid = false
+  }
+
+  if (!isValid) {
+    useNotify({ type: 'error', message: 'Vui lòng nhập đúng các thông tin.' })
+    scrollToFirstError(companyErrors.value, companyFieldIdMap)
+  }
+
+  return isValid
+}
+
+async function saveCompany() {
+  if (!authStore.user?.companyId) {
+    useNotify({ message: 'Không tìm thấy công ty' })
+
+    return
+  }
+
+  if (!validateCompanyFields()) {
+    return
+  }
+
+  saving.value = true
+  try {
+    // Step 1: Delete images marked for deletion from R2
+    if (deletedImageUrls.value.length > 0) {
+      await $api.upload.deleteBatchR2(deletedImageUrls.value)
+      console.log('Deleted images from R2:', deletedImageUrls.value)
+    }
+
+    // Step 2: Upload new files to R2 and collect URLs
+    let logoUrl: string | undefined = undefined
+    let bannerUrl: string | undefined = undefined
+    const detailUrls: string[] = []
+
+    // Upload logo if there's a cropped file
+    if (logoCroppedFile.value) {
+      const uploadedUrl = await $api.upload.uploadImageR2(logoCroppedFile.value, 'logo')
+
+      if (uploadedUrl) {
+        logoUrl = uploadedUrl
+      } else {
+        useNotify({ message: 'Tải lên logo thất bại. Vui lòng thử lại.', type: 'error' })
+
+        return
+      }
+    } else if (companyForm.value.logo && !companyForm.value.logo.startsWith('blob:')) {
+      // Use existing logo URL
+      logoUrl = companyForm.value.logo
+    }
+
+    // Upload banner if it's a blob URL (new file)
+    if (bannerFile.value) {
+      const uploadedUrl = await $api.upload.uploadImageR2(bannerFile.value, 'banner')
+      if (uploadedUrl) {
+        bannerUrl = uploadedUrl
+      } else {
+        useNotify({ message: 'Tải lên banner thất bại. Vui lòng thử lại.', type: 'error' })
+        return
+      }
+    } else if (companyForm.value.bannerImage?.startsWith('blob:')) {
+      // Need to fetch the blob and create a File
+      const blob = await fetch(companyForm.value.bannerImage).then((res) => res.blob())
+      const file = new File([blob], 'banner.png', { type: 'image/png' })
+      const uploadedUrl = await $api.upload.uploadImageR2(file, 'banner')
+
+      if (uploadedUrl) {
+        bannerUrl = uploadedUrl
+      } else {
+        useNotify({ message: 'Tải lên banner thất bại. Vui lòng thử lại.', type: 'error' })
+
+        return
+      }
+    } else if (companyForm.value.bannerImage) {
+      // Use existing banner URL
+      bannerUrl = companyForm.value.bannerImage
+    }
+
+    // Upload company images that are blob URLs (new files)
+    const currentUrls = companyForm.value.companyImages
+      .map((img: any) => (typeof img === 'string' ? img.trim() : (img?.url ? String(img.url).trim() : '')))
+      .filter((u: string) => Boolean(u && u.length > 0))
+
+    for (const url of currentUrls) {
+      if (url.startsWith('blob:')) {
+        const blob = await fetch(url).then((res) => res.blob())
+        const file = new File([blob], 'company-image.png', { type: 'image/png' })
+        const uploadedUrl = await $api.upload.uploadImageR2(file, 'company-images')
+
+        if (uploadedUrl) {
+          detailUrls.push(uploadedUrl)
+        }
+      } else {
+        // Keep existing URL
+        detailUrls.push(url)
+      }
+    }
+
+    console.log('Images to save:', { logo: logoUrl, banner: bannerUrl, images: detailUrls.length })
+
+    // Step 3: Prepare update data
+    const updateData: CompanyAddUpdateEntity = {
+      ...companyForm.value,
+      companySize: resolveCompanySizeForSave(
+        companySizeFromDb.value,
+        companyForm.value.companySize,
+        companySizeDirty.value,
+      ) ?? null,
+      mst: companyForm.value.mst && companyForm.value.mst.trim() !== ''
+        ? companyForm.value.mst.trim()
+        : undefined,
+      logo: logoUrl || null,
+      bannerImage: bannerUrl || null,
+      companyImages: detailUrls.map((u) => ({ url: u })),
+    }
+
+    await $api.company.editCompany(authStore.user.companyId, updateData)
+    useNotify({
+      message: t('company.editCompany.editCompanyComplete') as string,
+      type: 'success',
+    })
+
+    // Emit event to parent to reload company data
+    emit('companyUpdated')
+  } catch (e: any) {
+    console.error('Update company failed:', e)
+    useNotify({
+      message: Array.isArray(e?.message)
+        ? e.message[0]
+        : e?.message || t('company.form.createFailed'),
+    })
+  } finally {
+    saving.value = false
+  }
+}
+
+</script>

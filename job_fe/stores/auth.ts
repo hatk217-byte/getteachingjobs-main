@@ -1,0 +1,138 @@
+import type { CookieOptions } from '#app'
+import { UserMapper } from '~/mapper/user'
+import type { UserModel } from '~/models/user'
+
+interface State {
+  user: UserModel | null
+  token: string | null
+}
+
+export const useAuthStore = defineStore('auth', {
+  state: (): State => ({
+    user: null,
+    token: null,
+  }),
+
+  getters: {
+    isLoggedIn: (state) => !!state.user,
+    // isVerifiedEkyc: (state) =>
+    //   state.user && state.user?.status === FemaleStatus.Active,
+  },
+
+  actions: {
+    async login({ email, password }: { email: string; password: string }) {
+      const { $api } = useNuxtApp()
+
+      const response = await $api.auth.login({
+        email,
+        password,
+      })
+
+      // Chỉ set token khi đăng nhập thành công và có access_token
+      if (response && (response.access_token || response.accessToken)) {
+        const token = useToken(CONSTANTS.COOKIE_TOKEN_OPTION as CookieOptions)
+        token.set(response.access_token || response.accessToken)
+      }
+
+      return response
+    },
+
+    async autoLogin(email: string) {
+      const { $api } = useNuxtApp()
+
+      const response = await $api.auth.autoLogin({ email })
+
+      const token = useToken(CONSTANTS.COOKIE_TOKEN_OPTION as CookieOptions)
+
+      token.set(response.access_token || response.accessToken)
+
+      // Set user to store
+      this.user = UserMapper.toModel(response.user)
+
+      return response
+    },
+
+    async register({
+      fullName,
+      email,
+      password,
+      phoneNumber,
+      role,
+      taxCode,
+      companyId,
+    }: {
+      fullName: string
+      email: string
+      password: string
+      phoneNumber?: string
+      role?: number
+      taxCode?: string
+      companyId?: number
+    }) {
+      const { $api } = useNuxtApp()
+
+      const response = await $api.auth.register({
+        fullName,
+        email,
+        password,
+        username: email,
+        phoneNumber,
+        role,
+        taxCode,
+        companyId,
+      })
+
+      return response
+    },
+
+    async logout() {
+      const router = useRouter()
+
+      this.user = null
+
+      const token = useToken(CONSTANTS.COOKIE_TOKEN_OPTION as CookieOptions)
+
+      token.set(null)
+
+      if (import.meta.client) {
+        // Also clear host-only cookie to be safe
+        document.cookie = `${CONSTANTS.ACCESS_TOKEN}=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT`
+      }
+
+      const config = useRuntimeConfig()
+      if (import.meta.client && config.public.adminUrl && window.location.origin === new URL(config.public.adminUrl).origin) {
+        window.location.href = config.public.baseUrl || '/'
+      } else {
+        router.push(ROUTE_PAGE.HOME)
+      }
+    },
+
+    async getMe() {
+      const { $api } = useNuxtApp()
+
+      const response = await $api.auth.getMe()
+
+      this.user = UserMapper.toModel(response)
+
+      console.log('===== GET ME INFO =====')
+      console.log('User:', this.user)
+      console.log('Role:', this.user?.role)
+      console.log('Role Type:', typeof this.user?.role)
+      console.log('=======================')
+
+      return this.user
+    },
+
+    setUser(user: UserModel) {
+      this.user = UserMapper.toModel(user)
+    },
+
+    setToken(token: string) {
+      this.token = token
+    },
+
+    clearToken() {
+      this.token = null
+    },
+  },
+})

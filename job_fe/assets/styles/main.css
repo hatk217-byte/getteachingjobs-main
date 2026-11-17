@@ -1,0 +1,450 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+@import "./components/hero-home.scss";
+@import "./components/home-sections.scss";
+@import "./components/page-container.scss";
+@import "./components/site-footer.scss";
+@import "./components/candidate-dashboard.scss";
+@import "./components/candidate-cv-manager.scss";
+@import "./components/candidate-applications.scss";
+@import "./components/candidate-account.scss";
+@import "./components/candidate-settings.scss";
+@import "./components/employer-dashboard.scss";
+@import "./components/companies-directory.scss";
+@import "./components/jobs-directory.scss";
+@import "./components/directory-select-menu.scss";
+@import "./components/blog-directory.scss";
+@import "./components/blog-detail.scss";
+@import "./components/auth-modal.scss";
+@import "./components/contact-page.scss";
+@import "./components/legal-page.scss";
+@import "./components/company-detail.scss";
+@import "./components/job-detail.scss";
+@import "./components/detail-preview.scss";
+@import "./components/apply-drawer.scss";
+@import "./components/employer-post-page.scss";
+@import "./components/rich-text-editor.scss";
+
+:root {
+  --ui-primary: #ea580c;
+  --ui-secondary: #1d1a16;
+  --ui-success: #16a34a;
+  --ui-neutral: #b7ac9c;
+  --ui-warning: #cd5c5c;
+  --ui-error: #df3939;
+  --ui-info: #888ea3;
+  --ui-gray: #898989;
+  --ui-light-gray: #f9f9f9;
+  --ui-gray-50: #e6e6e6;
+  --ui-disabled: #b2b2b2;
+  --ui-border-line: #ccc;
+  --ui-border-line-light: #eaeaea;
+  --ui-cream: #fff8ec;
+  --ui-main-light: #ebeff3;
+  --blue: #ea580c;
+  --blue-dark: #c2410c;
+  --blue-soft: #fff7ed;
+  --blue-glow: rgba(234, 88, 12, 0.16);
+  --text: #1d2433;
+  --muted: #7d8698;
+  --border-default: 1px solid rgba(29, 36, 51, 0.12);
+  --line: #e8ebf3;
+  --bg: #f5f7fb;
+  --page-bg: #ffffff;
+  --bg-white: #ffffff;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --shadow-xs: 0 1px 3px rgba(18, 22, 60, 0.06);
+  --shadow-sm: 0 4px 12px rgba(18, 22, 60, 0.06);
+  --shadow-md: 0 8px 28px rgba(18, 22, 60, 0.08);
+  --shadow-lg: 0 20px 60px rgba(18, 22, 60, 0.1);
+  --shadow-blue: 0 8px 28px rgba(53, 99, 255, 0.22);
+  --container: 1060px;
+  --shell-max: 1640px;
+  --shell-gutter: 96px;
+  --layout-gutter: calc(var(--shell-gutter) * 0.4);
+  --shell-width: min(calc(100% - var(--shell-gutter)), var(--shell-max));
+  --focus-max: 1020px;
+  --focus-width: min(100%, var(--focus-max));
+  --r-xl: 12px;
+  --r-lg: 12px;
+  --r-md: 12px;
+  --r-sm: 12px;
+  --r-pill: 12px;
+  --home-radius-lg: 12px;
+  --home-radius-md: 12px;
+  --search-shell-radius: 12px;
+  --search-action-radius: 12px;
+  --scrollbar-size: 6px;
+  --scrollbar-track: transparent;
+  --scrollbar-thumb: rgba(148, 158, 178, 0.52);
+  --scrollbar-thumb-hover: rgba(125, 134, 152, 0.58);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+input,
+button,
+textarea,
+select {
+  font-family: inherit;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) transparent;
+  min-height: 100%;
+  background: var(--page-bg);
+  background-attachment: fixed;
+}
+
+/* Cuộn mượt toàn site (viewport + vùng overflow) */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body,
+  #__nuxt,
+  .overflow-y-auto,
+  .overflow-auto,
+  .overflow-x-auto,
+  .overflow-scroll,
+  [class*='overflow-y-auto'],
+  [class*='overflow-auto'] {
+    scroll-behavior: smooth;
+  }
+}
+
+html,
+body,
+#__nuxt {
+  background: var(--page-bg);
+  background-attachment: fixed;
+}
+
+@theme default {
+  --color-primary: var(--ui-primary);
+  --color-secondary: var(--ui-secondary);
+  --color-success: var(--ui-success);
+  --color-neutral: var(--ui-neutral);
+  --color-warning: var(--ui-warning);
+  --color-error: var(--ui-error);
+  --color-info: var(--ui-info);
+  --color-gray: var(--ui-gray);
+  --color-disabled: var(--ui-disabled);
+  --color-light-gray: var(--ui-light-gray);
+  --color-border-line: var(--ui-border-line);
+  --color-border-line-light: var(--ui-border-line-light);
+  --color-gray-50: var(--ui-gray-50);
+  --color-cream: var(--ui-cream);
+  --color-main-light: var(--ui-main-light);
+}
+
+@theme static {
+  --font-sans: "Be Vietnam Pro", "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: "Be Vietnam Pro", "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Be Vietnam Pro", "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --app-header-height: 74px;
+  --app-tab-bar-height: 90px;
+}
+
+@layer components {
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+
+  .padding-x-layout {
+    padding-left: var(--layout-gutter);
+    padding-right: var(--layout-gutter);
+  }
+
+  .margin-x-negative {
+    margin-left: calc(var(--layout-gutter) * -1);
+    margin-right: calc(var(--layout-gutter) * -1);
+  }
+
+  .app-root,
+  .layout-blank {
+    min-height: 100vh;
+    min-height: 100dvh;
+    background: transparent;
+  }
+}
+
+body {
+  overflow-x: hidden;
+  min-height: 100%;
+  font-family: var(--font-sans);
+  color: var(--color-secondary);
+  background: var(--page-bg);
+  background-attachment: fixed;
+}
+
+h3 {
+  display: block;
+  font-size: 1.17em;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+  font-weight: bold;
+  unicode-bidi: isolate;
+}
+
+.primary-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 40px;
+  padding: 0 20px;
+  border-radius: var(--r-pill);
+  font-size: 13px;
+  font-family: inherit;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+  border: none;
+  cursor: pointer;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(249, 115, 22, 0.22);
+  transition:
+    background 0.2s ease,
+    transform 0.25s var(--ease-spring),
+    box-shadow 0.25s ease;
+  text-decoration: none;
+}
+
+.primary-btn:hover {
+  background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(249, 115, 22, 0.32);
+}
+
+.white-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 0 20px;
+  border-radius: var(--r-pill);
+  font-size: 13px;
+  font-family: inherit;
+  font-weight: 600;
+  color: var(--blue);
+  background: #fff;
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  text-decoration: none;
+  transition:
+    background 0.2s ease,
+    transform 0.25s var(--ease-spring),
+    box-shadow 0.25s ease;
+}
+
+.white-btn:hover {
+  background: #f5f7ff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* Global scrollbar (đồng bộ html / Firefox / WebKit) */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: var(--scrollbar-size);
+  height: var(--scrollbar-size);
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 999px;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: var(--scrollbar-thumb);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: var(--scrollbar-thumb-hover);
+}
+
+*::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+*::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* UDrawer: đồng bộ 80% với dashboard đã dùng zoom 0.8 (panel thường fixed/portal, không kế thừa zoom của layout) */
+.ui-drawer-scale-80 {
+  --drawer-scale: 0.8;
+  zoom: 0.8;
+}
+
+@supports not (zoom: 1) {
+  .ui-drawer-scale-80 {
+    transform: scale(0.8);
+    transform-origin: right center;
+    /* When using transform scale (no `zoom` support), the element's visual size shrinks
+       but layout size doesn't, causing UDrawer content to appear "cut" vertically.
+       Compensate by expanding layout height to match the scaled viewport. */
+    height: calc(100vh / 0.8);
+    max-height: calc(100vh / 0.8);
+  }
+}
+
+/* Drawer body: scroll full height (compensate for scale). Subtract header area. */
+.ui-drawer-body-vh {
+  max-height: calc(100vh / var(--drawer-scale, 1) - 120px);
+  overflow-y: auto;
+}
+
+.employer-admin-drawer-panel .ui-drawer-body-vh {
+  max-height: none;
+}
+
+/* ==========================================================================
+   UCalendar Navigation Arrows (Light, subtle modern design)
+   ========================================================================== */
+.u-calendar-header,
+.u-calendar [class*="justify-between"]:first-child,
+[data-reka-calendar-root] [class*="justify-between"]:first-child,
+[data-reka-calendar-header],
+[data-calendar-header] {
+  padding-bottom: 8px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+
+/* Header heading */
+.u-calendar-header [class*="heading"],
+.u-calendar [class*="heading"],
+[data-reka-calendar-root] [class*="heading"],
+[data-reka-calendar-heading] {
+  font-size: 13.5px !important;
+  font-weight: 600 !important;
+  color: #1e293b !important;
+  letter-spacing: -0.01em !important;
+}
+
+/* All calendar navigation buttons */
+.u-calendar-header button,
+.u-calendar [class*="justify-between"]:first-child button,
+[data-reka-calendar-root] [class*="justify-between"]:first-child button,
+[data-reka-calendar-root] header button,
+[data-reka-calendar-header] button,
+[data-calendar-header] button,
+div[aria-label*="Event Date"] [class*="justify-between"] button {
+  width: 28px !important;
+  height: 28px !important;
+  min-width: 28px !important;
+  min-height: 28px !important;
+  max-width: 28px !important;
+  max-height: 28px !important;
+  padding: 0 !important;
+  margin: 0 1px !important;
+  border-radius: 9999px !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  color: #64748b !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.15s ease-in-out !important;
+  cursor: pointer !important;
+}
+
+/* Icon inside calendar navigation buttons */
+.u-calendar-header button span,
+.u-calendar-header button svg,
+.u-calendar-header button .icon,
+.u-calendar [class*="justify-between"]:first-child button span,
+.u-calendar [class*="justify-between"]:first-child button svg,
+.u-calendar [class*="justify-between"]:first-child button .icon,
+[data-reka-calendar-root] [class*="justify-between"]:first-child button span,
+[data-reka-calendar-root] [class*="justify-between"]:first-child button svg,
+[data-reka-calendar-root] [class*="justify-between"]:first-child button .icon {
+  width: 15px !important;
+  height: 15px !important;
+  font-size: 15px !important;
+  color: inherit !important;
+}
+
+/* Hover state for active buttons */
+.u-calendar-header button:hover:not(:disabled):not([aria-disabled="true"]):not([data-disabled]),
+.u-calendar [class*="justify-between"]:first-child button:hover:not(:disabled):not([aria-disabled="true"]):not([data-disabled]),
+[data-reka-calendar-root] [class*="justify-between"]:first-child button:hover:not(:disabled):not([aria-disabled="true"]):not([data-disabled]) {
+  background-color: #f1f5f9 !important;
+  color: #0f172a !important;
+}
+
+/* Active / press state */
+.u-calendar-header button:active:not(:disabled):not([aria-disabled="true"]):not([data-disabled]),
+.u-calendar [class*="justify-between"]:first-child button:active:not(:disabled):not([aria-disabled="true"]):not([data-disabled]),
+[data-reka-calendar-root] [class*="justify-between"]:first-child button:active:not(:disabled):not([aria-disabled="true"]):not([data-disabled]) {
+  background-color: #e2e8f0 !important;
+  transform: scale(0.94);
+}
+
+/* Disabled state: very light, NO solid gray background, subtle opacity */
+.u-calendar-header button:disabled,
+.u-calendar-header button[aria-disabled="true"],
+.u-calendar-header button[data-disabled],
+.u-calendar [class*="justify-between"]:first-child button:disabled,
+.u-calendar [class*="justify-between"]:first-child button[aria-disabled="true"],
+.u-calendar [class*="justify-between"]:first-child button[data-disabled],
+[data-reka-calendar-root] [class*="justify-between"]:first-child button:disabled,
+[data-reka-calendar-root] [class*="justify-between"]:first-child button[aria-disabled="true"],
+[data-reka-calendar-root] [class*="justify-between"]:first-child button[data-disabled] {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: #cbd5e1 !important;
+  opacity: 0.3 !important;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* ==========================================================================
+   Mandatory Asterisk (*) in Employer Dashboard & Post Pages (Brand Orange)
+   ========================================================================== */
+.employer-required-star,
+.employer-field-required,
+.employer-field > span .employer-required-star,
+.employer-field strong .employer-required-star,
+.employer-company-media-label .employer-required-star,
+.employer-input-label .employer-required-star,
+.page-dashboard-newjob .employer-input-label .text-red-500,
+.page-dashboard-newjob .employer-input-label .text-orange-500,
+.page-dashboard-newjob label .text-red-500,
+.page-dashboard-newjob label .text-orange-500,
+.page-job-upload .employer-input-label .text-red-500,
+.page-job-upload .employer-input-label .text-orange-500,
+.page-job-upload label .text-red-500,
+.page-job-upload label .text-orange-500 {
+  color: #f97316 !important;
+  font-weight: 700 !important;
+}

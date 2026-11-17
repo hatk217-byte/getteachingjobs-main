@@ -1,0 +1,72 @@
+import type {
+  CompanyEntity,
+  CompanyImage,
+  CompanyJobSummary,
+} from '~/entities/company'
+import type { CompanyBannerModel } from '~/models/company'
+import { normalizeCompanyLogo } from '~/utils/companyLogo'
+import { formatCompanyName } from '~/utils/formatCompanyName'
+
+export class CompanyMapper {
+  static fromDto(dto: any): CompanyEntity {
+    return {
+      id: dto.id,
+      name: formatCompanyName(dto.name),
+      mst: dto.mst ?? undefined,
+      logo: normalizeCompanyLogo(dto.logo),
+      organizationType: dto.organizationType ?? null,
+      facebookLink: dto.facebookLink ?? null,
+      linkedInLink: dto.linkedInLink ?? null,
+      twitterLink: dto.twitterLink ?? null,
+      instagramLink: dto.instagramLink ?? null,
+      website: dto.website ?? null,
+      address: dto.address ?? null,
+      taxAddress: dto.taxAddress ?? null,
+      companySize: dto.companySize ?? null,
+      foundedYear: dto.foundedYear ?? null,
+      description: dto.description ?? null,
+      insight: dto.insight ?? null,
+      overview: dto.overview ?? null,
+      openPositions: dto.openPositions ?? 0,
+
+      companyImages: Array.isArray(dto.companyImages)
+        ? dto.companyImages.map(this.mapCompanyImage)
+        : [],
+      jobs: Array.isArray(dto.jobs) ? dto.jobs.map(this.mapJobSummary) : [],
+    }
+  }
+
+  private static mapJobSummary(jobDto: any): CompanyJobSummary {
+    return {
+      id: jobDto.id,
+      title: jobDto.title,
+      location: jobDto.location,
+      typeOfEmployment: jobDto.typeOfEmployment,
+      imageLogo: jobDto.imageLogo ?? null,
+      postedDate: jobDto.postedDate ? new Date(jobDto.postedDate) : undefined,
+      salaryMin: jobDto.salaryMin ?? null,
+      salaryMax: jobDto.salaryMax ?? null,
+      salaryType: jobDto.salaryType ?? null,
+      experienceLevel: jobDto.experienceLevel ?? null,
+    }
+  }
+
+  private static mapCompanyImage(imageDto: any): CompanyImage {
+    return {
+      id: imageDto.id,
+      url: imageDto.url,
+    }
+  }
+
+  static toBannerModel(value: CompanyEntity): CompanyBannerModel {
+    return {
+      id: value.id,
+      insight: value.insight ?? '',
+      overview: value.overview ?? '',
+      image:
+        value.companyImages && value.companyImages.length > 0
+          ? (value.companyImages[0].url ?? '')
+          : (normalizeCompanyLogo(value.logo) ?? ''),
+    }
+  }
+}

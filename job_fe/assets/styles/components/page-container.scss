@@ -1,0 +1,17 @@
+/* Container đồng bộ với footer và toàn trang — 1320px */
+.home-page .container,
+.jobs-directory-page .container,
+.companies-directory-page .container {
+  width: min(calc(100% - 48px), 1320px) !important;
+  max-width: 1320px !important;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 640px) {
+  .home-page .container,
+  .jobs-directory-page .container,
+  .companies-directory-page .container {
+    width: min(calc(100% - 32px), 1320px) !important;
+  }
+}

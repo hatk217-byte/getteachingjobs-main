@@ -1,0 +1,44 @@
+import type FetchFactory from '~/services/factory'
+import type { UserEntity } from '~/entities/user'
+
+const AuthModule = (apiService: FetchFactory) => {
+  const login = async (body: { email: string; password: string }) =>
+    apiService.post(ROUTE_API.LOGIN, { body })
+
+  const register = async (body: {
+    fullName: string
+    email: string
+    password: string
+    username: string
+    phoneNumber?: string
+    role?: number
+    taxCode?: string
+    companyId?: number
+  }) => apiService.post(ROUTE_API.REGISTER, { body })
+
+  const getMe = async () => apiService.get<UserEntity>(ROUTE_API.ME)
+
+  const autoLogin = async (body: { email: string }) =>
+    apiService.post(ROUTE_API.AUTO_LOGIN, { body })
+
+  const forgotPassword = async (body: { email: string }) =>
+    apiService.post<{ message: string }>(ROUTE_API.FORGOT_PASSWORD, { body })
+
+  const resetPassword = async (body: {
+    token: string
+    newPassword: string
+    confirmPassword: string
+  }) =>
+    apiService.post<{ message: string }>(ROUTE_API.RESET_PASSWORD, { body })
+
+  return {
+    login,
+    register,
+    getMe,
+    autoLogin,
+    forgotPassword,
+    resetPassword,
+  }
+}
+
+export default AuthModule

@@ -1,0 +1,1364 @@
+{
+  "app": {
+    "name": "Job"
+  },
+  "auth": {
+    "login": "Đăng nhập",
+    "loginFailed": "Đăng nhập thất bại",
+    "welcomeBack": "Welcome back!",
+    "emailAddress": "Email address",
+    "password": "Password",
+    "continue": "Continue",
+    "forgotPassword": "Forgot password",
+    "forgotPasswordTitle": "Quên mật khẩu",
+    "forgotPasswordDescription": "Nhập email đã đăng ký. Chúng tôi sẽ gửi link đặt lại mật khẩu nếu email tồn tại.",
+    "forgotPasswordSubmit": "Gửi link đặt lại",
+    "forgotPasswordSending": "Đang gửi...",
+    "forgotPasswordSuccess": "Nếu email tồn tại trong hệ thống, bạn sẽ nhận được hướng dẫn đặt lại mật khẩu.",
+    "resetPasswordTitle": "Đặt lại mật khẩu",
+    "resetPasswordDescription": "Nhập mật khẩu mới cho tài khoản của bạn.",
+    "newPassword": "Mật khẩu mới",
+    "confirmPassword": "Xác nhận mật khẩu",
+    "resetPasswordSubmit": "Đặt lại mật khẩu",
+    "resetPasswordSubmitting": "Đang xử lý...",
+    "resetPasswordSuccess": "Mật khẩu đã được đặt lại. Vui lòng đăng nhập.",
+    "resetPasswordInvalidToken": "Link đặt lại mật khẩu không hợp lệ hoặc đã hết hạn.",
+    "backToLogin": "Quay lại đăng nhập",
+    "newToJobster": "New to Jobster?",
+    "createAccount": "Create an account",
+    "fullName": "Họ và tên",
+    "createPassword": "Create password",
+    "alreadyHaveAccount": "Already have an account?",
+    "signIn": "Sign in",
+    "registerSuccess": "Tạo tài khoản thành công!",
+    "registerFailed": "Đăng ký thất bại. Vui lòng thử lại sau.",
+    "sessionExpired": "Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.",
+    "pleaseLogin": "Vui lòng đăng nhập để tiếp tục.",
+    "candidate": "Ứng viên",
+    "recruiter": "Nhà tuyển dụng",
+    "taxCode": "Mã số thuế",
+    "mstNotFound": "Không tìm thấy thông tin công ty với mã số thuế đã nhập."
+  },
+  "common": {
+    "crop": "Cắt",
+    "cropImage": "Cắt ảnh",
+    "zoomIn": "Phóng to",
+    "zoomOut": "Thu nhỏ",
+    "rotate": "Xoay",
+    "cancel": "Hủy",
+    "close": "Đóng",
+    "logout": "Đăng xuất",
+    "confirm": "Xác nhận",
+    "processing": "Đang xử lý...",
+    "dragToMove": "Kéo để di chuyển",
+    "actions": {
+      "ok": "OK"
+    },
+    "fields": {
+      "email": "Địa chỉ email",
+      "password": "Mật khẩu"
+    },
+    "validate": {
+      "required": "{field} không được để trống",
+      "email": "{field} không hợp lệ",
+      "passwordMin": "{field} phải có ít nhất 8 ký tự",
+      "passwordLower": "{field} phải có chữ thường",
+      "passwordUpper": "{field} phải có chữ hoa",
+      "passwordNumber": "{field} phải có số",
+      "minLength": "{field} phải có ít nhất {min} ký tự",
+      "maxLength": "{field} không được vượt quá {max} ký tự",
+      "passwordMatch": "Mật khẩu xác nhận không khớp"
+    },
+    "error": {
+      "title": "Đã xảy ra lỗi",
+      "retry": "Thử lại"
+    },
+    "masterData": {
+      "category": {
+        "giaovienmamnon": "Giáo viên mầm non",
+        "giaovientieuhoc": "Giáo viên tiểu học",
+        "giaoviennguvan": "Giáo viên ngữ văn",
+        "giaovientoan": "Giáo viên toán",
+        "giaovientienganh": "Giáo viên tiếng Anh",
+        "giaoviengdcd": "Giáo viên giáo dục công dân",
+        "giaovienlichsu": "Giáo viên lịch sử",
+        "giaoviendiali": "Giáo viên địa lí",
+        "giaovienkhoahoctn": "Giáo viên khoa học tự nhiên",
+        "giaoviencongnghe": "Giáo viên công nghệ",
+        "giaovientinhoc": "Giáo viên tin học",
+        "giaovienthechat": "Giáo viên giáo dục thể chất",
+        "giaoviennghethuat": "Giáo viên nghệ thuật (âm nhạc, mĩ thuật)",
+        "giaovienhoatdongtrainghiem": "Giáo viên hoạt động trải nghiệm, hướng nghiệp",
+        "giaovienvatly": "Giáo viên vật lý",
+        "giaovienhoahoc": "Giáo viên hoá học",
+        "giaoviengdiaphuong": "Giáo viên giáo dục địa phương",
+        "giaovientiengphap": "Giáo viên tiếng Pháp",
+        "giaovientienhduc": "Giáo viên tiếng Đức",
+        "giaovientiengnga": "Giáo viên tiếng Nga",
+        "giaovientiengnhat": "Giáo viên tiếng Nhật",
+        "giaovientienghan": "Giáo viên tiếng Hàn",
+        "giaovientiengtrung": "Giáo viên tiếng Trung",
+        "giaovientiengtbn": "Giáo viên tiếng Tây Ban Nha",
+        "giaovienstem": "Giáo viên StEM/StEAM",
+        "trogiang": "Trợ giảng",
+        "trogiangtienhanh": "Trợ giảng tiếng Anh",
+        "trogiangtoan": "Trợ giảng toán"
+      },
+      "location": {
+        "tuyenquang": "Tuyên Quang",
+        "caobang": "Cao Bằng",
+        "laichau": "Lai Châu",
+        "laocai": "Lào Cai",
+        "thainguyen": "Thái Nguyên",
+        "dienbien": "Điện Biên",
+        "langson": "Lạng Sơn",
+        "sonla": "Sơn La",
+        "phutho": "Phú Thọ",
+        "bacninh": "Bắc Ninh",
+        "quangninh": "Quảng Ninh",
+        "hanoi": "TP. Hà Nội",
+        "haiphong": "TP. Hải Phòng",
+        "hungyen": "Hưng Yên",
+        "ninhbinh": "Ninh Bình",
+        "thanhhoa": "Thanh Hóa",
+        "nghean": "Nghệ An",
+        "hatinh": "Hà Tĩnh",
+        "quangtri": "Quảng Trị",
+        "hue": "TP. Huế",
+        "danang": "TP. Đà Nẵng",
+        "quangngai": "Quảng Ngãi",
+        "gialai": "Gia Lai",
+        "daklak": "Đắk Lắk",
+        "khanhhoa": "Khánh Hoà",
+        "lamdong": "Lâm Đồng",
+        "dongnai": "Đồng Nai",
+        "tayninh": "Tây Ninh",
+        "hochiminh": "TP. Hồ Chí Minh",
+        "dongthap": "Đồng Tháp",
+        "angiang": "An Giang",
+        "vinhlong": "Vĩnh Long",
+        "cantho": "TP. Cần Thơ",
+        "camau": "Cà Mau"
+      },
+      "jobBenefits": {
+        "insurance": "Bảo hiểm",
+        "travel": "Du lịch",
+        "bonus": "Thưởng",
+        "healthcare": "Chăm sóc sức khỏe",
+        "training": "Đào tạo",
+        "salaryincrease": "Tăng lương",
+        "laptop": "Cấp laptop",
+        "lunchallowance": "Phụ cấp ăn trưa",
+        "transportallowance": "Phụ cấp đi lại",
+        "paidleave": "Nghỉ phép có lương",
+        "housingsupport": "Hỗ trợ nhà ở",
+        "uniform": "Đồng phục",
+        "teambuilding": "Teambuilding",
+        "performancebonus": "Thưởng hiệu suất",
+        "annualhealthcheck": "Khám sức khỏe định kỳ"
+      },
+      "experienceLevel": {
+        "underoneyear": "Dưới 1 năm",
+        "twoyears": "2 năm",
+        "threeyears": "3 năm",
+        "fouryears": "4 năm",
+        "fiveyears": "5 năm",
+        "sixyearsplus": "6 năm +",
+        "notrequired": "Không yêu cầu"
+      },
+      "typeOfEmployment": {
+        "intern": "Thực tập sinh",
+        "fulltime": "Toàn thời gian",
+        "parttime": "Bán thời gian",
+        "remote": "Remote",
+        "temporary": "Tạm thời/dự án"
+      },
+      "organizationType": {
+        "truongconglap": "Trường Công Lập",
+        "truongtuthuc": "Trường Tư thục",
+        "truongquocte": "Trường Quốc Tế",
+        "truongconggiao": "Trường Công Giáo",
+        "trungtam": "Trung Tâm",
+        "truonggiaoducdacbiet": "Trường Giáo Dục Đặc Biệt",
+        "truongdaynghe": "Trường Dạy Nghề",
+        "khac": "Khác"
+      },
+      "salaryType": {
+        "month": "Tháng",
+        "week": "Tuần",
+        "hour": "Giờ",
+        "contract": "Theo hợp đồng dự án",
+        "more": "Thương lượng"
+      },
+      "gender": {
+        "male": "Nam",
+        "female": "Nữ"
+      },
+      "grade": {
+        "preschool": "Mầm non",
+        "primaryschool": "Tiểu học",
+        "secondaryschool": "Trung học",
+        "highschool": "Phổ thông",
+        "college": "Cao đẳng",
+        "university": "Đại học",
+        "postgraduate": "Sau đại học",
+        "other": "Khác"
+      },
+      "requiredQualification": {
+        "incomplete": "Chưa tốt nghiệp",
+        "associatedegree": "Cao đẳng",
+        "bachelordegree": "Đại học",
+        "teachingdegree": "Sư phạm",
+        "masterdegree": "Thạc sĩ",
+        "postdoctoral": "Phó tiến sĩ",
+        "doctorate": "Tiến sĩ"
+      }
+    },
+    "separator": "•",
+    "nanValue": "N/A",
+    "requiredMark": "*",
+    "remove": "Xoá"
+  },
+  "companies": {
+    "search": {
+      "placeholder": "Tên trung tâm, trường học, tổ chức giáo dục…",
+      "organizationType": "Loại hình"
+    },
+    "jobs": "Việc Làm",
+    "noJobs": "Không có việc làm mới",
+    "noResults": {
+      "title": "Không tìm thấy công ty",
+      "clearSearch": "Xóa tìm kiếm",
+      "noDescriptionAvailable": "Không có mô tả"
+    }
+  },
+  "homePage": {
+    "header": {
+      "signIn": "Đăng nhập",
+      "signUp": "Đăng ký"
+    },
+    "heroImage": {
+      "title1": "Tuyển dụng Giáo viên",
+      "title2": "Toàn Quốc",
+      "subtitle": "Nền tảng tuyển dụng Giáo viên hàng đầu Việt Nam. Cập nhật việc làm Giáo viên mới nhất.",
+      "searchPlaceholder": "Nhập vị trí bạn muốn ứng tuyển",
+      "searchButton": "Tìm kiếm",
+      "allLocations": "Tỉnh thành"
+    },
+    "searchByCategory": {
+      "title1": "Danh mục việc làm",
+      "title2": "Tìm kiếm cơ hội nghề nghiệp theo chuyên môn của bạn",
+      "allCategories": "Xem tất cả",
+      "openPosition": "việc làm"
+    },
+    "featuredJobOffers": {
+      "title": "Việc Làm Nổi bật",
+      "by": "bởi",
+      "uploadBy": "Đăng tải ngày "
+    },
+    "featuredCities": {
+      "title1": "Việc làm theo tỉnh thành",
+      "title2": "Việc làm theo tỉnh thành"
+    },
+    "blog": {
+      "title1": "Cẩm nang giáo viên",
+      "readMore": "Xem thêm >"
+    },
+    "lastBanner": {
+      "title1": "Bắt đầu hành trình giáo dục ngay hôm nay",
+      "title2": "Tham gia cùng hàng nghìn giáo viên đã tìm thấy công việc mơ ước tại",
+      "url": "TuyenGiaoVien.vn",
+      "button1": "Tìm việc làm ngay",
+      "button2": "Đăng tin tuyển dụng"
+    },
+    "footer": {
+      "subscription": "Nền tảng tuyển dụng Giáo viên hàng đầu Việt Nam. Kết nối giáo viên tài năng với các cơ sở giáo dục uy tín trên toàn quốc.",
+      "titleCandidate": "Dành cho ứng viên",
+      "featureCandidate1": "Tìm việc làm",
+      "featureCandidate2": "Hướng dẫn ứng tuyển",
+      "featureCandidate3": "Cẩm nang nghề nghiệp",
+      "titleRecruit": "Dành cho nhà tuyển dụng",
+      "featureRecruit1": "Đăng tin tuyển dụng",
+      "featureRecruit2": "Bảng giá dịch vụ",
+      "featureRecruit3": "Hỗ trợ tuyển dụng",
+      "copyRight": "© 2024 TuyenGiaoVien.vn. Tất cả quyền được bảo lưu.",
+      "policies": "Điều khoản sử dụng",
+      "sercurity": "Chính sách bảo mật",
+      "contact": "Thông tin liên lạc"
+    },
+    "buttonContent": {
+      "seeAll": "Xem tất cả",
+      "detailCompany": "Chi tiết NDT"
+    }
+  },
+  "home": {
+    "tabs": {
+      "demos": "Demos",
+      "findJobs": "Việc Làm",
+      "companies": "Công Ty",
+      "candidates": "Candidates",
+      "blog": "Blog",
+      "pages": "Đăng tin miễn phí"
+    },
+    "signIn": "Sign in",
+    "headline": "Find the perfect job for you",
+    "subheadline": "Search your career opportunity through 12,800 jobs",
+    "search": {
+      "placeholderKeyword": "Nhập từ khóa việc làm",
+      "placeholderCategory": "Lĩnh vực",
+      "placeholderLocation": "Tỉnh thành",
+      "placeholderOrganizationType": "Loại hình tổ chức",
+      "button": "Tìm kiếm",
+      "placeholderOrganizationTypeAll": "Chọn loại hình tổ chức"
+    },
+    "popularTags": {
+      "designer": "Designer",
+      "webDeveloper": "Web Developer",
+      "writer": "Writer",
+      "teamLeader": "Team Leader",
+      "fullstack": "Fullstack",
+      "web": "Web",
+      "financialAnalyst": "Financial Analyst",
+      "senior": "Senior",
+      "software": "Software"
+    },
+    "stats": {
+      "businessDevelopment": "job offers in Business Development",
+      "marketing": "job offers in Marketing & Communication",
+      "projectManagement": "job offers in Project Management"
+    }
+  },
+  "jobs": {
+    "tabs": {
+      "demos": "Demos",
+      "findJobs": "Find Jobs",
+      "companies": "Companies",
+      "candidates": "Candidates",
+      "blog": "Blog",
+      "pages": "Pages"
+    },
+    "signIn": "Sign in",
+    "header": {
+      "title": "Find Jobs",
+      "subtitle": "Search your career opportunity through 12,800 jobs"
+    },
+    "filters": {
+      "searchByKeywords": "Search by Keywords",
+      "placeholderKeyword": "Nhập từ khóa việc làm",
+      "placeholderCategory": "Lĩnh vực",
+      "placeholderLocation": "Tỉnh thành",
+      "typeOfEmployment": "Type of Employment",
+      "experienceLevel": "Experience Level"
+    },
+    "results": {
+      "showingJobs": "Showing {count} jobs",
+      "loading": "Loading jobs...",
+      "error": "Không tải được danh sách việc làm!",
+      "noJobs": "Không tìm thấy việc làm nào."
+    }
+  },
+  "search": {
+    "results": "Kết quả tìm kiếm",
+    "searchFound": "Tìm thấy",
+    "searchResults": "việc làm",
+    "filters": "Bộ lọc",
+    "employmentType": "Hình thức làm việc",
+    "experienceLevel": "Kinh nghiệm",
+    "clearFilters": "Xóa bộ lọc",
+    "viewJob": "Xem việc làm",
+    "noResults": "Không tìm thấy việc làm",
+    "noResultsDescription": "Thử điều chỉnh tiêu chí tìm kiếm hoặc lọc để tìm thấy nhiều việc làm hơn.",
+    "clearSearch": "Xóa tìm kiếm"
+  },
+  "job": {
+    "detail": {
+      "title": "Chi tiết công việc",
+      "featured": "Nổi bật",
+      "applyNow": "Ứng tuyển",
+      "share": "Chia sẻ",
+      "linkCopied": "Đã sao chép liên kết!",
+      "negotiable": "Thương lượng",
+      "salary": "Lương",
+      "experience": "Kinh nghiệm",
+      "employmentType": "Hình thức làm việc",
+      "location": "Địa điểm",
+      "description": "Mô tả chi tiết",
+      "requirements": "Bằng cấp",
+      "requirement1": "Bằng cử nhân ngành Giáo dục hoặc lĩnh vực liên quan",
+      "requirement2": "Chứng chỉ giảng dạy hoặc giấy phép hành nghề",
+      "requirement3": "Tối thiểu 2 năm kinh nghiệm giảng dạy",
+      "requirement4": "Kỹ năng giao tiếp và tương tác tốt",
+      "benefits": "Phúc lợi",
+      "benefit1": "Lương và phúc lợi cạnh tranh",
+      "benefit2": "Bảo hiểm y tế",
+      "benefit3": "Cơ hội phát triển chuyên môn",
+      "benefit4": "Làm việc linh hoạt",
+      "aboutCompany": "Về công ty",
+      "companyDescription": "Chúng tôi là một tổ chức giáo dục hàng đầu cam kết cung cấp chất lượng giáo dục và tạo môi trường học tập hỗ trợ cho cả học sinh và giáo viên.",
+      "viewCompany": "Xem chi tiết",
+      "jobOverview": "Thông tin công việc",
+      "postedDate": "Ngày đăng",
+      "deadline": "Hạn cuối",
+      "category": "Danh mục",
+      "similarJobs": "Việc làm tương tự",
+      "notFound": "Không tìm thấy công việc",
+      "notFoundDescription": "Công việc bạn đang tìm kiếm không tồn tại hoặc đã bị xóa.",
+      "goBack": "Quay lại",
+      "applicationSubmitted": "Đã gửi đơn ứng tuyển thành công!",
+      "applicationSuccess": "Ứng tuyển thành công"
+    },
+    "listJobUser": {
+      "title": "Thông tin việc làm",
+      "foundResults": "Tổng cộng {count} việc làm",
+      "addJob": "Chỉnh sửa Job",
+      "updateJob": "Chỉnh sửa Job",
+      "deleteJob": "Xóa Job",
+      "waitingJob": "Chờ duyệt"
+    },
+    "uploadJob": {
+      "title": "Đăng tin tuyển dụng",
+      "stepCompanyInfo": "Thông tin công ty",
+      "stepPostDetail": "Chi tiết tin đăng",
+      "mstLabel": "Mã số thuế",
+      "lookupMst": "Tra cứu",
+      "lookupFoundTitle": "Đã tìm thấy thông tin",
+      "optionalMoreInfo": "Thêm thông tin bổ sung",
+      "optionalMoreInfoHint": "(tuỳ chọn)",
+      "continueNext": "Tiếp tục",
+      "detailAddressLabel": "Địa chỉ chi tiết",
+      "mandatoryChar": "*",
+      "nameJobLabel": "Vị trí tuyển dụng",
+      "nameJobPlaceHolder": "VD: Giáo viên Toán THCS, Trợ giảng Tiếng Anh...",
+      "detailJobLabel": "Mô tả công việc",
+      "emailJobLabel": "Email liên hệ",
+      "emailJobPlaceholder": "{'email@truong.edu.vn'}",
+      "phoneJobLabel": "Số điện thoại",
+      "phoneJobPlaceholder": "0xxx xxx xxx",
+      "companyNameLabel": "Tên công ty",
+      "deadlineLabel": "Hạn nộp",
+      "categoryLabel": "Lĩnh vực",
+      "typeJobLabel": "Hình thức",
+      "currentSalaryLabel": "Loại lương",
+      "minSalaryLabel": "Tối thiểu",
+      "maxSalaryLabel": "Tối đa",
+      "experienceLabel": "Kinh nghiệm",
+      "benefitLabel": "Phúc lợi",
+      "addressJobLabel": "Địa chỉ làm việc",
+      "addressJobPlaceholder": "Nhập địa chỉ làm việc",
+      "subAddressJobLabel": "(Danh sách cơ sở giảng dạy của trường/trung tâm)",
+      "locationJobLabel": "Tỉnh thành",
+      "agreeUploadJobLabel": "Bằng cách ấn vào đây, tôi đồng ý với",
+      "agreePolicy": "Điều khoản và Điều kiện ",
+      "agreePrivacy": "Chính sách quyền riêng tư",
+      "and": " và ",
+      "uploadJobContent": "Đăng tin ngay",
+      "updateJobContent": "Cập nhật công việc",
+      "uploadJobComplete": "Đăng tải công việc thành công.",
+      "uploadJobFailed": "Đăng tải công việc thất bại. Vui lòng thử lại.",
+      "chooseSchool": "Tra cứu công ty / trường học",
+      "viewJob": "Xem trước công việc",
+      "chooseDate": "dd/mm/yyyy",
+      "chooseCategory": "Chọn lĩnh vực",
+      "chooseTypeOfEmployment": "Chọn hình thức",
+      "moreInformation": "Thông tin khác",
+      "requiredQualificationLabel": "Chọn bằng cấp",
+      "genderLabel": "Giới tính",
+      "gradeLabel": "Khối",
+      "chooseSalaryType": "Chọn loại lương",
+      "enterSalary": "Nhập mức lương",
+      "minSalary": "VD: 8,000,000",
+      "maxSalary": "VD: 15,000,000",
+      "chooseExperienceLevel": "Chọn kinh nghiệm",
+      "chooseBenefitLevel": "Chọn phúc lợi",
+      "chooseGender": "Chọn giới tính",
+      "chooseGradeLevel": "Chọn khối",
+      "chooseLocation": "Chọn tỉnh / thành"
+    },
+    "editJob": {
+      "title": "Chỉnh sửa việc làm",
+      "editJobContent": "Lưu thông tin",
+      "editJobComplete": "Chỉnh sửa công việc thành công."
+    },
+    "preview": {
+      "title": "Xem trước công việc",
+      "previewMode": "Chế độ xem trước",
+      "actions": "Hành động",
+      "backToEdit": "Quay lại chỉnh sửa",
+      "confirmAndPublish": "Xác nhận và đăng tải",
+      "publishSuccess": "Đăng tải công việc thành công!",
+      "noData": "Không có dữ liệu",
+      "noDataDescription": "Không tìm thấy thông tin công việc để xem trước.",
+      "loadError": "Lỗi khi tải dữ liệu công việc"
+    },
+    "application": {
+      "title": "GỬI ĐƠN ỨNG TUYỂN",
+      "personalInfo": "Thông tin cá nhân",
+      "fullName": "Họ và tên",
+      "firstName": "Tên",
+      "lastName": "Họ",
+      "phone": "Số điện thoại",
+      "email": "Địa chỉ Email",
+      "fullNamePlaceholder": "Nhập họ và tên của bạn",
+      "firstNamePlaceholder": "Nhập tên của bạn",
+      "lastNamePlaceholder": "Nhập họ của bạn",
+      "phonePlaceholder": "Nhập số điện thoại",
+      "emailPlaceholder": "Nhập email của bạn",
+      "required": "*",
+      "cvUpload": "Tải lên CV",
+      "cvUploadDescription": "Kéo thả tệp hoặc nhấn để tải lên",
+      "cvUploadLimit": "Tối đa 10Mb và loại tệp được phép là (.doc, .docx, .xlsx, .pdf)",
+      "or": "hoặc",
+      "cvUploadButton": "Tải lên CV",
+      "coverLetter": "Thư ứng tuyển",
+      "coverLetterPlaceholder": "Viết ngắn gọn giới thiệu bản thân và nêu rõ mục đích của việc ứng tuyển. Nói về kinh nghiệm, kỹ năng và thành tích của bạn trong lĩnh vực tương ứng. Bạn cần trình bày lý do tại sao bạn muốn làm việc tại công ty đó và những đóng góp mà bạn có thể đưa ra. Điều này sẽ giúp nhà tuyển dụng hiểu rõ hơn về ứng viên và đánh giá năng lực của bạn.",
+      "coverLetterUpload": "Tải lên thư ứng tuyển",
+      "coverLetterUploadLimit": "Kích thước tệp tải thư giới thiệu lên là (Tối đa 5Mb) và loại tệp được phép là (.doc, .docx, .pdf)",
+      "termsAgreement": "Bằng cách ấn vào đây, tôi đồng ý với",
+      "termsAndConditions": "Điều khoản và Điều kiện",
+      "and": "và",
+      "privacyPolicy": "Chính sách quyền riêng tư",
+      "cancel": "Hủy",
+      "submit": "Nộp Đơn Ứng Tuyển",
+      "submitSuccess": "Đơn ứng tuyển đã được gửi thành công!",
+      "submitError": "Có lỗi xảy ra khi gửi đơn ứng tuyển. Vui lòng thử lại."
+    }
+  },
+  "company": {
+    "detail": {
+      "title": "Chi tiết công ty",
+      "about": "Về",
+      "images": "Hình ảnh công ty",
+      "availableJobs": "Việc làm hiện có",
+      "details": "Thông tin chi tiết",
+      "industry": "Loại hình tổ chức",
+      "companySize": "Quy mô công ty",
+      "employees": "nhân viên",
+      "foundedIn": "Năm thành lập",
+      "location": "Địa chỉ",
+      "website": "Website",
+      "email": "Email",
+      "socialLinks": "Mạng xã hội",
+      "showMore": "Hiện tất cả",
+      "showLess": "Hiện ít hơn"
+    },
+    "listCompanyUser": {
+      "title": "Danh sách công ty",
+      "foundResults": "Tìm thấy {count} công ty",
+      "orgTypeUnknown": "Không tìm thấy tổ chức"
+    },
+    "actions": {
+      "create": "Thêm mới công ty",
+      "view": "Xem chi tiết",
+      "update": "Cập nhật",
+      "delete": "Xóa",
+      "approve": "Duyệt",
+      "confirmDelete": "Xác nhận xóa công ty"
+    },
+    "toasts": {
+      "deleteSuccess": "Xóa công ty thành công.",
+      "approveSuccess": "Duyệt công ty thành công."
+    },
+    "errors": {
+      "loadFailed": "Không thể tải danh sách công ty.",
+      "deleteFailed": "Xóa công ty thất bại.",
+      "approveFailed": "Duyệt công ty thất bại."
+    },
+    "name": "Tên công ty",
+    "mst": "Mã số thuế",
+    "taxAddress": "Địa chỉ thuế",
+    "email": "Email",
+    "industry": "Loại hình tổ chức",
+    "founded": "Năm thành lập",
+    "address": "Địa chỉ",
+    "size": "Quy mô",
+    "socialMedia": "Mạng xã hội",
+    "social": {
+      "facebook": "Facebook",
+      "twitter": "Twitter",
+      "linkedin": "LinkedIn",
+      "instagram": "Instagram"
+    },
+    "website": "Website",
+    "action": {
+      "inputMST": "Mã số thuế trường học / công ty",
+      "placeHolderMST": "Nhập mã số thuế",
+      "placeHolderInputName": "Nhập tên công ty"
+    },
+    "form": {
+      "stepCompany": "Công ty / Trường học",
+      "stepConfirm": "Xác nhận hoàn tất",
+      "createTitle": "Thêm công ty / trường học",
+      "logoTitle": "Logo công ty",
+      "bannerTitle": "Ảnh bìa công ty",
+      "bannerDropHint": "Kéo thả ảnh bìa vào đây hoặc nhấn để chọn",
+      "imagesTitleAdditional": "Ảnh giới thiệu công ty",
+      "dropHintLogo": "Kéo thả logo vào đây hoặc nhấn để chọn",
+      "dropHint": "Kéo thả ảnh vào đây hoặc nhấn để chọn (nhiều ảnh)",
+      "addMore": "Thêm ảnh",
+      "logoBadge": "Logo",
+      "insightLabel": "Mô tả tầm nhìn của công ty",
+      "descLabel": "Giới thiệu công ty",
+      "descPlaceholder": "Giới thiệu ngắn về sứ mệnh, môi trường làm việc, đội ngũ và điểm nổi bật của công ty...",
+      "overviewLabel": "Tổng quan",
+      "overviewPlaceholder": "Tổng quan chi tiết: quy mô, cơ cấu, môi trường làm việc, lợi thế cạnh tranh, mục tiêu sắp tới...",
+      "confirmNext": "Xác nhận & Tiếp tục",
+      "createSuccess": "Đăng ký công ty thành công.",
+      "createFailed": "Đăng ký công ty thất bại. Vui lòng thử lại.",
+      "backToList": "Trở về trang danh sách",
+      "createBtn": "Tạo công ty",
+      "placeholderInsight": "Sứ mệnh của công ty",
+      "placeholderName": "Nhập tên công ty",
+      "placeholderAddress": "Nhập địa chỉ làm việc hoặc địa chỉ trụ sở chính...",
+      "placeholderFounded": "VD: 2008",
+      "placeholderCompanySize": "Chọn quy mô công ty",
+      "placeholderEmail": "Enter your email",
+      "placeholderWebsite": "https://your-company.com",
+      "placeholderFacebook": "https://facebook.com/your-company",
+      "placeholderTwitter": "https://twitter.com/your-company",
+      "placeholderInstagram": "https://instagram.com/your-company",
+      "placeholderLinkedIn": "https://linkedin.com/company/your-company",
+      "videoTitle": "Video giới thiệu công ty",
+      "placeholderVideo": "https://youtube.com/watch?v=...",
+      "errName": "Tên công ty không được để trống.",
+      "errAddress": "Địa chỉ không được để trống.",
+      "errOrgType": "Vui lòng chọn loại hình tổ chức.",
+      "errEmail": "Email không hợp lệ.",
+      "errWebsite": "Website không hợp lệ.",
+      "errCompanySize": "Vui lòng chọn quy mô công ty hợp lệ."
+    },
+    "editCompany": {
+      "title": "Chỉnh sửa công ty",
+      "editCompanyContent": "Lưu thông tin",
+      "editCompanyComplete": "Chỉnh sửa thông tin công ty thành công",
+      "noPermission": "Bạn không có quyền chỉnh sửa thông tin công ty. Chỉ tài khoản Host công ty mới có thể thực hiện."
+    }
+  },
+  "dashboard": {
+    "header": {
+      "logo": "Jobster",
+      "postJob": "Đăng tin tuyển dụng"
+    },
+    "sidebar": {
+      "adminTools": "Công cụ quản trị",
+      "dashboard": "Dashboard",
+      "editProfile": "Hồ sơ công ty",
+      "newJob": "Đăng tin mới",
+      "manageJobs": "Quản lý tin đăng",
+      "candidates": "Quản lý ứng viên",
+      "settings": "Cài đặt",
+      "changePassword": "Đổi mật khẩu",
+      "insights": "Thống kê",
+      "notifications": "Thông báo",
+      "overview": "Tổng quan",
+      "accountInfo": "Thông tin tài khoản",
+      "appliedJobs": "Công việc đã ứng tuyển",
+      "options": "Tùy chọn",
+      "deleteAccount": "Xoá tài khoản",
+      "adminDashboard": "Dashboard",
+      "adminCompanies": "Công ty",
+      "adminManageJobs": "Quản lý công việc",
+      "adminCandidates": "Ứng viên",
+      "adminUsers": "Users",
+      "adminBlogs": "Blogs",
+      "adminSettings": "Cài đặt",
+      "adminEmailSettings": "Cài đặt gửi email",
+      "adminImportExcel": "Import Excel"
+    },
+    "admin": {
+      "importExcel": {
+        "placeholder": "Khu vực nhập liệu từ file Excel. Bạn có thể bổ sung upload và mapping cột ở bước sau.",
+        "title": "Import dữ liệu từ Excel",
+        "hint": "Sheet \"note\" (đầu file): hướng dẫn cách điền cột và mã từ dropdown. Các sheet dữ liệu: companies → users → jobs → job_applications → blogs (jobs: category/location/benefits dùng multi-select).",
+        "chooseFile": "Chọn file Excel",
+        "downloadTemplate": "Tải file Excel mẫu",
+        "importData": "Import data",
+        "selected": "Đã chọn:",
+        "resultTitle": "Kết quả import",
+        "errors": "Ghi chú / lỗi dòng",
+        "notifyDownloaded": "Đã tải file mẫu",
+        "notifyDownloadError": "Không tải được file mẫu",
+        "notifyImportOk": "Import hoàn tất",
+        "notifyImportFailed": "Import thất bại — có {n} lỗi, xem chi tiết bên dưới",
+        "notifyImportError": "Import thất bại"
+      },
+      "overview": {
+        "welcome": "Welcome, System Admin"
+      },
+      "stats": {
+        "companies": "Companies",
+        "jobs": "Jobs",
+        "applications": "Applications",
+        "users": "Users"
+      },
+      "companies": {
+        "title": "Company",
+        "description": "Quản lý tất cả các công ty trong hệ thống",
+        "welcome": "Welcome, System Admin",
+        "searchPlaceholder": "Tìm theo tên công ty, MST hoặc Email",
+        "filterFeature": "Feature",
+        "filterBanner": "Banner",
+        "newCompany": "Thêm công ty",
+        "total": "Tổng số công ty",
+        "pendingLabel": "Chờ duyệt",
+        "table": {
+          "name": "Tên công ty",
+          "description": "Mô tả",
+          "email": "Email",
+          "address": "Địa chỉ",
+          "status": "Trạng thái",
+          "featured": "Nổi bật",
+          "totalJobs": "Tổng số job",
+          "mst": "MST",
+          "phone": "Số điện thoại",
+          "province": "Tỉnh thành",
+          "registrationDate": "Ngày đăng ký",
+          "companyType": "Trạng thái duyệt"
+        },
+        "status": {
+          "active": "Hoạt động",
+          "pending": "Chờ duyệt",
+          "approved": "Đã duyệt",
+          "rejected": "Từ chối",
+          "inactive": "Không hoạt động"
+        },
+        "actions": {
+          "approve": "Xác nhận duyệt",
+          "feature": "Làm nổi bật",
+          "unfeature": "Bỏ nổi bật",
+          "show": "Hiển thị",
+          "hide": "Không hiển thị",
+          "delete": "Xóa",
+          "view": "Xem",
+          "edit": "Sửa"
+        },
+        "approveSuccess": "Đã duyệt công ty thành công! Công ty này đã được kích hoạt.",
+        "approveConfirm": "Xác nhận duyệt công ty này?",
+        "featureSuccess": "Đã làm nổi bật công ty",
+        "unfeatureSuccess": "Đã bỏ nổi bật công ty",
+        "showSuccess": "Đã hiển thị công ty",
+        "hideSuccess": "Đã ẩn công ty",
+        "deleteSuccess": "Xóa công ty thành công",
+        "deleteConfirm": "Bạn có chắc chắn muốn xóa công ty này?",
+        "loading": "Đang tải...",
+        "noCompanies": "Không tìm thấy công ty nào"
+      },
+      "jobs": {
+        "title": "Quản lý công việc",
+        "welcome": "Welcome, System Admin",
+        "description": "Duyệt và quản lý tất cả tin tuyển dụng",
+        "searchPlaceholder": "Tìm kiếm theo tiêu đề...",
+        "total": "Tổng số tin",
+        "pendingLabel": "Chờ duyệt",
+        "table": {
+          "title": "Tiêu đề",
+          "company": "Công ty",
+          "status": "Trạng thái",
+          "postedDate": "Ngày đăng"
+        },
+        "status": {
+          "pending": "Chờ duyệt",
+          "approved": "Đã duyệt"
+        },
+        "actions": {
+          "approve": "Duyệt tin"
+        },
+        "approveSuccess": "Đã duyệt tin thành công",
+        "approveConfirm": "Xác nhận duyệt tin này?",
+        "loading": "Đang tải...",
+        "noJobs": "Không tìm thấy tin nào"
+      },
+      "candidates": {
+        "title": "Ứng viên",
+        "description": "Xem danh sách ứng viên theo từng công ty tại mục Công ty."
+      },
+      "applications": {
+        "title": "Applications",
+        "welcome": "Welcome, System Admin",
+        "searchPlaceholder": "Tìm theo tên, vị trí, công ty, email, SĐT...",
+        "filterExpertise": "CANDIDATE EXPERTISE",
+        "filterLocation": "LOCATION",
+        "filterAll": "Tất cả",
+        "table": {
+          "jobPosition": "JOB POSITION",
+          "candidate": "CANDIDATE",
+          "email": "EMAIL",
+          "cv": "CV",
+          "candidateExpertise": "CANDIDATE EXPERTISE",
+          "location": "LOCATION",
+          "createdAt": "CREATED AT",
+          "status": "STATUS",
+          "applicationCount": "SỐ HỒ SƠ",
+          "latestApplication": "ỨNG TUYỂN GẦN NHẤT",
+          "actions": "ACTION"
+        },
+        "deleteConfirm": "Bạn có chắc chắn muốn xóa đơn ứng tuyển này?",
+        "deleteSuccess": "Đã xóa đơn ứng tuyển thành công."
+      },
+      "settings": {
+        "title": "Cài đặt",
+        "welcome": "Welcome, System Admin",
+        "description": "Cài đặt hệ thống.",
+        "account": {
+          "title": "Thông tin tài khoản",
+          "emailReadonlyNote": "Bạn không thể thay đổi tài khoản email của bạn",
+          "fullName": "Họ và tên",
+          "fullNamePlaceholder": "Nhập họ và tên",
+          "username": "Tên đăng nhập",
+          "usernamePlaceholder": "Nhập tên đăng nhập",
+          "phone": "Số điện thoại",
+          "phonePlaceholder": "Nhập số điện thoại",
+          "save": "Lưu thông tin",
+          "saving": "Đang lưu..."
+        },
+        "password": {
+          "title": "Thay đổi mật khẩu của bạn",
+          "current": "Mật khẩu cũ",
+          "currentPlaceholder": "Mật khẩu cũ",
+          "new": "Mật khẩu mới",
+          "newPlaceholder": "Mật khẩu mới",
+          "confirm": "Xác nhận mật khẩu mới",
+          "confirmPlaceholder": "Xác nhận mật khẩu mới",
+          "change": "Đổi mật khẩu",
+          "changing": "Đang đổi..."
+        }
+      },
+      "emailSettings": {
+        "title": "Cài đặt gửi email",
+        "welcome": "Welcome, System Admin",
+        "formTitle": "Cấu hình gửi email",
+        "smtpHost": "SMTP host",
+        "smtpPort": "SMTP port",
+        "smtpSecure": "Dùng SSL/TLS (thường bật với port 465)",
+        "smtpUser": "Tài khoản SMTP",
+        "smtpPass": "Mật khẩu SMTP",
+        "smtpPassPlaceholder": "Nhập mật khẩu SMTP",
+        "showSmtpPass": "Hiện mật khẩu",
+        "hideSmtpPass": "Ẩn mật khẩu",
+        "smtpPassHelp": {
+          "triggerLabel": "Hướng dẫn lấy App Password Gmail",
+          "title": "Cách lấy App Password (Gmail)",
+          "intro": "Nếu bạn dùng Gmail để gửi mail, hãy tạo Mật khẩu ứng dụng (App Password) thay vì dùng mật khẩu đăng nhập thường.",
+          "step1": "B1. Truy cập trang App Passwords bằng tài khoản Google của bạn:",
+          "step2": "B2. Nhập tên ứng dụng để dễ nhớ. Ví dụ: TuyenGiaoVien",
+          "step3": "B3. Nhấn Tạo, copy mã 16 ký tự Google hiển thị và dán vào ô Mật khẩu SMTP.",
+          "note": "Lưu ý: Tài khoản Google cần bật xác minh 2 bước trước khi tạo App Password."
+        },
+        "fromName": "Tên người gửi",
+        "testRecipient": "Email nhận thử",
+        "testEmailModalTitle": "Gửi email thử",
+        "testEmailModalDescription": "Nhập email để nhận thư kiểm tra cấu hình SMTP.",
+        "testEmailModalCancel": "Hủy",
+        "testEmailModalSend": "Gửi",
+        "save": "Lưu cấu hình",
+        "saving": "Đang lưu...",
+        "sendTest": "Gửi email thử",
+        "sendingTest": "Đang gửi...",
+        "loading": "Đang tải cấu hình email...",
+        "errors": {
+          "smtpHostRequired": "Vui lòng nhập SMTP host",
+          "smtpHostFormat": "SMTP host không đúng định dạng (vd: smtp.gmail.com)",
+          "smtpPortRequired": "Vui lòng nhập SMTP port",
+          "smtpPortFormat": "SMTP port phải là số từ 1 đến 65535",
+          "smtpUserRequired": "Vui lòng nhập tài khoản SMTP",
+          "smtpUserFormat": "Tài khoản SMTP không đúng định dạng email",
+          "smtpPassRequired": "Vui lòng nhập mật khẩu SMTP",
+          "fromNameRequired": "Vui lòng nhập tên người gửi",
+          "testRecipientRequired": "Vui lòng nhập email nhận thử",
+          "testRecipientFormat": "Email nhận thử không đúng định dạng"
+        },
+        "templates": {
+          "title": "Mẫu email hệ thống",
+          "description": "Chỉnh sửa nội dung email nghiệp vụ. Dùng nút biến để chèn placeholder.",
+          "loading": "Đang tải mẫu email...",
+          "subject": "Tiêu đề",
+          "body": "Nội dung",
+          "bodyHint": "Nhấn các nút biến bên dưới để chèn placeholder vào nội dung email.",
+          "bodyPlaceholder": "Nội dung email HTML...",
+          "variables": "Biến có thể chèn",
+          "enableSending": "Bật gửi email loại này",
+          "active": "Đang bật",
+          "inactive": "Chưa kích hoạt",
+          "save": "Lưu mẫu",
+          "saving": "Đang lưu...",
+          "reset": "Reset mặc định",
+          "resetting": "Đang reset...",
+          "preview": "Xem trước",
+          "previewing": "Đang tải...",
+          "previewTitle": "Xem trước email",
+          "whenSentTitle": "Email này được gửi khi nào?",
+          "whenLabel": "Thời điểm gửi",
+          "recipientLabel": "Người nhận",
+          "noteLabel": "Lưu ý",
+          "templateTriggers": {
+            "SMTP_TEST": {
+              "when": "Admin bấm nút \"Gửi email thử\" trên form cấu hình SMTP (phía trên).",
+              "recipient": "Email admin nhập trong hộp thoại gửi thử, hoặc email tài khoản đang đăng nhập."
+            },
+            "ACCOUNT_CREDENTIALS_CANDIDATE": {
+              "when": "Tạo tài khoản ứng viên (role USER): đăng ký mới, hoặc ứng tuyển lần đầu (hệ thống tự tạo user theo email).",
+              "recipient": "Ứng viên vừa được tạo tài khoản.",
+              "note": "Email chứa mật khẩu dạng plaintext theo luồng nghiệp vụ hiện tại."
+            },
+            "ACCOUNT_CREDENTIALS_EMPLOYER": {
+              "when": "Tạo tài khoản nhà tuyển dụng (role COMPANY): đăng ký NTD, đăng tin free-post lần đầu, hoặc admin thêm user công ty.",
+              "recipient": "Nhà tuyển dụng vừa được tạo tài khoản.",
+              "note": "Email chứa mật khẩu dạng plaintext theo luồng nghiệp vụ hiện tại."
+            },
+            "APPLICATION_CONFIRMATION": {
+              "when": "Ngay sau khi ứng viên nộp hồ sơ ứng tuyển thành công (guest hoặc đã đăng nhập).",
+              "recipient": "Email của ứng viên vừa nộp hồ sơ."
+            },
+            "NEW_APPLICATION_EMPLOYER": {
+              "when": "Cùng thời điểm với xác nhận ứng tuyển — khi có hồ sơ mới được tạo.",
+              "recipient": "Host công ty (user isHostCompany) của tin tuyển dụng được ứng tuyển."
+            },
+            "COMPANY_PENDING_ADMIN": {
+              "when": "Công ty mới được tạo và đang chờ duyệt (isWaiting = true): từ trang admin, đăng ký NTD, hoặc đăng tin free-post.",
+              "recipient": "Tất cả tài khoản có role ADMIN (gửi song song, dedupe email)."
+            },
+            "COMPANY_APPROVED": {
+              "when": "Admin duyệt công ty (form admin hoặc PATCH /companies/:id/approve — isWaiting = false).",
+              "recipient": "Tất cả user NTD đang hoạt động thuộc công ty (users.companyId, dedupe email)."
+            },
+            "COMPANY_REJECTED": {
+              "when": "Admin từ chối hoặc xóa mềm công ty (PATCH reject hoặc DELETE).",
+              "recipient": "Tất cả user NTD đang hoạt động thuộc công ty (users.companyId, dedupe email)."
+            },
+            "JOB_PENDING_ADMIN": {
+              "when": "Tin tuyển dụng mới được tạo với trạng thái ADMIN_REVIEW (dashboard admin/NTD hoặc đăng tin free-post).",
+              "recipient": "Tất cả tài khoản ADMIN."
+            },
+            "JOB_APPROVED": {
+              "when": "Tin được duyệt (PATCH /jobs/:id/approve — chuyển status sang APPROVED).",
+              "recipient": "Host công ty của tin, hoặc user tạo tin nếu không có host."
+            },
+            "JOB_REJECTED": {
+              "when": "Tin bị cập nhật sang trạng thái REJECTED (admin/NTD chỉnh sửa tin).",
+              "recipient": "Host công ty hoặc user tạo tin."
+            },
+            "PASSWORD_CHANGED": {
+              "when": "Sau khi user đổi mật khẩu thành công (trang cài đặt) hoặc hoàn tất đặt lại mật khẩu qua link reset.",
+              "recipient": "Chính user vừa đổi mật khẩu."
+            },
+            "PASSWORD_RESET": {
+              "when": "User gửi yêu cầu quên mật khẩu (POST /auth/forgot-password). Luôn trả message chung dù email có tồn tại hay không.",
+              "recipient": "User có email khớp trong hệ thống.",
+              "note": "Link reset hết hạn sau 1 giờ, chỉ dùng một lần."
+            },
+            "JOB_EXPIRING_SOON": {
+              "when": "Cron tự động chạy 8:00 sáng mỗi ngày — tin APPROVED còn từ 0–3 ngày trước deadline.",
+              "recipient": "Host công ty hoặc user tạo tin."
+            },
+            "JOB_EXPIRED": {
+              "when": "Cron tự động chạy 8:00 sáng mỗi ngày — tin APPROVED vừa quá deadline (trong vòng 24 giờ).",
+              "recipient": "Host công ty hoặc user tạo tin."
+            },
+            "EMAIL_VERIFICATION": {
+              "when": "Chưa kích hoạt — dự kiến gửi sau khi user đăng ký, kèm link xác minh email.",
+              "recipient": "User mới đăng ký.",
+              "note": "Template đang tắt (isActive = false). Bật gửi khi triển khai xác minh email."
+            },
+            "APPLICATION_STATUS_UPDATE": {
+              "when": "NTD hoặc admin đổi trạng thái hồ sơ trên trang Quản lý ứng viên / Applications.",
+              "recipient": "Ứng viên của hồ sơ được cập nhật.",
+              "note": "Email chỉ gửi khi trạng thái thay đổi (không gửi lúc mới nộp hồ sơ)."
+            }
+          },
+          "variableDescriptions": {
+            "fallback": "Biến {variable} — giá trị được thay khi gửi email.",
+            "siteName": "Tên website/hệ thống (vd: TopViec).",
+            "year": "Năm hiện tại khi gửi email.",
+            "sentAt": "Thời điểm gửi email (dùng cho email thử SMTP).",
+            "fullName": "Họ tên người nhận.",
+            "email": "Địa chỉ email người nhận.",
+            "username": "Tên đăng nhập tài khoản.",
+            "password": "Mật khẩu tài khoản (plaintext — chỉ email tạo tài khoản).",
+            "loginUrl": "Link trang đăng nhập.",
+            "dashboardUrl": "Link dashboard nhà tuyển dụng.",
+            "adminDashboardUrl": "Link trang quản trị admin.",
+            "jobTitle": "Tiêu đề tin tuyển dụng.",
+            "companyName": "Tên công ty.",
+            "companyMst": "Mã số thuế công ty.",
+            "applicantName": "Họ tên ứng viên.",
+            "applicantEmail": "Email ứng viên.",
+            "applicationDate": "Ngày nộp hồ sơ ứng tuyển.",
+            "jobUrl": "Link xem tin tuyển dụng công khai.",
+            "resetUrl": "Link đặt lại mật khẩu (có token, hết hạn 1 giờ).",
+            "verifyUrl": "Link xác minh email tài khoản.",
+            "expiresAt": "Thời điểm link reset/verify hết hạn.",
+            "changedAt": "Thời điểm mật khẩu được đổi.",
+            "deadline": "Hạn nộp / hết hạn tin tuyển dụng.",
+            "daysLeft": "Số ngày còn lại trước deadline.",
+            "rejectReason": "Lý do từ chối (công ty hoặc tin tuyển dụng).",
+            "applicationStatus": "Trạng thái mới của hồ sơ ứng tuyển.",
+            "statusMessage": "Ghi chú thêm về cập nhật trạng thái hồ sơ."
+          }
+        }
+      },
+      "users": {
+        "title": "Users",
+        "welcome": "Welcome, System Admin",
+        "description": "Quản lý tất cả người dùng trong hệ thống",
+        "searchPlaceholder": "Search...",
+        "newUser": "Thêm người dùng",
+        "total": "Tổng số users",
+        "table": {
+          "avatar": "AVATAR",
+          "name": "NAME",
+          "email": "EMAIL",
+          "phoneNumber": "PHONE NUMBER",
+          "userType": "USER TYPE",
+          "createdDate": "CREATED DATE",
+          "action": "ACTION"
+        },
+        "userTypes": {
+          "admin": "ADMIN",
+          "candidate": "CANDIDATE",
+          "employer": "EMPLOYER",
+          "hostCompany": "HOST_COMPANY"
+        },
+        "roles": {
+          "user": "User thường",
+          "company": "User công ty",
+          "admin": "Quản trị viên"
+        },
+        "status": {
+          "active": "Hoạt động",
+          "inactive": "Không hoạt động"
+        },
+        "actions": {
+          "approve": "Duyệt",
+          "delete": "Xóa",
+          "upgradeToCompany": "Chuyển thành User công ty",
+          "linkCompany": "Liên kết công ty"
+        },
+        "upgradeSuccess": "Nâng cấp user thành công",
+        "linkCompanySuccess": "Liên kết công ty thành công",
+        "deleteSuccess": "Xóa user thành công",
+        "deleteConfirm": "Bạn có chắc chắn muốn xóa user này?",
+        "selectCompany": "Chọn công ty",
+        "selectCompanyPlaceholder": "Chọn công ty...",
+        "noCompaniesWarning": "⚠️ Chưa có công ty nào được duyệt. Vui lòng duyệt công ty trước.",
+        "selectedCompany": "✓ Đã chọn",
+        "loading": "Đang tải...",
+        "noUsers": "Không tìm thấy user nào"
+      },
+      "blogs": {
+        "title": "Quản lý Blog",
+        "welcome": "Welcome, System Admin",
+        "description": "Quản lý tất cả bài viết blog",
+        "searchPlaceholder": "Tìm kiếm blog...",
+        "total": "Tổng số bài viết",
+        "addNew": "Thêm blog mới",
+        "edit": "Chỉnh sửa",
+        "delete": "Xóa",
+        "createTitle": "Tạo blog mới",
+        "editTitle": "Chỉnh sửa blog",
+        "form": {
+          "title": "Tiêu đề",
+          "titlePlaceholder": "Nhập tiêu đề blog...",
+          "content": "Nội dung",
+          "contentPlaceholder": "Nhập nội dung blog...",
+          "thumbnail": "Ảnh đại diện",
+          "category": "Danh mục",
+          "tags": "Thẻ tag",
+          "status": "Trạng thái",
+          "published": "Xuất bản",
+          "draft": "Nháp"
+        },
+        "createSuccess": "Tạo blog thành công",
+        "updateSuccess": "Cập nhật blog thành công",
+        "deleteSuccess": "Xóa blog thành công",
+        "deleteConfirm": "Bạn có chắc chắn muốn xóa blog này?",
+        "loading": "Đang tải...",
+        "noBlogs": "Chưa có blog nào",
+        "save": "Lưu",
+        "cancel": "Hủy"
+      }
+    },
+    "applicationStatus": {
+      "column": "Trạng thái",
+      "latestStatusColumn": "Trạng thái mới nhất",
+      "latestStatusHint": "Trạng thái của đơn ứng tuyển gần nhất. Mỗi vị trí có trạng thái riêng — xem và cập nhật trong chi tiết ứng viên.",
+      "updateLabel": "Cập nhật trạng thái",
+      "messagePlaceholder": "Ghi chú gửi kèm email cho ứng viên (tùy chọn)...",
+      "save": "Lưu",
+      "saveNote": "Gửi ghi chú",
+      "saving": "Đang lưu...",
+      "updateSuccess": "Đã cập nhật trạng thái hồ sơ",
+      "updateFailed": "Không thể cập nhật trạng thái hồ sơ",
+      "labels": {
+        "SUBMITTED": "Đã nộp hồ sơ",
+        "REVIEWING": "Đang xem xét",
+        "INTERVIEW": "Mời phỏng vấn",
+        "ACCEPTED": "Trúng tuyển",
+        "REJECTED": "Không phù hợp"
+      }
+    },
+    "appliedJobs": {
+      "title": "Công việc đã ứng tuyển",
+      "searchPlaceholder": "Tìm kiếm vị trí hoặc công ty đã ứng tuyển",
+      "totalApplications": "công việc đã ứng tuyển",
+      "loading": "Đang tải...",
+      "noApplications": "Chưa có công việc nào đã ứng tuyển",
+      "table": {
+        "position": "Vị trí ứng tuyển",
+        "location": "Tỉnh thành",
+        "category": "Lĩnh vực",
+        "type": "Type",
+        "appliedDate": "Ngày ứng tuyển"
+      },
+      "actions": {
+        "view": "Xem chi tiết",
+        "delete": "Xóa"
+      },
+      "pagination": {
+        "showing": "Hiển thị",
+        "of": "của",
+        "results": "kết quả",
+        "previous": "Trước",
+        "next": "Sau"
+      },
+      "deleteConfirm": "Bạn có chắc chắn muốn xóa đơn ứng tuyển này?",
+      "deleteSuccess": "Xóa đơn ứng tuyển thành công",
+      "deleteFailed": "Không thể xóa đơn ứng tuyển",
+      "fetchFailed": "Không thể tải danh sách ứng tuyển"
+    },
+    "main": {
+      "title": "Tổng quan",
+      "welcome": "Xin chào, {name}!",
+      "recentApplications": "Những đơn ứng tuyển gần đây",
+      "metrics": {
+        "postedJobs": "Công việc đăng tải",
+        "pendingJobs": "Tin đăng chờ duyệt",
+        "expiredJobs": "Tin hết hạn",
+        "expiringSoonJobs": "Tin sắp hết hạn"
+      },
+      "applicationsTable": {
+        "position": "VỊ TRÍ ỨNG TUYỂN",
+        "applicant": "ỨNG VIÊN",
+        "email": "ĐỊA CHỈ EMAIL",
+        "cv": "CV",
+        "applicationDate": "NGÀY ỨNG TUYỂN",
+        "actions": "THAO TÁC",
+        "noApplications": "Chưa có đơn ứng tuyển nào"
+      },
+      "charts": {
+        "jobPosting": "Biểu đồ đăng tin tuyển dụng",
+        "candidateApplications": "Biểu đồ ứng viên ứng tuyển",
+        "vsLastWeek": "so với 7 ngày trước"
+      },
+      "timeRange": {
+        "last7Days": "7 ngày qua",
+        "last30Days": "30 ngày qua",
+        "last3Months": "3 tháng qua",
+        "lastYear": "1 năm qua"
+      }
+    },
+    "userMenu": {
+      "dashboard": "Dashboard",
+      "editProfile": "Chỉnh sửa hồ sơ",
+      "createCompany": "Tạo mới công ty",
+      "postJob": "Đăng tải công việc",
+      "logout": "Đăng xuất"
+    },
+    "manageJobs": {
+      "title": "Quản lý tin đăng",
+      "description": "Quản lý các công việc bạn đã đăng tải",
+      "totalJobs": "Tổng cộng",
+      "jobs": "tin đăng",
+      "deadline": "Hạn nộp",
+      "approve": "Duyệt",
+      "viewDetail": "Xem chi tiết",
+      "view": "Xem",
+      "edit": "Sửa",
+      "delete": "Xóa",
+      "noJobs": "Chưa có tin đăng nào",
+      "noJobsDescription": "Bắt đầu đăng tin tuyển dụng đầu tiên của bạn",
+      "createNewJob": "Đăng tin mới",
+      "searchPlaceholder": "Tìm theo vị trí, địa điểm, lĩnh vực...",
+      "filterByStatus": "Lọc theo trạng thái",
+      "clearFilter": "Xóa bộ lọc",
+      "loading": "Đang tải...",
+      "noJobsFound": "Không tìm thấy công việc nào",
+      "table": {
+        "title": "Tiêu đề",
+        "company": "Công ty",
+        "deadline": "Hạn nộp",
+        "status": "Trạng thái",
+        "actions": "Thao tác"
+      },
+      "status": {
+        "all": "Tất cả",
+        "active": "Đang hoạt động",
+        "pending": "Chờ duyệt",
+        "expired": "Hết hạn",
+        "expiringSoon": "Sắp hết hạn",
+        "rejected": "Từ chối"
+      },
+      "cards": {
+        "all": "Tất cả tin đăng",
+        "pendingReview": "Chờ duyệt",
+        "approved": "Đã duyệt",
+        "expiringSoon": "Sắp hết hạn",
+        "expired": "Đã hết hạn",
+        "trash": "Đã xoá"
+      },
+      "rowStatus": {
+        "approved": "Đã duyệt",
+        "adminReview": "Chờ duyệt",
+        "pending": "Chờ duyệt",
+        "rejected": "Từ chối"
+      },
+      "pagination": {
+        "showing": "Hiển thị",
+        "in": "trong",
+        "of": "của",
+        "total": "tổng số",
+        "jobs": "công việc",
+        "previous": "Trước",
+        "next": "Sau"
+      },
+      "deleteConfirm": "Bạn có chắc chắn muốn xóa công việc này?",
+      "deleteSuccess": "Xóa công việc thành công!",
+      "deleteFailed": "Xóa công việc thất bại",
+      "fetchFailed": "Không thể tải danh sách công việc",
+      "deleteModal": {
+        "title": "Xóa tin tuyển dụng?",
+        "message": "Bạn có chắc chắn muốn xóa tin",
+        "irreversible": "Hành động này không thể hoàn tác.",
+        "cancel": "Hủy",
+        "confirm": "Xóa"
+      },
+      "approveModal": {
+        "title": "Xác nhận duyệt tin đăng",
+        "subtitle": "Bạn có chắc chắn muốn duyệt tin đăng này?",
+        "jobTitle": "Tin đăng",
+        "warning": "Sau khi duyệt, tin đăng sẽ được hiển thị công khai trên hệ thống.",
+        "cancel": "Hủy",
+        "confirm": "Xác nhận duyệt"
+      }
+    },
+    "newJob": {
+      "description": "Tạo công việc mới cho công ty của bạn"
+    },
+    "favouriteJobs": {
+      "title": "Favourite Jobs",
+      "description": "Danh sách công việc yêu thích của bạn",
+      "comingSoon": "Nội dung sẽ được cập nhật sau..."
+    },
+    "resume": {
+      "title": "Quản lý hồ sơ ứng tuyển",
+      "description": "Tải CV của bạn lên bên dưới để sử dụng trong suốt quá trình ứng tuyển",
+      "coverLetterTitle": "Thư ứng tuyển",
+      "coverLetterDescription": "Viết ngắn gọn giới thiệu bản thân và nêu rõ mục đích của việc ứng tuyển. Nói về kinh nghiệm, kỹ năng và thành tích của bạn trong lĩnh vực tương ứng. Bạn cần trình bày lý do tại sao bạn muốn làm việc tại công ty đó và những đóng góp mà bạn có thể đưa ra. Điều này sẽ giúp nhà tuyển dụng hiểu rõ hơn về ứng viên và đánh giá năng lực của bạn.",
+      "coverLetterPlaceholder": "Nhập nội dung thư ứng tuyển của bạn...",
+      "saveCoverLetter": "Lưu thư ứng tuyển",
+      "cvTitle": "CV của bạn",
+      "lastModified": "Lần cuối chỉnh sửa:",
+      "noCvUploaded": "Chưa có CV được tải lên",
+      "uploadCv": "Tải lên CV",
+      "uploadGuidelines": "Vui lòng tải lên tệp .doc, .docx hoặc .pdf, tối đa 3MB và không có mật khẩu bảo vệ",
+      "coverLetterFileTitle": "Cover Letter",
+      "noCoverLetterUploaded": "Chưa có Cover Letter được tải lên",
+      "uploadCoverLetter": "Tải lên Cover Letter",
+      "fileTypeError": "Chỉ chấp nhận file .doc, .docx hoặc .pdf",
+      "fileSizeError": "Kích thước file không được vượt quá 3MB",
+      "uploadCvSuccess": "Tải lên CV thành công",
+      "uploadCvFailed": "Không thể tải lên CV",
+      "saveCoverLetterSuccess": "Lưu thư ứng tuyển thành công",
+      "saveCoverLetterFailed": "Không thể lưu thư ứng tuyển",
+      "uploadCoverLetterSuccess": "Tải lên Cover Letter thành công",
+      "uploadCoverLetterFailed": "Không thể tải lên Cover Letter"
+    },
+    "candidates": {
+      "description": "Xem danh sách ứng viên đã ứng tuyển",
+      "searchPlaceholder": "Tìm theo tên ứng viên...",
+      "fetchFailed": "Không thể tải danh sách ứng tuyển",
+      "viewDetailFeature": "Tính năng xem chi tiết đang được phát triển",
+      "deleteConfirm": "Bạn có chắc chắn muốn xóa đơn ứng tuyển này không?",
+      "deleteSuccess": "Đã xóa đơn ứng tuyển thành công",
+      "deleteFailed": "Không thể xóa đơn ứng tuyển",
+      "deleteModal": {
+        "title": "Xóa đơn ứng tuyển?",
+        "message": "Bạn có chắc chắn muốn xóa đơn ứng tuyển của",
+        "forJob": "cho vị trí",
+        "irreversible": "Hành động này không thể hoàn tác.",
+        "cancel": "Hủy",
+        "confirm": "Xóa"
+      }
+    },
+    "settings": {
+      "description": "Quản lý cài đặt tài khoản của bạn",
+      "accountInfo": {
+        "title": "Thông tin tài khoản",
+        "email": "Email:",
+        "emailWarning": "Bạn không thể thay đổi tài khoản email của bạn",
+        "fullName": "Họ và tên",
+        "fullNamePlaceholder": "Nhập họ và tên",
+        "username": "Tên đăng nhập",
+        "usernamePlaceholder": "Nhập tên đăng nhập",
+        "phoneNumber": "Số điện thoại",
+        "phoneNumberPlaceholder": "Nhập số điện thoại",
+        "save": "Lưu thông tin"
+      },
+      "changePassword": {
+        "title": "Thay đổi mật khẩu của bạn",
+        "currentPassword": "Mật khẩu cũ *",
+        "currentPasswordPlaceholder": "Mật khẩu cũ",
+        "newPassword": "Mật khẩu mới *",
+        "newPasswordPlaceholder": "Mật khẩu mới",
+        "confirmPassword": "Xác nhận mật khẩu mới *",
+        "confirmPasswordPlaceholder": "Xác nhận mật khẩu mới",
+        "submit": "Đổi mật khẩu",
+        "forgotPassword": "Quên mật khẩu?",
+        "forgotPasswordMessage": "Vui lòng liên hệ quản trị viên để đặt lại mật khẩu",
+        "validation": {
+          "currentPasswordRequired": "Vui lòng nhập mật khẩu cũ",
+          "newPasswordRequired": "Vui lòng nhập mật khẩu mới",
+          "newPasswordMinLength": "Mật khẩu mới phải có ít nhất 6 ký tự",
+          "confirmPasswordRequired": "Vui lòng xác nhận mật khẩu mới",
+          "passwordMismatch": "Mật khẩu xác nhận không khớp",
+          "currentPasswordIncorrect": "Mật khẩu cũ không đúng"
+        },
+        "changeSuccess": "Đổi mật khẩu thành công",
+        "changeFailed": "Không thể đổi mật khẩu"
+      },
+      "deleteAccount": {
+        "title": "Xóa tài khoản",
+        "pageTitle": "Xoá tài khoản",
+        "pageDescription": "Hành động này sẽ xóa vĩnh viễn tài khoản của bạn",
+        "warningTitle": "Cảnh báo: Hành động này không thể hoàn tác",
+        "warningMessage": "Khi bạn xóa tài khoản, tất cả dữ liệu của bạn sẽ bị xóa vĩnh viễn, bao gồm:",
+        "dataList": {
+          "personalInfo": "Thông tin cá nhân",
+          "cvCoverLetter": "Hồ sơ ứng tuyển (CV, Cover Letter)",
+          "applicationHistory": "Lịch sử ứng tuyển",
+          "savedJobs": "Việc làm đã lưu"
+        },
+        "button": "Xoá tài khoản",
+        "modalTitle": "Bạn chắc chắn muốn xóa hồ sơ?",
+        "modalSubtitle": "Hành động này không thể khôi phục",
+        "passwordLabel": "Vui lòng nhập mật khẩu để xác nhận :",
+        "passwordPlaceholder": "Nhập mật khẩu ...",
+        "passwordError": "Vui lòng nhập mật khẩu để xác nhận",
+        "passwordIncorrect": "Mật khẩu không đúng",
+        "agreeTerms": "Bằng cách ấn vào đây, tôi đồng ý với",
+        "termsAndConditions": "Điều khoản và Điều kiện",
+        "and": "và",
+        "privacyPolicy": "Chính sách quyền riêng tư",
+        "termsError": "Vui lòng đồng ý với điều khoản để tiếp tục",
+        "deleteButton": "Xóa hồ sơ",
+        "deleting": "Đang xóa...",
+        "deleteSuccess": "Tài khoản đã được xóa thành công",
+        "deleteFailed": "Không thể xóa tài khoản"
+      }
+    },
+    "charts": {
+      "jobPostings": "Biểu đồ đăng tin tuyển dụng",
+      "candidates": "Biểu đồ ứng viên ứng tuyển",
+      "growth": "↑",
+      "growthText": "% so với 7 ngày trước"
+    }
+  }
+}

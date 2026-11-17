@@ -1,0 +1,34 @@
+export interface JobEntity {
+  id: number
+  title: string
+  category: string
+  location: string
+  typeOfEmployment: string
+  experienceLevel: string
+  requiredQualification?: string | null
+  gender?: string | null
+  grade?: string | null
+  companyId: number
+  userId: number
+  companyName: string
+  companyLogo: string
+  organizationType?: string | null
+  foundedYear?: number | null
+  website?: string | null
+  facebookLink?: string | null
+  instagramLink?: string | null
+  twitterLink?: string | null
+  linkedInLink?: string | null
+  bannerLogo?: string
+  salaryMin?: string | null
+  salaryMax?: string | null
+  salaryType: number
+  benefits?: string | null
+  status?: string
+  createdAt?: Date
+  deadline?: Date
+  detailDescription?: string | null
+  email?: string | null
+  phoneNumber?: string | null
+  address: string
+}

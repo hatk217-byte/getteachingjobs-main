@@ -1,0 +1,101 @@
+import type { JobEntity } from '~/entities/job'
+import type { JobModel, JobModelAddUpdate } from '~/models/job'
+import { normalizeCompanyLogo } from '~/utils/companyLogo'
+import { formatCompanyName } from '~/utils/formatCompanyName'
+
+export class JobMapper {
+  static toModel(value: JobEntity): JobModel {
+    return {
+      id: value.id,
+      title: value.title,
+      category: value.category,
+      location: value.location,
+      typeOfEmployment: value.typeOfEmployment,
+      experienceLevel: value.experienceLevel,
+      requiredQualification: value.requiredQualification ?? '',
+      gender: value.gender ?? null,
+      grade: value.grade ?? null,
+      companyId: value.companyId,
+      userId: value.userId,
+      companyName: formatCompanyName(value.companyName),
+      companyLogo: normalizeCompanyLogo(value.companyLogo) ?? '',
+      companyBannerImage: (value as any).companyBannerImage || null,
+      organizationType: value.organizationType,
+      foundedYear: value.foundedYear,
+      website: value.website,
+      facebookLink: value.facebookLink,
+      instagramLink: value.instagramLink,
+      twitterLink: value.twitterLink,
+      linkedInLink: value.linkedInLink,
+      bannerLogo: value.bannerLogo,
+      salaryMin: value.salaryMin,
+      salaryMax: value.salaryMax,
+      salaryType: value.salaryType,
+      benefits: value.benefits,
+      status: (value as any).status ?? undefined,
+      createdAt: value.createdAt || new Date(),
+      deadline: value.deadline,
+      detailDescription: value.detailDescription ?? (value as { description?: string }).description ?? null,
+      email: value.email,
+      phoneNumber: value.phoneNumber,
+      address: value.address || '',
+      jobAddress: (value as any).jobAddress || null,
+      postType: (value as any).postType || 'Basic',
+      applicationsCount:
+        (value as any).applicationsCount
+        ?? (value as any).totalApplications
+        ?? 0,
+    }
+  }
+
+  static toModelAddUpdate(value: JobEntity): JobModelAddUpdate {
+    return {
+      title: value.title,
+      detailDescription:
+        value.detailDescription ?? (value as { description?: string }).description ?? '',
+      category: value.category 
+        ? value.category.split(',').map(c => c.trim()).filter(c => c)
+        : undefined,
+      location: value.location 
+        ? value.location.split(',').map(l => l.trim()).filter(l => l)
+        : undefined,
+      typeOfEmployment: value.typeOfEmployment
+        ? (typeof value.typeOfEmployment === 'string'
+            ? value.typeOfEmployment.split(',').map(t => t.trim()).filter(Boolean)
+            : [String(value.typeOfEmployment)])
+        : [],
+      experienceLevel:
+        value.experienceLevel !== undefined ? Number(value.experienceLevel) : 0,
+      requiredQualification: value.requiredQualification
+        ? value.requiredQualification.split(',').map((q) => q.trim()).filter(Boolean)
+        : undefined,
+      gender: value.gender 
+        ? value.gender.split(',').map(g => g.trim()).filter(g => g)
+        : undefined,
+      grade: value.grade
+        ? (typeof value.grade === 'string'
+            ? value.grade.split(',').map(g => g.trim()).filter(Boolean)
+            : [String(value.grade)])
+        : [],
+      salaryMin: value.salaryMin ?? undefined,
+      salaryMax: value.salaryMax ?? undefined,
+      salaryType: value.salaryType ?? undefined,
+      benefits: value.benefits 
+        ? value.benefits.split(',').map(b => b.trim()).filter(b => b)
+        : undefined,
+      deadline: value.deadline
+        ? new Date(value.deadline).toISOString().split('T')[0]
+        : undefined,
+      imageLogo: '',
+      bannerLogo: '',
+      postedDate: new Date(),
+      userId: value.userId,
+      companyId: value.companyId,
+      status: (value as any).status ?? 'ADMIN_REVIEW',
+      email: value.email ?? undefined,
+      phoneNumber: value.phoneNumber ?? undefined,
+      address: value.address || '',
+      postType: (value as any).postType || 'Basic',
+    }
+  }
+}
