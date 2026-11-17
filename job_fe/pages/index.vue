@@ -782,21 +782,6 @@ const featuredCities = [
     isLarge: false,
   },
 ]
-  {
-    id: '13',
-    name: 'Hải Phòng',
-    countText: '85+ việc làm',
-    image: '/images/cities/haiphong.jpg',
-    isLarge: false,
-  },
-  {
-    id: '33',
-    name: 'Cần Thơ',
-    countText: '60+ việc làm',
-    image: '/images/cities/cantho.jpg',
-    isLarge: false,
-  },
-]
 
 
 const stats = [
