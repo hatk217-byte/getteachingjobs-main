@@ -9,7 +9,7 @@
       <aside class="candidate-sidebar">
         <NuxtLink to="/" class="candidate-brand wordmark" aria-label="Home">
           <span class="wordmark-main">GetTeachingJobs</span>
-          <span class="wordmark-dot">.com</span>
+          <span class="wordmark-dot">.vn</span>
         </NuxtLink>
 
         <nav class="candidate-sidebar-nav" aria-label="Teacher Dashboard">

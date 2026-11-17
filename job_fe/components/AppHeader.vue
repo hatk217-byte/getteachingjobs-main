@@ -4,7 +4,7 @@
       <div class="topbar-inner app-header__inner">
         <NuxtLink to="/" class="wordmark" aria-label="Home" @click="closeMobileNav">
           <span class="wordmark-main">GetTeachingJobs</span>
-          <span class="wordmark-dot">.com</span>
+          <span class="wordmark-dot">.vn</span>
         </NuxtLink>
 
         <button

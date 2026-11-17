@@ -6,7 +6,7 @@
         <div class="footer-brand-info">
           <NuxtLink to="/" class="footer-wordmark" aria-label="Home">
             <span class="wordmark-main">GetTeachingJobs</span>
-            <span class="wordmark-dot">.com</span>
+            <span class="wordmark-dot">.vn</span>
           </NuxtLink>
           <h2 class="footer-brand-heading">
             Connecting International Educators with Premier Schools in Vietnam.
@@ -257,7 +257,7 @@
       <!-- 4. Footer Bottom Bar -->
       <div class="footer-bottom-bar">
         <p class="footer-copyright">
-          © {{ currentYear }} GetTeachingJobs.com. All rights reserved.
+          © {{ currentYear }} GetTeachingJobs.vn. All rights reserved.
         </p>
 
         <div class="footer-legal-links">

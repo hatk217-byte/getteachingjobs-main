@@ -15,7 +15,7 @@
         <div class="employer-sidebar-brand-wrap">
           <NuxtLink to="/" class="employer-sidebar-brand wordmark" aria-label="Home">
             <span class="wordmark-main">GetTeachingJobs</span>
-            <span class="wordmark-dot">.com</span>
+            <span class="wordmark-dot">.vn</span>
           </NuxtLink>
         </div>
 

@@ -43,7 +43,7 @@
               Welcome to<br />
               <span class="auth-brand-wordmark">
                 <span class="auth-brand-main">GetTeachingJobs</span>
-                <span class="auth-brand-dot">.com</span>
+                <span class="auth-brand-dot">.vn</span>
               </span>
             </h2>
           </div>

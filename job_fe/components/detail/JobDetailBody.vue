@@ -556,7 +556,7 @@ const overviewFields = computed(() => {
 
 const companyIntroText = computed(() => {
   if (props.job.note?.trim()) return props.job.note.trim()
-  return `${props.job.companyName || 'Employer'} is a reputable educational institution recruiting via GetTeachingJobs.com.`
+  return `${props.job.companyName || 'Employer'} is a reputable educational institution recruiting via GetTeachingJobs.vn.`
 })
 
 const getOtherJobLocation = (oj: any) => {

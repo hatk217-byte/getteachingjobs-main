@@ -5,7 +5,7 @@
         About GetTeachingJobs
       </h1>
       <p class="mt-4 text-[15px] leading-relaxed text-[rgba(29,36,51,0.72)] max-w-2xl">
-        GetTeachingJobs.com is the leading job portal connecting certified international teachers and native English speakers with prestigious schools, bilingual academies, and educational institutions across Vietnam.
+        GetTeachingJobs.vn is the leading job portal connecting certified international teachers and native English speakers with prestigious schools, bilingual academies, and educational institutions across Vietnam.
       </p>
     </UContainer>
   </div>

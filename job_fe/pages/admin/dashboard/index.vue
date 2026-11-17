@@ -12,7 +12,7 @@
         <div class="employer-sidebar-brand-wrap">
           <a :href="config.public.baseUrl || '/'" class="employer-sidebar-brand wordmark" aria-label="Home">
             <span class="wordmark-main">GetTeachingJobs</span>
-            <span class="wordmark-dot">.com</span>
+            <span class="wordmark-dot">.vn</span>
           </a>
         </div>
 

@@ -19,11 +19,11 @@ export default defineNuxtConfig({
       },
 
       charset: 'utf-8',
-      title: 'GetTeachingJobs.com',
+      title: 'GetTeachingJobs.vn',
       titleTemplate: (titleChunk?: string) =>
         titleChunk && String(titleChunk).trim().length > 0
-          ? `${String(titleChunk).trim()} - GetTeachingJobs.com`
-          : 'GetTeachingJobs.com - Teaching Jobs in Vietnam',
+          ? `${String(titleChunk).trim()} - GetTeachingJobs.vn`
+          : 'GetTeachingJobs.vn - Teaching Jobs in Vietnam',
       viewport:
         'width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0',
       link: [

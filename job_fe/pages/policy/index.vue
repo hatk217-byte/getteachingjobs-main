@@ -2,7 +2,7 @@
   <section class="legal-page">
     <div class="container legal-shell">
       <header class="legal-hero">
-        <span class="legal-eyebrow">GetTeachingJobs.com</span>
+        <span class="legal-eyebrow">GetTeachingJobs.vn</span>
         <h1>Terms of Service &amp; Privacy Policy</h1>
         <p>GetTeachingJobs is committed to protecting and respecting the privacy of all educators and school partners.</p>
         <time datetime="2025-10-20">Last updated: October 2025</time>
@@ -24,13 +24,13 @@
         <section class="legal-section" id="dieu-khoan-dieu-kien">
           <h2>Terms &amp; Conditions</h2>
           <p>
-            By accessing or using GetTeachingJobs.com, you agree to comply with and be bound by the terms
+            By accessing or using GetTeachingJobs.vn, you agree to comply with and be bound by the terms
             and conditions outlined below. If you do not agree with any part of these terms, please discontinue use of our service.
           </p>
 
           <h3>Scope of Service</h3>
           <p>
-            GetTeachingJobs.com is a specialized platform connecting international educators and teachers with
+            GetTeachingJobs.vn is a specialized platform connecting international educators and teachers with
             schools, language centers, and educational institutions across Vietnam. We provide tools for job posting,
             job search, candidate profiles, and direct applications.
           </p>
@@ -74,7 +74,7 @@
 
         <section class="legal-section" id="chinh-sach-quyen-rieng-tu">
           <h2>Privacy Policy</h2>
-          <p>By using GetTeachingJobs.com, you consent to the collection and use of information in accordance with this Privacy Policy.</p>
+          <p>By using GetTeachingJobs.vn, you consent to the collection and use of information in accordance with this Privacy Policy.</p>
 
           <h3>Data We Collect</h3>
           <h4>For Teachers &amp; Candidates</h4>
@@ -179,7 +179,7 @@
             </div>
             <div>
               <dt>Website</dt>
-              <dd><NuxtLink to="/">getteachingjobs.com</NuxtLink></dd>
+              <dd><NuxtLink to="/">getteachingjobs.vn</NuxtLink></dd>
             </div>
           </dl>
         </section>
@@ -273,7 +273,7 @@ useHead({
     {
       name: 'description',
       content:
-        'Terms of Service, Privacy Policy, and contact information for GetTeachingJobs.com',
+        'Terms of Service, Privacy Policy, and contact information for GetTeachingJobs.vn',
     },
   ],
 })
