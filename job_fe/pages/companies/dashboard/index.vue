@@ -474,7 +474,7 @@
         <!-- New Job View -->
         <div v-else-if="activeView === 'newJob'">
           <div class="bg-white rounded-2xl shadow-sm p-8 text-center" style="border: 1px solid rgba(29, 36, 51, 0.10)">
-            <UIcon name="i-lucide-panel-right-open" class="w-10 h-10 text-orange-600 mx-auto mb-3" />
+            <UIcon name="i-lucide-panel-right-open" class="w-10 h-10 text-blue-600 mx-auto mb-3" />
             <div class="text-sm text-[rgba(29,36,51,0.65)]">
               Form tạo tin đã chuyển sang drawer bên phải. Vui lòng bấm “Đăng tin tuyển dụng”.
             </div>

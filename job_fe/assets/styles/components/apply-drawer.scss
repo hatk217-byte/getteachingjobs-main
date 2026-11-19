@@ -75,8 +75,8 @@ div[role="status"] {
     align-items: center;
     padding: 2px 8px;
     border-radius: 999px;
-    background: #fff7ed;
-    color: #ea580c;
+    background: #eff6ff;
+    color: #1d4ed8;
     font-size: 11px;
     font-weight: 700;
     margin-bottom: 4px;
@@ -159,17 +159,17 @@ div[role="status"] {
   min-height: 38px;
   padding: 0 20px;
   border-radius: 8px;
-  background: #16a34a;
+  background: #2563eb;
   color: #ffffff;
   font-size: 13.5px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.18s ease;
-  box-shadow: 0 2px 6px rgba(22, 163, 74, 0.2);
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.2);
 
   &:hover {
-    background: #15803d;
-    box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
+    background: #1d4ed8;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
     transform: translateY(-1px);
   }
 
@@ -237,14 +237,14 @@ div[role="status"] {
 .apply-vldl-change-cv-btn {
   font-size: 12.5px;
   font-weight: 600;
-  color: #f97316;
+  color: #2563eb;
   cursor: pointer;
   white-space: nowrap;
   flex-shrink: 0;
   text-decoration: underline;
 
   &:hover {
-    color: #ea580c;
+    color: #1d4ed8;
   }
 }
 
@@ -293,7 +293,7 @@ div[role="status"] {
       }
 
       &:focus {
-        border-color: #f97316;
+        border-color: #2563eb;
         box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.12);
       }
 
@@ -350,7 +350,7 @@ div[role="status"] {
       }
 
       &:focus {
-        border-color: #f97316;
+        border-color: #2563eb;
         box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.12);
       }
     }
@@ -387,7 +387,7 @@ div[role="status"] {
     width: 16px;
     height: 16px;
     border-radius: 4px;
-    accent-color: #f97316;
+    accent-color: #2563eb;
     flex-shrink: 0;
     cursor: pointer;
   }
@@ -398,12 +398,12 @@ div[role="status"] {
     line-height: 1.45;
 
     .terms-link {
-      color: #16a34a;
+      color: #2563eb;
       text-decoration: none;
       font-weight: 600;
 
       &:hover {
-        color: #15803d;
+        color: #1d4ed8;
         text-decoration: underline;
       }
     }
@@ -420,7 +420,7 @@ div[role="status"] {
   min-height: 44px;
   border: none;
   border-radius: 8px;
-  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
   color: #ffffff;
   font-size: 14.5px;
   font-weight: 700;

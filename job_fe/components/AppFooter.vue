@@ -289,3 +289,7 @@ const toggleAccordion = (key: string) => {
   accordions.value[key] = !accordions.value[key]
 }
 </script>
+
+<style lang="scss">
+@use '@/assets/styles/components/site-footer.scss';
+</style>

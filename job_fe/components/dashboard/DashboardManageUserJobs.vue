@@ -245,7 +245,7 @@ const getStatusText = (job: JobEntity): string => {
 const getStatusClass = (job: JobEntity): string => {
   if (!isJobVisible(job)) return 'bg-yellow-100 text-yellow-800'
   if (isExpired(job.deadline)) return 'bg-red-100 text-red-800'
-  if (isExpiringSoon(job.deadline)) return 'bg-orange-100 text-orange-800'
+  if (isExpiringSoon(job.deadline)) return 'bg-amber-100 text-amber-800'
 
   return 'bg-green-100 text-green-800'
 }

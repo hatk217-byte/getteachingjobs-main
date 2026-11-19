@@ -5,7 +5,7 @@
         <button
           type="button"
           class="employer-page-back"
-          aria-label="Quay lại trang chủ"
+          aria-label="Back to home"
           @click="goBack"
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -27,8 +27,8 @@
         data-post-wizard-mode="standalone"
         data-company-lookup-required="true"
       >
-        <div class="employer-stepper" aria-label="Tiến trình đăng tin">
-          <div class="employer-stepper-track" aria-hidden="true" />
+        <div class="employer-stepper" aria-label="Job posting progress">
+          <div class="employer-stepper-track" :class="{ 'is-done': wizardStep > 0 }" aria-hidden="true" />
           <div
             class="employer-step"
             :class="{ 'is-active': wizardStep === 0, 'is-done': wizardStep > 0 }"
@@ -41,19 +41,8 @@
               :aria-label="$t('job.uploadJob.stepCompanyInfo')"
               @click="goBackToCompanyStep()"
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path
-                  d="M12 4L19 8V19H5V8L12 4Z"
-                  stroke="currentColor"
-                  stroke-width="1.9"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M9 19V12H15V19"
-                  stroke="currentColor"
-                  stroke-width="1.9"
-                  stroke-linejoin="round"
-                />
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M20 6 9 17l-5-5"/>
               </svg>
             </button>
             <span v-else class="employer-step-icon">
@@ -115,338 +104,56 @@
         >
           <template #school>
             <section class="employer-step-panel">
-              <form class="employer-lookup-form" data-company-lookup-form @submit.prevent="findCompanyByMst()">
-                <div class="employer-field-stack employer-field-full">
-                  <label class="employer-input-label" for="company-mst">
-                    {{ $t('job.uploadJob.mstLabel') }}
-                    <span class="text-red-500">{{ $t('job.uploadJob.mandatoryChar') }}</span>
-                  </label>
-                  <div class="employer-inline-field">
-                    <UInput
-                      id="company-mst"
-                      v-model="mstCompany"
-                      variant="outline"
-                      class="w-full min-w-0 flex-1"
-                      :ui="{ base: 'h-12 w-full rounded-xl text-[15px]' }"
-                      :placeholder="$t('company.action.placeHolderMST')"
-                      @input="onMstCompanyInput"
-                      @keydown.enter="findCompanyByMst()"
-                    />
-                    <UButton
-                      type="submit"
-                      icon="i-lucide-search"
-                      :label="isGettingCompanyByMst ? '...' : $t('job.uploadJob.lookupMst')"
-                      class="job-upload-lookup-btn h-12 shrink-0"
-                      :loading="isGettingCompanyByMst"
-                      @click.prevent="findCompanyByMst()"
-                    />
-                  </div>
-                </div>
-              </form>
-
-              <div
-                v-if="isDisplayInputCompany"
-                class="employer-company-panel"
-                data-company-panel
-              >
-                <div class="employer-company-found" role="status">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path
-                      d="M22 11.08V12a10 10 0 1 1-5.93-9.14"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                    />
-                    <path
-                      d="M22 4 12 14.01l-3-3"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                  <span>{{ $t('job.uploadJob.lookupFoundTitle') }}</span>
-                </div>
-
-                <div class="employer-field-stack">
-                  <label
-                    class="employer-input-label"
-                    for="company-name"
-                  >
-                    {{ $t('company.name') }}
-                    <span aria-hidden="true" class="text-red-500">{{
-                      $t('common.requiredMark')
-                    }}</span>
-                  </label>
-                  <UInput
-                    id="company-name"
-                    v-model="companyAdd.name"
-                    variant="outline"
-                    :readonly="isDisplayInputCompany"
-                    :ui="{
-                      root: 'w-full',
-                      base: [
-                        'h-11 rounded-xl w-full',
-                        companyErrors.name
-                          ? 'ring-1 ring-inset ring-red-200/80 border border-red-500'
-                          : companyFieldsLookupHighlight
-                            ? 'ring-1 ring-inset ring-sky-200/80 border-sky-300/80'
-                            : '',
-                      ]
-                        .filter(Boolean)
-                        .join(' '),
-                    }"
-                    @input="companyErrors.name = ''"
-                  />
-                  <p
-                    v-if="companyErrors.name"
-                    class="mt-0.5 text-sm !text-red-500"
-                  >
-                    {{ companyErrors.name }}
-                  </p>
-                </div>
-
-                <div class="employer-field-stack">
-                  <label
-                    class="employer-input-label"
-                    for="company-tax-address"
-                  >
-                    Địa chỉ thuế
-                  </label>
-                  <UInput
-                    id="company-tax-address"
-                    v-model.trim="companyAdd.taxAddress"
-                    :readonly="isDisplayInputCompany"
-                    placeholder="Địa chỉ thuế"
-                    :ui="{
-                      root: 'w-full',
-                      base: [
-                        'h-11 rounded-xl w-full',
-                        companyErrors.taxAddress
-                          ? 'ring-1 ring-inset ring-red-200/80 border border-red-500'
-                          : companyFieldsLookupHighlight
-                            ? 'ring-1 ring-inset ring-sky-200/80 border-sky-300/80'
-                            : '',
-                      ]
-                        .filter(Boolean)
-                        .join(' '),
-                    }"
-                    @input="companyErrors.taxAddress = ''"
-                  />
-                  <p
-                    v-if="companyErrors.taxAddress"
-                    class="mt-0.5 text-sm !text-red-500"
-                  >
-                    {{ companyErrors.taxAddress }}
-                  </p>
-                </div>
-
-                <!-- Social links and Video (removed for free-post) -->
-                <!-- Logo uploader hidden in free-post -->
-                <div v-if="false" class="pt-5">
-                  <label class="font-medium text-sm text-gray-700">
-                    {{ $t('company.form.logoTitle') }}
-                    <span aria-hidden="true" class="text-black">{{
-                      $t('common.requiredMark')
-                    }}</span>
-                  </label>
-
-                  <div
-                    class="border-2 border-dashed rounded-xl p-6 text-center cursor-pointer transition bg-gray-50"
-                    :class="[
-                      isDraggingLogo
-                        ? 'ring-2 ring-blue-400 bg-blue-50'
-                        : 'border-gray-400',
-                      companyErrors.logo ? 'border-red-500' : ''
-                    ]"
-                    @click="logoFileEl?.click()"
-                    @dragenter.prevent="onDragEnterLogo"
-                    @dragover.prevent
-                    @dragleave.prevent="onDragLeaveLogo"
-                    @drop="onDropLogo"
-                  >
-                    <input
-                      ref="logoFileEl"
-                      type="file"
-                      :accept="IMAGE_UPLOAD_ACCEPT"
-                      class="hidden"
-                      @change="onPickLogo"
-                    />
-
-                    <div v-if="logoPreview" class="flex flex-col gap-4">
-                      <div class="flex justify-center">
-                        <div
-                          class="relative p-2 bg-white rounded-lg border shadow-sm inline-flex items-center justify-center"
-                        >
-                          <img
-                            :src="logoPreview"
-                            class="max-h-40 max-w-[260px] h-auto w-auto object-contain rounded-md"
-                            draggable="false"
-                          />
-                          <span
-                            class="absolute top-2 left-2 px-2 py-0.5 text-xs rounded bg-blue-600 text-white"
-                          >
-                            {{ $t('company.form.logoBadge') }}
-                          </span>
-                          <UButton
-                            icon="i-lucide-crop"
-                            color="primary"
-                            size="xs"
-                            variant="solid"
-                            class="absolute top-8 left-2"
-                            :aria-label="$t('common.cropImage')"
-                            @click.stop="openCropModal"
-                          />
-                          <UButton
-                            icon="i-lucide-trash-2"
-                            color="error"
-                            size="xs"
-                            variant="solid"
-                            class="absolute top-2 right-2"
-                            :aria-label="$t('common.remove')"
-                            @click.stop="removeLogo"
-                          />
-                        </div>
-                      </div>
+              <!-- Case 1: Existing School Profile Selected -->
+              <div v-if="selectedSchool" class="school-selected-card">
+                <div class="school-profile-banner">
+                  <div class="school-profile-info">
+                    <div class="school-profile-avatar">
+                      <img
+                        v-if="selectedSchool.logo && !selectedSchoolLogoError"
+                        :src="normalizeCompanyLogo(selectedSchool.logo)"
+                        alt=""
+                        class="object-contain"
+                        @error="selectedSchoolLogoError = true"
+                      />
+                      <span v-else>{{ getSchoolInitials(selectedSchool.name) }}</span>
                     </div>
-
-                    <div v-else class="text-gray-500">
-                      {{ $t('company.form.dropHintLogo') }}
+                    <div class="school-profile-meta">
+                      <div class="school-profile-badge">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                          <path d="M22 4 12 14.01l-3-3"/>
+                        </svg>
+                        <span>Verified School Profile</span>
+                      </div>
+                      <h3 class="school-profile-name">{{ selectedSchool.name }}</h3>
+                      <p v-if="selectedSchool.address || selectedSchool.taxAddress" class="school-profile-address">
+                        📍 {{ cleanHtml(selectedSchool.address || selectedSchool.taxAddress) }}
+                      </p>
                     </div>
                   </div>
-                  <p v-if="companyErrors.logo" class="!text-red-500 text-sm mt-1">
-                    {{ companyErrors.logo }}
-                  </p>
-                </div>
 
-                <!-- Banner Image hidden in free-post -->
-                <div v-if="false" class="pt-5">
-                  <label class="font-medium text-sm text-gray-700">
-                    {{ $t('company.form.bannerTitle') }}
-                  </label>
+                  <div class="flex items-center justify-between pt-2 border-t border-slate-100">
+                    <button type="button" class="school-change-btn" @click="resetSchoolSelection()">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
+                        <path d="M21 3v5h-5"/>
+                        <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/>
+                        <path d="M3 21v-5h5"/>
+                      </svg>
+                      <span>Select another school</span>
+                    </button>
+                    <span v-if="selectedSchool.website" class="text-xs text-slate-400">
+                      🔗 {{ selectedSchool.website }}
+                    </span>
+                  </div>
 
-                  <div
-                    class="border-2 border-dashed rounded-xl p-6 text-center cursor-pointer transition bg-gray-50"
-                    :class="
-                      isDraggingBanner
-                        ? 'ring-2 ring-blue-400 bg-blue-50'
-                        : 'border-gray-400'
-                    "
-                    @click="bannerFileEl?.click()"
-                    @dragenter.prevent="onDragEnterBanner"
-                    @dragover.prevent
-                    @dragleave.prevent="onDragLeaveBanner"
-                    @drop="onDropBanner"
-                  >
-                    <input
-                      ref="bannerFileEl"
-                      type="file"
-                      :accept="IMAGE_UPLOAD_ACCEPT"
-                      class="hidden"
-                      @change="onPickBanner"
-                    />
-
-                    <div v-if="bannerPreview" class="flex flex-col gap-4">
-                      <div class="flex justify-center">
-                        <div
-                          class="relative p-2 bg-white rounded-lg border shadow-sm inline-flex items-center justify-center"
-                        >
-                          <img
-                            :src="bannerPreview"
-                            class="max-h-60 max-w-full h-auto w-auto object-contain rounded-md"
-                            draggable="false"
-                          />
-                          <UButton
-                            icon="i-lucide-trash-2"
-                            color="error"
-                            size="xs"
-                            variant="solid"
-                            class="absolute top-2 right-2"
-                            :aria-label="$t('common.remove')"
-                            @click.stop="removeBanner"
-                          />
-                        </div>
-                      </div>
-                    </div>
-
-                    <div v-else class="text-gray-500">
-                      {{ $t('company.form.bannerDropHint') }}
-                    </div>
+                  <div class="school-profile-notice">
+                    ℹ️ You are posting a job on behalf of <strong>{{ selectedSchool.name }}</strong>. Your job posting and candidate applications will be managed in your recruiter dashboard. Official school brand information is verified and protected.
                   </div>
                 </div>
 
-                <!-- Company images uploader hidden in free-post -->
-                <div v-if="false" class="pt-5">
-                  <label class="font-medium text-sm text-gray-700">
-                    {{ $t('company.form.imagesTitleAdditional') }}
-                  </label>
-
-                  <div
-                    class="border-2 border-dashed rounded-xl p-6 text-center cursor-pointer transition bg-gray-50"
-                    :class="
-                      isDraggingImages
-                        ? 'ring-2 ring-blue-400 bg-blue-50'
-                        : 'border-gray-400'
-                    "
-                    @click="imagesFileEl?.click()"
-                    @dragenter.prevent="onDragEnterImages"
-                    @dragover.prevent
-                    @dragleave.prevent="onDragLeaveImages"
-                    @drop="onDropImages"
-                  >
-                    <input
-                      ref="imagesFileEl"
-                      type="file"
-                      :accept="IMAGE_UPLOAD_ACCEPT"
-                      multiple
-                      class="hidden"
-                      @change="onPickImages"
-                    />
-
-                    <div
-                      v-if="imagePreviews.length > 0"
-                      class="flex flex-col gap-4"
-                    >
-                      <div class="flex flex-wrap gap-4">
-                        <div
-                          v-for="(src, idx) in imagePreviews"
-                          :key="src + idx"
-                          class="relative p-2 bg-white rounded-lg border shadow-sm inline-flex items-center justify-center"
-                        >
-                          <img
-                            :src="src"
-                            class="max-h-40 max-w-[260px] h-auto w-auto object-contain rounded-md"
-                            draggable="false"
-                          />
-                          <UButton
-                            icon="i-lucide-trash-2"
-                            color="error"
-                            size="xs"
-                            variant="solid"
-                            class="absolute top-2 right-2"
-                            :aria-label="$t('common.remove')"
-                            @click.stop="removeImage(idx)"
-                          />
-                        </div>
-                      </div>
-                      <div class="flex justify-center">
-                        <UButton
-                          size="xs"
-                          variant="soft"
-                          @click.stop="imagesFileEl?.click()"
-                        >
-                          {{ $t('company.form.addMore') }}
-                        </UButton>
-                      </div>
-                    </div>
-
-                    <div v-else class="text-gray-500">
-                      {{ $t('company.form.dropHint') }}
-                    </div>
-                  </div>
-                </div>
-
-                <div class="employer-actions">
+                <div class="employer-actions mt-5">
                   <button
                     type="button"
                     class="employer-primary-btn"
@@ -455,11 +162,11 @@
                   >
                     {{ $t('job.uploadJob.continueNext') }}
                     <svg
-                      width="16"
-                      height="16"
+                      width="15"
+                      height="15"
                       viewBox="0 0 24 24"
                       fill="none"
-                      style="margin-left: 6px"
+                      style="margin-left: 5px"
                       aria-hidden="true"
                     >
                       <path
@@ -472,6 +179,218 @@
                     </svg>
                   </button>
                 </div>
+              </div>
+
+              <!-- Case 2: Creating New School Profile -->
+              <div v-else-if="isCreatingNewSchool" class="school-selected-card">
+                <div class="school-new-form">
+                  <div class="flex items-center pb-4 mb-4 border-b border-slate-100">
+                    <button
+                      type="button"
+                      class="text-sm font-medium text-slate-500 hover:text-blue-600 inline-flex items-center gap-1.5 transition-colors"
+                      @click="resetSchoolSelection()"
+                    >
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+                      <span>Back to school search</span>
+                    </button>
+                  </div>
+
+                  <div class="school-new-fields-group">
+                    <div class="employer-field-stack">
+                      <label class="employer-input-label" for="new-school-name">
+                        School / Institution Name
+                        <span class="text-red-500">*</span>
+                      </label>
+                      <UInput
+                        id="new-school-name"
+                        v-model.trim="companyAdd.name"
+                        variant="outline"
+                        placeholder="Enter school or institution name"
+                        :ui="{ root: 'w-full', base: 'h-11 rounded-xl w-full text-[15px]' }"
+                        @input="companyErrors.name = ''"
+                      />
+                      <p v-if="companyErrors.name" class="mt-0.5 text-sm !text-red-500">
+                        {{ companyErrors.name }}
+                      </p>
+                    </div>
+
+                    <div class="employer-field-stack">
+                      <label class="employer-input-label" for="new-school-address">
+                        {{ $t('job.uploadJob.detailAddressLabel') }}
+                        <span class="text-red-500">*</span>
+                      </label>
+                      <UInput
+                        id="new-school-address"
+                        v-model.trim="companyAdd.address"
+                        variant="outline"
+                        placeholder="Main campus or branch address"
+                        :ui="{ root: 'w-full', base: 'h-11 rounded-xl w-full text-[15px]' }"
+                        @input="companyErrors.address = ''"
+                      />
+                      <p v-if="companyErrors.address" class="mt-0.5 text-sm !text-red-500">
+                        {{ companyErrors.address }}
+                      </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                      <div class="employer-field-stack">
+                        <label class="employer-input-label" for="new-school-website">
+                          School Website / Fanpage
+                        </label>
+                        <UInput
+                          id="new-school-website"
+                          v-model.trim="companyAdd.website"
+                          variant="outline"
+                          placeholder="https://school.edu.vn"
+                          :ui="{ root: 'w-full', base: 'h-11 rounded-xl w-full text-[15px]' }"
+                        />
+                      </div>
+                      <div class="employer-field-stack">
+                        <label class="employer-input-label" for="new-school-mst">
+                          Tax ID / Registration Code
+                          <span class="text-xs text-slate-400 font-normal ml-1">(Optional)</span>
+                        </label>
+                        <UInput
+                          id="new-school-mst"
+                          v-model.trim="companyAdd.mst"
+                          variant="outline"
+                          placeholder="Tax code or registration number (if any)"
+                          :ui="{ root: 'w-full', base: 'h-11 rounded-xl w-full text-[15px]' }"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="employer-actions mt-5">
+                  <button
+                    type="button"
+                    class="employer-primary-btn"
+                    data-company-confirm
+                    @click="confirmCreateSchool()"
+                  >
+                    {{ $t('job.uploadJob.continueNext') }}
+                    <svg
+                      width="15"
+                      height="15"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      style="margin-left: 5px"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M5 12h14M12 5l7 7-7 7"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Case 3: Auto-suggest Typeahead Search Box -->
+              <div v-else class="school-search-box">
+                <div class="employer-field-stack employer-field-full">
+                  <label class="employer-input-label" for="school-search-input">
+                    Search your School / Educational Institution
+                    <span class="text-red-500">*</span>
+                  </label>
+                  
+                  <div class="relative w-full" ref="schoolSearchContainerRef">
+                    <div class="relative flex items-center">
+                      <svg
+                        class="absolute left-3.5 pointer-events-none text-slate-400"
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <circle cx="11" cy="11" r="8"/>
+                        <path d="m21 21-4.3-4.3"/>
+                      </svg>
+                      
+                      <input
+                        id="school-search-input"
+                        v-model="schoolSearchQuery"
+                        type="text"
+                        class="school-search-native-input"
+                        placeholder="Type school name (e.g. Pathway, Vinschool, Apollo, ILA...)"
+                        autocomplete="off"
+                        @input="onSearchSchoolInput"
+                        @focus="onSearchInputFocus"
+                        @keydown.enter.prevent="onSearchEnterKey"
+                      />
+
+                      <div class="absolute right-3.5 flex items-center gap-1.5">
+                        <span v-if="isSearchingSchools" class="text-xs text-blue-600 font-medium animate-pulse">
+                          Searching...
+                        </span>
+                        <button
+                          v-if="schoolSearchQuery"
+                          type="button"
+                          class="w-6 h-6 rounded-full flex items-center justify-center text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors"
+                          aria-label="Clear search"
+                          @click="clearSchoolSearch"
+                        >
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M18 6 6 18M6 6l12 12"/>
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+
+                    <!-- Dropdown Suggestions -->
+                    <div
+                      v-if="isSearchDropdownOpen && (schoolSearchResults.length > 0 || schoolSearchQuery.trim())"
+                      class="school-suggest-dropdown"
+                    >
+                      <div v-if="schoolSearchResults.length > 0" class="school-suggest-list">
+                        <div
+                          v-for="s in schoolSearchResults"
+                          :key="s.id"
+                          class="school-suggest-item"
+                          @click="selectSchool(s)"
+                        >
+                          <div class="school-suggest-logo">
+                            <img
+                              v-if="s.logo && !logoErrorMap[s.id]"
+                              :src="normalizeCompanyLogo(s.logo)"
+                              alt=""
+                              class="object-contain"
+                              @error="onLogoError(s.id)"
+                            />
+                            <span v-else>{{ getSchoolInitials(s.name) }}</span>
+                          </div>
+                          <div class="school-suggest-info">
+                            <div class="school-suggest-name">{{ s.name }}</div>
+                            <div v-if="s.address || s.taxAddress" class="school-suggest-sub">
+                              📍 {{ cleanHtml(s.address || s.taxAddress) }}
+                            </div>
+                          </div>
+                          <span class="school-suggest-badge">Select this school →</span>
+                        </div>
+                      </div>
+
+                      <!-- Add new school option -->
+                      <div
+                        class="school-suggest-new-item"
+                        @click="startCreateNewSchool(schoolSearchQuery)"
+                      >
+                        <div class="school-suggest-plus">➕</div>
+                        <div class="school-suggest-new-info">
+                          <strong>School not found in the list?</strong>
+                          <span>Click here to add new: "<strong>{{ schoolSearchQuery.trim() || 'Your school name' }}</strong>"</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
               </div>
             </section>
           </template>
@@ -495,7 +414,7 @@
                     data-accordion-toggle
                   >
                     <span class="employer-accordion-num">1</span>
-                    <span class="employer-accordion-label">Thông tin cơ bản</span>
+                    <span class="employer-accordion-label">Basic Information</span>
                     <svg class="employer-accordion-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                       <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
@@ -531,7 +450,7 @@
                         v-model="job.detailDescription"
                         class="w-full rich-text-content"
                         :class="{ 'ring-1 ring-red-300': jobErrors.detailDescription }"
-                        placeholder="Nhập mô tả công việc"
+                        placeholder="Enter job description & responsibilities"
                       />
                       <p v-if="jobErrors.detailDescription" class="mt-1 text-sm !text-red-500">{{ jobErrors.detailDescription }}</p>
                     </div>
@@ -807,7 +726,7 @@
                 <template #default="{ open }">
                   <button type="button" class="employer-accordion-head" :aria-expanded="open" data-accordion-toggle>
                     <span class="employer-accordion-num">2</span>
-                    <span class="employer-accordion-label">Yêu cầu ứng viên</span>
+                    <span class="employer-accordion-label">Candidate Requirements & Benefits</span>
                     <svg class="employer-accordion-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                       <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
@@ -940,7 +859,7 @@
                 <template #default="{ open }">
                   <button type="button" class="employer-accordion-head" :aria-expanded="open" data-accordion-toggle>
                     <span class="employer-accordion-num">3</span>
-                    <span class="employer-accordion-label">Thông tin liên hệ</span>
+                    <span class="employer-accordion-label">Contact & Application Details</span>
                     <svg class="employer-accordion-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                       <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
@@ -1137,7 +1056,7 @@ definePageMeta({
   layout: false,
 })
 
-import { computed, nextTick, ref } from 'vue'
+import { computed, nextTick, ref, onMounted, onUnmounted } from 'vue'
 import { UButton } from '#components'
 import type { StepperItem } from '@nuxt/ui'
 import type {
@@ -1933,7 +1852,7 @@ async function applyCrop() {
   } catch (error) {
     console.error('Error cropping image:', error)
     useNotify({
-      message: 'Có lỗi xảy ra khi cắt ảnh. Vui lòng thử lại.',
+      message: 'An error occurred while cropping image. Please try again.',
     })
   }
 }
@@ -2182,6 +2101,162 @@ const goToListJobUser = () => {
 }
 
 const mstCompany = ref('')
+const schoolSearchQuery = ref('')
+const isSearchDropdownOpen = ref(false)
+const isSearchingSchools = ref(false)
+const schoolSearchResults = ref<CompanyEntity[]>([])
+const selectedSchool = ref<CompanyEntity | null>(null)
+const isCreatingNewSchool = ref(false)
+const schoolSearchContainerRef = ref<HTMLElement | null>(null)
+let searchDebounceTimer: any = null
+
+const logoErrorMap = ref<Record<number, boolean>>({})
+const selectedSchoolLogoError = ref(false)
+
+const onLogoError = (id: number) => {
+  logoErrorMap.value[id] = true
+}
+
+const cleanHtml = (raw: string | null | undefined): string => {
+  if (!raw) return ''
+  return String(raw).replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim()
+}
+
+const getSchoolInitials = (name: string | null | undefined): string => {
+  if (!name) return 'SC'
+  const clean = name.replace(/^(công ty tnhh|công ty cp|công ty cổ phần|công ty trách nhiệm hữu hạn|hệ thống trường|trường)\s+/i, '').trim()
+  const words = (clean || name).split(/\s+/).filter(Boolean)
+  if (words.length >= 2) {
+    return (words[0][0] + words[1][0]).toUpperCase()
+  }
+  return (name || 'SC').slice(0, 2).toUpperCase()
+}
+
+const clearSchoolSearch = () => {
+  schoolSearchQuery.value = ''
+  schoolSearchResults.value = []
+  isSearchDropdownOpen.value = false
+}
+
+const handleDocumentClick = (e: MouseEvent) => {
+  if (schoolSearchContainerRef.value && !schoolSearchContainerRef.value.contains(e.target as Node)) {
+    isSearchDropdownOpen.value = false
+  }
+}
+
+onMounted(() => {
+  if (typeof window !== 'undefined') {
+    window.addEventListener('click', handleDocumentClick)
+  }
+})
+
+onUnmounted(() => {
+  if (typeof window !== 'undefined') {
+    window.removeEventListener('click', handleDocumentClick)
+  }
+})
+
+const onSearchSchoolInput = (e: any) => {
+  const val = typeof e === 'string' ? e : e?.target?.value || ''
+  schoolSearchQuery.value = val
+  isSearchDropdownOpen.value = true
+
+  if (searchDebounceTimer) clearTimeout(searchDebounceTimer)
+  if (!val.trim()) {
+    schoolSearchResults.value = []
+    isSearchingSchools.value = false
+    return
+  }
+
+  isSearchingSchools.value = true
+  searchDebounceTimer = setTimeout(async () => {
+    try {
+      const res = await $api.company.searchCompany({ keyword: val.trim() })
+      schoolSearchResults.value = Array.isArray(res) ? res : []
+    } catch (err) {
+      console.error('Failed to search schools:', err)
+      schoolSearchResults.value = []
+    } finally {
+      isSearchingSchools.value = false
+    }
+  }, 250)
+}
+
+const onSearchInputFocus = () => {
+  if (schoolSearchQuery.value.trim() && schoolSearchResults.value.length > 0) {
+    isSearchDropdownOpen.value = true
+  }
+}
+
+const onSearchEnterKey = () => {
+  if (schoolSearchResults.value.length > 0) {
+    selectSchool(schoolSearchResults.value[0])
+  } else if (schoolSearchQuery.value.trim()) {
+    startCreateNewSchool(schoolSearchQuery.value.trim())
+  }
+}
+
+const selectSchool = (s: CompanyEntity) => {
+  selectedSchool.value = s
+  isExistCompany.value = true
+  isDisplayInputCompany.value = true
+  isAddCompany.value = false
+  isCreatingNewSchool.value = false
+  isSearchDropdownOpen.value = false
+  schoolSearchQuery.value = s.name
+
+  // Set company for job
+  selectedCompany.value = s
+  job.value.companyId = s.id
+
+  if (!companyAdd.value) {
+    companyAdd.value = {} as CompanyAddUpdateEntity
+  }
+  companyAdd.value.id = s.id
+  companyAdd.value.name = s.name
+  companyAdd.value.address = s.address || ''
+  companyAdd.value.taxAddress = s.taxAddress || ''
+  companyAdd.value.mst = s.mst || null
+  companyAdd.value.logo = normalizeCompanyLogo(s.logo) || ''
+  companyAdd.value.organizationType = s.organizationType ?? DEFAULT_COMPANY_ORGANIZATION_TYPE
+  companyAdd.value.website = s.website || ''
+}
+
+const startCreateNewSchool = (name: string) => {
+  selectedSchool.value = null
+  isExistCompany.value = false
+  isDisplayInputCompany.value = true
+  isAddCompany.value = true
+  isCreatingNewSchool.value = true
+  isSearchDropdownOpen.value = false
+
+  if (!companyAdd.value) {
+    companyAdd.value = {} as CompanyAddUpdateEntity
+  }
+  companyAdd.value.id = null
+  companyAdd.value.name = name.trim() || ''
+  companyAdd.value.address = ''
+  companyAdd.value.taxAddress = ''
+  companyAdd.value.mst = ''
+  companyAdd.value.logo = ''
+  companyAdd.value.organizationType = DEFAULT_COMPANY_ORGANIZATION_TYPE
+  companyAdd.value.website = ''
+}
+
+const resetSchoolSelection = () => {
+  selectedSchool.value = null
+  isCreatingNewSchool.value = false
+  isDisplayInputCompany.value = false
+  isExistCompany.value = false
+  isAddCompany.value = false
+  if (companyAdd.value) {
+    companyAdd.value.id = null
+  }
+  job.value.companyId = undefined
+  schoolSearchQuery.value = ''
+  schoolSearchResults.value = []
+  isSearchDropdownOpen.value = false
+}
 
 function onMstCompanyInput(event: Event) {
   handleMstInput(event, (value) => {
@@ -2290,7 +2365,7 @@ const findCompanyByMst = async () => {
   try {
     if (!mstCompany.value || mstCompany.value.trim().length === 0) {
       useNotify({
-        message: 'Vui lòng nhập mã số thuế để tra cứu.',
+        message: 'Please enter a tax ID to look up.',
       })
 
       return
@@ -2396,7 +2471,7 @@ const findCompanyByMst = async () => {
 
           useNotify({
             message:
-              'Không tìm thấy thông tin trường học với mã số thuế đã nhập.',
+              'No school found with the provided tax ID.',
           })
         }
       } catch (vietQRError: any) {
@@ -2404,7 +2479,7 @@ const findCompanyByMst = async () => {
         console.error('VietQR lookup failed:', vietQRError)
         useNotify({
           message:
-            'Không tìm thấy thông tin trường học với mã số thuế đã nhập.',
+            'No school found with the provided tax ID.',
         })
       }
     }
@@ -2422,43 +2497,34 @@ const findCompanyByMst = async () => {
 }
 
 const confirmCreateSchool = () => {
-  if (!isDisplayInputCompany.value) {
-    useNotify({
-      message: 'Vui lòng tra cứu mã số thuế để tiếp tục.',
-    })
-
-    return
-  }
-
-  console.log(isExistCompany.value)
-  console.log(companyAdd.value.id)
-
-  if (isExistCompany.value) {
-    // Company exists in DB - just proceed
-    if (companyAdd.value && companyAdd.value.id) {
-      if (stepper.value?.hasNext) {
-        stepper.value.next()
-        wizardStep.value = 1
-      }
-    } else {
-      useNotify({
-        message: 'Vui lòng tra cứu mã số thuế để tiếp tục.',
-      })
-    }
-  } else {
-    // New company - validate and proceed
-    isAddCompany.value = true
-    const isValidCompany = validateCompanyFields()
-
-    if (!isValidCompany) {
-      return
-    }
-
+  if (selectedSchool.value && selectedSchool.value.id) {
+    // School exists
     if (stepper.value?.hasNext) {
       stepper.value.next()
       wizardStep.value = 1
     }
+    return
   }
+
+  if (isCreatingNewSchool.value) {
+    // Validate new school
+    if (!companyAdd.value?.name?.trim()) {
+      useNotify({ message: 'Please enter school or institution name.' })
+      return
+    }
+    if (!companyAdd.value?.address?.trim()) {
+      useNotify({ message: 'Please enter school address.' })
+      return
+    }
+    isAddCompany.value = true
+    if (stepper.value?.hasNext) {
+      stepper.value.next()
+      wizardStep.value = 1
+    }
+    return
+  }
+
+  useNotify({ message: 'Please select a school or add a new one to continue.' })
 }
 
 const goBackToCompanyStep = () => {
@@ -2478,7 +2544,7 @@ const addJob = async () => {
 
   // If not check display msg
   if (!agreeChecked.value) {
-    useNotify({ message: 'Hãy xác nhận điều khoản và chính sách' })
+    useNotify({ message: 'Please agree to the Terms of Service and Privacy Policy.' })
 
     return
   }
@@ -2509,8 +2575,10 @@ const addJob = async () => {
     try {
       const payload = {
         email: job.value.email || '',
-        mst: mstCompany.value || '',
+        companyId: companyAdd.value?.id || job.value.companyId || undefined,
+        mst: companyAdd.value?.mst || mstCompany.value || undefined,
         company: {
+          id: companyAdd.value?.id || job.value.companyId || undefined,
           name: companyAdd.value?.name || '',
           mst: companyAdd.value?.mst || mstCompany.value || '',
           address: companyAdd.value?.address || '',
@@ -2583,7 +2651,7 @@ const addJob = async () => {
           authStore.setUser(response.user)
 
           useNotify({
-            message: response.message || 'Đăng tin thành công!',
+            message: response.message || 'Job posted successfully!',
             type: 'success',
           })
 
@@ -2596,13 +2664,13 @@ const addJob = async () => {
 
         useNotify({ message: response.message, type: 'success' })
       } else {
-        throw new Error(response?.message || 'Đăng tải công việc thất bại. Vui lòng thử lại.')
+        throw new Error(response?.message || 'Failed to post job. Please try again.')
       }
     } catch (error: any) {
       console.error('Add job failed:', error)
       useNotify({
         message:
-          Array.isArray(error?.message) ? error.message[0] : (error?.message || 'Đăng tải công việc thất bại. Vui lòng thử lại.'),
+          Array.isArray(error?.message) ? error.message[0] : (error?.message || 'Failed to post job. Please try again.'),
       })
     }
   }
@@ -2611,14 +2679,14 @@ const addJob = async () => {
   if (isAddCompany.value && !isAddCompanySuccess) {
     confirmStepState.value = 'error'
     useNotify({
-      message: 'Đăng ký trường học thất bại. Vui lòng thử lại.',
+      message: 'Failed to register school. Please try again.',
     })
 
     return
   } else if (!isAddJobSuccess) {
     confirmStepState.value = 'error'
     useNotify({
-      message: 'Đăng tải công việc thất bại. Vui lòng thử lại.',
+      message: 'Failed to post job. Please try again.',
     })
 
     return
@@ -2668,10 +2736,10 @@ function validateCompanyFields(): boolean {
       name: 'company-name',
     }
 
-    // Hiển thị toast notification
+    // Display toast notification
     useNotify({
       type: 'error',
-      message: 'Vui lòng nhập đúng các thông tin.',
+      message: 'Please fill in all required fields correctly.',
     })
 
     scrollToFirstError(companyErrors.value, companyFieldIdMap)
@@ -2686,7 +2754,7 @@ function validateJobFields(): boolean {
   let isValid = true
 
   if (!job.value.title || job.value.title.trim().length === 0) {
-    jobErrors.value.title = 'Tên công việc không được để trống.'
+    jobErrors.value.title = 'Job title is required.'
     isValid = false
   }
 
@@ -2694,20 +2762,20 @@ function validateJobFields(): boolean {
   const cleanDetail = detailHtml.replace(/<[^>]*>/g, '').trim()
 
   if (cleanDetail.length === 0) {
-    jobErrors.value.detailDescription = 'Mô tả công việc không được để trống.'
+    jobErrors.value.detailDescription = 'Job description is required.'
     isValid = false
   }
 
   if (!job.value.deadline) {
-    jobErrors.value.deadline = 'Vui lòng chọn hạn nộp hồ sơ.'
+    jobErrors.value.deadline = 'Please select application deadline.'
     isValid = false
   } else if (isDeadlineTooEarly(job.value.deadline)) {
-    jobErrors.value.deadline = 'Hạn nộp không được sớm hơn ngày đăng.'
+    jobErrors.value.deadline = 'Deadline cannot be earlier than today.'
     isValid = false
   }
 
   if (!job.value.category || (Array.isArray(job.value.category) && job.value.category.length === 0)) {
-    jobErrors.value.category = 'Vui lòng chọn ngành nghề.'
+    jobErrors.value.category = 'Please select teaching subject.'
     isValid = false
   }
 
@@ -2716,28 +2784,28 @@ function validateJobFields(): boolean {
     (Array.isArray(job.value.typeOfEmployment) && job.value.typeOfEmployment.length === 0) ||
     (typeof job.value.typeOfEmployment === 'string' && job.value.typeOfEmployment.trim().length === 0)
   ) {
-    jobErrors.value.typeOfEmployment = 'Vui lòng chọn loại hình công việc.'
+    jobErrors.value.typeOfEmployment = 'Please select employment type.'
     isValid = false
   }
 
   if (!job.value.location) {
-    jobErrors.value.location = 'Vui lòng chọn địa điểm làm việc.'
+    jobErrors.value.location = 'Please select job location.'
     isValid = false
   }
 
   if (!job.value.salaryType) {
-    jobErrors.value.salaryType = 'Vui lòng chọn mức lương hiện tại.'
+    jobErrors.value.salaryType = 'Please select salary frequency.'
     isValid = false
   }
 
   // Validate salary min/max only if salary type is not "Thỏa thuận" (5)
   if (job.value.salaryType != 5) {
     if (!job.value.salaryMin || unformatCurrency(job.value.salaryMin).trim() === '') {
-      jobErrors.value.salaryMin = 'Vui lòng nhập mức lương tối thiểu.'
+      jobErrors.value.salaryMin = 'Please enter minimum salary.'
       isValid = false
     }
     if (!job.value.salaryMax || unformatCurrency(job.value.salaryMax).trim() === '') {
-      jobErrors.value.salaryMax = 'Vui lòng nhập mức lương tối đa.'
+      jobErrors.value.salaryMax = 'Please enter maximum salary.'
       isValid = false
     }
   }
@@ -2747,27 +2815,27 @@ function validateJobFields(): boolean {
   const cleanAddress = addressHtml.replace(/<[^>]*>/g, '').trim()
 
   if (cleanAddress.length === 0) {
-    jobErrors.value.address = 'Địa chỉ công việc không được để trống.'
+    jobErrors.value.address = 'Job location address is required.'
     isValid = false
   }
 
   if (isExistCompany.value && !job.value.companyId) {
-    jobErrors.value.companyId = 'Vui lòng chọn trường học.'
+    jobErrors.value.companyId = 'Please select a school.'
     isValid = false
   }
 
   // Email validation - required
   if (!job.value.email || job.value.email.trim().length === 0) {
-    jobErrors.value.email = 'Email không được để trống.'
+    jobErrors.value.email = 'Email address is required.'
     isValid = false
   } else if (!/^\S+@\S+\.\S+$/.test(job.value.email.trim())) {
-    jobErrors.value.email = 'Email không đúng định dạng.'
+    jobErrors.value.email = 'Invalid email format.'
     isValid = false
   }
 
   // Phone number validation - required
   if (!job.value.phoneNumber || job.value.phoneNumber.trim().length === 0) {
-    jobErrors.value.phoneNumber = 'Số điện thoại không được để trống.'
+    jobErrors.value.phoneNumber = 'Phone number is required.'
     isValid = false
   }
 
@@ -2777,19 +2845,19 @@ function validateJobFields(): boolean {
     !Array.isArray(job.value.requiredQualification) ||
     job.value.requiredQualification.length === 0
   ) {
-    jobErrors.value.requiredQualification = 'Vui lòng chọn bằng cấp.'
+    jobErrors.value.requiredQualification = 'Please select required qualification.'
     isValid = false
   }
 
   // Experience level validation - required
   if (!job.value.experienceLevel || job.value.experienceLevel === 0) {
-    jobErrors.value.experienceLevel = 'Vui lòng chọn mức độ kinh nghiệm.'
+    jobErrors.value.experienceLevel = 'Please select experience level.'
     isValid = false
   }
 
   // Benefits validation - required
   if (!job.value.benefits || (Array.isArray(job.value.benefits) && job.value.benefits.length === 0)) {
-    jobErrors.value.benefits = 'Vui lòng chọn ít nhất một phúc lợi.'
+    jobErrors.value.benefits = 'Please select at least one benefit.'
     isValid = false
   }
 
@@ -2802,24 +2870,24 @@ function validateJobFields(): boolean {
     (Array.isArray(job.value.grade) && job.value.grade.length === 0) ||
     (typeof job.value.grade === 'string' && job.value.grade.trim().length === 0)
   ) {
-    jobErrors.value.grade = 'Vui lòng chọn cấp bậc.'
+    jobErrors.value.grade = 'Please select grade level.'
     isValid = false
   }
 
-  // Kiểm tra độ dài
+  // Validate length
   if (job.value.title && job.value.title.length > 255) {
-    jobErrors.value.title = 'Tên công việc không được vượt quá 255 ký tự.'
+    jobErrors.value.title = 'Job title cannot exceed 255 characters.'
     isValid = false
   }
 
-  // Kiểm tra lương (nếu có và không phải "Thỏa thuận")
+  // Validate salary
   if (
     job.value.salaryType != 5 &&
     job.value.salaryMin &&
     job.value.salaryMax &&
     Number(unformatCurrency(job.value.salaryMin)) > Number(unformatCurrency(job.value.salaryMax))
   ) {
-    jobErrors.value.salaryMin = 'Lương tối thiểu không được lớn hơn lương tối đa.'
+    jobErrors.value.salaryMin = 'Minimum salary cannot exceed maximum salary.'
     isValid = false
   }
 
@@ -2845,10 +2913,10 @@ function validateJobFields(): boolean {
       companyId: 'company-name',
     }
 
-    // Hiển thị toast notification
+    // Display toast notification
     useNotify({
       type: 'error',
-      message: 'Vui lòng nhập đúng các thông tin.',
+      message: 'Please fill in all required fields correctly.',
     })
 
     scrollToFirstError(jobErrors.value, jobFieldIdMap)
@@ -2888,7 +2956,7 @@ function validateJobFields(): boolean {
   border: none !important;
 
   &::after {
-    content: "Không tìm thấy kết quả";
+    content: "No results found";
     display: block;
     font-size: 13px !important;
     font-weight: 400 !important;

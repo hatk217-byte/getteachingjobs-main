@@ -111,9 +111,9 @@
   width: 42px;
   height: 42px;
   border-radius: 10px;
-  background: #fff7ed;
+  background: #eff6ff;
   border: 1px solid #fed7aa;
-  color: #ea580c;
+  color: #2563eb;
   flex-shrink: 0;
 }
 
@@ -184,7 +184,7 @@
   border: 1px solid rgba(226, 232, 240, 0.9);
   border-radius: 10px;
   background: #ffffff;
-  color: #ea580c;
+  color: #2563eb;
   cursor: pointer;
   transition:
     border-color 0.18s ease,
@@ -194,13 +194,13 @@
 }
 
 .candidate-cv-edit-btn:hover {
-  border-color: rgba(249, 115, 22, 0.4);
+  border-color: rgba(37, 99, 235, 0.3);
   background: rgba(249, 115, 22, 0.08);
 }
 
 .candidate-cv-edit-btn[aria-pressed='true'] {
   border-color: rgba(249, 115, 22, 0.5);
-  background: rgba(249, 115, 22, 0.12);
+  background: rgba(37, 99, 235, 0.15);
 }
 
 .candidate-cv-field {
@@ -249,7 +249,7 @@
 
 .candidate-cv-cover-field textarea:focus {
   border-color: rgba(249, 115, 22, 0.45);
-  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.12);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
   background: #ffffff;
 }
 
@@ -308,13 +308,13 @@
 
 .candidate-primary-btn {
   border: 0;
-  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%) !important;
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%) !important;
   color: #ffffff !important;
   box-shadow: 0 4px 12px rgba(249, 115, 22, 0.25) !important;
 }
 
 .candidate-primary-btn:hover:not(:disabled) {
-  background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%) !important;
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important;
 }
 
 .candidate-primary-btn:disabled {
@@ -331,8 +331,8 @@
 
 .candidate-secondary-btn:hover:not(:disabled) {
   border-color: rgba(216, 224, 238, 0.96);
-  background: #fff7ed;
-  color: #ea580c;
+  background: #eff6ff;
+  color: #2563eb;
 }
 
 .candidate-secondary-btn:disabled {

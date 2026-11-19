@@ -576,7 +576,7 @@
               <div
                 v-if="showCropArea"
                 ref="cropArea"
-                class="absolute border-2 border-orange-500 cursor-move shadow-[0_0_0_9999px_rgba(0,0,0,0.55)] rounded-lg overflow-visible"
+                class="absolute border-2 border-blue-500 cursor-move shadow-[0_0_0_9999px_rgba(0,0,0,0.55)] rounded-lg overflow-visible"
                 :style="cropAreaStyle"
                 @mousedown.prevent="startCropDrag"
                 @touchstart.prevent="startCropDrag"
@@ -604,22 +604,22 @@
 
                 <!-- Resize handles -->
                 <div
-                  class="absolute w-4 h-4 bg-orange-500 border-2 border-white rounded-full cursor-nwse-resize shadow-md -top-2 -left-2"
+                  class="absolute w-4 h-4 bg-blue-600 border-2 border-white rounded-full cursor-nwse-resize shadow-md -top-2 -left-2"
                   @mousedown.stop.prevent="(e) => startResize('nw', e)"
                   @touchstart.stop.prevent="(e) => startResize('nw', e)"
                 />
                 <div
-                  class="absolute w-4 h-4 bg-orange-500 border-2 border-white rounded-full cursor-nesw-resize shadow-md -top-2 -right-2"
+                  class="absolute w-4 h-4 bg-blue-600 border-2 border-white rounded-full cursor-nesw-resize shadow-md -top-2 -right-2"
                   @mousedown.stop.prevent="(e) => startResize('ne', e)"
                   @touchstart.stop.prevent="(e) => startResize('ne', e)"
                 />
                 <div
-                  class="absolute w-4 h-4 bg-orange-500 border-2 border-white rounded-full cursor-nwse-resize shadow-md -bottom-2 -right-2"
+                  class="absolute w-4 h-4 bg-blue-600 border-2 border-white rounded-full cursor-nwse-resize shadow-md -bottom-2 -right-2"
                   @mousedown.stop.prevent="(e) => startResize('se', e)"
                   @touchstart.stop.prevent="(e) => startResize('se', e)"
                 />
                 <div
-                  class="absolute w-4 h-4 bg-orange-500 border-2 border-white rounded-full cursor-nesw-resize shadow-md -bottom-2 -left-2"
+                  class="absolute w-4 h-4 bg-blue-600 border-2 border-white rounded-full cursor-nesw-resize shadow-md -bottom-2 -left-2"
                   @mousedown.stop.prevent="(e) => startResize('sw', e)"
                   @touchstart.stop.prevent="(e) => startResize('sw', e)"
                 />

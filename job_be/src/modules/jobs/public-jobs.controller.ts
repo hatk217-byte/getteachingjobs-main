@@ -52,15 +52,27 @@ export class PublicJobsController {
   async freePost(
     @Body() body: PublicFreePostRequestDto,
   ): Promise<PublicFreePostResponseDto> {
-    const { email, mst, company: companyDto, job: jobDto } = body;
+    const { email, mst, companyId, company: companyDto, job: jobDto } = body;
 
     // 1) Check user by email
     const user = await this.usersService.findByEmail(email);
 
-    // 2) Check company by MST
-    const existingCompany = await this.companiesRepository.findOne({
-      where: { mst },
-    });
+    // 2) Check company: by companyId first, then by companyDto.id, then by mst, then by name
+    let existingCompany: Company | null = null;
+    const targetCompanyId = companyId || companyDto?.id;
+    if (targetCompanyId) {
+      existingCompany = await this.companiesRepository.findOne({
+        where: { id: targetCompanyId },
+      });
+    } else if (mst && mst.trim()) {
+      existingCompany = await this.companiesRepository.findOne({
+        where: { mst: mst.trim() },
+      });
+    } else if (companyDto?.name && companyDto.name.trim()) {
+      existingCompany = await this.companiesRepository.findOne({
+        where: { name: companyDto.name.trim() },
+      });
+    }
 
     // Utility to build response
     const ok = (message: string, token?: string, user?: any): PublicFreePostResponseDto => ({
@@ -75,7 +87,7 @@ export class PublicJobsController {
     const createCompany = async (): Promise<Company> => {
       const comp = this.companiesRepository.create({
         name: companyDto.name,
-        mst: companyDto.mst,
+        mst: companyDto.mst?.trim() || mst?.trim() || null,
         // For public posting, ignore incoming images to avoid abuse; set defaults
         logo: null,
         bannerImage: null,

@@ -1,5 +1,13 @@
 <template>
-  <header v-if="!headerStore.hideHeader" class="app-header site-header">
+  <header
+    v-if="!headerStore.hideHeader"
+    class="app-header site-header"
+    :class="{
+      'app-header--home': isHomePage,
+      'app-header--teacher': isTeacherSupport,
+      'app-header--scrolled': isScrolled,
+    }"
+  >
     <div class="topbar app-header__container">
       <div class="topbar-inner app-header__inner">
         <NuxtLink to="/" class="wordmark" aria-label="Home" @click="closeMobileNav">
@@ -28,8 +36,12 @@
             v-for="item in menuItems"
             :key="item.to"
             :to="item.to"
-            :class="{ 'is-active': isActive(item) }"
+            :class="{
+              'is-active': isActive(item),
+              'is-highlight': item.highlight,
+            }"
           >
+            <span v-if="item.highlight" class="highlight-dot" aria-hidden="true" />
             {{ item.label }}
           </NuxtLink>
         </nav>
@@ -45,9 +57,13 @@
               v-for="item in menuItems"
               :key="`mobile-${item.to}`"
               :to="item.to"
-              :class="{ 'is-active': isActive(item) }"
+              :class="{
+                'is-active': isActive(item),
+                'is-highlight': item.highlight,
+              }"
               @click="closeMobileNav"
             >
+              <span v-if="item.highlight" class="highlight-dot" aria-hidden="true" />
               {{ item.label }}
             </NuxtLink>
           </nav>
@@ -82,10 +98,18 @@
                 data-auth-view-target="login"
                 @click="openAuthFromMobile('login')"
               >
-                Sign In / Register
+                Login
               </button>
+              <NuxtLink
+                v-if="isTeacherSupport"
+                to="/teacher-support/your-situation"
+                class="site-mobile-menu__action site-mobile-menu__action--post"
+                @click="closeMobileNav"
+              >
+                Check Your Case
+              </NuxtLink>
               <button
-                v-if="showPostButton"
+                v-else-if="showPostButton"
                 type="button"
                 class="site-mobile-menu__action site-mobile-menu__action--post"
                 @click="handlePostJobFree"
@@ -119,12 +143,19 @@
               data-auth-view-target="login"
               @click="openAuthModal('login')"
             >
-              Sign In / Register
+              Login
             </button>
           </template>
 
+          <NuxtLink
+            v-if="isTeacherSupport"
+            to="/teacher-support/your-situation"
+            class="topbar-actions__post small-btn"
+          >
+            Check Your Case
+          </NuxtLink>
           <button
-            v-if="showPostButton"
+            v-else-if="showPostButton"
             type="button"
             class="topbar-actions__post small-btn"
             @click="handlePostJobFree"
@@ -193,15 +224,56 @@ const closeMobileNav = () => {
   isMobileNavOpen.value = false
 }
 
-const menuItems = computed(() => [
-  { label: 'Schools & Centers', to: ROUTE_PAGE.COMPANY.GET },
-  { label: 'Find Jobs', to: ROUTE_PAGE.SEARCH },
-  { label: 'Blog', to: '/blog' },
-  { label: 'Contact', to: '/contact' },
-])
+const isTeacherSupport = computed(() => {
+  return router.currentRoute.value.path.startsWith('/teacher-support')
+})
+
+const isHomePage = computed(() => {
+  return router.currentRoute.value.path === '/'
+})
+
+const isScrolled = ref(false)
+
+const handleScroll = () => {
+  if (import.meta.client) {
+    isScrolled.value = window.scrollY > 15
+  }
+}
+
+onMounted(() => {
+  if (import.meta.client) {
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    handleScroll()
+  }
+})
+
+const menuItems = computed(() => {
+  if (isTeacherSupport.value) {
+    return [
+      { label: 'Services', to: '/teacher-support#services' },
+      { label: 'Your Situation', to: '/teacher-support/your-situation' },
+      { label: 'Why Us', to: '/teacher-support/why-us' },
+      { label: 'Useful Guides', to: '/teacher-support/guides' },
+      { label: 'FAQs', to: '/teacher-support/faqs' },
+    ]
+  }
+  return [
+    { label: 'Schools & Centers', to: ROUTE_PAGE.COMPANY.GET },
+    { label: 'Find Jobs', to: ROUTE_PAGE.SEARCH },
+    { label: 'Teacher Support', to: '/teacher-support' },
+    { label: 'Teacher Guides', to: '/blog' },
+  ]
+})
 
 const isActive = (item: { to: string }) => {
-  return router.currentRoute.value.path === item.to
+  const currentPath = router.currentRoute.value.path
+  if (item.to.startsWith('/#')) {
+    return currentPath === '/' && router.currentRoute.value.hash === item.to.slice(1)
+  }
+  if (isTeacherSupport.value) {
+    return currentPath === item.to || currentPath.startsWith(item.to + '/')
+  }
+  return currentPath === item.to
 }
 
 const userRole = computed(() => authStore.user?.role)
@@ -280,6 +352,7 @@ watch(isMobileNavOpen, (open) => {
 onUnmounted(() => {
   if (import.meta.client) {
     document.body.style.overflow = ''
+    window.removeEventListener('scroll', handleScroll)
   }
 })
 </script>

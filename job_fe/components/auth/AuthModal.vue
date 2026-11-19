@@ -212,7 +212,7 @@
               :disabled="loading"
               @click="!loading && (registerForm.activeTab = 'candidate')"
             >
-              Teacher / Educator
+              Teacher
             </button>
             <button
               type="button"
@@ -223,7 +223,7 @@
               :disabled="loading"
               @click="!loading && (registerForm.activeTab = 'employer')"
             >
-              School / Employer
+              Employer
             </button>
           </div>
 

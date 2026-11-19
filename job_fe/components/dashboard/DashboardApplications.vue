@@ -122,7 +122,7 @@
       >
         <button
           type="button"
-          class="h-10 w-10 rounded-xl bg-orange-600 text-white font-extrabold text-[12px] shadow-sm"
+          class="h-10 w-10 rounded-xl bg-blue-600 text-white font-extrabold text-[12px] shadow-sm"
         >
           {{ currentPage }}
         </button>

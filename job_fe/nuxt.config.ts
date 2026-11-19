@@ -10,6 +10,7 @@ export default defineNuxtConfig({
   routeRules: {
     '/terms': { redirect: '/policy#dieu-khoan-dieu-kien' },
     '/privacy': { redirect: '/policy#chinh-sach-quyen-rieng-tu' },
+    '/teacher-support/services': { redirect: '/teacher-support#services' },
   },
 
   app: {

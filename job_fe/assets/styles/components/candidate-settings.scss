@@ -115,7 +115,7 @@
   padding: 0;
   border: 0;
   background: transparent;
-  color: #ea580c;
+  color: #2563eb;
   font-size: 13px;
   font-weight: bold;
   text-decoration: none;
@@ -124,7 +124,7 @@
 }
 
 .candidate-content .candidate-settings-edit-link:hover {
-  color: #c2410c;
+  color: #1d4ed8;
   text-decoration: underline;
 }
 
@@ -185,7 +185,7 @@
 
 .candidate-content .candidate-password-control input:focus {
   border-color: rgba(249, 115, 22, 0.45);
-  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.12);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
 }
 
 .candidate-content .candidate-settings-password-field.has-error .candidate-password-control input {
@@ -255,7 +255,7 @@
   padding: 0 18px;
   border: 0;
   border-radius: 10px;
-  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%) !important;
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%) !important;
   color: #ffffff !important;
   font-size: 14px;
   font-weight: 600;
@@ -266,7 +266,7 @@
 }
 
 .candidate-content .candidate-settings-password-actions .candidate-primary-btn:hover:not(:disabled) {
-  background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%) !important;
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important;
 }
 
 .candidate-content .candidate-settings-password-actions .candidate-primary-btn:disabled {
@@ -427,7 +427,7 @@
 
 .candidate-delete-modal-field input:focus {
   border-color: rgba(249, 115, 22, 0.45);
-  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.12);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
 }
 
 .candidate-delete-modal-terms {
@@ -451,19 +451,19 @@
   height: 18px;
   margin-top: 2px;
   flex-shrink: 0;
-  accent-color: #ea580c;
+  accent-color: #2563eb;
   cursor: pointer;
 }
 
 .candidate-delete-modal-checkbox .is-link {
   text-decoration: underline;
-  color: #ea580c;
+  color: #2563eb;
   font-weight: 600;
   transition: color 0.18s ease;
 }
 
 .candidate-delete-modal-checkbox .is-link:hover {
-  color: #c2410c;
+  color: #1d4ed8;
 }
 
 .candidate-delete-modal-error {

@@ -76,8 +76,8 @@
   gap: 8px;
   border: 1.5px dashed #fed7aa;
   border-radius: 12px;
-  background: #fffaf5;
-  color: #ea580c;
+  background: #eff6ff;
+  color: #2563eb;
   font-size: 14px;
   text-align: center;
   overflow: hidden;
@@ -85,8 +85,8 @@
 }
 
 .candidate-account-page .candidate-avatar-upload:hover .candidate-avatar-preview {
-  border-color: #f97316;
-  background: #fff7ed;
+  border-color: #2563eb;
+  background: #eff6ff;
 }
 
 .candidate-account-page .candidate-avatar-preview.has-image {
@@ -194,9 +194,9 @@
 }
 
 .candidate-account-page .candidate-field input:focus:not([readonly]) {
-  border-color: #f97316;
+  border-color: #2563eb;
   background: #ffffff;
-  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.12);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
 }
 
 .candidate-account-page .candidate-field-error {
@@ -243,7 +243,7 @@
 .candidate-account-page .candidate-select-field button[role="combobox"]:focus {
   border-color: rgba(249, 115, 22, 0.45) !important;
   background: #ffffff !important;
-  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.12) !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15) !important;
   outline: none !important;
 }
 
@@ -281,7 +281,7 @@
 .candidate-account-page .candidate-checkbox input {
   width: 18px;
   height: 18px;
-  accent-color: #ea580c;
+  accent-color: #2563eb;
 }
 
 .candidate-account-page .candidate-checkbox {
@@ -303,7 +303,7 @@
   padding: 0 18px;
   border: 0;
   border-radius: 12px;
-  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%) !important;
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%) !important;
   color: #ffffff !important;
   font-size: 14px;
   font-weight: 600;
@@ -317,7 +317,7 @@
 }
 
 .candidate-account-page .candidate-primary-btn:hover:not(:disabled) {
-  background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%) !important;
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important;
 }
 
 .candidate-account-page .candidate-primary-btn:disabled {

@@ -51,7 +51,7 @@
       transition: color 0.15s ease;
 
       &:hover {
-        color: #f97316;
+        color: #2563eb;
         text-decoration: underline;
       }
     }
@@ -113,7 +113,7 @@
   justify-content: center;
   font-size: 22px;
   font-weight: 600;
-  color: #f97316;
+  color: #2563eb;
   flex-shrink: 0;
   overflow: hidden;
   box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
@@ -154,9 +154,9 @@
   gap: 4px;
   padding: 2.5px 9px;
   border-radius: 999px;
-  background: #ecfdf5;
-  border: 1px solid #a7f3d0;
-  color: #059669;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #2563eb;
   font-size: 12px;
   font-weight: 500;
   line-height: 1;
@@ -252,10 +252,10 @@
   &:hover {
     border-color: #cbd5e1;
     background: #f8fafc;
-    color: #f97316;
+    color: #2563eb;
 
     svg {
-      color: #f97316;
+      color: #2563eb;
     }
   }
 
@@ -277,7 +277,7 @@
   min-height: 44px;
   padding: 0 24px;
   border-radius: 10px;
-  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%) !important;
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
   color: #ffffff !important;
   font-size: 14.5px;
   font-weight: 700;
@@ -289,9 +289,9 @@
   white-space: nowrap;
 
   &:hover {
-    background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%) !important;
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%) !important;
     transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(249, 115, 22, 0.45);
+    box-shadow: 0 6px 18px rgba(220, 38, 38, 0.35);
   }
 }
 
@@ -347,12 +347,12 @@
 }
 
 .company-vldl-website-link {
-  color: #f97316;
+  color: #2563eb;
   font-weight: 600;
   text-decoration: none;
 
   &:hover {
-    color: #ea580c;
+    color: #1d4ed8;
     text-decoration: underline;
   }
 }
@@ -453,7 +453,7 @@
 
 .company-single-video:hover .company-single-video-play {
   transform: scale(1.1);
-  background: #ea580c;
+  background: #2563eb;
 }
 
 /* Sidebar: Tổng quan nhà tuyển dụng */
@@ -562,7 +562,7 @@
     box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
 
     .hiring-job-title {
-      color: #f97316;
+      color: #2563eb;
     }
   }
 }
@@ -583,7 +583,7 @@
   align-items: center;
   justify-content: center;
   font-weight: 800;
-  color: #f97316;
+  color: #2563eb;
   flex-shrink: 0;
   overflow: hidden;
 
@@ -649,7 +649,7 @@
 .hiring-job-salary {
   font-size: 13px;
   font-weight: 700;
-  color: #16a34a;
+  color: #2563eb;
   flex-shrink: 0;
 }
 
@@ -703,11 +703,11 @@
   }
 
   &.is-active {
-    background: linear-gradient(135deg, #f97316 0%, #ea580c 100%) !important;
-    border-color: #ea580c !important;
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
+    border-color: #1d4ed8 !important;
     color: #ffffff !important;
     font-weight: 700;
-    box-shadow: 0 2px 8px rgba(249, 115, 22, 0.3);
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
   }
 
   &:disabled {
@@ -734,7 +734,7 @@
   gap: 6px;
   font-size: 13px;
   font-weight: 600;
-  color: #f97316;
+  color: #2563eb;
   text-decoration: none;
   transition: color 0.15s ease;
 
@@ -743,7 +743,7 @@
   }
 
   &:hover {
-    color: #ea580c;
+    color: #1d4ed8;
     text-decoration: underline;
 
     svg {
@@ -802,7 +802,7 @@
   }
 
   a {
-    color: #f97316;
+    color: #2563eb;
     text-decoration: underline;
   }
 }

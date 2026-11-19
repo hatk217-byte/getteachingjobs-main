@@ -60,31 +60,12 @@ export class CompaniesService {
       );
     }
 
-    if (!data.logo || data.logo.trim() === '') {
-      throw new BadRequestException(
-        'Logo công ty là bắt buộc và không được để trống',
-      );
-    }
-
-    // Mã số thuế không được để trống when creating a new company
-    if (!data.mst || data.mst.trim() === '') {
-      throw new BadRequestException('Mã số thuế là bắt buộc và không được để trống');
-    }
-
-    const existingCompany = await this.companiesRepository.findOne({
-      where: { name: data.name.trim() },
-    });
-
-    if (existingCompany) {
-      throw new ConflictException('Tên công ty đã tồn tại');
-    }
-
     const { companyImages, mst, ...companyData } = data;
 
     // Set isWaiting = true by default (requires admin approval)
     companyData.isWaiting = true;
 
-    const normalizedMst = canonicalMst(mst);
+    const normalizedMst = mst && mst.trim() !== '' ? canonicalMst(mst) : null;
 
     const company = this.companiesRepository.create({
       ...companyData,

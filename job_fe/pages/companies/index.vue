@@ -12,9 +12,9 @@
           class="search-card school-directory-search-card"
           @submit.prevent="performSearch"
         >
-          <div class="search-row search-row-directory">
+          <div class="search-row-directory">
             <!-- 1. Keyword Input -->
-            <div class="search-item search-item-directory">
+            <div class="search-item-directory">
               <span class="search-item-icon" aria-hidden="true">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
                   <path d="M21 21L16.65 16.65M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
@@ -29,7 +29,7 @@
             </div>
 
             <!-- 2. Location Select -->
-            <div class="search-item search-item-directory">
+            <div class="search-item-directory">
               <span class="search-item-icon" aria-hidden="true">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
                   <path d="M12 21C15.5 17.2 18 14.1 18 10.5C18 6.91015 15.3137 4 12 4C8.68629 4 6 6.91015 6 10.5C6 14.1 8.5 17.2 12 21Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
@@ -51,7 +51,7 @@
             </div>
 
             <!-- 3. Organization Type Select -->
-            <div class="search-item search-item-directory">
+            <div class="search-item-directory">
               <span class="search-item-icon" aria-hidden="true">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
                   <path d="M4 7H20M7 4V7M17 4V7M6 11H18V18H6V11Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
@@ -121,13 +121,14 @@
               <!-- 1. Centered Logo -->
               <div
                 class="school-company-logo"
-                :class="{ 'logo-has-image': !!company.logo }"
+                :class="{ 'logo-has-image': !!company.logo && !logoErrorMap[company.id] }"
               >
                 <img
-                  v-if="company.logo"
-                  :src="company.logo"
+                  v-if="company.logo && !logoErrorMap[company.id]"
+                  :src="normalizeCompanyLogo(company.logo)"
                   :alt="`${company.name} logo`"
                   loading="lazy"
+                  @error="onLogoError(company.id)"
                 >
                 <template v-else>
                   {{ getCompanyLogoInitials(company.name) }}
@@ -267,8 +268,23 @@ const route = useRoute()
 
 const companies = ref<CompanyEntity[]>([])
 const loading = ref(false)
+const logoErrorMap = ref<Record<number, boolean>>({})
 
-const pageSize = 12
+const onLogoError = (id: number) => {
+  logoErrorMap.value[id] = true
+}
+
+const normalizeCompanyLogo = (logo: string | null | undefined): string => {
+  if (!logo) return ''
+  if (logo.startsWith('http://') || logo.startsWith('https://') || logo.startsWith('data:')) {
+    return logo
+  }
+  const config = useRuntimeConfig()
+  const apiBase = (config.public?.apiBase as string) || 'http://localhost:8080'
+  return `${apiBase}${logo.startsWith('/') ? '' : '/'}${logo}`
+}
+
+const pageSize = 8
 const currentPage = ref(1)
 
 const searchParams = ref<{
@@ -386,11 +402,13 @@ const getCompanySubtitle = (company: CompanyEntity): string => {
 }
 
 const getCompanyLogoInitials = (name: string): string => {
-  const words = name.trim().split(/\s+/).filter(Boolean)
+  if (!name) return 'SC'
+  const clean = name.replace(/^(công ty tnhh|công ty cp|công ty cổ phần|công ty trách nhiệm hữu hạn|hệ thống trường|trường)\s+/i, '').trim()
+  const words = (clean || name).trim().split(/\s+/).filter(Boolean)
   if (words.length >= 2) {
     return `${words[0].charAt(0)}${words[1].charAt(0)}`.toUpperCase()
   }
-  return (words[0] || 'C').slice(0, 2).toUpperCase()
+  return (clean || name || 'SC').slice(0, 2).toUpperCase()
 }
 
 onMounted(() => {

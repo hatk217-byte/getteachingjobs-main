@@ -3,15 +3,20 @@ import { IsArray, IsDateString, IsEmail, IsNotEmpty, IsNumber, IsOptional, IsStr
 import { Transform, Type } from 'class-transformer';
 
 export class PublicCompanyDto {
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsNumber()
+  id?: number;
+
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
   name: string;
 
-  @ApiProperty()
-  @IsNotEmpty()
+  @ApiProperty({ required: false })
+  @IsOptional()
   @IsString()
-  mst: string;
+  mst?: string;
 
   @ApiProperty({ required: false })
   @IsOptional()
@@ -145,10 +150,15 @@ export class PublicFreePostRequestDto {
   @IsEmail()
   email: string;
 
-  @ApiProperty()
-  @IsNotEmpty()
+  @ApiProperty({ required: false })
+  @IsOptional()
   @IsString()
-  mst: string;
+  mst?: string;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsNumber()
+  companyId?: number;
 
   @ApiProperty({ type: PublicCompanyDto })
   @ValidateNested()

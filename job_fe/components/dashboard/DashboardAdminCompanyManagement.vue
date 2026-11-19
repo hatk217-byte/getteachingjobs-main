@@ -1105,8 +1105,8 @@ function jobStatusDisplayClass(j: any): string {
   const s = (j.status || '').toUpperCase()
   if (s === 'APPROVED') return 'bg-blue-100 text-blue-800'
   if (s === 'REJECTED') return 'bg-red-100 text-red-800'
-  if (isJobPendingReview(s)) return 'bg-orange-100 text-orange-800'
-  return 'bg-orange-100 text-orange-800'
+  if (isJobPendingReview(s)) return 'bg-amber-50 text-amber-700 border border-amber-200'
+  return 'bg-amber-50 text-amber-700 border border-amber-200'
 }
 function formatJobDate(date: Date | string | undefined) {
   if (!date) return '–'

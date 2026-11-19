@@ -20,9 +20,9 @@ export class Company {
   @Column()
   name: string;
 
-  @ApiProperty({ description: 'Company mst' })
-  @Column()
-  mst: string;
+  @ApiProperty({ description: 'Company mst', required: false, nullable: true })
+  @Column({ nullable: true })
+  mst: string | null;
 
   @ApiProperty({ description: 'Company logo' })
   @Column({ nullable: true })

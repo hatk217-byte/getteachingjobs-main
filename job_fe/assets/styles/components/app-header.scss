@@ -6,8 +6,40 @@
   z-index: 50;
   background: rgba(255, 255, 255, 0.88);
   border-bottom: 1px solid rgba(226, 232, 240, 0.8);
-  backdrop-filter: blur(16px) saturate(1.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
   transition: box-shadow 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+
+  &--home,
+  &--teacher {
+    background: #edf4fe;
+    border-bottom: 1px solid rgba(219, 234, 254, 0.65);
+    box-shadow: none;
+
+    &.app-header--scrolled {
+      background: rgba(255, 255, 255, 0.92);
+      border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+      box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+    }
+  }
+
+  &--teacher {
+    .topbar-actions__post {
+      background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+      border-color: #1d4ed8;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.22);
+
+      &:hover {
+        background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+        border-color: #1e40af;
+      }
+    }
+  }
+
+  &--scrolled {
+    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+  }
 
   &__container,
   .topbar.app-header__container {
@@ -92,6 +124,7 @@
     }
 
     &__auth {
+      font-family: 'Plus Jakarta Sans', var(--font-sans);
       background: #ffffff;
       color: #1e293b;
       border: 1.5px solid #e2e8f0;
@@ -106,18 +139,19 @@
     }
 
     &__post {
-      background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+      font-family: 'Plus Jakarta Sans', var(--font-sans);
+      background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
       color: #ffffff;
-      border: 1.5px solid #f97316;
-      font-weight: 700;
-      box-shadow: 0 4px 14px rgba(249, 115, 22, 0.25);
+      border: 1.5px solid #dc2626;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12), 0 2px 4px rgba(220, 38, 38, 0.18);
 
       &:hover {
-        background: #ea580c;
-        border-color: #ea580c;
+        background: #b91c1c;
+        border-color: #b91c1c;
         color: #ffffff;
         transform: translateY(-1px);
-        box-shadow: 0 6px 18px rgba(249, 115, 22, 0.35);
+        box-shadow: 0 6px 18px rgba(15, 23, 42, 0.16), 0 4px 8px rgba(220, 38, 38, 0.24);
       }
     }
 
@@ -150,11 +184,12 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    max-width: min(560px, calc(100% - 520px));
+    max-width: min(660px, calc(100% - 460px));
     transform: translate(-50%, -50%);
     pointer-events: none;
 
     a {
+      font-family: 'Plus Jakarta Sans', var(--font-sans);
       pointer-events: auto;
       display: inline-flex;
       align-items: center;
@@ -164,9 +199,9 @@
       border-radius: 8px;
       font-size: 14.5px;
       color: #475569;
-      font-weight: 500;
+      font-weight: 550;
       position: relative;
-      transition: color 0.2s ease, background 0.2s ease;
+      transition: all 0.2s ease;
       white-space: nowrap;
       letter-spacing: -0.01em;
       text-decoration: none;
@@ -179,7 +214,7 @@
         right: 16px;
         height: 2px;
         border-radius: 2px;
-        background: #16a34a;
+        background: #1d4ed8;
         transform: scaleX(0);
         transform-origin: left;
         transition: transform 0.25s var(--ease-out);
@@ -196,7 +231,7 @@
 
       &.is-active,
       &.router-link-active {
-        color: #16a34a;
+        color: #1d4ed8;
         font-weight: 600;
         background: transparent;
 
@@ -225,19 +260,20 @@
   }
 
   .wordmark-main {
+    font-family: 'Plus Jakarta Sans', var(--font-sans);
     font-size: 21px;
     font-weight: 800;
     letter-spacing: -0.035em;
     color: #0f172a;
     text-transform: none;
-    font-family: inherit;
   }
 
   .wordmark-dot {
+    font-family: 'Plus Jakarta Sans', var(--font-sans);
     font-size: 14px;
-    font-weight: 800;
+    font-weight: 700;
     letter-spacing: -0.02em;
-    color: #16a34a;
+    color: #2563eb;
   }
 
   &__backdrop {
@@ -375,21 +411,26 @@
         }
 
         &--post {
+          font-family: 'Plus Jakarta Sans', var(--font-sans);
           color: #ffffff;
-          background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
-          box-shadow: 0 4px 12px rgba(249, 115, 22, 0.25);
-          font-weight: 700;
+          background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+          box-shadow: 0 4px 12px rgba(220, 38, 38, 0.26);
+          font-weight: 600;
 
           &:hover {
-            background: #ea580c;
+            background: #b91c1c;
           }
         }
 
         &--primary {
           color: #ffffff;
-          background: #16a34a;
-          box-shadow: 0 4px 12px rgba(22, 163, 74, 0.22);
-          font-weight: 700;
+          background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+          box-shadow: 0 4px 12px rgba(220, 38, 38, 0.26);
+          font-weight: 600;
+
+          &:hover {
+            background: #b91c1c;
+          }
         }
 
         &--secondary {

@@ -6,8 +6,8 @@
           class="search-card jobs-directory-search-card"
           @submit.prevent="performSearch"
         >
-          <div class="search-row search-row-directory jobs-search-row">
-            <div class="search-item search-item-directory jobs-search-item jobs-search-item-keyword">
+          <div class="jobs-search-row">
+            <div class="jobs-search-item jobs-search-item-keyword">
               <span class="search-item-icon" aria-hidden="true">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
                   <path d="M21 21L16.65 16.65M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
@@ -21,7 +21,7 @@
               >
             </div>
 
-            <div class="search-item search-item-directory jobs-search-item jobs-search-item-select">
+            <div class="jobs-search-item jobs-search-item-select">
               <span class="search-item-icon" aria-hidden="true">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
                   <path d="M4 7H20M7 4V7M17 4V7M6 11H20V18H6V11Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
@@ -69,7 +69,7 @@
               <span class="arr">▾</span>
             </div>
 
-            <div class="search-item search-item-directory jobs-search-item jobs-search-item-select">
+            <div class="jobs-search-item jobs-search-item-select">
               <span class="search-item-icon" aria-hidden="true">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
                   <path d="M12 21C15.5 17.2 18 14.1 18 10.5C18 6.91015 15.3137 4 12 4C8.68629 4 6 6.91015 6 10.5C6 14.1 8.5 17.2 12 21Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
@@ -303,9 +303,8 @@
 
                   <div class="job-row-side">
                     <span v-if="shouldShowUrgentTag(job)" class="job-fire-icon" title="Urgent" aria-label="Urgent">
-                      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true">
-                        <path fill="#ea580c" d="M12 23c-4.97 0-9-4.03-9-9 0-4.92 3.84-9.36 6.89-12.06.4-.35.99-.21 1.2.29.98 2.27 2.7 4.09 3.91 5.37.28.29.74.22.92-.14.73-1.42 1.61-3.66 1.15-5.96-.08-.41.28-.78.7-.72 4.16.59 7.23 4.8 7.23 8.22 0 4.97-4.03 9-9 9z" />
-                        <path fill="#f59e0b" d="M11.5 17.5c1.93 0 3.5-1.57 3.5-3.5 0-1.88-1.55-3.41-3.23-4.88-.23-.2-.58-.09-.67.19-.51 1.63-1.6 3.19-1.6 4.69 0 1.93 1.57 3.5 2 3.5z" />
+                      <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" class="text-red-500" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M12.963 2.286a.75.75 0 00-1.071-.136 9.742 9.742 0 00-3.539 6.177 7.547 7.547 0 01-1.705-1.715.75.75 0 00-1.152-.082A9 9 0 1015.68 4.534a7.46 7.46 0 01-2.717-2.248zM15.75 14.25a3.75 3.75 0 11-7.313-1.172c.628.465 1.35.81 2.133 1a5.99 5.99 0 011.925-3.546 3.75 3.75 0 013.255 3.718z" clip-rule="evenodd" />
                       </svg>
                     </span>
                     <span v-else />
@@ -374,7 +373,7 @@
             <!-- Empty state -->
             <div v-else class="jobs-empty-state">
               <div class="empty-icon-circle">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ea580c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                   <circle cx="11" cy="11" r="8" />
                   <line x1="21" y1="21" x2="16.65" y2="16.65" />
                   <line x1="8" y1="11" x2="14" y2="11" />

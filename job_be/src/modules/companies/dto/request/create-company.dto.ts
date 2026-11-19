@@ -34,20 +34,20 @@ export class CreateCompanyDto {
   @Transform(({ value }) => value?.trim())
   name: string;
 
-  @ApiProperty({ description: 'MST type ', example: '123456789' })
+  @ApiProperty({ description: 'MST type ', example: '123456789', required: false })
+  @IsOptional()
   @IsString({ message: 'Mã số thuế phải là chuỗi' })
-  @IsNotEmpty({ message: 'Mã số thuế không được để trống' })
-  @Transform(({ value }) => value?.trim())
-  mst: string;
+  @Transform(({ value }) => value?.trim() || null)
+  mst?: string | null;
 
   @ApiProperty({
     description: 'Company logo',
     example: 'https://example.com/logo.png',
-    required: true,
+    required: false,
   })
+  @IsOptional()
   @IsString({ message: 'Logo phải là chuỗi' })
-  @IsNotEmpty({ message: 'Logo không được để trống' })
-  logo: string;
+  logo?: string | null;
 
   @ApiProperty({ description: 'Organization type ID', example: 1 })
   @IsNumber({}, { message: 'Loại hình tổ chức phải là số' })

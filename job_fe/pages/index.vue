@@ -8,8 +8,18 @@
     >
       <div class="hero-shell">
         <div class="hero-banner" data-hero>
+          <div class="hero-orbits" aria-hidden="true">
+            <span data-parallax-depth="26" data-parallax-center />
+            <span data-parallax-depth="20" data-parallax-center />
+            <span data-parallax-depth="14" data-parallax-center />
+          </div>
+
           <div class="hero-copy">
-            <h1>Get teaching jobs <span class="highlight-text">in Vietnam</span></h1>
+            <div class="hero-kicker">
+              <span class="kicker-dot" />
+              <span>Your Gateway to Teaching in Vietnam</span>
+            </div>
+            <h1>Get teaching jobs <span class="highlight-text"><span class="highlight-in">in</span> <em class="highlight-vietnam">Vietnam</em></span></h1>
             <p>
               Over <strong>700+</strong> teaching positions, <strong>200+</strong> verified international schools & language academies across Vietnam.
             </p>
@@ -28,19 +38,78 @@
                     placeholder="Job title, keywords, subject..."
                   >
                 </div>
-                <div class="search-item search-item-hero">
-                  <USelectMenu
-                    v-model="location"
-                    :items="heroLocationItems"
-                    value-key="value"
-                    variant="none"
-                    :placeholder="$t('home.search.placeholderLocation')"
-                    :search-input="{ placeholder: 'Search city or province...', variant: 'none' }"
-                    :ui="heroLocationSelectUi"
-                    class="hero-location-select"
-                    @update:open="onHeroLocationMenuOpenChange"
-                  />
-                  <span class="arr">▾</span>
+                <div ref="locationDropdownRef" class="search-item search-item-hero search-item-location">
+                  <input
+                    v-model="locationQuery"
+                    type="text"
+                    placeholder="City / Province"
+                    autocomplete="off"
+                    @focus="onLocationFocus"
+                    @input="onLocationInput"
+                    @keydown.down.prevent="navigateLocationList(1)"
+                    @keydown.up.prevent="navigateLocationList(-1)"
+                    @keydown.enter.prevent="selectHighlightedLocation"
+                    @keydown.escape="isLocationOpen = false"
+                  >
+                  <button
+                    v-if="locationQuery"
+                    type="button"
+                    class="clear-location-btn"
+                    title="Clear location"
+                    @click.stop="clearLocation"
+                  >
+                    ✕
+                  </button>
+                  <span class="arr" @click.stop="toggleLocationDropdown">▾</span>
+
+                  <!-- Smart Location Popover -->
+                  <div v-if="isLocationOpen" class="hero-location-popover">
+                    <!-- Quick Hubs Section -->
+                    <div class="popover-hubs-section">
+                      <div class="popover-section-label">
+                        <span>Popular Hubs</span>
+                      </div>
+                      <div class="popover-hubs-chips">
+                        <button
+                          v-for="hub in majorHubChips"
+                          :key="hub.label"
+                          type="button"
+                          class="hub-chip"
+                          :class="{
+                            'is-active': (hub.value === '' && !locationQuery) || (hub.value && (location === hub.value || locationQuery.toLowerCase() === hub.label.toLowerCase()))
+                          }"
+                          @mousedown.prevent="selectHub(hub)"
+                        >
+                          {{ hub.label }}
+                        </button>
+                      </div>
+                    </div>
+
+                    <!-- Divider & All Cities List -->
+                    <div class="popover-cities-section">
+                      <div class="popover-section-label">
+                        <span>{{ locationQuery.trim() ? 'Search Results' : 'All Cities & Provinces (A-Z)' }}</span>
+                      </div>
+                      <div class="popover-cities-list">
+                        <div
+                          v-for="(item, idx) in filteredHeroLocations"
+                          :key="item.value"
+                          class="hero-location-dropdown-item"
+                          :class="{
+                            'is-selected': location === item.value,
+                            'is-highlighted': highlightedIndex === idx
+                          }"
+                          @mousedown.prevent="selectLocation(item)"
+                        >
+                          <span class="city-name">{{ item.label }}</span>
+                          <span v-if="location === item.value" class="city-check">✓</span>
+                        </div>
+                        <div v-if="filteredHeroLocations.length === 0" class="hero-location-dropdown-empty">
+                          No matching cities found
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <button type="submit" class="primary-btn hero-search-submit">
                   <span>Search</span>
@@ -57,10 +126,10 @@
                 <span class="meta-label">Quick search:</span>
                 <button
                   v-for="tag in heroQuickTags"
-                  :key="tag.value"
+                  :key="tag.label"
                   type="button"
                   class="popular-tag-btn"
-                  @click="onCategoryClick(tag.value)"
+                  @click="onQuickTagClick(tag)"
                 >
                   {{ tag.label }}
                 </button>
@@ -121,13 +190,254 @@
       </div>
     </section>
 
-    <!-- Featured Job Offers -->
-    <section class="section-block latest-jobs-block py-10 relative z-10">
+    <!-- Urgent Hiring -->
+    <section
+      class="section-block urgent-jobs-block py-10 relative z-10"
+      data-animate
+      style="--delay: 0.04s"
+    >
       <div class="container">
         <div class="section-head section-head-center">
-          <h2>Latest Teaching Jobs</h2>
+          <h2>Urgent Hiring</h2>
           <p class="section-subtitle">
-            Updated hourly from accredited schools and institutions nationwide.
+            High-priority teaching positions with immediate start dates.
+          </p>
+        </div>
+
+        <div class="job-frame job-frame-urgent">
+          <div class="job-list job-list-urgent">
+            <article
+              v-for="(job, index) in urgentLatestJobs"
+              :key="job.id"
+              class="job-row job-row-urgent"
+              data-animate
+              :style="{ '--delay': `${getUrgentJobRowDelay(index)}s` }"
+              @click="viewJob(job)"
+            >
+              <div
+                class="job-logo"
+                :class="{ 'logo-has-image': !!job.companyLogo }"
+              >
+                <img
+                  v-if="job.companyLogo"
+                  :src="job.companyLogo"
+                  :alt="`${job.companyName} logo`"
+                  loading="lazy"
+                >
+                <template v-else>
+                  {{ (job.companyName || 'CT').slice(0, 2).toUpperCase() }}
+                </template>
+              </div>
+
+              <div class="job-row-content">
+                <NuxtLink
+                  :to="`/jobs/${job.id}`"
+                  class="job-row-title-link"
+                  @click.stop
+                >
+                  <h3 class="job-row-title">{{ job.title }}</h3>
+                </NuxtLink>
+
+                <div class="job-row-company">
+                  <NuxtLink
+                    v-if="job.companyId"
+                    :to="`/companies/${job.companyId}`"
+                    class="jobs-employer-link"
+                    @click.stop
+                  >
+                    {{ job.companyName }}
+                  </NuxtLink>
+                  <span v-else>{{ job.companyName }}</span>
+                </div>
+
+                <div class="job-row-meta">
+                  <span v-if="getFullLocationText(job)" class="meta-item">
+                    {{ truncateText(getFullLocationText(job), 32) }}
+                  </span>
+                  <span v-if="getEmploymentTypeText(job)" class="meta-item">
+                    {{ getEmploymentTypeText(job) }}
+                  </span>
+                  <span v-if="getExperienceText(job) && getExperienceText(job) !== 'Không yêu cầu'" class="meta-item">
+                    {{ getExperienceText(job) }}
+                  </span>
+                  <span v-if="job.createdAt" class="meta-item meta-item-date">
+                    {{ timeAgo(job.createdAt) }}
+                  </span>
+                </div>
+
+                <div class="job-row-salary">
+                  {{ formatSalaryRange(job) }}
+                </div>
+              </div>
+
+              <div class="job-row-side">
+                <span class="job-fire-icon" title="Urgent" aria-label="Urgent">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" class="text-red-500" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M12.963 2.286a.75.75 0 00-1.071-.136 9.742 9.742 0 00-3.539 6.177 7.547 7.547 0 01-1.705-1.715.75.75 0 00-1.152-.082A9 9 0 1015.68 4.534a7.46 7.46 0 01-2.717-2.248zM15.75 14.25a3.75 3.75 0 11-7.313-1.172c.628.465 1.35.81 2.133 1a5.99 5.99 0 011.925-3.546 3.75 3.75 0 013.255 3.718z" clip-rule="evenodd" />
+                  </svg>
+                </span>
+
+                <NuxtLink
+                  :to="`/jobs/${job.id}`"
+                  class="job-row-apply"
+                  @click.stop
+                >
+                  <span>Apply Now</span>
+                  <span class="apply-arrow" aria-hidden="true">→</span>
+                </NuxtLink>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="section-footer-cta">
+          <button
+            type="button"
+            class="section-cta-link"
+            @click="viewAllClick({ postType: 'Urgent' })"
+          >
+            <span>View All Urgent Jobs</span>
+            <span class="cta-arrow" aria-hidden="true">→</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Popular Categories -->
+    <section class="section-block popular-categories-block py-10 relative z-10">
+      <div class="container">
+        <div class="section-head section-head-center">
+          <h2>Popular Teaching Categories</h2>
+          <p class="section-subtitle">
+            Explore 700+ diverse teaching opportunities across disciplines and grade levels
+          </p>
+        </div>
+
+        <div class="categories-grid">
+          <NuxtLink
+            v-for="cat in featuredCategories"
+            :key="cat.id"
+            :to="{ path: '/jobs/search', query: { category: cat.id } }"
+            class="category-card"
+          >
+            <div class="category-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6" v-html="cat.iconSvg" />
+            </div>
+            <div class="category-info">
+              <h3 class="category-name">{{ cat.name }}</h3>
+              <span class="category-count">({{ cat.countText }})</span>
+            </div>
+          </NuxtLink>
+        </div>
+      </div>
+    </section>
+
+    <!-- Teacher Support & Services -->
+    <section
+      id="teacher-support"
+      class="section-block teacher-support-block py-10 relative z-10"
+      data-animate
+      style="--delay: 0.08s"
+    >
+      <div class="container">
+        <div class="section-head section-head-center">
+          <span class="support-kicker">✦ Dedicated Educator Care</span>
+          <h2>Teacher Support & Services</h2>
+          <p class="section-subtitle">
+            From verified job placement and visa applications to consular legalization, dedicated and professional support for educators in Vietnam.
+          </p>
+        </div>
+
+        <div class="teacher-support-grid">
+          <!-- 1. Job Placement & School Matching (Hot & Highlighted) -->
+          <NuxtLink to="/teacher-support/services/job-placement" class="teacher-support-card card-highlight">
+            <div class="support-card-top">
+              <div class="support-card-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+                  <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                </svg>
+              </div>
+              <span class="support-card-badge support-badge-hot">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M12.963 2.286a.75.75 0 0 0-1.071-.136 9.742 9.742 0 0 0-3.539 6.177A7.547 7.547 0 0 1 6.6 7.25a.75.75 0 0 0-1.127.876c1.07 2.766 2.455 4.542 2.773 6.643a6.837 6.837 0 0 0-.47 1.838A5.998 5.998 0 0 1 6 12a.75.75 0 0 0-1.393-.377C4.195 12.43 3.75 13.914 3.75 15.5c0 4.556 3.694 8.25 8.25 8.25s8.25-3.694 8.25-8.25a8.21 8.21 0 0 0-2.316-5.787 10.74 10.74 0 0 0-4.971-7.427ZM12 21.25c-3.175 0-5.75-2.575-5.75-5.75 0-.825.176-1.61.492-2.319.648 1.487 1.868 2.658 3.385 3.197a.75.75 0 0 0 .97-.733c-.02-.857.172-1.748.583-2.6.438-.908 1.11-1.728 1.995-2.427A6.71 6.71 0 0 1 17.75 15.5c0 3.175-2.575 5.75-5.75 5.75Z" clip-rule="evenodd" />
+                </svg>
+                <span>Hot Service</span>
+              </span>
+            </div>
+            <h3 class="support-card-title">Job Placement & School Matching</h3>
+            <p class="support-card-desc">
+              Direct connections with verified international, bilingual, and English centers across Vietnam with transparent contracts and 0% agent fee.
+            </p>
+            <div class="support-card-link">
+              <span>Explore School Placement</span>
+              <span class="card-arrow" aria-hidden="true">→</span>
+            </div>
+          </NuxtLink>
+
+          <!-- 2. Vietnam Visa Application -->
+          <NuxtLink to="/teacher-support/services/visa-service" class="teacher-support-card">
+            <div class="support-card-top">
+              <div class="support-card-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                  <polyline points="14 2 14 8 20 8" />
+                  <line x1="16" y1="13" x2="8" y2="13" />
+                  <line x1="16" y1="17" x2="8" y2="17" />
+                  <circle cx="10" cy="13" r="2" />
+                </svg>
+              </div>
+              <span class="support-card-badge">Fast Track Available</span>
+            </div>
+            <h3 class="support-card-title">Vietnam Visa Application</h3>
+            <p class="support-card-desc">
+              Official DN1 business visa invitation letters, working e-visas, and stay regularization without leaving Vietnam.
+            </p>
+            <div class="support-card-link">
+              <span>Explore Visa Application</span>
+              <span class="card-arrow" aria-hidden="true">→</span>
+            </div>
+          </NuxtLink>
+
+          <!-- 3. Apostille & Consular Legalization -->
+          <NuxtLink to="/teacher-support/services/consular-legalization" class="teacher-support-card">
+            <div class="support-card-top">
+              <div class="support-card-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="8" r="6" />
+                  <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11" />
+                </svg>
+              </div>
+              <span class="support-card-badge">MOFA Recognized</span>
+            </div>
+            <h3 class="support-card-title">Apostille & Consular Legalization</h3>
+            <p class="support-card-desc">
+              Apostille guidance, consular legalization routing, and certified translations for degrees, transcripts, TEFL, and police checks.
+            </p>
+            <div class="support-card-link">
+              <span>Explore Legalization</span>
+              <span class="card-arrow" aria-hidden="true">→</span>
+            </div>
+          </NuxtLink>
+        </div>
+
+        <div class="teacher-support-banner">
+          <span class="banner-text">Teaching in Vietnam and need dedicated document guidance? Check your situation or explore all services.</span>
+          <NuxtLink to="/teacher-support#services" class="banner-btn">
+            <span>View All Services</span>
+            <span aria-hidden="true">→</span>
+          </NuxtLink>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Teaching Jobs (Original Design) -->
+    <section class="section-block latest-jobs-block py-10 relative z-10" data-animate style="--delay: 0.08s">
+      <div class="container">
+        <div class="section-head section-head-center">
+          <h2>Featured Teaching Jobs</h2>
+          <p class="section-subtitle">
+            Explore top opportunities from accredited schools and institutions nationwide.
           </p>
         </div>
 
@@ -229,145 +539,67 @@
       </div>
     </section>
 
-    <!-- Popular Categories -->
-    <section class="section-block popular-categories-block py-10 relative z-10">
-      <div class="container">
-        <div class="section-head section-head-center">
-          <h2>Popular Teaching Categories</h2>
-          <p class="section-subtitle">
-            Explore 700+ diverse teaching opportunities across disciplines and grade levels
-          </p>
-        </div>
-
-        <div class="categories-grid">
-          <NuxtLink
-            v-for="cat in featuredCategories"
-            :key="cat.id"
-            :to="{ path: '/jobs/search', query: { category: cat.id } }"
-            class="category-card"
-          >
-            <div class="category-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6" v-html="cat.iconSvg" />
-            </div>
-            <div class="category-info">
-              <h3 class="category-name">{{ cat.name }}</h3>
-              <span class="category-count">({{ cat.countText }})</span>
-            </div>
-          </NuxtLink>
-        </div>
-      </div>
-    </section>
-
-    <!-- Urgent Jobs -->
+    <!-- Top Hiring Schools & Centers -->
     <section
-      class="section-block urgent-jobs-block py-10 relative z-10"
+      v-if="topHiringInstitutions.length"
+      class="section-block top-institutions-block py-10 relative z-10"
       data-animate
-      style="--delay: 0.08s"
+      style="--delay: 0.04s"
     >
       <div class="container">
-        <div class="section-head section-head-center">
-          <h2>Urgent Hiring</h2>
-          <p class="section-subtitle">
-            High-priority teaching positions with immediate start dates.
-          </p>
-        </div>
-
-        <div class="job-frame job-frame-urgent">
-          <div class="job-list job-list-urgent">
-            <article
-              v-for="(job, index) in urgentLatestJobs"
-              :key="job.id"
-              class="job-row job-row-urgent"
-              data-animate
-              :style="{ '--delay': `${getUrgentJobRowDelay(index)}s` }"
-              @click="viewJob(job)"
-            >
-              <div
-                class="job-logo"
-                :class="{ 'logo-has-image': !!job.companyLogo }"
-              >
-                <img
-                  v-if="job.companyLogo"
-                  :src="job.companyLogo"
-                  :alt="`${job.companyName} logo`"
-                  loading="lazy"
-                >
-                <template v-else>
-                  {{ (job.companyName || 'CT').slice(0, 2).toUpperCase() }}
-                </template>
-              </div>
-
-              <div class="job-row-content">
-                <NuxtLink
-                  :to="`/jobs/${job.id}`"
-                  class="job-row-title-link"
-                  @click.stop
-                >
-                  <h3 class="job-row-title">{{ job.title }}</h3>
-                </NuxtLink>
-
-                <div class="job-row-company">
-                  <NuxtLink
-                    v-if="job.companyId"
-                    :to="`/companies/${job.companyId}`"
-                    class="jobs-employer-link"
-                    @click.stop
-                  >
-                    {{ job.companyName }}
-                  </NuxtLink>
-                  <span v-else>{{ job.companyName }}</span>
-                </div>
-
-                <div class="job-row-meta">
-                  <span v-if="getFullLocationText(job)" class="meta-item">
-                    {{ truncateText(getFullLocationText(job), 32) }}
-                  </span>
-                  <span v-if="getEmploymentTypeText(job)" class="meta-item">
-                    {{ getEmploymentTypeText(job) }}
-                  </span>
-                  <span v-if="getExperienceText(job) && getExperienceText(job) !== 'Không yêu cầu'" class="meta-item">
-                    {{ getExperienceText(job) }}
-                  </span>
-                  <span v-if="job.createdAt" class="meta-item meta-item-date">
-                    {{ timeAgo(job.createdAt) }}
-                  </span>
-                </div>
-
-                <div class="job-row-salary">
-                  {{ formatSalaryRange(job) }}
-                </div>
-              </div>
-
-              <div class="job-row-side">
-                <span class="job-fire-icon" title="Urgent" aria-label="Urgent">
-                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true">
-                    <path fill="#ea580c" d="M12 23c-4.97 0-9-4.03-9-9 0-4.92 3.84-9.36 6.89-12.06.4-.35.99-.21 1.2.29.98 2.27 2.7 4.09 3.91 5.37.28.29.74.22.92-.14.73-1.42 1.61-3.66 1.15-5.96-.08-.41.28-.78.7-.72 4.16.59 7.23 4.8 7.23 8.22 0 4.97-4.03 9-9 9z" />
-                    <path fill="#f59e0b" d="M11.5 17.5c1.93 0 3.5-1.57 3.5-3.5 0-1.88-1.55-3.41-3.23-4.88-.23-.2-.58-.09-.67.19-.51 1.63-1.6 3.19-1.6 4.69 0 1.93 1.57 3.5 2 3.5z" />
-                  </svg>
-                </span>
-
-                <NuxtLink
-                  :to="`/jobs/${job.id}`"
-                  class="job-row-apply"
-                  @click.stop
-                >
-                  <span>Apply Now</span>
-                  <span class="apply-arrow" aria-hidden="true">→</span>
-                </NuxtLink>
-              </div>
-            </article>
+        <div class="section-head section-head-between">
+          <div>
+            <h2>Top Hiring Schools & Centers</h2>
+            <p class="section-subtitle">
+              Discover top employers and educational institutions actively recruiting
+            </p>
           </div>
+          <NuxtLink to="/companies" class="section-head-link">
+            <span>Explore all schools</span>
+            <span aria-hidden="true">→</span>
+          </NuxtLink>
         </div>
 
-        <div class="section-footer-cta">
-          <button
-            type="button"
-            class="section-cta-link"
-            @click="viewAllClick({ postType: 'Urgent' })"
+        <div class="top-institutions-grid">
+          <NuxtLink
+            v-for="company in topHiringInstitutions"
+            :key="company.id"
+            :to="`/companies/${company.id}`"
+            class="top-institution-card"
           >
-            <span>View All Urgent Jobs</span>
-            <span class="cta-arrow" aria-hidden="true">→</span>
-          </button>
+            <div
+              class="top-institution-logo"
+              :class="{ 'logo-has-image': !!company.logo }"
+            >
+              <img
+                v-if="company.logo"
+                :src="company.logo"
+                :alt="`${company.name} logo`"
+                loading="lazy"
+              >
+              <template v-else>
+                {{ getCompanyLogoInitials(company.name) }}
+              </template>
+            </div>
+
+            <h3 class="top-institution-name" :title="company.name">
+              {{ formatCompanyName(company.name) }}
+            </h3>
+
+            <div class="top-institution-location">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+              <span>{{ company.locationLabel }}</span>
+            </div>
+
+            <div class="top-institution-action">
+              <span class="top-institution-badge">
+                {{ company.openPositions || 1 }} {{ (company.openPositions || 1) === 1 ? 'OPEN JOB' : 'OPEN JOBS' }}
+              </span>
+            </div>
+          </NuxtLink>
         </div>
       </div>
     </section>
@@ -429,6 +661,7 @@ import { CompanyMapper } from '~/mapper/company'
 import type { BlogModel } from '~/models/blog'
 import { BlogMapper } from '~/mapper/blog'
 import { formatSalaryRange } from '~/utils/formatSalary'
+import { formatCompanyName } from '~/utils/formatCompanyName'
 
 const config = useRuntimeConfig()
 
@@ -442,6 +675,7 @@ const {
   categoryEnumLabel,
   employmentTypesEnumLabel,
   experienceLevelsEnumLabel,
+  organizationTypesLabel,
 } = useJobFilters()
 
 const heroLocationSelectUi = {
@@ -483,6 +717,107 @@ const getCategoryInitials = (label: string) => {
 const keyword = ref('')
 
 const location = ref<string | undefined>(undefined)
+const locationQuery = ref('')
+const isLocationOpen = ref(false)
+const highlightedIndex = ref(-1)
+
+const filteredHeroLocations = computed(() => {
+  const q = locationQuery.value.trim().toLowerCase()
+  const topValues = ['12', '29', '21', '13', '11', '25', '26'] // Hanoi, HCMC, Da Nang, Hai Phong, Quang Ninh, Khanh Hoa, Lam Dong
+  const all = (heroLocationItems.value || []) as Array<{ label: string; value: string }>
+  if (!q) {
+    const tops = all.filter((i) => topValues.includes(i.value))
+    const others = all.filter((i) => !topValues.includes(i.value))
+    return [...tops, ...others]
+  }
+  return all.filter((item) => item.label.toLowerCase().includes(q))
+})
+
+const onLocationFocus = () => {
+  isLocationOpen.value = true
+  highlightedIndex.value = -1
+}
+
+const toggleLocationDropdown = () => {
+  isLocationOpen.value = !isLocationOpen.value
+}
+
+const majorHubChips = [
+  { label: 'All Vietnam', value: '' },
+  { label: 'Hanoi', value: '12' },
+  { label: 'Ho Chi Minh City', value: '29' },
+  { label: 'Da Nang', value: '21' },
+  { label: 'Hai Phong', value: '13' },
+  { label: 'Binh Duong', value: 'Binh Duong' },
+]
+
+const selectHub = (hub: { label: string; value: string }) => {
+  if (hub.value === '') {
+    location.value = undefined
+    locationQuery.value = ''
+  } else if (/^\d+$/.test(hub.value)) {
+    location.value = hub.value
+    locationQuery.value = hub.label
+  } else {
+    location.value = undefined
+    locationQuery.value = hub.label
+  }
+  isLocationOpen.value = false
+  highlightedIndex.value = -1
+}
+
+const selectLocation = (item: { label: string; value: string }) => {
+  location.value = item.value
+  locationQuery.value = item.label
+  isLocationOpen.value = false
+  highlightedIndex.value = -1
+}
+
+const clearLocation = () => {
+  location.value = undefined
+  locationQuery.value = ''
+  highlightedIndex.value = -1
+}
+
+const onLocationInput = () => {
+  isLocationOpen.value = true
+  highlightedIndex.value = 0
+  const q = locationQuery.value.trim().toLowerCase()
+  if (!q) {
+    location.value = undefined
+    return
+  }
+  const match = ((heroLocationItems.value || []) as Array<{ label: string; value: string }>).find(
+    (i) => i.label.toLowerCase() === q,
+  )
+  location.value = match ? match.value : undefined
+}
+
+const navigateLocationList = (step: number) => {
+  if (!isLocationOpen.value) {
+    isLocationOpen.value = true
+    highlightedIndex.value = 0
+    return
+  }
+  const list = filteredHeroLocations.value
+  if (!list.length) return
+  highlightedIndex.value = (highlightedIndex.value + step + list.length) % list.length
+}
+
+const selectHighlightedLocation = () => {
+  if (!isLocationOpen.value) {
+    searchJobs()
+    return
+  }
+  const list = filteredHeroLocations.value
+  if (highlightedIndex.value >= 0 && highlightedIndex.value < list.length) {
+    selectLocation(list[highlightedIndex.value])
+  } else if (list.length > 0) {
+    selectLocation(list[0])
+  } else {
+    isLocationOpen.value = false
+  }
+}
 
 const onHeroLocationMenuOpenChange = (open: boolean) => {
   if (!import.meta.client) return
@@ -664,10 +999,10 @@ const randomLength = Math.floor(Math.random() * 2) + 6
 const popularTags = shuffled.slice(0, randomLength)
 
 const heroQuickTags = [
-  { label: 'Teaching Assistant', value: '26' },
-  { label: 'Math Teacher', value: '4' },
-  { label: 'Science Teacher', value: '9' },
-  { label: 'English Teacher', value: '5' },
+  { label: 'International Schools', keyword: 'International School' },
+  { label: 'English Centers', keyword: 'English Center' },
+  { label: 'Bilingual Schools', keyword: 'Bilingual School' },
+  { label: 'Public Schools', keyword: 'Public School' },
 ]
 
 const featuredCategories = [
@@ -924,13 +1259,15 @@ onMounted(() => {
     heroLocationItems.value.some((item) => item.value === query.location)
   ) {
     location.value = query.location as string
+    const found = heroLocationItems.value.find((item) => item.value === query.location)
+    if (found) locationQuery.value = found.label
   }
 
   // Add click outside listener for dropdown
   document.addEventListener('click', handleClickOutside)
 
   // Fetch Api
-  Promise.allSettled([getFeatureJobs(), getBlogs(), getCategoryJobs(), getCompanyBanners()]).finally(
+  Promise.allSettled([getFeatureJobs(), getBlogs(), getCategoryJobs(), getCompanyBanners(), getTopHiringInstitutions()]).finally(
     () =>
       nextTick(() => {
         bindHomeRevealAnimations()
@@ -955,9 +1292,29 @@ const searchJobs = () => {
 
   if (keyword.value.trim()) query.keyword = keyword.value.trim()
 
-  if (location.value) query.location = location.value
+  if (location.value) {
+    query.location = location.value
+  } else if (locationQuery.value.trim()) {
+    const q = locationQuery.value.trim().toLowerCase()
+    const all = (heroLocationItems.value || []) as Array<{ label: string; value: string }>
+    const match = all.find((i) => i.label.toLowerCase().includes(q))
+    if (match) {
+      query.location = match.value
+    } else {
+      query.keyword = query.keyword ? `${query.keyword} ${locationQuery.value.trim()}` : locationQuery.value.trim()
+    }
+  }
 
   router.push({ path: '/jobs/search', query })
+}
+
+const onQuickTagClick = (tag: { label: string; keyword: string }) => {
+  router.push({
+    path: '/jobs/search',
+    query: {
+      keyword: tag.keyword,
+    },
+  })
 }
 
 const onCategoryClick = (tag: string) => {
@@ -969,10 +1326,10 @@ const onCategoryClick = (tag: string) => {
   })
 }
 
-const viewAllClick = () => {
+const viewAllClick = (extraQuery: Record<string, any> = {}) => {
   router.push({
     path: '/jobs/search',
-    query: {},
+    query: extraQuery,
   })
 }
 
@@ -1204,6 +1561,133 @@ const getCompanyBanners = async () => {
   }
 }
 
+// Top Hiring Institutions
+const topHiringInstitutions = ref<any[]>([])
+
+const getCompanyLogoInitials = (name?: string | null): string => {
+  if (!name) return 'SC'
+  const words = name.trim().split(/\s+/).filter(Boolean)
+  if (words.length >= 2) {
+    return (words[0].charAt(0) + words[1].charAt(0)).toUpperCase()
+  }
+  return (words[0] || 'SC').slice(0, 2).toUpperCase()
+}
+
+const extractLocationName = (comp: any, detail?: any): string => {
+  // Check if jobs span multiple locations or provinces
+  const jobs: any[] = detail?.jobs || comp?.jobs || []
+  if (jobs.length > 0) {
+    const locSet = new Set<string>()
+    for (const j of jobs) {
+      if (j?.location != null && String(j.location).trim()) {
+        const rawLoc = String(j.location).trim()
+        const parts = rawLoc.split(',').map((p) => p.trim()).filter(Boolean)
+        for (const p of parts) {
+          locSet.add(p)
+        }
+      }
+    }
+    if (locSet.size > 1) {
+      return 'Nationwide'
+    }
+    if (locSet.size === 1) {
+      const code = Array.from(locSet)[0]
+      const label = (locationEnumLabel as Record<string, string>)?.[code] ??
+                    (locationEnumLabel as Record<number, string>)?.[Number(code)]
+      if (label) return label
+    }
+  }
+
+  const raw = ((comp.taxAddress || '') + ' ' + (comp.address || '')).replace(/<[^>]+>/g, '').trim()
+  const lower = (raw + ' ' + (comp.name || '')).toLowerCase()
+
+  if (
+    lower.includes('trực tuyến') ||
+    lower.includes('online') ||
+    lower.includes('toàn quốc') ||
+    lower.includes('nationwide')
+  ) {
+    return 'Nationwide'
+  }
+
+  if (lower.includes('hồ chí minh') || lower.includes('tp.hcm') || lower.includes('tphcm') || lower.includes('sài gòn') || lower.includes('ho chi minh')) {
+    if (lower.includes('hà nội') || lower.includes('ha noi') || lower.includes('hanoi')) {
+      return 'Nationwide'
+    }
+    return 'Ho Chi Minh City'
+  }
+  if (lower.includes('hà nội') || lower.includes('ha noi') || lower.includes('hanoi')) {
+    return 'Hanoi'
+  }
+  if (lower.includes('đà nẵng') || lower.includes('da nang') || lower.includes('danang')) {
+    return 'Da Nang'
+  }
+  if (lower.includes('bình dương') || lower.includes('binh duong')) {
+    return 'Binh Duong'
+  }
+  if (lower.includes('đồng nai') || lower.includes('dong nai')) {
+    return 'Dong Nai'
+  }
+  if (lower.includes('hải phòng') || lower.includes('hai phong') || lower.includes('haiphong')) {
+    return 'Hai Phong'
+  }
+  if (lower.includes('cần thơ') || lower.includes('can tho')) {
+    return 'Can Tho'
+  }
+
+  if (raw) {
+    const parts = raw.split(',').map((p: string) => p.trim()).filter(Boolean)
+    if (parts.length >= 2) {
+      let candidate = parts[parts.length - 1]
+      if (candidate.toLowerCase().includes('việt nam') || candidate.toLowerCase().includes('vietnam')) {
+        candidate = parts[parts.length - 2] || 'Nationwide'
+      }
+      const cleaned = candidate.replace(/^(Thành phố|Tỉnh|TP\.?)\s+/i, '').trim()
+      return cleaned || 'Nationwide'
+    }
+  }
+
+  return 'Nationwide'
+}
+
+const getTopHiringInstitutions = async () => {
+  try {
+    const response = await $api.company.searchCompany({})
+    if (response && Array.isArray(response)) {
+      const sorted = [...response].sort((a: any, b: any) => {
+        const posA = a.openPositions || 0
+        const posB = b.openPositions || 0
+        if (posB !== posA) return posB - posA
+        return (b.logo ? 1 : 0) - (a.logo ? 1 : 0)
+      })
+
+      const top4 = sorted.slice(0, 4)
+
+      const detailedTop4 = await Promise.all(
+        top4.map(async (c: any) => {
+          try {
+            const detail = await $api.company.getCompanyDetail(c.id)
+            return {
+              ...c,
+              locationLabel: extractLocationName(c, detail),
+            }
+          } catch {
+            return {
+              ...c,
+              locationLabel: extractLocationName(c),
+            }
+          }
+        }),
+      )
+
+      topHiringInstitutions.value = detailedTop4
+    }
+  } catch (error: any) {
+    console.error('Failed to fetch top hiring institutions:', error)
+    topHiringInstitutions.value = []
+  }
+}
+
 // Fetch Blog
 const getBlogs = async () => {
   try {
@@ -1380,9 +1864,11 @@ const openDashboardInNewTab = (path: string, query?: Record<string, string>) => 
 const handleClickOutside = (event: Event) => {
   const target = event.target as HTMLElement
 
-  // Check if click is outside the dropdown container
   if (!target.closest('.user-dropdown-container')) {
     showUserDropdown.value = false
+  }
+  if (!target.closest('.search-item-location')) {
+    isLocationOpen.value = false
   }
 }
 
@@ -1545,6 +2031,11 @@ const userMenuItems = computed(() => {
   return items
 })
 </script>
+
+<style lang="scss">
+@use '@/assets/styles/components/hero-home.scss';
+@use '@/assets/styles/components/home-sections.scss';
+</style>
 
 <style scoped>
 .sr-reveal {

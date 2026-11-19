@@ -153,13 +153,13 @@
 .employer-sidebar-link.is-active {
   color: #ffffff;
   border-color: transparent;
-  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
   box-shadow: none;
 }
 
 .employer-sidebar-link.is-active:hover {
   color: #ffffff;
-  background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
 }
 
 .employer-sidebar-link-icon {
@@ -326,7 +326,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
   color: #ffffff;
   font-size: 14px;
   font-weight: bold;
@@ -398,7 +398,7 @@
   padding: 0 18px;
   border-radius: 10px;
   font-size: 13.5px;
-  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%) !important;
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
   color: #ffffff !important;
   border: none !important;
   box-shadow: none !important;
@@ -406,7 +406,7 @@
   transition: all 0.2s ease;
 
   &:hover {
-    background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%) !important;
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%) !important;
     box-shadow: none !important;
     transform: translateY(-1px);
   }
@@ -453,7 +453,11 @@
   justify-content: center;
 }
 
-.employer-overview-stat-icon.is-blue,
+.employer-overview-stat-icon.is-blue {
+  background: #eff6ff;
+  color: #2563eb;
+}
+
 .employer-overview-stat-icon.is-green {
   background: #ecfdf5;
   color: #16a34a;
@@ -470,8 +474,8 @@
 }
 
 .employer-overview-stat-icon.is-orange {
-  background: #ffedd5;
-  color: #f97316;
+  background: #eff6ff;
+  color: #2563eb;
 }
 
 .employer-overview-stat-icon.is-green {
@@ -799,8 +803,8 @@
   width: 52px;
   height: 52px;
   border-radius: 16px;
-  background: #fff7ed;
-  color: #ea580c;
+  background: #eff6ff;
+  color: #2563eb;
 }
 
 .employer-overview-empty-state strong {
@@ -826,7 +830,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
   color: #ffffff;
   font-size: 13.5px;
   font-weight: 700;
@@ -837,7 +841,7 @@
 }
 
 .employer-overview-empty-action:hover {
-  background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
   box-shadow: none;
   transform: translateY(-1px);
 }
@@ -891,7 +895,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: #ea580c;
+  background: #2563eb;
   color: #ffffff;
   font-size: 13px;
   font-weight: bold;
@@ -1042,7 +1046,7 @@
 .employer-company-media-label .employer-required-star,
 .employer-input-label .employer-required-star,
 .employer-field-label .employer-required-star {
-  color: #f97316 !important;
+  color: #ef4444 !important;
   font-weight: bold !important;
   margin-left: 2px;
 }
@@ -1318,7 +1322,7 @@
   border-radius: 14px;
   border: 1.5px dashed rgba(184, 198, 222, 0.9);
   background: #fbfdff;
-  color: #ea580c;
+  color: #2563eb;
   transition:
     border-color 0.18s ease,
     background 0.18s ease,
@@ -1587,7 +1591,7 @@
 
 .employer-candidates-th-sort-btn.is-active,
 .employer-candidates-th-sort-btn:hover {
-  color: #c2410c;
+  color: #1d4ed8;
 }
 
 .employer-candidates-sort-menu {
@@ -1620,7 +1624,7 @@
 .employer-candidates-sort-option:hover,
 .employer-candidates-sort-option.is-selected {
   background: rgba(239, 246, 255, 0.95);
-  color: #c2410c;
+  color: #1d4ed8;
 }
 
 .employer-candidates-th-hint {
@@ -1715,7 +1719,7 @@
 .application-status-trigger.is-reviewing {
   background: rgba(239, 246, 255, 0.96);
   border-color: rgba(191, 219, 254, 0.95);
-  color: #15803d;
+  color: #2563eb;
 }
 
 .application-status-trigger.is-interview {
@@ -1777,7 +1781,7 @@
 }
 
 .application-status-menu-option.is-reviewing {
-  color: #15803d;
+  color: #2563eb;
 }
 
 .application-status-menu-option.is-interview {
@@ -2451,7 +2455,7 @@ body:has(.employer-admin-applications-filters) .vs__no-options {
   padding: 0 8px;
   border-radius: 999px;
   background: rgba(59, 130, 246, 0.12);
-  color: #15803d;
+  color: #2563eb;
   font-size: 13px;
   font-weight: 700;
 }
@@ -2768,7 +2772,7 @@ body:has(.employer-admin-applications-filters) .vs__no-options {
 }
 
 .employer-row-title-btn:hover {
-  color: #16a34a;
+  color: #2563eb;
   text-decoration: underline;
 }
 
@@ -2963,7 +2967,7 @@ body:has(.employer-admin-applications-filters) .vs__no-options {
 
 .employer-row-action:hover:not(:disabled) {
   border-color: rgba(234, 88, 12, 0.35);
-  color: #ea580c;
+  color: #2563eb;
 }
 
 .employer-row-action.is-danger:hover:not(:disabled) {
@@ -3026,12 +3030,12 @@ body:has(.employer-admin-applications-filters) .vs__no-options {
 .employer-dashboard-page-btn:hover,
 .employer-dashboard-page-nav:hover {
   border-color: rgba(234, 88, 12, 0.35);
-  color: #ea580c;
+  color: #2563eb;
 }
 
 .employer-dashboard-page-btn.is-active {
   border-color: transparent;
-  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
   color: #ffffff;
   box-shadow: none;
 }
@@ -3304,7 +3308,7 @@ body:has(.employer-admin-applications-filters) .vs__no-options {
 
 .employer-settings-page .employer-settings-primary {
   border: 0;
-  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
   color: #ffffff;
 }
 
@@ -3583,7 +3587,7 @@ body:has(.employer-admin-applications-filters) .vs__no-options {
   border: 0;
   padding: 0;
   background: transparent;
-  color: #ea580c;
+  color: #2563eb;
   font-size: inherit;
   font-weight: bold;
   cursor: pointer;
@@ -4297,7 +4301,7 @@ body:has(.employer-company-page) [data-reka-combobox-content] {
 
 .employer-field-hint {
   margin: 0;
-  color: #ea580c;
+  color: #2563eb;
   font-size: 12px;
   font-weight: 600;
   line-height: 1.45;
@@ -4652,7 +4656,7 @@ body:has(.employer-company-page) [data-reka-combobox-content] {
 
 .employer-admin-company-status-btn:hover {
   border-color: rgba(234, 88, 12, 0.35);
-  color: #ea580c;
+  color: #2563eb;
 }
 
 .employer-admin-company-status-btn.is-active.is-approved {
@@ -4849,13 +4853,13 @@ body:has(.employer-company-page) [data-reka-combobox-content] {
 
 .employer-admin-user-type-btn:hover {
   border-color: rgba(234, 88, 12, 0.35);
-  color: #ea580c;
+  color: #2563eb;
 }
 
 .employer-admin-user-type-btn.is-active.is-candidate {
-  border-color: rgba(234, 88, 12, 0.55);
-  background: rgba(239, 246, 255, 0.95);
-  color: #15803d;
+  border-color: #93c5fd;
+  background: #eff6ff;
+  color: #1d4ed8;
 }
 
 .employer-admin-user-type-btn.is-active.is-system-admin {
@@ -4906,7 +4910,7 @@ body:has(.employer-company-page) [data-reka-combobox-content] {
 }
 
 .employer-admin-user-password-toggle:hover {
-  color: #ea580c;
+  color: #2563eb;
 }
 
 /* Khi crop mở: tắt pointer-events overlay/drawer Vaul để modal crop nhận click */
@@ -5060,7 +5064,7 @@ html.employer-admin-crop-modal-open [data-vaul-drawer] {
 }
 
 .employer-admin-users-summary strong {
-  color: #ea580c;
+  color: #2563eb;
   font-weight: bold;
 }
 
@@ -5103,7 +5107,7 @@ html.employer-admin-crop-modal-open [data-vaul-drawer] {
 .employer-admin-users-filter-pill.is-active {
   border-color: rgba(234, 88, 12, 0.92);
   background: rgba(239, 246, 255, 0.95);
-  color: #ea580c;
+  color: #2563eb;
   box-shadow: inset 0 0 0 1px rgba(234, 88, 12, 0.14);
 }
 
@@ -5230,7 +5234,7 @@ html.employer-admin-crop-modal-open [data-vaul-drawer] {
 
 .employer-admin-user-type.is-candidate {
   background: rgba(219, 234, 254, 0.95);
-  color: #15803d;
+  color: #1d4ed8;
 }
 
 .employer-admin-user-type.is-employer {
@@ -5240,7 +5244,7 @@ html.employer-admin-crop-modal-open [data-vaul-drawer] {
 
 .employer-admin-user-type.is-host {
   background: rgba(255, 237, 213, 0.95);
-  color: #c2410c;
+  color: #1d4ed8;
 }
 
 .employer-admin-user-type.is-default {
@@ -5454,7 +5458,7 @@ html.employer-admin-crop-modal-open [data-vaul-drawer] {
 .employer-smtp-pass-help-link {
   display: inline-block;
   margin-top: 4px;
-  color: #16a34a;
+  color: #2563eb;
   font-size: 12px;
   font-weight: 600;
   line-height: 1.5;
@@ -5590,7 +5594,7 @@ html.employer-admin-crop-modal-open [data-vaul-drawer] {
 }
 
 .employer-admin-email-test-field-control:focus-within .employer-admin-email-test-field-icon {
-  color: #ea580c;
+  color: #2563eb;
 }
 
 .employer-admin-email-test-field.has-error .employer-admin-email-test-field-input {
@@ -5749,7 +5753,7 @@ html.employer-admin-crop-modal-open [data-vaul-drawer] {
 
 .employer-admin-company-host-btn:hover:not(:disabled) {
   border-color: rgba(234, 88, 12, 0.35);
-  color: #ea580c;
+  color: #2563eb;
 }
 
 .employer-admin-company-host-btn:disabled {
@@ -5901,7 +5905,7 @@ html.employer-admin-crop-modal-open [data-vaul-drawer] {
 }
 
 .employer-admin-import-alert--info .employer-admin-import-alert-icon {
-  color: #ea580c;
+  color: #2563eb;
 }
 
 .employer-admin-import-alert--info .employer-admin-import-alert-copy strong {
@@ -5967,7 +5971,7 @@ html.employer-admin-crop-modal-open [data-vaul-drawer] {
   height: 40px;
   border-radius: 12px;
   background: rgba(239, 246, 255, 0.95);
-  color: #ea580c;
+  color: #2563eb;
   flex-shrink: 0;
 }
 
@@ -6034,7 +6038,7 @@ html.employer-admin-crop-modal-open [data-vaul-drawer] {
 .employer-admin-import-mode-option input {
   width: 16px;
   height: 16px;
-  accent-color: #ea580c;
+  accent-color: #2563eb;
   cursor: pointer;
 }
 
@@ -6386,7 +6390,7 @@ html.employer-admin-crop-modal-open [data-vaul-drawer] {
 }
 
 .employer-email-template-btn.is-primary {
-  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
   border-color: transparent;
   color: #fff;
   box-shadow: 0 8px 20px rgba(234, 88, 12, 0.22);
@@ -6414,9 +6418,9 @@ html.employer-admin-crop-modal-open [data-vaul-drawer] {
 }
 
 .employer-email-template-variable-chip {
-  border: 1px solid #ecfdf5;
+  border: 1px solid #bfdbfe;
   background: #eff6ff;
-  color: #15803d;
+  color: #1d4ed8;
   border-radius: 999px;
   padding: 4px 10px;
   font-size: 12px;

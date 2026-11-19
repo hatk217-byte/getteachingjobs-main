@@ -1,0 +1,1563 @@
+/* ==========================================================================
+   Teacher Support Landing Page — Matching GetTeachingJobs Theme
+   ========================================================================== */
+
+.ts-page {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif);
+  color: #0f172a;
+  background-color: #ffffff;
+  overflow-x: hidden;
+  padding-bottom: 0;
+}
+
+/* Container */
+.ts-container {
+  width: min(calc(100% - 48px), 1200px);
+  margin-left: auto;
+  margin-right: auto;
+
+  @media (max-width: 640px) {
+    width: min(calc(100% - 32px), 1200px);
+  }
+}
+
+/* Section Header Typography */
+.ts-section-header {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 52px;
+
+  &.text-left {
+    text-align: left;
+    margin-left: 0;
+  }
+
+  .ts-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    background: rgba(37, 99, 235, 0.08);
+    color: #1d4ed8;
+    border: 1px solid rgba(37, 99, 235, 0.16);
+    border-radius: 9999px;
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .ts-title {
+    font-size: clamp(26px, 3.5vw, 38px);
+    font-weight: 800;
+    line-height: 1.22;
+    color: #0f274a;
+    letter-spacing: -0.02em;
+    margin: 0 0 16px;
+
+    .highlight {
+      color: #2563eb;
+      font-style: italic;
+
+      &.text-nowrap {
+        white-space: nowrap;
+      }
+    }
+  }
+
+  .ts-subtitle {
+    font-size: clamp(15px, 1.8vw, 17px);
+    line-height: 1.6;
+    color: #475569;
+    margin: 0;
+  }
+}
+
+/* ==========================================================================
+   1. Hero Section
+   ========================================================================== */
+.ts-hero {
+  position: relative;
+  min-height: calc(100vh - var(--app-header-height, 74px));
+  min-height: calc(100svh - var(--app-header-height, 74px));
+  min-height: calc(100dvh - var(--app-header-height, 74px));
+  max-height: 920px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 0;
+  box-sizing: border-box;
+  background: linear-gradient(180deg, #edf4fe 0%, #f4f8fe 45%, #ffffff 100%);
+  border-bottom: 1px solid rgba(219, 234, 254, 0.65);
+  overflow: hidden;
+
+  /* Họa tiết lưới nhẹ nhàng, tinh tế, hòa hợp với tông màu xanh tươi sáng */
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+      linear-gradient(to right, rgba(37, 99, 235, 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(37, 99, 235, 0.04) 1px, transparent 1px);
+    background-size: 46px 46px;
+    background-position: center center;
+    mask-image: radial-gradient(ellipse 85% 75% at 50% 40%, rgba(0, 0, 0, 0.85) 20%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse 85% 75% at 50% 40%, rgba(0, 0, 0, 0.85) 20%, transparent 80%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Đệm ánh sáng xanh dịu mát, thanh lịch */
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle 750px at 50% 18%, rgba(219, 234, 254, 0.65) 0%, rgba(239, 246, 255, 0.3) 45%, transparent 75%),
+      radial-gradient(circle 500px at 15% 20%, rgba(219, 234, 254, 0.45) 0%, transparent 60%),
+      radial-gradient(circle 500px at 85% 20%, rgba(219, 234, 254, 0.4) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  @media (max-width: 768px) {
+    min-height: auto;
+    padding: 60px 0;
+  }
+
+  .ts-container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+  }
+
+  .ts-hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 880px;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .ts-hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(8px);
+    border: 1px solid #bfdbfe;
+    box-shadow: 0 1px 4px rgba(37, 99, 235, 0.06);
+    border-radius: 9999px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #1e40af;
+    margin-bottom: 22px;
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.16);
+    }
+  }
+
+  .ts-hero-h1 {
+    font-size: clamp(32px, 4.4vw, 50px);
+    font-weight: 800;
+    color: #0f172a;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+    margin: 0 0 22px;
+    text-align: center;
+
+    .ts-hero-script {
+      color: #2563eb;
+      font-style: italic;
+      position: relative;
+      display: inline-block;
+
+      &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 2px;
+        width: 100%;
+        height: 3px;
+        background: linear-gradient(90deg, #2563eb 0%, #38bdf8 100%);
+        border-radius: 2px;
+        opacity: 0.85;
+      }
+    }
+  }
+
+  .ts-hero-p {
+    font-size: clamp(16px, 1.9vw, 18px);
+    line-height: 1.65;
+    color: #334155;
+    max-width: 720px;
+    margin: 0 auto 34px;
+    text-align: center;
+  }
+
+  .ts-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 36px;
+  }
+
+  .ts-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 13px 26px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #ffffff;
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: 0 4px 16px rgba(37, 99, 235, 0.28);
+    transition: all 0.2s ease;
+
+    &:hover {
+      transform: translateY(-1.5px);
+      background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.38);
+      filter: brightness(1.03);
+    }
+  }
+
+  .ts-btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 13px 22px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #1e293b;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04);
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: #eff6ff;
+      border-color: #bfdbfe;
+      color: #1d4ed8;
+    }
+  }
+
+  /* Refined Hero Guarantee Strip - Transparent & Ultra Clean */
+  .ts-hero-guarantee {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 12px 20px;
+    padding: 6px 0;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    margin: 0 auto;
+
+    @media (max-width: 768px) {
+      padding: 6px 0;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .guarantee-label {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #1e293b;
+      letter-spacing: -0.01em;
+      display: inline-flex;
+      align-items: center;
+      padding-right: 14px;
+      border-right: 1px solid #cbd5e1;
+
+      @media (max-width: 768px) {
+        border-right: none;
+        padding-right: 0;
+        border-bottom: 1px solid #e2e8f0;
+        padding-bottom: 6px;
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    .guarantee-items {
+      display: inline-flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 10px 20px;
+
+      @media (max-width: 600px) {
+        gap: 8px 14px;
+      }
+    }
+
+    .guarantee-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #334155;
+      letter-spacing: -0.01em;
+
+      .check-icon {
+        width: 16px;
+        height: 16px;
+        color: #2563eb;
+        flex-shrink: 0;
+      }
+    }
+  }
+}
+
+/* ==========================================================================
+   2. Services Section
+   ========================================================================== */
+.ts-services {
+  padding: 80px 0;
+  background: #ffffff;
+
+  @media (max-width: 768px) {
+    padding: 56px 0;
+  }
+
+  .ts-services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 28px;
+
+    @media (max-width: 1024px) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    @media (max-width: 640px) {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+  }
+
+  .ts-service-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    padding: 24px 22px;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.25s ease;
+    position: relative;
+    box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.04);
+
+    &.card-placement {
+      border-color: #bfdbfe;
+      background: linear-gradient(180deg, #f8faff 0%, #ffffff 100%);
+    }
+
+    &:hover {
+      border-color: #93c5fd;
+      transform: translateY(-4px);
+      box-shadow: 0 18px 36px -8px rgba(37, 99, 235, 0.12), 0 2px 6px rgba(15, 23, 42, 0.04);
+
+      .btn-select-service {
+        background: #2563eb;
+        border-color: #2563eb;
+        color: #ffffff;
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+      }
+    }
+
+    .card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+      min-height: 26px;
+
+      .card-num {
+        font-size: 13px;
+        font-weight: 800;
+        color: #2563eb;
+        background: #eff6ff;
+        border: 1px solid #bfdbfe;
+        border-radius: 6px;
+        padding: 2px 7px;
+        letter-spacing: 0.04em;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .category-badge {
+        font-size: 11.5px;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        padding: 3px 10px;
+        border-radius: 9999px;
+        background: #f8fafc;
+        color: #475569;
+        border: 1px solid #e2e8f0;
+        white-space: nowrap;
+
+        &.highlight {
+          background: #fef2f2;
+          color: #dc2626;
+          border-color: #fecaca;
+        }
+
+        &.popular {
+          background: #eff6ff;
+          color: #2563eb;
+          border-color: #bfdbfe;
+        }
+      }
+    }
+
+    .card-title {
+      font-size: 17.5px;
+      font-weight: 700;
+      color: #0f274a;
+      line-height: 1.3;
+      margin: 0 0 8px;
+    }
+
+    .card-desc {
+      font-size: 13.5px;
+      color: #64748b;
+      line-height: 1.5;
+      margin: 0 0 14px;
+      flex-grow: 0;
+    }
+
+    .feature-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex-grow: 1;
+
+      li {
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        font-size: 13px;
+        color: #334155;
+        line-height: 1.45;
+
+        .check-bullet {
+          width: 15px;
+          height: 15px;
+          color: #2563eb;
+          flex-shrink: 0;
+          margin-top: 2px;
+        }
+      }
+    }
+
+    .card-footer {
+      border-top: 1px solid #f1f5f9;
+      padding-top: 14px;
+      margin-top: auto;
+
+      .btn-select-service {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 9px 16px;
+        font-size: 13.5px;
+        font-weight: 700;
+        color: #1d4ed8;
+        background: #f0f7ff;
+        border: 1px solid #dbeafe;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover {
+          background: #2563eb;
+          border-color: #2563eb;
+          color: #ffffff;
+          box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+        }
+      }
+    }
+  }
+
+  /* Document Tip Highlight Banner */
+  .ts-doc-tip-banner {
+    max-width: 960px;
+    margin: 40px auto 0;
+    padding: 16px 22px;
+    background: #f0f7ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    color: #1e40af;
+    line-height: 1.5;
+
+    .tip-tag {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background: #2563eb;
+      color: #ffffff;
+      padding: 3px 8px;
+      border-radius: 6px;
+      flex-shrink: 0;
+    }
+
+    strong {
+      color: #1d4ed8;
+      font-weight: 700;
+    }
+  }
+}
+
+/* ==========================================================================
+   3. How It Works (4-Step Process) — Royal Deep Navy Showcase (Matching Homepage)
+   ========================================================================== */
+.ts-process {
+  padding: 88px 0;
+  background: #091a3c;
+  background: linear-gradient(180deg, #071530 0%, #0c234e 45%, #091a3c 100%);
+  border-top: 1px solid rgba(59, 130, 246, 0.25);
+  border-bottom: 1px solid rgba(59, 130, 246, 0.25);
+  position: relative;
+  overflow: hidden;
+
+  /* Radial ambient glow top */
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle 800px at 50% 15%, rgba(37, 99, 235, 0.28) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Secondary ambient glow bottom */
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -150px;
+    right: 10%;
+    width: 450px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(14, 165, 233, 0.18) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  @media (max-width: 768px) {
+    padding: 60px 0;
+  }
+
+  .ts-container {
+    position: relative;
+    z-index: 1;
+  }
+
+  .ts-section-header {
+    margin-bottom: 48px;
+
+    .ts-pill {
+      font-family: 'Plus Jakarta Sans', var(--font-sans);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #93c5fd;
+      background: rgba(37, 99, 235, 0.25);
+      border: 1px solid rgba(147, 197, 253, 0.35);
+      padding: 6px 15px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+      box-shadow: 0 0 16px rgba(59, 130, 246, 0.2);
+    }
+
+    .ts-title {
+      color: #ffffff;
+      font-size: clamp(28px, 3.4vw, 40px);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      margin: 0 0 12px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+
+      .highlight {
+        color: #60a5fa;
+        font-style: italic;
+
+        &.text-nowrap {
+          white-space: nowrap;
+        }
+      }
+    }
+
+    .ts-subtitle {
+      color: #cbd5e1;
+      font-size: clamp(15.5px, 1.6vw, 17.5px);
+      max-width: 680px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+  }
+
+  .ts-steps-wrapper {
+    position: relative;
+    margin-top: 10px;
+  }
+
+  .ts-steps-track {
+    position: absolute;
+    top: 52px;
+    left: 70px;
+    right: 70px;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(96, 165, 250, 0.2) 0%, rgba(96, 165, 250, 0.8) 50%, rgba(96, 165, 250, 0.2) 100%);
+    opacity: 0.7;
+    z-index: 1;
+
+    @media (max-width: 980px) {
+      display: none;
+    }
+  }
+
+  .ts-steps-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px;
+    position: relative;
+    z-index: 2;
+
+    @media (max-width: 980px) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    @media (max-width: 600px) {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+  }
+
+  .ts-step-card {
+    background: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 20px;
+    padding: 26px 22px 22px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 45px -12px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.08);
+    position: relative;
+    transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+
+    &:hover {
+      transform: translateY(-6px);
+      border-color: rgba(147, 197, 253, 0.6);
+      box-shadow: 0 26px 54px -10px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(96, 165, 250, 0.35);
+
+      .step-icon-box {
+        background: #2563eb;
+        color: #ffffff;
+        box-shadow: 0 8px 18px -4px rgba(37, 99, 235, 0.5);
+      }
+
+      .step-watermark {
+        color: #dbeafe;
+      }
+    }
+
+    .step-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+
+    .step-icon-box {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: #eff6ff;
+      color: #2563eb;
+      border: 1px solid #dbeafe;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.25s ease;
+
+      .step-svg {
+        width: 24px;
+        height: 24px;
+      }
+    }
+
+    .step-watermark {
+      font-size: 34px;
+      font-weight: 900;
+      line-height: 1;
+      color: #e2e8f0;
+      letter-spacing: -0.04em;
+      transition: color 0.25s ease;
+      font-variant-numeric: tabular-nums;
+      user-select: none;
+    }
+
+    .step-card-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .step-number-pill {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #2563eb;
+      background: #eff6ff;
+      border: 1px solid #dbeafe;
+      border-radius: 6px;
+      padding: 2px 7px;
+      display: inline-block;
+      width: fit-content;
+      margin-bottom: 12px;
+    }
+
+    .step-title {
+      font-size: 17.5px;
+      font-weight: 700;
+      color: #0f274a;
+      line-height: 1.35;
+      margin: 0 0 10px;
+    }
+
+    .step-desc {
+      font-size: 13.5px;
+      color: #64748b;
+      line-height: 1.6;
+      margin: 0 0 18px;
+    }
+
+    .step-card-footer {
+      margin-top: auto;
+      padding-top: 14px;
+      border-top: 1px dashed #e2e8f0;
+    }
+
+    .step-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #0369a1;
+      background: #f0f9ff;
+      border: 1px solid #e0f2fe;
+      border-radius: 999px;
+      padding: 4px 10px;
+
+      .tag-icon {
+        width: 14px;
+        height: 14px;
+        flex-shrink: 0;
+        color: #0284c7;
+      }
+    }
+  }
+}
+
+/* ==========================================================================
+   4. Testimonials Section (What teachers say)
+   ========================================================================== */
+.ts-testimonials {
+  padding: 84px 0;
+  background: #ffffff;
+
+  @media (max-width: 768px) {
+    padding: 56px 0;
+  }
+
+  .ts-testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 22px;
+
+    @media (max-width: 1100px) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    @media (max-width: 640px) {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+  }
+
+  .ts-testimonial-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    padding: 26px 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+
+    &:hover {
+      background: #ffffff;
+      border-color: #cbd5e1;
+      transform: translateY(-4px);
+      box-shadow: 0 14px 30px -8px rgba(15, 23, 42, 0.08);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .stars-row {
+      display: flex;
+      gap: 2px;
+      color: #f59e0b;
+
+      .star-icon {
+        width: 15px;
+        height: 15px;
+      }
+    }
+
+    .tag-pill {
+      font-size: 11px;
+      font-weight: 600;
+      color: #1d4ed8;
+      background: #eff6ff;
+      border: 1px solid #dbeafe;
+      padding: 3px 9px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .quote-text {
+      font-size: 13.8px;
+      line-height: 1.62;
+      color: #334155;
+      margin: 0 0 20px;
+      flex-grow: 1;
+      font-style: normal;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding-top: 16px;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    .client-info {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      min-width: 0;
+
+      .client-role {
+        font-size: 13.5px;
+        font-weight: 700;
+        color: #0f172a;
+        line-height: 1.35;
+      }
+
+      .client-loc {
+        font-size: 12px;
+        color: #64748b;
+        line-height: 1.35;
+      }
+    }
+
+    .verified-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #059669;
+      background: #ecfdf5;
+      border: 1px solid #a7f3d0;
+      padding: 3px 8px;
+      border-radius: 999px;
+      white-space: nowrap;
+      flex-shrink: 0;
+
+      .check-icon {
+        width: 12px;
+        height: 12px;
+      }
+    }
+  }
+}
+
+/* ==========================================================================
+   5. Intake Consultation Form Section
+   ========================================================================== */
+.ts-form-section {
+  padding: 80px 0;
+  background: linear-gradient(180deg, #f8fafc 0%, #f0f7ff 100%);
+  border-top: 1px solid #e2e8f0;
+
+  @media (max-width: 768px) {
+    padding: 56px 0;
+  }
+
+  .ts-form-layout {
+    max-width: 780px;
+    margin: 0 auto;
+  }
+
+  /* Form Container */
+  .ts-form-card {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 20px;
+    padding: 36px;
+    box-shadow: 0 12px 32px -6px rgba(15, 23, 42, 0.06);
+
+    @media (max-width: 640px) {
+      padding: 24px 20px;
+    }
+
+    .form-title {
+      font-size: 24px;
+      font-weight: 800;
+      color: #0f274a;
+      margin: 0 0 8px;
+      letter-spacing: -0.015em;
+    }
+
+    .form-desc {
+      font-size: 14.5px;
+      color: #64748b;
+      margin: 0 0 28px;
+      line-height: 1.5;
+    }
+  }
+
+  .ts-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 22px;
+
+    label {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #1e293b;
+
+      .req {
+        color: #ef4444;
+        margin-left: 2px;
+      }
+    }
+
+    .helper-text {
+      font-size: 12px;
+      color: #64748b;
+      margin-top: -3px;
+    }
+
+    input[type='text'],
+    input[type='email'],
+    input[type='tel'],
+    select,
+    textarea {
+      width: 100%;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      color: #0f172a;
+      font-size: 14.5px;
+      border-radius: 10px;
+      padding: 12px 14px;
+      outline: none;
+      font-family: inherit;
+      transition: all 0.15s ease;
+
+      &:focus {
+        border-color: #2563eb;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+      }
+
+      &::placeholder {
+        color: #94a3b8;
+      }
+
+      &:disabled {
+        background: #f1f5f9;
+        cursor: not-allowed;
+      }
+    }
+
+    select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      padding-right: 42px;
+      cursor: pointer;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 110px;
+    }
+  }
+
+  /* Two Column Row */
+  .ts-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+
+    @media (max-width: 600px) {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+  }
+
+  /* WhatsApp-style Fused Phone Input */
+  .ts-phone-fused-input {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border: 1px solid #cbd5e1;
+    background: #ffffff;
+    border-radius: 10px;
+    transition: all 0.15s ease;
+    overflow: hidden;
+
+    &:focus-within {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    }
+
+    .calling-code-prefix {
+      padding: 12px 14px;
+      font-size: 14.5px;
+      font-weight: 700;
+      color: #1e40af;
+      background: #eff6ff;
+      border-right: 1px solid #dbeafe;
+      user-select: none;
+      flex-shrink: 0;
+      min-width: 68px;
+      text-align: center;
+    }
+
+    input {
+      flex: 1;
+      border: none !important;
+      outline: none !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
+      padding: 12px 14px !important;
+      font-size: 14.5px !important;
+      color: #0f172a !important;
+      background: transparent !important;
+    }
+  }
+
+  /* Segmented Toggle for Inside / Outside Vietnam */
+  .ts-location-toggle {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 12px;
+
+    .toggle-opt {
+      border: 1.5px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #334155;
+      background: #f8fafc;
+      transition: all 0.15s ease;
+
+      input {
+        accent-color: #2563eb;
+      }
+
+      &.is-active {
+        border-color: #2563eb;
+        background: #eff6ff;
+        color: #1d4ed8;
+      }
+    }
+  }
+
+  /* Form Theme Formatted v-select */
+  .ts-vselect {
+    width: 100%;
+
+    .vs__dropdown-toggle {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      padding: 6px 12px;
+      min-height: 46px;
+      transition: all 0.15s ease;
+      cursor: pointer;
+    }
+
+    &.vs--open .vs__dropdown-toggle {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    }
+
+    .vs__selected {
+      font-size: 14.5px;
+      color: #0f172a;
+      font-weight: 500;
+      margin: 2px 4px 2px 0;
+      padding: 0;
+    }
+
+    &.vs--multiple .vs__selected {
+      border-radius: 9999px;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      color: #1d4ed8;
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.25;
+      padding: 4px 10px;
+      margin: 3px 6px 3px 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+
+      .vs__deselect {
+        margin-left: 4px;
+        fill: #2563eb;
+        cursor: pointer;
+
+        &:hover {
+          fill: #dc2626;
+        }
+      }
+    }
+
+    .vs__search {
+      font-size: 14.5px;
+      color: #0f172a;
+      font-family: inherit;
+      margin: 2px 0;
+      padding: 0;
+
+      &::placeholder {
+        color: #94a3b8;
+        font-size: 14px;
+      }
+    }
+
+    .vs__clear {
+      fill: #94a3b8;
+      margin-right: 8px;
+      cursor: pointer;
+
+      &:hover {
+        fill: #64748b;
+      }
+    }
+
+    .vs__open-indicator {
+      display: none !important;
+    }
+
+    .vs__dropdown-menu {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 12px;
+      box-shadow: 0 14px 30px -4px rgba(15, 23, 42, 0.12);
+      padding: 6px;
+      margin-top: 6px;
+      max-height: 220px;
+      z-index: 1000;
+    }
+
+    .vs__dropdown-option {
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 13.5px;
+      color: #334155;
+      cursor: pointer;
+      transition: all 0.12s ease;
+
+      &--highlight {
+        background: #eff6ff;
+        color: #1d4ed8;
+        font-weight: 600;
+      }
+
+      &--selected {
+        background: #dbeafe;
+        color: #1e40af;
+        font-weight: 700;
+      }
+    }
+  }
+
+  /* Radio App Group (WhatsApp / Zalo / None) */
+  .ts-app-radios {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+
+    .radio-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #334155;
+      cursor: pointer;
+      background: #f8fafc;
+      transition: all 0.15s ease;
+
+      input {
+        accent-color: #2563eb;
+      }
+
+      &.is-active {
+        border-color: #2563eb;
+        background: #eff6ff;
+        color: #1d4ed8;
+      }
+    }
+  }
+
+  .ts-submit-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 28px;
+    font-size: 15.5px;
+    font-weight: 700;
+    color: #ffffff;
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(37, 99, 235, 0.28);
+    transition: all 0.2s ease;
+    margin-top: 10px;
+
+    &:hover:not(:disabled) {
+      transform: translateY(-1px);
+      background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.38);
+      filter: brightness(1.03);
+    }
+
+    &:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none;
+    }
+  }
+
+  /* Success Notice */
+  .ts-success-card {
+    text-align: center;
+    padding: 40px 20px;
+
+    .success-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: #ecfdf5;
+      color: #059669;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+
+    h3 {
+      font-size: 22px;
+      font-weight: 800;
+      color: #0f172a;
+      margin: 0 0 10px;
+    }
+
+    p {
+      font-size: 14.5px;
+      color: #64748b;
+      line-height: 1.6;
+      max-width: 480px;
+      margin: 0 auto 24px;
+    }
+
+    .btn-reset {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 20px;
+      border-radius: 8px;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      color: #1d4ed8;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+  }
+}
+
+/* ==========================================================================
+   6. FAQ Accordion Section
+   ========================================================================== */
+.ts-faq {
+  padding: 80px 0;
+  background: #ffffff;
+
+  @media (max-width: 768px) {
+    padding: 56px 0;
+  }
+
+  .ts-faq-list {
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .ts-faq-item {
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    background: #ffffff;
+    overflow: hidden;
+    transition: border-color 0.15s ease;
+
+    &.is-open {
+      border-color: #93c5fd;
+      box-shadow: 0 4px 14px -2px rgba(37, 99, 235, 0.08);
+
+      .faq-question {
+        color: #1d4ed8;
+      }
+    }
+
+    .faq-question {
+      width: 100%;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      font-size: 16px;
+      font-weight: 700;
+      color: #0f274a;
+      transition: color 0.15s ease;
+
+      .faq-chevron {
+        color: #64748b;
+        transition: transform 0.2s ease;
+        flex-shrink: 0;
+      }
+
+      &.open .faq-chevron {
+        transform: rotate(180deg);
+        color: #2563eb;
+      }
+    }
+
+    .faq-answer {
+      padding: 0 24px 22px;
+      font-size: 14.5px;
+      line-height: 1.65;
+      color: #475569;
+      border-top: 1px solid #f8fafc;
+    }
+  }
+}
+
+/* ==========================================================================
+   7. Nationwide Contact Banner
+   ========================================================================== */
+.ts-contact-banner {
+  padding: 64px 0 80px;
+  background: linear-gradient(135deg, #0f274a 0%, #173868 60%, #1e4580 100%);
+  color: #ffffff;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 32px 32px;
+    opacity: 0.8;
+  }
+
+  .ts-banner-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    max-width: 820px;
+    margin: 0 auto;
+
+    .banner-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 14px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #93c5fd;
+      margin-bottom: 16px;
+    }
+
+    h2 {
+      font-size: clamp(26px, 3.6vw, 36px);
+      font-weight: 800;
+      line-height: 1.25;
+      margin: 0 0 16px;
+      color: #ffffff;
+    }
+
+    p {
+      font-size: clamp(15px, 1.8vw, 17px);
+      color: #cbd5e1;
+      line-height: 1.6;
+      margin: 0 0 32px;
+    }
+
+    .hubs-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 32px;
+
+      .hub-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 7px 14px;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 9999px;
+        font-size: 13px;
+        color: #e2e8f0;
+      }
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+
+      .btn-whatsapp-large {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 13px 26px;
+        background: #25d366;
+        color: #ffffff;
+        font-size: 15px;
+        font-weight: 700;
+        border-radius: 12px;
+        text-decoration: none;
+        box-shadow: 0 4px 16px rgba(37, 211, 102, 0.35);
+        transition: transform 0.15s ease;
+
+        &:hover {
+          transform: translateY(-1.5px);
+          filter: brightness(1.05);
+        }
+      }
+
+      .btn-form-scroll {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 13px 24px;
+        background: #ffffff;
+        color: #0f274a;
+        font-size: 15px;
+        font-weight: 700;
+        border-radius: 12px;
+        text-decoration: none;
+        transition: all 0.15s ease;
+
+        &:hover {
+          background: #f1f5f9;
+          transform: translateY(-1.5px);
+        }
+      }
+    }
+  }
+}

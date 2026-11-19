@@ -3,26 +3,26 @@
     <label class="employer-field employer-field-full">
       <span>
         MST
-        <span class="employer-required-star">{{ $t('common.requiredMark') }}</span>
+        <span class="text-xs text-gray-400 font-normal ml-1">(Tùy chọn)</span>
       </span>
       <div class="employer-admin-company-mst-row">
         <UInput
           v-model.trim="form.mst"
           class="w-full min-w-0 flex-1"
-          placeholder="Mã số thuế"
-          :disabled="mstChecking || isEditMode"
+          placeholder="Mã số thuế (nếu có)"
+          :disabled="mstChecking"
           @input="onMstInput"
           @keydown.enter.prevent="validateMst"
         />
         <UButton
-          v-if="!isEditMode"
+          v-if="form.mst?.trim()"
           color="primary"
           class="employer-admin-company-mst-btn shrink-0"
           :loading="mstChecking"
           :disabled="!form.mst?.trim() || mstChecking"
           @click="validateMst"
         >
-          {{ isMstVerified ? 'Kiểm tra lại' : 'Kiểm tra' }}
+          {{ isMstVerified ? 'Kiểm tra lại' : 'Tra cứu MST' }}
         </UButton>
       </div>
       <p v-if="mstChecking" class="employer-field-hint">Đang kiểm tra MST...</p>
@@ -40,7 +40,7 @@
         v-model.trim="form.name"
         class="w-full"
         :placeholder="$t('company.form.placeholderName')"
-        :disabled="isNameAutoFilled || (!isMstVerified && !isEditMode)"
+        
         @input="errors.name = ''"
       />
       <p v-if="isNameAutoFilled" class="employer-field-hint">Tên công ty được tự động điền từ MST.</p>
@@ -55,7 +55,7 @@
         autoresize
         class="w-full"
         :placeholder="$t('company.form.placeholderInsight')"
-        :disabled="(!isMstVerified && !isEditMode)"
+        
       />
     </label>
 
@@ -67,7 +67,7 @@
         autoresize
         class="w-full"
         :placeholder="$t('company.form.overviewPlaceholder')"
-        :disabled="(!isMstVerified && !isEditMode)"
+        
       />
     </label>
 
@@ -78,7 +78,7 @@
           :model-value="form.description || undefined"
           class="w-full rich-text-content"
           :placeholder="$t('company.form.descPlaceholder')"
-          :disabled="!isMstVerified && !isEditMode"
+          
           @update:model-value="(val) => (form.description = val || null)"
         />
       </div>
@@ -94,7 +94,7 @@
           v-model="form.address"
           class="w-full rich-text-content"
           :placeholder="$t('company.form.placeholderAddress')"
-          :disabled="!isMstVerified && !isEditMode"
+          
           @update:model-value="errors.address = ''"
         />
       </div>
@@ -107,7 +107,7 @@
         v-model.trim="form.taxAddress"
         class="w-full"
         placeholder="Địa chỉ thuế"
-        :disabled="(!isMstVerified && !isEditMode)"
+        
       />
     </label>
 
@@ -130,7 +130,7 @@
           :content="{ side: 'bottom' }"
           :placeholder="$t('company.industry')"
           :search-input="{ placeholder: 'Tìm loại hình...', variant: 'none' }"
-          :disabled="(!isMstVerified && !isEditMode)"
+          
           @update:model-value="(v) => { form.organizationType = Number(v ?? 0); errors.organizationType = '' }"
         />
         <p v-if="errors.organizationType" class="employer-field-error">{{ errors.organizationType }}</p>
@@ -145,7 +145,7 @@
           max="2100"
           class="w-full"
           :placeholder="$t('company.form.placeholderFounded') as string"
-          :disabled="(!isMstVerified && !isEditMode)"
+          
         />
         <p v-if="errors.foundedYear" class="employer-field-error">{{ errors.foundedYear }}</p>
       </label>
@@ -165,7 +165,7 @@
         :ui="orgTypeSelectUi"
         :content="{ side: 'bottom' }"
         :placeholder="$t('company.form.placeholderCompanySize')"
-        :disabled="(!isMstVerified && !isEditMode)"
+        
         @update:model-value="
           (v) => {
             form.companySize = v ? Number(v) : null
@@ -184,7 +184,7 @@
         type="url"
         class="w-full"
         :placeholder="$t('company.form.placeholderWebsite')"
-        :disabled="(!isMstVerified && !isEditMode)"
+        
         @input="errors.website = ''"
       />
       <p v-if="errors.website" class="employer-field-error">{{ errors.website }}</p>
@@ -197,7 +197,7 @@
           v-model.trim="form.facebookLink"
           class="w-full"
           :placeholder="$t('company.form.placeholderFacebook')"
-          :disabled="(!isMstVerified && !isEditMode)"
+          
         />
       </label>
       <label class="employer-field">
@@ -206,7 +206,7 @@
           v-model.trim="form.twitterLink"
           class="w-full"
           :placeholder="$t('company.form.placeholderTwitter')"
-          :disabled="(!isMstVerified && !isEditMode)"
+          
         />
       </label>
       <label class="employer-field">
@@ -215,7 +215,7 @@
           v-model.trim="form.instagramLink"
           class="w-full"
           :placeholder="$t('company.form.placeholderInstagram')"
-          :disabled="(!isMstVerified && !isEditMode)"
+          
         />
       </label>
       <label class="employer-field">
@@ -224,7 +224,7 @@
           v-model.trim="form.linkedInLink"
           class="w-full"
           :placeholder="$t('company.form.placeholderLinkedIn')"
-          :disabled="(!isMstVerified && !isEditMode)"
+          
         />
       </label>
     </div>
@@ -236,7 +236,7 @@
         type="url"
         class="w-full"
         :placeholder="$t('company.form.placeholderVideo')"
-        :disabled="(!isMstVerified && !isEditMode)"
+        
       />
     </label>
 
@@ -436,7 +436,7 @@
               <div
                 v-if="showCropArea"
                 ref="cropArea"
-                class="absolute border-2 border-orange-500 cursor-move shadow-[0_0_0_9999px_rgba(0,0,0,0.55)] rounded-lg overflow-visible"
+                class="absolute border-2 border-blue-500 cursor-move shadow-[0_0_0_9999px_rgba(0,0,0,0.55)] rounded-lg overflow-visible"
                 :style="cropAreaStyle"
                 @mousedown.prevent="startCropDrag"
                 @touchstart.prevent="startCropDrag"
@@ -461,22 +461,22 @@
                 </div>
 
                 <div
-                  class="absolute w-4 h-4 bg-orange-500 border-2 border-white rounded-full cursor-nwse-resize shadow-md -top-2 -left-2"
+                  class="absolute w-4 h-4 bg-blue-500 border-2 border-white rounded-full cursor-nwse-resize shadow-md -top-2 -left-2"
                   @mousedown.stop.prevent="(e) => startResize('nw', e)"
                   @touchstart.stop.prevent="(e) => startResize('nw', e)"
                 />
                 <div
-                  class="absolute w-4 h-4 bg-orange-500 border-2 border-white rounded-full cursor-nesw-resize shadow-md -top-2 -right-2"
+                  class="absolute w-4 h-4 bg-blue-500 border-2 border-white rounded-full cursor-nesw-resize shadow-md -top-2 -right-2"
                   @mousedown.stop.prevent="(e) => startResize('ne', e)"
                   @touchstart.stop.prevent="(e) => startResize('ne', e)"
                 />
                 <div
-                  class="absolute w-4 h-4 bg-orange-500 border-2 border-white rounded-full cursor-nwse-resize shadow-md -bottom-2 -right-2"
+                  class="absolute w-4 h-4 bg-blue-500 border-2 border-white rounded-full cursor-nwse-resize shadow-md -bottom-2 -right-2"
                   @mousedown.stop.prevent="(e) => startResize('se', e)"
                   @touchstart.stop.prevent="(e) => startResize('se', e)"
                 />
                 <div
-                  class="absolute w-4 h-4 bg-orange-500 border-2 border-white rounded-full cursor-nesw-resize shadow-md -bottom-2 -left-2"
+                  class="absolute w-4 h-4 bg-blue-500 border-2 border-white rounded-full cursor-nesw-resize shadow-md -bottom-2 -left-2"
                   @mousedown.stop.prevent="(e) => startResize('sw', e)"
                   @touchstart.stop.prevent="(e) => startResize('sw', e)"
                 />
@@ -1295,18 +1295,8 @@ function validate(): boolean {
   errors.value = {}
   let ok = true
 
-  // In add mode, require MST verification before allowing submit
-  if (!isEditMode.value && !isMstVerified.value) {
-    errors.value.mst = 'Vui lòng nhập và xác thực MST trước.'
-    ok = false
-  }
-
   if (!form.value.name?.trim()) {
     errors.value.name = t('company.form.errName')
-    ok = false
-  }
-  if (!form.value.mst?.trim()) {
-    errors.value.mst = 'Vui lòng nhập MST.'
     ok = false
   }
   const addressHtml = form.value.address || ''

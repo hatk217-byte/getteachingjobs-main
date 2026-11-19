@@ -80,7 +80,7 @@
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0;
-  color: #16a34a;
+  color: #2563eb;
 }
 
 .candidate-sidebar-nav {
@@ -119,14 +119,14 @@
 .candidate-nav-link.is-active {
   color: #ffffff;
   border-color: transparent;
-  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
   box-shadow: none;
 }
 
 .candidate-nav-link.is-active:hover {
   color: #ffffff;
   border-color: transparent;
-  background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
 }
 
 .candidate-nav-link.is-active .candidate-nav-icon {
@@ -216,7 +216,7 @@
   width: 32px;
   height: 32px;
   border-radius: 10px;
-  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
   font-size: 12px;
   font-weight: bold;
   color: #fff;
@@ -353,15 +353,15 @@
 }
 
 .candidate-overview-file-icon.is-yellow {
-  color: #ea580c;
+  color: #2563eb;
   border: 1px solid #fed7aa;
-  background: #fff7ed;
+  background: #eff6ff;
 }
 
 .candidate-overview-file-icon.is-blue {
-  color: #ea580c;
+  color: #2563eb;
   border: 1px solid #fed7aa;
-  background: #fff7ed;
+  background: #eff6ff;
 }
 
 .candidate-overview-cv-copy {
@@ -411,7 +411,7 @@
 .candidate-overview-card-head a,
 .candidate-overview-card-head-link {
   width: fit-content;
-  color: #ea580c;
+  color: #2563eb;
   font-size: 13px;
   font-weight: 550;
   text-decoration: none;
@@ -425,7 +425,7 @@
 .candidate-overview-cv-copy a:hover,
 .candidate-overview-card-head a:hover,
 .candidate-overview-card-head-link:hover {
-  color: #c2410c;
+  color: #1d4ed8;
   text-decoration: underline;
 }
 
@@ -600,7 +600,7 @@
   border: none;
   border-radius: 10px;
   background: transparent;
-  color: #ea580c;
+  color: #2563eb;
   text-decoration: none;
   cursor: pointer;
   transition:
@@ -623,8 +623,8 @@
   width: 32px;
   height: 32px;
   margin: 0 auto 12px;
-  border: 2px solid rgba(234, 88, 12, 0.2);
-  border-top-color: #ea580c;
+  border: 2px solid rgba(37, 99, 235, 0.2);
+  border-top-color: #2563eb;
   border-radius: 50%;
   animation: candidate-overview-spin 0.8s linear infinite;
 }
