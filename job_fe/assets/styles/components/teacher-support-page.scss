@@ -400,6 +400,12 @@
       margin-bottom: 14px;
       min-height: 26px;
 
+      .card-head-left {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
       .card-num {
         font-size: 13px;
         font-weight: 800;
@@ -433,6 +439,26 @@
           background: #eff6ff;
           color: #2563eb;
           border-color: #bfdbfe;
+        }
+      }
+
+      .card-view-details {
+        font-size: 12px;
+        font-weight: 600;
+        color: #64748b;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 3px;
+        margin-left: auto;
+        padding: 2px 6px;
+        border-radius: 6px;
+        transition: all 0.15s ease;
+        white-space: nowrap;
+
+        &:hover {
+          color: #2563eb;
+          background: #eff6ff;
         }
       }
     }
@@ -494,10 +520,6 @@
       border-top: 1px solid #f1f5f9;
       padding-top: 14px;
       margin-top: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 9px;
-      align-items: center;
 
       .btn-select-service {
         width: 100%;
@@ -524,23 +546,6 @@
 
         &:active {
           transform: translateY(0);
-        }
-      }
-
-      .card-scope-link {
-        font-size: 12.5px;
-        font-weight: 600;
-        color: #64748b;
-        text-decoration: none;
-        display: inline-flex;
-        align-items: center;
-        gap: 4px;
-        padding: 2px 6px;
-        transition: color 0.15s ease;
-
-        &:hover {
-          color: #1d4ed8;
-          text-decoration: underline;
         }
       }
     }
