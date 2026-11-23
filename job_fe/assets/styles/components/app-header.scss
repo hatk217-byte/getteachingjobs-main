@@ -330,27 +330,14 @@
 
       &.is-featured {
         background: #f8fafc;
-        border: 1px solid #e2e8f0;
 
         .site-nav__dropdown-num {
           background: #eff6ff;
           color: #1d4ed8;
         }
 
-        .site-nav__dropdown-item-title {
-          color: #0f172a;
-          font-weight: 600;
-        }
-
         &:hover {
           background: #eff6ff !important;
-          border-color: #bfdbfe;
-
-          .site-nav__dropdown-badge {
-            background: #1d4ed8;
-            color: #ffffff;
-            border-color: #1d4ed8;
-          }
         }
       }
 
@@ -386,20 +373,24 @@
       color: #1e293b;
       white-space: nowrap;
       transition: color 0.15s ease;
-    }
 
-    &__dropdown-badge {
-      font-size: 10.5px;
-      font-weight: 600;
-      color: #1d4ed8;
-      background: #eff6ff;
-      border: 1px solid #bfdbfe;
-      padding: 1.5px 7px;
-      border-radius: 9999px;
-      margin-left: auto;
-      letter-spacing: -0.01em;
-      white-space: nowrap;
-      transition: all 0.15s ease;
+      &--shimmer {
+        font-weight: 700 !important;
+        background: linear-gradient(
+          90deg,
+          #1d4ed8 0%,
+          #0284c7 25%,
+          #2563eb 50%,
+          #0284c7 75%,
+          #1d4ed8 100%
+        );
+        background-size: 200% auto;
+        color: #1d4ed8;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: jobPlacementShimmer 2.8s linear infinite;
+        display: inline-block;
+      }
     }
   }
 
@@ -588,17 +579,6 @@
           }
         }
 
-        .site-mobile-menu__subbadge {
-          font-size: 10px;
-          font-weight: 600;
-          color: #1d4ed8;
-          background: #eff6ff;
-          border: 1px solid #bfdbfe;
-          padding: 1px 6px;
-          border-radius: 9999px;
-          margin-left: auto;
-        }
-
         .site-mobile-menu__subnum {
           font-size: 10.5px;
           font-weight: 700;
@@ -721,4 +701,13 @@
 .dropdown-fade-leave-to {
   opacity: 0;
   transform: translateY(-4px) !important;
+}
+
+@keyframes jobPlacementShimmer {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
 }

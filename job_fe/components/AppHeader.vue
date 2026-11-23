@@ -80,8 +80,12 @@
                       @click="closeServicesDropdown"
                     >
                       <span class="site-nav__dropdown-num">{{ svc.num }}</span>
-                      <span class="site-nav__dropdown-item-title">{{ svc.title }}</span>
-                      <span v-if="svc.badge" class="site-nav__dropdown-badge">{{ svc.badge }}</span>
+                      <span
+                        class="site-nav__dropdown-item-title"
+                        :class="{ 'site-nav__dropdown-item-title--shimmer': svc.featured }"
+                      >
+                        {{ svc.title }}
+                      </span>
                     </NuxtLink>
                   </div>
                 </div>
@@ -139,8 +143,7 @@
                     @click="closeMobileNav"
                   >
                     <span class="site-mobile-menu__subnum">{{ svc.num }}</span>
-                    <span>{{ svc.title }}</span>
-                    <span v-if="svc.badge" class="site-mobile-menu__subbadge">{{ svc.badge }}</span>
+                    <span :class="{ 'site-nav__dropdown-item-title--shimmer': svc.featured }">{{ svc.title }}</span>
                   </NuxtLink>
                 </div>
               </div>
@@ -330,7 +333,7 @@ const isMobileServicesOpen = ref(false)
 let closeTimer: ReturnType<typeof setTimeout> | null = null
 
 const teacherServicesList = [
-  { slug: 'job-placement', num: '01', title: 'Job Placement', badge: 'Recommended', featured: true, to: '/teacher-support/services/job-placement' },
+  { slug: 'job-placement', num: '01', title: 'Job Placement', featured: true, to: '/teacher-support/services/job-placement' },
   { slug: 'visa-service', num: '02', title: 'Vietnam Visa Service', to: '/teacher-support/services/visa-service' },
   { slug: 'consular-legalization', num: '03', title: 'Apostille & Legalization', to: '/teacher-support/services/consular-legalization' },
   { slug: 'coe-support', num: '04', title: 'DMW & OEC Support', to: '/teacher-support/services/coe-support' },
