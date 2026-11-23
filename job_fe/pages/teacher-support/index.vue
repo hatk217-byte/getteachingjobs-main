@@ -92,7 +92,11 @@
               <span class="card-num">01</span>
               <span class="category-badge highlight">Highly Recommended</span>
             </div>
-            <h3 class="card-title">Job Placement</h3>
+            <h3 class="card-title">
+              <NuxtLink to="/teacher-support/services/job-placement" class="card-title-link">
+                Job Placement
+              </NuxtLink>
+            </h3>
             <p class="card-desc">
               Direct connections with verified international and bilingual schools across Vietnam.
             </p>
@@ -117,9 +121,16 @@
               </li>
             </ul>
             <div class="card-footer">
+              <button
+                type="button"
+                class="btn-select-service"
+                @click="selectServiceAndScroll('job_placement')"
+              >
+                <span>Request Consultation &rarr;</span>
+              </button>
               <NuxtLink
                 to="/teacher-support/services/job-placement"
-                class="btn-select-service"
+                class="card-scope-link"
               >
                 <span>Full Scope &amp; Placement &rarr;</span>
               </NuxtLink>
@@ -131,7 +142,11 @@
             <div class="card-head">
               <span class="card-num">02</span>
             </div>
-            <h3 class="card-title">Vietnam Visa Service</h3>
+            <h3 class="card-title">
+              <NuxtLink to="/teacher-support/services/visa-service" class="card-title-link">
+                Vietnam Visa Service
+              </NuxtLink>
+            </h3>
             <p class="card-desc">
               Business sponsorship letters, e-visas, and legal stay regularisation.
             </p>
@@ -156,9 +171,16 @@
               </li>
             </ul>
             <div class="card-footer">
+              <button
+                type="button"
+                class="btn-select-service"
+                @click="selectServiceAndScroll('visa_service')"
+              >
+                <span>Request Consultation &rarr;</span>
+              </button>
               <NuxtLink
                 to="/teacher-support/services/visa-service"
-                class="btn-select-service"
+                class="card-scope-link"
               >
                 <span>Full Scope &amp; Visa Options &rarr;</span>
               </NuxtLink>
@@ -170,7 +192,11 @@
             <div class="card-head">
               <span class="card-num">03</span>
             </div>
-            <h3 class="card-title">Apostille &amp; Consular Legalization</h3>
+            <h3 class="card-title">
+              <NuxtLink to="/teacher-support/services/consular-legalization" class="card-title-link">
+                Apostille &amp; Consular Legalization
+              </NuxtLink>
+            </h3>
             <p class="card-desc">
               Certified translations recognised across Vietnam.
             </p>
@@ -195,9 +221,16 @@
               </li>
             </ul>
             <div class="card-footer">
+              <button
+                type="button"
+                class="btn-select-service"
+                @click="selectServiceAndScroll('consular_legalization')"
+              >
+                <span>Request Consultation &rarr;</span>
+              </button>
               <NuxtLink
                 to="/teacher-support/services/consular-legalization"
-                class="btn-select-service"
+                class="card-scope-link"
               >
                 <span>Full Scope &amp; Legalization &rarr;</span>
               </NuxtLink>
@@ -209,7 +242,11 @@
             <div class="card-head">
               <span class="card-num">04</span>
             </div>
-            <h3 class="card-title">DMW &amp; OEC Support (Filipino Teachers)</h3>
+            <h3 class="card-title">
+              <NuxtLink to="/teacher-support/services/coe-support" class="card-title-link">
+                DMW &amp; OEC Support (Filipino Teachers)
+              </NuxtLink>
+            </h3>
             <p class="card-desc">
               Certificate of Employment (COE), DMW compliance, and OEC / OFW Pass exit clearance.
             </p>
@@ -240,9 +277,16 @@
               </li>
             </ul>
             <div class="card-footer">
+              <button
+                type="button"
+                class="btn-select-service"
+                @click="selectServiceAndScroll('coe_support')"
+              >
+                <span>Request Consultation &rarr;</span>
+              </button>
               <NuxtLink
                 to="/teacher-support/services/coe-support"
-                class="btn-select-service"
+                class="card-scope-link"
               >
                 <span>Full Scope &amp; DMW Roadmap &rarr;</span>
               </NuxtLink>
@@ -254,7 +298,11 @@
             <div class="card-head">
               <span class="card-num">05</span>
             </div>
-            <h3 class="card-title">Work Permit &amp; TRC</h3>
+            <h3 class="card-title">
+              <NuxtLink to="/teacher-support/services/work-permit-trc" class="card-title-link">
+                Work Permit &amp; TRC
+              </NuxtLink>
+            </h3>
             <p class="card-desc">
               Preparation for foreign teaching permits and long-term residence cards.
             </p>
@@ -279,9 +327,16 @@
               </li>
             </ul>
             <div class="card-footer">
+              <button
+                type="button"
+                class="btn-select-service"
+                @click="selectServiceAndScroll('work_permit_trc')"
+              >
+                <span>Request Consultation &rarr;</span>
+              </button>
               <NuxtLink
                 to="/teacher-support/services/work-permit-trc"
-                class="btn-select-service"
+                class="card-scope-link"
               >
                 <span>Full Scope &amp; Eligibility &rarr;</span>
               </NuxtLink>
@@ -293,7 +348,11 @@
             <div class="card-head">
               <span class="card-num">06</span>
             </div>
-            <h3 class="card-title">Other Supports</h3>
+            <h3 class="card-title">
+              <NuxtLink to="/teacher-support/services/other-supports" class="card-title-link">
+                Other Supports
+              </NuxtLink>
+            </h3>
             <p class="card-desc">
               Essential relocation logistics and local settlement support.
             </p>
@@ -318,9 +377,16 @@
               </li>
             </ul>
             <div class="card-footer">
+              <button
+                type="button"
+                class="btn-select-service"
+                @click="selectServiceAndScroll('other_supports')"
+              >
+                <span>Request Consultation &rarr;</span>
+              </button>
               <NuxtLink
                 to="/teacher-support/services/other-supports"
-                class="btn-select-service"
+                class="card-scope-link"
               >
                 <span>Full Scope &amp; Relocation &rarr;</span>
               </NuxtLink>
@@ -590,7 +656,10 @@
                 </div>
 
                 <!-- 3. What service do you need help with? (Multiple Choice v-select) -->
-                <div class="ts-form-group">
+                <div
+                  class="ts-form-group"
+                  :class="{ 'ts-form-group--highlight': isServiceHighlighted }"
+                >
                   <label for="service-select">
                     3. Service(s) you need help with <span class="req">*</span>
                   </label>
@@ -916,6 +985,7 @@ const submitting = ref(false)
 const submitted = ref(false)
 const submittedName = ref('')
 const submittedApp = ref('WhatsApp')
+const isServiceHighlighted = ref(false)
 
 const form = reactive({
   locationType: 'inside', // 'inside' | 'outside'
@@ -930,21 +1000,27 @@ const form = reactive({
   message: '',
 })
 
-// Auto-select service and scroll (Adds to multiple choice selection)
+// Auto-select service and scroll (Pre-selects clicked service)
 const selectServiceAndScroll = (serviceKey: string) => {
   const label = serviceKeyMap[serviceKey] || serviceKey
-  if (!form.services.includes(label)) {
-    form.services.push(label)
-  }
+  form.services = [label]
   scrollTo('#assessment-form')
+
+  // Visual feedback pulse on the services select field
+  isServiceHighlighted.value = true
+  setTimeout(() => {
+    isServiceHighlighted.value = false
+  }, 2200)
 }
 
-// Smooth scroll utility
+// Smooth scroll utility with header offset
 const scrollTo = (hash: string) => {
   if (typeof document === 'undefined') return
   const el = document.querySelector(hash)
   if (el) {
-    el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    const yOffset = -70
+    const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset
+    window.scrollTo({ top: y, behavior: 'smooth' })
   }
 }
 
