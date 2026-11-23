@@ -73,21 +73,15 @@
                       :key="svc.slug"
                       :to="svc.to"
                       class="site-nav__dropdown-item"
-                      :class="{ 'is-item-active': router.currentRoute.value.path === svc.to }"
+                      :class="{
+                        'is-item-active': router.currentRoute.value.path === svc.to,
+                        'is-featured': svc.featured,
+                      }"
                       @click="closeServicesDropdown"
                     >
                       <span class="site-nav__dropdown-num">{{ svc.num }}</span>
                       <span class="site-nav__dropdown-item-title">{{ svc.title }}</span>
-                    </NuxtLink>
-                  </div>
-
-                  <div class="site-nav__dropdown-footer">
-                    <NuxtLink
-                      to="/teacher-support#services"
-                      class="site-nav__dropdown-footer-link"
-                      @click="closeServicesDropdown"
-                    >
-                      <span>View all 6 services &rarr;</span>
+                      <span v-if="svc.badge" class="site-nav__dropdown-badge">{{ svc.badge }}</span>
                     </NuxtLink>
                   </div>
                 </div>
@@ -138,18 +132,15 @@
                     :key="`m-${svc.slug}`"
                     :to="svc.to"
                     class="site-mobile-menu__sublink"
-                    :class="{ 'is-active': router.currentRoute.value.path === svc.to }"
+                    :class="{
+                      'is-active': router.currentRoute.value.path === svc.to,
+                      'is-featured': svc.featured,
+                    }"
                     @click="closeMobileNav"
                   >
                     <span class="site-mobile-menu__subnum">{{ svc.num }}</span>
                     <span>{{ svc.title }}</span>
-                  </NuxtLink>
-                  <NuxtLink
-                    to="/teacher-support#services"
-                    class="site-mobile-menu__sublink site-mobile-menu__sublink--all"
-                    @click="closeMobileNav"
-                  >
-                    View all 6 services overview &rarr;
+                    <span v-if="svc.badge" class="site-mobile-menu__subbadge">{{ svc.badge }}</span>
                   </NuxtLink>
                 </div>
               </div>
@@ -339,7 +330,7 @@ const isMobileServicesOpen = ref(false)
 let closeTimer: ReturnType<typeof setTimeout> | null = null
 
 const teacherServicesList = [
-  { slug: 'job-placement', num: '01', title: 'Job Placement', to: '/teacher-support/services/job-placement' },
+  { slug: 'job-placement', num: '01', title: 'Job Placement', badge: 'Recommended', featured: true, to: '/teacher-support/services/job-placement' },
   { slug: 'visa-service', num: '02', title: 'Vietnam Visa Service', to: '/teacher-support/services/visa-service' },
   { slug: 'consular-legalization', num: '03', title: 'Apostille & Legalization', to: '/teacher-support/services/consular-legalization' },
   { slug: 'coe-support', num: '04', title: 'DMW & OEC Support', to: '/teacher-support/services/coe-support' },

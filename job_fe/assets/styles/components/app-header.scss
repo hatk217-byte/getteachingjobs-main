@@ -274,7 +274,7 @@
       position: absolute;
       top: calc(100% + 8px);
       left: 0;
-      width: 270px;
+      width: 290px;
       background: #ffffff;
       border: 1px solid #e2e8f0;
       border-radius: 12px;
@@ -328,6 +328,32 @@
         }
       }
 
+      &.is-featured {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+
+        .site-nav__dropdown-num {
+          background: #eff6ff;
+          color: #1d4ed8;
+        }
+
+        .site-nav__dropdown-item-title {
+          color: #0f172a;
+          font-weight: 600;
+        }
+
+        &:hover {
+          background: #eff6ff !important;
+          border-color: #bfdbfe;
+
+          .site-nav__dropdown-badge {
+            background: #1d4ed8;
+            color: #ffffff;
+            border-color: #1d4ed8;
+          }
+        }
+      }
+
       &.is-item-active {
         background: #eff6ff !important;
 
@@ -362,33 +388,18 @@
       transition: color 0.15s ease;
     }
 
-    &__dropdown-footer {
-      margin-top: 4px;
-      padding-top: 4px;
-      border-top: 1px solid #f1f5f9;
-    }
-
-    &__dropdown-footer-link {
-      display: flex !important;
-      align-items: center !important;
-      justify-content: space-between !important;
-      font-size: 12.5px !important;
-      font-weight: 600 !important;
-      color: #1d4ed8 !important;
-      padding: 8px 12px !important;
-      border-radius: 8px !important;
-      text-decoration: none !important;
-      min-height: auto !important;
-      background: transparent !important;
-      transition: background 0.15s ease !important;
-
-      &::after {
-        display: none !important;
-      }
-
-      &:hover {
-        background: #eff6ff !important;
-      }
+    &__dropdown-badge {
+      font-size: 10.5px;
+      font-weight: 600;
+      color: #1d4ed8;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      padding: 1.5px 7px;
+      border-radius: 9999px;
+      margin-left: auto;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+      transition: all 0.15s ease;
     }
   }
 
@@ -565,11 +576,27 @@
             font-weight: 600 !important;
           }
 
-          &--all {
+          &.is-featured {
+            background: #f8fafc;
+            color: #0f172a !important;
             font-weight: 600 !important;
-            color: #1d4ed8 !important;
-            margin-top: 4px;
+
+            .site-mobile-menu__subnum {
+              background: #eff6ff;
+              color: #1d4ed8;
+            }
           }
+        }
+
+        .site-mobile-menu__subbadge {
+          font-size: 10px;
+          font-weight: 600;
+          color: #1d4ed8;
+          background: #eff6ff;
+          border: 1px solid #bfdbfe;
+          padding: 1px 6px;
+          border-radius: 9999px;
+          margin-left: auto;
         }
 
         .site-mobile-menu__subnum {
