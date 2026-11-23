@@ -156,7 +156,7 @@
         "uniform": "School Uniform Provided",
         "teambuilding": "Team Retreats & Social Events",
         "performancebonus": "Contract Completion Bonus",
-        "annualhealthcheck": "Annual Medical Checkup & Work Permit Support"
+        "annualhealthcheck": "Annual Health Checkup & Physical Exam"
       },
       "experienceLevel": {
         "underoneyear": "Under 1 year",
@@ -192,6 +192,7 @@
         "more": "Negotiable"
       },
       "gender": {
+        "nopreference": "No preference / Any",
         "male": "Male",
         "female": "Female"
       },
@@ -208,8 +209,8 @@
       "requiredQualification": {
         "incomplete": "High School Diploma",
         "associatedegree": "Associate Degree",
-        "bachelordegree": "Bachelor's Degree",
-        "teachingdegree": "Teaching Certificate (TEFL / TESOL / CELTA / PGCE)",
+        "bachelordegree": "Bachelor's Degree (Required by VN Law)",
+        "teachingdegree": "Teaching License / Degree in Education",
         "masterdegree": "Master's Degree",
         "postdoctoral": "Postdoctoral",
         "doctorate": "Doctorate / Ph.D"
@@ -454,7 +455,11 @@
       "deadlineLabel": "Application Deadline",
       "categoryLabel": "Teaching Subject",
       "typeJobLabel": "Employment Type",
-      "currentSalaryLabel": "Currency",
+      "currencyLabel": "Currency",
+      "salaryPeriodLabel": "Salary Frequency",
+      "salaryRateTypeLabel": "Pay Basis (Gross / Net)",
+      "isNegotiableLabel": "Negotiable / Competitive Salary (Thương lượng theo năng lực)",
+      "currentSalaryLabel": "Salary Frequency",
       "minSalaryLabel": "Minimum Salary",
       "maxSalaryLabel": "Maximum Salary",
       "experienceLabel": "Experience Required",
@@ -477,7 +482,7 @@
       "chooseCategory": "Select subject",
       "chooseTypeOfEmployment": "Select type",
       "moreInformation": "Additional Information",
-      "requiredQualificationLabel": "Required Qualification",
+      "requiredQualificationLabel": "Required Academic Degree",
       "genderLabel": "Gender Preference",
       "gradeLabel": "Grade / Student Level",
       "chooseSalaryType": "Select frequency",
@@ -485,10 +490,29 @@
       "minSalary": "Min salary",
       "maxSalary": "Max salary",
       "chooseExperienceLevel": "Select experience",
-      "chooseBenefitLevel": "Select benefits",
+      "chooseBenefitLevel": "Select benefits (Multiple choice)",
       "chooseGender": "Select gender",
       "chooseGradeLevel": "Select grade",
-      "chooseLocation": "Select location"
+      "chooseLocation": "Select location",
+      "vacanciesLabel": "Number of Vacancies",
+      "vacanciesPlaceholder": "e.g. 2 teachers",
+      "startDateLabel": "Start Date",
+      "startDatePlaceholder": "e.g. Immediate / August 2026",
+      "contractLengthLabel": "Contract Length",
+      "contractLengthPlaceholder": "e.g. 1 Year (Renewable)",
+      "workingScheduleLabel": "Working Schedule & Teaching Hours",
+      "workingSchedulePlaceholder": "e.g. 18-20 teaching hours/week, Mon-Fri",
+      "workModeLabel": "Work Mode",
+      "chooseWorkMode": "Select work mode",
+      "schoolTypeLabel": "School Type",
+      "chooseSchoolType": "Select school type",
+      "curriculumLabel": "Curriculum",
+      "chooseCurriculum": "Select curriculum",
+      "nationalityPreferenceLabel": "Native / Nationality Preference",
+      "chooseNationalityPreference": "Select nationality preference",
+      "certificatesLabel": "Teaching Certificates Required / Preferred",
+      "chooseCertificates": "Select teaching certificates (Multiple choice)",
+      "backToStep1": "Back to School Information"
     },
     "editJob": {
       "title": "Edit Job Posting",

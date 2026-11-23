@@ -179,10 +179,18 @@ export default defineNuxtConfig({
     storesDirs: ['./stores/**'],
   },
 
+  sourcemap: {
+    server: false,
+    client: false,
+  },
+
   build: {
     transpile: ['vue-i18n'],
   },
   vite: {
+    esbuild: {
+      drop: process.env.NODE_ENV === 'production' ? ['console', 'debugger'] : [],
+    },
     plugins: [
       VueI18nVitePlugin({
         include: [

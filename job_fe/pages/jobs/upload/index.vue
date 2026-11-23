@@ -61,7 +61,7 @@
                 />
               </svg>
             </span>
-            <strong>{{ $t('job.uploadJob.stepCompanyInfo') }}</strong>
+            <strong>Step 1: {{ $t('job.uploadJob.stepCompanyInfo') }}</strong>
           </div>
           <div
             class="employer-step"
@@ -84,25 +84,13 @@
                 />
               </svg>
             </span>
-            <strong>{{ $t('job.uploadJob.stepPostDetail') }}</strong>
+            <strong>Step 2: {{ $t('job.uploadJob.stepPostDetail') }}</strong>
           </div>
         </div>
 
         <div class="upload-stepper-wrap">
-        <UStepper
-          ref="stepper"
-          :items="steppers"
-          class="w-full stepper-cus stepper-cus--compact"
-          color="primary"
-          size="lg"
-          disabled
-          :ui="{
-            header: 'hidden',
-            title: 'text-xs font-medium text-slate-600',
-            wrapper: 'mt-0',
-          }"
-        >
-          <template #school>
+          <!-- Step 1: School Information -->
+          <div v-show="wizardStep === 0">
             <section class="employer-step-panel">
               <!-- Case 1: Existing School Profile Selected -->
               <div v-if="selectedSchool" class="school-selected-card">
@@ -111,7 +99,7 @@
                     <div class="school-profile-avatar">
                       <img
                         v-if="selectedSchool.logo && !selectedSchoolLogoError"
-                        :src="normalizeCompanyLogo(selectedSchool.logo)"
+                        :src="normalizeCompanyLogo(selectedSchool.logo) ?? undefined"
                         alt=""
                         class="object-contain"
                         @error="selectedSchoolLogoError = true"
@@ -358,7 +346,7 @@
                           <div class="school-suggest-logo">
                             <img
                               v-if="s.logo && !logoErrorMap[s.id]"
-                              :src="normalizeCompanyLogo(s.logo)"
+                              :src="normalizeCompanyLogo(s.logo) ?? undefined"
                               alt=""
                               class="object-contain"
                               @error="onLogoError(s.id)"
@@ -393,8 +381,10 @@
 
               </div>
             </section>
-          </template>
-          <template #detail>
+          </div>
+
+          <!-- Step 2: Job Details -->
+          <div v-show="wizardStep === 1">
             <section class="employer-step-panel employer-step-detail-wrap">
               <UCollapsible
                 v-model:open="step2BasicOpen"
@@ -594,92 +584,223 @@
                       </div>
                     </div>
 
+                    <!-- ESL Specific Overview Fields: Work Mode, Vacancies, Start Date -->
                     <div class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-3">
+                      <!-- Work Mode -->
                       <div class="employer-field-stack">
                         <label class="employer-input-label">
-                          {{ $t('job.uploadJob.currentSalaryLabel') }}
-                          <span class="text-red-500">{{ $t('job.uploadJob.mandatoryChar') }}</span>
+                          {{ $t('job.uploadJob.workModeLabel') }}
                         </label>
                         <USelect
-                          id="job-salary-type"
-                          :items="salaryTypeItems"
-                          :model-value="job.salaryType?.toString()"
-                          :content="{ side: 'bottom' }"
-                          :placeholder="$t('job.uploadJob.chooseSalaryType')"
-                          :ui="{
-                            base: 'h-11 w-full rounded-xl' + fieldErrorRingClass(jobErrors.salaryType),
-                          }"
+                          id="job-work-mode"
+                          v-model="jobWorkMode"
+                          :items="workModeOptions"
+                          :placeholder="$t('job.uploadJob.chooseWorkMode')"
+                          :ui="{ base: 'h-11 w-full rounded-xl' }"
                           class="w-full text-sm"
-                          @update:model-value="
-                            (val) => {
-                              job.salaryType = Number(val ?? 0)
-                              jobErrors.salaryType = ''
-                            }
-                          "
                         />
-                        <p v-if="jobErrors.salaryType" class="mt-1 text-sm !text-red-500">{{ jobErrors.salaryType }}</p>
                       </div>
-                      <div v-if="job.salaryType != 5" class="employer-field-stack">
+
+                      <!-- Number of Vacancies -->
+                      <div class="employer-field-stack">
                         <label class="employer-input-label">
-                          {{ $t('job.uploadJob.minSalaryLabel') }}
-                          <span class="text-red-500">{{ $t('job.uploadJob.mandatoryChar') }}</span>
+                          {{ $t('job.uploadJob.vacanciesLabel') }}
                         </label>
                         <UInput
-                          id="job-salary-min"
-                          :model-value="formatCurrency(job.salaryMin)"
-                          type="text"
-                          :placeholder="$t('job.uploadJob.minSalary')"
+                          id="job-vacancies"
+                          v-model.number="jobVacancies"
+                          type="number"
+                          min="1"
+                          max="100"
+                          :placeholder="$t('job.uploadJob.vacanciesPlaceholder')"
                           :ui="{
                             root: 'w-full',
-                            base: 'h-11 w-full rounded-xl' + fieldErrorRingClass(jobErrors.salaryMin),
+                            base: 'h-11 w-full rounded-xl',
                           }"
                           class="w-full text-sm"
-                          @update:model-value="(val) => {
-                            job.salaryMin = unformatCurrency(val)
-                            jobErrors.salaryMin = ''
-                          }"
                         />
-                        <p v-if="jobErrors.salaryMin" class="mt-1 text-sm !text-red-500">{{ jobErrors.salaryMin }}</p>
                       </div>
-                      <div v-if="job.salaryType != 5" class="employer-field-stack">
+
+                      <!-- Start Date -->
+                      <div class="employer-field-stack">
                         <label class="employer-input-label">
-                          {{ $t('job.uploadJob.maxSalaryLabel') }}
-                          <span class="text-red-500">{{ $t('job.uploadJob.mandatoryChar') }}</span>
+                          {{ $t('job.uploadJob.startDateLabel') }}
                         </label>
                         <UInput
-                          id="job-salary-max"
-                          :model-value="formatCurrency(job.salaryMax)"
+                          id="job-start-date"
+                          v-model="jobStartDate"
                           type="text"
-                          :placeholder="$t('job.uploadJob.maxSalary')"
+                          :placeholder="$t('job.uploadJob.startDatePlaceholder')"
                           :ui="{
                             root: 'w-full',
-                            base: 'h-11 w-full rounded-xl' + fieldErrorRingClass(jobErrors.salaryMax),
+                            base: 'h-11 w-full rounded-xl',
                           }"
                           class="w-full text-sm"
-                          @update:model-value="(val) => {
-                            job.salaryMax = unformatCurrency(val)
-                            jobErrors.salaryMax = ''
-                          }"
                         />
-                        <p v-if="jobErrors.salaryMax" class="mt-1 text-sm !text-red-500">{{ jobErrors.salaryMax }}</p>
                       </div>
                     </div>
 
-                    <div class="job-address-location-fields">
-                      <div class="employer-field-stack rich-text-output">
+                    <!-- Contract Length & Working Schedule -->
+                    <div class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-3">
+                      <!-- Contract Length -->
+                      <div class="employer-field-stack">
                         <label class="employer-input-label">
-                          {{ $t('job.uploadJob.addressJobLabel') }}
-                          <span class="text-red-500">{{ $t('job.uploadJob.mandatoryChar') }}</span>
+                          {{ $t('job.uploadJob.contractLengthLabel') }}
                         </label>
-                        <RichTextEditor
-                          id="job-address"
-                          v-model="job.address"
-                          class="w-full rich-text-content"
-                          :class="{ 'ring-1 ring-red-300': jobErrors.address }"
-                          :placeholder="$t('job.uploadJob.addressJobPlaceholder')"
+                        <UInput
+                          id="job-contract-length"
+                          v-model="jobContractLength"
+                          type="text"
+                          :placeholder="$t('job.uploadJob.contractLengthPlaceholder')"
+                          :ui="{
+                            root: 'w-full',
+                            base: 'h-11 w-full rounded-xl',
+                          }"
+                          class="w-full text-sm"
                         />
-                        <p v-if="jobErrors.address" class="mt-1 text-sm !text-red-500">{{ jobErrors.address }}</p>
                       </div>
+
+                      <!-- Working Schedule -->
+                      <div class="employer-field-stack md:col-span-2">
+                        <label class="employer-input-label">
+                          {{ $t('job.uploadJob.workingScheduleLabel') }}
+                        </label>
+                        <UInput
+                          id="job-working-schedule"
+                          v-model="jobWorkingSchedule"
+                          type="text"
+                          :placeholder="$t('job.uploadJob.workingSchedulePlaceholder')"
+                          :ui="{
+                            root: 'w-full',
+                            base: 'h-11 w-full rounded-xl',
+                          }"
+                          class="w-full text-sm"
+                        />
+                      </div>
+                    </div>
+
+                    <!-- Salary & Compensation Component -->
+                    <div class="mt-4 p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-3">
+                      <div class="flex items-center justify-between flex-wrap gap-2">
+                        <label class="employer-input-label !mb-0 font-semibold text-slate-800">
+                          Salary & Compensation
+                        </label>
+                        <!-- Negotiable Checkbox -->
+                        <label class="flex items-center gap-2 cursor-pointer text-sm font-medium text-slate-700 select-none">
+                          <input
+                            v-model="isNegotiable"
+                            type="checkbox"
+                            class="w-4 h-4 rounded text-primary-600 focus:ring-primary-500 border-slate-300"
+                            @change="onNegotiableChange"
+                          />
+                          <span>{{ $t('job.uploadJob.isNegotiableLabel') }}</span>
+                        </label>
+                      </div>
+
+                      <div class="grid grid-cols-1 gap-3 sm:grid-cols-3">
+                        <!-- 1. Currency -->
+                        <div class="employer-field-stack">
+                          <label class="employer-input-label text-xs">
+                            {{ $t('job.uploadJob.currencyLabel') }}
+                          </label>
+                          <USelect
+                            id="job-currency"
+                            v-model="jobCurrency"
+                            :items="currencyItems"
+                            :disabled="isNegotiable"
+                            :ui="{ base: 'h-10 w-full rounded-xl bg-white' }"
+                            class="w-full text-sm"
+                          />
+                        </div>
+
+                        <!-- 2. Salary Frequency / Period -->
+                        <div class="employer-field-stack">
+                          <label class="employer-input-label text-xs">
+                            {{ $t('job.uploadJob.salaryPeriodLabel') }}
+                          </label>
+                          <USelect
+                            id="job-salary-period"
+                            :items="salaryPeriodItems"
+                            :model-value="jobSalaryPeriod?.toString()"
+                            :disabled="isNegotiable"
+                            :placeholder="$t('job.uploadJob.chooseSalaryType')"
+                            :ui="{ base: 'h-10 w-full rounded-xl bg-white' }"
+                            class="w-full text-sm"
+                            @update:model-value="(val) => { jobSalaryPeriod = Number(val ?? 1) }"
+                          />
+                        </div>
+
+                        <!-- 3. Pay Basis (Gross / Net) -->
+                        <div class="employer-field-stack">
+                          <label class="employer-input-label text-xs">
+                            {{ $t('job.uploadJob.salaryRateTypeLabel') }}
+                          </label>
+                          <USelect
+                            id="job-rate-type"
+                            v-model="jobSalaryRateType"
+                            :items="salaryRateTypeItems"
+                            :disabled="isNegotiable"
+                            :ui="{ base: 'h-10 w-full rounded-xl bg-white' }"
+                            class="w-full text-sm"
+                          />
+                        </div>
+                      </div>
+
+                      <!-- Min & Max Salary Row (Only when NOT Negotiable) -->
+                      <div v-if="!isNegotiable" class="grid grid-cols-1 gap-3 sm:grid-cols-2 pt-1">
+                        <div class="employer-field-stack">
+                          <label class="employer-input-label text-xs">
+                            {{ $t('job.uploadJob.minSalaryLabel') }} ({{ jobCurrency }})
+                            <span class="text-red-500">*</span>
+                          </label>
+                          <UInput
+                            id="job-salary-min"
+                            :model-value="formatCurrency(job.salaryMin)"
+                            type="text"
+                            :placeholder="jobCurrency === 'USD' ? 'e.g. 1,500' : 'e.g. 35,000,000'"
+                            :ui="{
+                              root: 'w-full',
+                              base: 'h-10 w-full rounded-xl bg-white' + fieldErrorRingClass(jobErrors.salaryMin),
+                            }"
+                            class="w-full text-sm"
+                            @update:model-value="(val) => {
+                              job.salaryMin = unformatCurrency(val)
+                              jobErrors.salaryMin = ''
+                            }"
+                          />
+                          <p v-if="jobErrors.salaryMin" class="mt-1 text-sm !text-red-500">{{ jobErrors.salaryMin }}</p>
+                        </div>
+
+                        <div class="employer-field-stack">
+                          <label class="employer-input-label text-xs">
+                            {{ $t('job.uploadJob.maxSalaryLabel') }} ({{ jobCurrency }})
+                            <span class="text-red-500">*</span>
+                          </label>
+                          <UInput
+                            id="job-salary-max"
+                            :model-value="formatCurrency(job.salaryMax)"
+                            type="text"
+                            :placeholder="jobCurrency === 'USD' ? 'e.g. 2,200' : 'e.g. 50,000,000'"
+                            :ui="{
+                              root: 'w-full',
+                              base: 'h-10 w-full rounded-xl bg-white' + fieldErrorRingClass(jobErrors.salaryMax),
+                            }"
+                            class="w-full text-sm"
+                            @update:model-value="(val) => {
+                              job.salaryMax = unformatCurrency(val)
+                              jobErrors.salaryMax = ''
+                            }"
+                          />
+                          <p v-if="jobErrors.salaryMax" class="mt-1 text-sm !text-red-500">{{ jobErrors.salaryMax }}</p>
+                        </div>
+                      </div>
+
+                      <div v-else class="text-xs text-slate-500 italic py-1">
+                        ℹ️ Mức lương được ghi nhận là "Thỏa thuận" (Negotiable) — ứng viên và trường sẽ thảo luận chi tiết khi phỏng vấn.
+                      </div>
+                    </div>
+
+                    <div class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
                       <div class="employer-field-stack">
                         <label class="employer-input-label">
                           {{ $t('job.uploadJob.locationJobLabel') }}
@@ -708,6 +829,26 @@
                         </div>
                         <p v-if="jobErrors.location" class="mt-1 text-sm !text-red-500">{{ jobErrors.location }}</p>
                       </div>
+
+                      <!-- Standard text input for address instead of RichTextEditor -->
+                      <div class="employer-field-stack">
+                        <label class="employer-input-label">
+                          {{ $t('job.uploadJob.addressJobLabel') }}
+                          <span class="text-red-500">{{ $t('job.uploadJob.mandatoryChar') }}</span>
+                        </label>
+                        <UInput
+                          id="job-address"
+                          v-model="job.address"
+                          :placeholder="$t('job.uploadJob.addressJobPlaceholder')"
+                          :ui="{
+                            root: 'w-full',
+                            base: 'h-11 w-full rounded-xl' + fieldErrorRingClass(jobErrors.address),
+                          }"
+                          class="w-full text-sm"
+                          @input="jobErrors.address = ''"
+                        />
+                        <p v-if="jobErrors.address" class="mt-1 text-sm !text-red-500">{{ jobErrors.address }}</p>
+                      </div>
                     </div>
                   </div>
                 </template>
@@ -735,113 +876,159 @@
                 <template #content>
                   <div class="employer-accordion-body">
                     <div class="employer-grid">
-                        <div class="employer-field-stack">
-                          <label class="employer-input-label">
-                            {{ $t('job.uploadJob.requiredQualificationLabel') }}
-                            <span class="text-red-500">{{ $t('job.uploadJob.mandatoryChar') }}</span>
-                          </label>
-                          <div
-                            id="job-required-qualification"
-                            class="job-vselect w-full min-w-0"
-                            :class="{ 'job-vselect--error': jobErrors.requiredQualification }"
-                          >
-                            <v-select
-                              v-model="requiredQualificationForSelect"
-                              :options="requiredQualificationSelectItems"
-                              :append-to-body="true"
+                      <!-- 1. Native / Nationality Preference -->
+                      <div class="employer-field-stack md:col-span-2">
+                        <label class="employer-input-label">
+                          {{ $t('job.uploadJob.nationalityPreferenceLabel') }}
+                        </label>
+                        <USelect
+                          id="job-nationality-pref"
+                          v-model="jobNationalityPreference"
+                          :items="nationalityPreferenceOptions"
+                          :placeholder="$t('job.uploadJob.chooseNationalityPreference')"
+                          :ui="{ base: 'h-11 w-full rounded-xl' }"
+                          class="w-full text-sm"
+                        />
+                      </div>
+
+                      <!-- 2. Academic Degree Requirement -->
+                      <div class="employer-field-stack">
+                        <label class="employer-input-label">
+                          {{ $t('job.uploadJob.requiredQualificationLabel') }}
+                          <span class="text-red-500">{{ $t('job.uploadJob.mandatoryChar') }}</span>
+                        </label>
+                        <div
+                          id="job-required-qualification"
+                          class="job-vselect w-full min-w-0"
+                          :class="{ 'job-vselect--error': jobErrors.requiredQualification }"
+                        >
+                          <v-select
+                            v-model="requiredQualificationForSelect"
+                            :options="requiredQualificationSelectItems"
+                            :append-to-body="true"
                             :calculate-position="vueSelectCalculatePosition"
-                              multiple
-                              searchable
-                              class="w-full text-sm"
-                              :placeholder="$t('job.uploadJob.requiredQualificationLabel')"
-                              label="label"
-                              :clear-search-on-blur="() => true"
-                              @open="onMultiSelectOpen"
-                              @close="onMultiSelectClose"
-                              @update:model-value="jobErrors.requiredQualification = ''"
-                            />
-                          </div>
-                          <p v-if="jobErrors.requiredQualification" class="mt-1 text-sm !text-red-500">{{ jobErrors.requiredQualification }}</p>
-                        </div>
-                        <div class="employer-field-stack">
-                          <label class="employer-input-label">
-                            {{ $t('job.uploadJob.experienceLabel') }}
-                            <span class="text-red-500">{{ $t('job.uploadJob.mandatoryChar') }}</span>
-                          </label>
-                          <USelect
-                            :items="experienceLevelItems"
-                            :model-value="job.experienceLevel?.toString()"
-                            :content="{ side: 'bottom' }"
-                            :placeholder="$t('job.uploadJob.chooseExperienceLevel')"
-                            :ui="{
-                              base: 'h-11 w-full rounded-xl' + fieldErrorRingClass(jobErrors.experienceLevel),
-                            }"
+                            multiple
+                            searchable
                             class="w-full text-sm"
-                            @update:model-value="
-                              (val) => {
-                                job.experienceLevel = Number(val ?? 0)
-                                jobErrors.experienceLevel = ''
-                              }
-                            "
+                            :placeholder="$t('job.uploadJob.requiredQualificationLabel')"
+                            label="label"
+                            :clear-search-on-blur="() => true"
+                            @open="onMultiSelectOpen"
+                            @close="onMultiSelectClose"
+                            @update:model-value="jobErrors.requiredQualification = ''"
                           />
-                          <p v-if="jobErrors.experienceLevel" class="mt-1 text-sm !text-red-500">{{ jobErrors.experienceLevel }}</p>
                         </div>
-                        <div class="employer-field-stack">
-                          <label class="employer-input-label">
-                            {{ $t('job.uploadJob.genderLabel') }}
-                          </label>
-                          <div
-                            class="job-vselect w-full min-w-0"
-                            :class="{ 'job-vselect--error': jobErrors.gender }"
-                          >
-                            <v-select
-                              id="job-gender"
-                              v-model="genderForSelect"
-                              :options="genderItems"
-                              :append-to-body="true"
+                        <p v-if="jobErrors.requiredQualification" class="mt-1 text-sm !text-red-500">{{ jobErrors.requiredQualification }}</p>
+                      </div>
+
+                      <!-- 3. Teaching Certificates (Multiselect) -->
+                      <div class="employer-field-stack">
+                        <label class="employer-input-label">
+                          {{ $t('job.uploadJob.certificatesLabel') }}
+                        </label>
+                        <div class="job-vselect w-full min-w-0">
+                          <v-select
+                            id="job-certificates"
+                            v-model="certificatesForSelect"
+                            :options="teachingCertificateOptions"
+                            :append-to-body="true"
                             :calculate-position="vueSelectCalculatePosition"
-                              multiple
-                              searchable
-                              class="w-full text-sm"
-                              :placeholder="$t('job.uploadJob.chooseGender')"
-                              label="label"
-                              :clear-search-on-blur="() => true"
-                              @open="onMultiSelectOpen"
-                              @close="onMultiSelectClose"
-                              @update:model-value="jobErrors.gender = ''"
-                            />
-                          </div>
-                          <p v-if="jobErrors.gender" class="mt-1 text-sm !text-red-500">{{ jobErrors.gender }}</p>
-                        </div>
-                        <div class="employer-field-stack">
-                          <label class="employer-input-label">
-                            {{ $t('job.uploadJob.benefitLabel') }}
-                            <span class="text-red-500">{{ $t('job.uploadJob.mandatoryChar') }}</span>
-                          </label>
-                          <div
-                            class="job-vselect w-full min-w-0"
-                            :class="{ 'job-vselect--error': jobErrors.benefits }"
-                          >
-                            <v-select
-                              id="job-benefit"
-                              v-model="benefitsForSelect"
-                              :options="jobBenefitsSelectItems"
-                              :append-to-body="true"
-                            :calculate-position="vueSelectCalculatePosition"
-                              multiple
-                              searchable
-                              class="w-full text-sm"
-                              :placeholder="$t('job.uploadJob.chooseBenefitLevel')"
-                              label="label"
-                              :clear-search-on-blur="() => true"
-                              @open="onMultiSelectOpen"
-                              @close="onMultiSelectClose"
-                              @update:model-value="jobErrors.benefits = ''"
-                            />
-                          </div>
-                          <p v-if="jobErrors.benefits" class="mt-1 text-sm !text-red-500">{{ jobErrors.benefits }}</p>
+                            multiple
+                            searchable
+                            class="w-full text-sm"
+                            :placeholder="$t('job.uploadJob.chooseCertificates')"
+                            label="label"
+                            :clear-search-on-blur="() => true"
+                            @open="onMultiSelectOpen"
+                            @close="onMultiSelectClose"
+                          />
                         </div>
                       </div>
+
+                      <!-- 4. Experience Level -->
+                      <div class="employer-field-stack">
+                        <label class="employer-input-label">
+                          {{ $t('job.uploadJob.experienceLabel') }}
+                          <span class="text-red-500">{{ $t('job.uploadJob.mandatoryChar') }}</span>
+                        </label>
+                        <USelect
+                          :items="experienceLevelItems"
+                          :model-value="job.experienceLevel?.toString()"
+                          :content="{ side: 'bottom' }"
+                          :placeholder="$t('job.uploadJob.chooseExperienceLevel')"
+                          :ui="{
+                            base: 'h-11 w-full rounded-xl' + fieldErrorRingClass(jobErrors.experienceLevel),
+                          }"
+                          class="w-full text-sm"
+                          @update:model-value="
+                            (val) => {
+                              job.experienceLevel = Number(val ?? 0)
+                              jobErrors.experienceLevel = ''
+                            }
+                          "
+                        />
+                        <p v-if="jobErrors.experienceLevel" class="mt-1 text-sm !text-red-500">{{ jobErrors.experienceLevel }}</p>
+                      </div>
+
+                      <!-- 5. Gender Preference (With No preference / Any) -->
+                      <div class="employer-field-stack">
+                        <label class="employer-input-label">
+                          {{ $t('job.uploadJob.genderLabel') }}
+                        </label>
+                        <div
+                          class="job-vselect w-full min-w-0"
+                          :class="{ 'job-vselect--error': jobErrors.gender }"
+                        >
+                          <v-select
+                            id="job-gender"
+                            v-model="genderForSelect"
+                            :options="genderItems"
+                            :append-to-body="true"
+                            :calculate-position="vueSelectCalculatePosition"
+                            multiple
+                            searchable
+                            class="w-full text-sm"
+                            :placeholder="$t('job.uploadJob.chooseGender')"
+                            label="label"
+                            :clear-search-on-blur="() => true"
+                            @open="onMultiSelectOpen"
+                            @close="onMultiSelectClose"
+                            @update:model-value="jobErrors.gender = ''"
+                          />
+                        </div>
+                        <p v-if="jobErrors.gender" class="mt-1 text-sm !text-red-500">{{ jobErrors.gender }}</p>
+                      </div>
+
+                      <!-- 6. Teacher Benefits (Multiple choice) -->
+                      <div class="employer-field-stack md:col-span-2">
+                        <label class="employer-input-label">
+                          {{ $t('job.uploadJob.benefitLabel') }}
+                          <span class="text-red-500">{{ $t('job.uploadJob.mandatoryChar') }}</span>
+                        </label>
+                        <div
+                          class="job-vselect w-full min-w-0"
+                          :class="{ 'job-vselect--error': jobErrors.benefits }"
+                        >
+                          <v-select
+                            id="job-benefit"
+                            v-model="benefitsForSelect"
+                            :options="jobBenefitsSelectItems"
+                            :append-to-body="true"
+                            :calculate-position="vueSelectCalculatePosition"
+                            multiple
+                            searchable
+                            class="w-full text-sm"
+                            :placeholder="$t('job.uploadJob.chooseBenefitLevel')"
+                            label="label"
+                            :clear-search-on-blur="() => true"
+                            @open="onMultiSelectOpen"
+                            @close="onMultiSelectClose"
+                            @update:model-value="jobErrors.benefits = ''"
+                          />
+                        </div>
+                        <p v-if="jobErrors.benefits" class="mt-1 text-sm !text-red-500">{{ jobErrors.benefits }}</p>
+                      </div>
+                    </div>
                     </div>
                   </template>
                 </UCollapsible>
@@ -921,7 +1108,18 @@
                 </span>
               </label>
 
-              <div class="employer-actions employer-actions-end">
+              <div class="employer-actions flex items-center justify-between gap-4 mt-8 pt-4 border-t border-slate-100 flex-wrap">
+                <button
+                  type="button"
+                  class="employer-secondary-btn flex items-center gap-2 px-5 py-3 rounded-xl border border-slate-200 text-slate-700 hover:bg-slate-50 font-medium text-sm transition"
+                  @click="goBackToCompanyStep()"
+                >
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 12H5M12 19l-7-7 7-7" />
+                  </svg>
+                  <span>{{ $t('job.uploadJob.backToStep1') }}</span>
+                </button>
+
                 <button
                   type="button"
                   class="employer-primary-btn employer-submit-btn"
@@ -937,8 +1135,7 @@
                 </button>
               </div>
             </section>
-          </template>
-        </UStepper>
+          </div>
         </div>
       </div>
     </div>
@@ -1083,20 +1280,7 @@ const { calculatePosition: vueSelectCalculatePosition } = useVueSelectFixedPosit
 useHead({
   title: computed(() => t('job.uploadJob.title')),
 })
-const stepper = useTemplateRef('stepper')
 const wizardStep = ref(0)
-const steppers = computed<StepperItem[]>(() => [
-  {
-    slot: 'school' as const,
-    title: t('job.uploadJob.stepCompanyInfo'),
-    icon: 'i-lucide-home',
-  },
-  {
-    slot: 'detail' as const,
-    title: t('job.uploadJob.stepPostDetail'),
-    icon: 'i-lucide-file-text',
-  },
-])
 
 const step2BasicOpen = ref(true)
 const step2CandidateOpen = ref(true)
@@ -1162,10 +1346,63 @@ const {
   locationItemsWithoutAll,
   jobBenefitsItems,
   salaryTypeItems,
+  salaryPeriodItems,
   requiredQualificationItems,
   genderItems,
   gradeItems,
 } = useJobFilters()
+
+const currencyItems = [
+  { label: 'VND (₫)', value: 'VND' },
+  { label: 'USD ($)', value: 'USD' },
+]
+
+const salaryRateTypeItems = [
+  { label: 'Net (Take-home / Sau thuế)', value: 'Net' },
+  { label: 'Gross (Before tax / Trước thuế)', value: 'Gross' },
+]
+
+const workModeOptions = [
+  { label: 'On-site (Tại trường / Cơ sở)', value: 'On-site' },
+  { label: 'Hybrid (Kết hợp On-site & Online)', value: 'Hybrid' },
+  { label: 'Online / Remote (Dạy trực tuyến)', value: 'Online' },
+]
+
+const nationalityPreferenceOptions = [
+  { label: 'Native English Speakers Only (UK, US, Canada, Aus, NZ, Ireland, SA)', value: 'Native Only' },
+  { label: 'Native Preferred (Open to Non-Native with C1 / IELTS 7.5+)', value: 'Native Preferred' },
+  { label: 'Open to All Nationalities (Filipino, European, Asian with C1)', value: 'Open to All' },
+  { label: 'No Nationality Preference', value: 'No Preference' },
+]
+
+const teachingCertificateOptions = [
+  { label: 'TEFL Certificate (120+ Hours)', value: 'TEFL 120h' },
+  { label: 'TESOL Certificate', value: 'TESOL' },
+  { label: 'CELTA (Cambridge)', value: 'CELTA' },
+  { label: 'DELTA / Trinity DipTESOL', value: 'DELTA' },
+  { label: 'Home Country Teaching License / QTS / PGCE', value: 'Teaching License' },
+  { label: 'Degree in Education (Bằng Sư phạm)', value: 'Education Degree' },
+  { label: 'IELTS 7.5+ / CEFR C1 Certificate', value: 'C1/IELTS' },
+]
+
+// State for new and refined fields
+const isNegotiable = ref(false)
+const jobCurrency = ref('VND')
+const jobSalaryPeriod = ref<number>(1)
+const jobSalaryRateType = ref('Net')
+const jobWorkMode = ref('On-site')
+const jobVacancies = ref<number | undefined>(1)
+const jobStartDate = ref('')
+const jobContractLength = ref('')
+const jobWorkingSchedule = ref('')
+const jobNationalityPreference = ref('Native Preferred')
+
+const onNegotiableChange = () => {
+  if (isNegotiable.value) {
+    jobErrors.value.salaryMin = ''
+    jobErrors.value.salaryMax = ''
+  }
+}
 
 const requiredQualificationSelectItems = computed(() =>
   [...requiredQualificationItems.value].sort((a, b) =>
@@ -1193,15 +1430,30 @@ const jobBenefitsSelectItems = computed(() =>
   ),
 )
 
-/** Tỉnh/thành: giữ "Toàn Quốc" đầu list, sort A→Z phần còn lại. */
+/** Tỉnh/thành: "Toàn Quốc" đầu list, ưu tiên các trung tâm lớn (TP.HCM, Hà Nội, Đà Nẵng, Hải Phòng), sau đó sort A→Z phần còn lại. */
 const locationSelectItems = computed(() => {
   const items = locationItemsWithoutAll.value
   const nationwide = items.find((item) => item.value === '0')
-  const provinces = items
-    .filter((item) => item.value !== '0')
+  const provinces = items.filter((item) => item.value !== '0')
+
+  // Top priority teaching hubs: 29: TP.HCM, 12: Hà Nội, 21: Đà Nẵng, 13: Hải Phòng
+  const priorityIds = ['29', '12', '21', '13']
+  const priorityList: typeof provinces = []
+
+  for (const pid of priorityIds) {
+    const found = provinces.find((p) => p.value === pid)
+    if (found) priorityList.push(found)
+  }
+
+  const remaining = provinces
+    .filter((p) => !priorityIds.includes(p.value))
     .sort((a, b) => a.label.localeCompare(b.label, 'vi', { sensitivity: 'base' }))
 
-  return nationwide ? [nationwide, ...provinces] : provinces
+  const result: typeof provinces = []
+  if (nationwide) result.push(nationwide)
+  result.push(...priorityList)
+  result.push(...remaining)
+  return result
 })
 
 // Computed properties for USelectMenu (convert between string[] and object[])
@@ -1355,10 +1607,13 @@ const gradeForSelect = computed({
 // Computed property for v-select gender (convert between string[] and object[])
 const genderForSelect = computed({
   get: () => {
-    if (!job.value.gender || !Array.isArray(job.value.gender)) return []
+    if (!job.value.gender || !Array.isArray(job.value.gender) || job.value.gender.length === 0) {
+      const anyOpt = genderItems.value.find(item => item.value === '0')
+      return anyOpt ? [anyOpt] : []
+    }
 
     return job.value.gender
-      .filter(g => g)
+      .filter(g => g !== undefined && g !== null)
       .map(g => {
         const value = typeof g === 'object' && g !== null && 'value' in g ? (g as { value: string }).value : String(g)
 
@@ -1368,8 +1623,24 @@ const genderForSelect = computed({
   set: (val: any[]) => {
     job.value.gender = val
       ? val.map(v => typeof v === 'object' && v !== null && 'value' in v ? (v as { value: string }).value : String(v))
-      : []
+      : ['0']
   }
+})
+
+// Computed property for v-select teaching certificates
+const jobCertificates = ref<string[]>([])
+const certificatesForSelect = computed({
+  get: () => {
+    return jobCertificates.value.map((val) => {
+      const v = typeof val === 'object' && val !== null && 'value' in val ? (val as any).value : String(val)
+      return teachingCertificateOptions.find((item) => item.value === v) || { label: v, value: v }
+    })
+  },
+  set: (val: any[]) => {
+    jobCertificates.value = val
+      ? val.map((v) => typeof v === 'object' && v !== null && 'value' in v ? (v as any).value : String(v))
+      : []
+  },
 })
 
 /** Logo state (REQUIRED) */
@@ -2233,7 +2504,7 @@ const startCreateNewSchool = (name: string) => {
   if (!companyAdd.value) {
     companyAdd.value = {} as CompanyAddUpdateEntity
   }
-  companyAdd.value.id = null
+  companyAdd.value.id = undefined
   companyAdd.value.name = name.trim() || ''
   companyAdd.value.address = ''
   companyAdd.value.taxAddress = ''
@@ -2250,7 +2521,7 @@ const resetSchoolSelection = () => {
   isExistCompany.value = false
   isAddCompany.value = false
   if (companyAdd.value) {
-    companyAdd.value.id = null
+    companyAdd.value.id = undefined
   }
   job.value.companyId = undefined
   schoolSearchQuery.value = ''
@@ -2499,10 +2770,8 @@ const findCompanyByMst = async () => {
 const confirmCreateSchool = () => {
   if (selectedSchool.value && selectedSchool.value.id) {
     // School exists
-    if (stepper.value?.hasNext) {
-      stepper.value.next()
-      wizardStep.value = 1
-    }
+    wizardStep.value = 1
+    if (typeof window !== 'undefined') window.scrollTo({ top: 0, behavior: 'smooth' })
     return
   }
 
@@ -2517,10 +2786,8 @@ const confirmCreateSchool = () => {
       return
     }
     isAddCompany.value = true
-    if (stepper.value?.hasNext) {
-      stepper.value.next()
-      wizardStep.value = 1
-    }
+    wizardStep.value = 1
+    if (typeof window !== 'undefined') window.scrollTo({ top: 0, behavior: 'smooth' })
     return
   }
 
@@ -2528,10 +2795,8 @@ const confirmCreateSchool = () => {
 }
 
 const goBackToCompanyStep = () => {
-  if (stepper.value?.hasPrev) {
-    stepper.value.prev()
-    wizardStep.value = 0
-  }
+  wizardStep.value = 0
+  if (typeof window !== 'undefined') window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 
 const addJob = async () => {
@@ -2614,35 +2879,40 @@ const addJob = async () => {
             : new Date().toISOString(),
           deadline: new Date(job.value.deadline as any).toISOString(),
           salaryMin:
-            job.value.salaryType === 5
+            isNegotiable.value
               ? 0
               : Number(unformatCurrency(job.value.salaryMin as any) ?? 0),
           salaryMax:
-            job.value.salaryType === 5
+            isNegotiable.value
               ? 0
               : Number(unformatCurrency(job.value.salaryMax as any) ?? 0),
-          salaryType: Number(job.value.salaryType ?? 0),
+          salaryType: isNegotiable.value ? 5 : Number(jobSalaryPeriod.value ?? 1),
+          currency: jobCurrency.value || 'VND',
+          salaryRateType: jobSalaryRateType.value || 'Net',
           phoneNumber: job.value.phoneNumber ?? '',
           email: job.value.email || '',
           address: job.value.address || '',
           benefits: Array.isArray(job.value.benefits)
             ? job.value.benefits.filter(Boolean).map(String).join(',')
             : String(job.value.benefits ?? ''),
+          workMode: jobWorkMode.value || 'On-site',
+          vacancies: jobVacancies.value ? Number(jobVacancies.value) : undefined,
+          startDate: jobStartDate.value || undefined,
+          contractLength: jobContractLength.value || undefined,
+          workingSchedule: jobWorkingSchedule.value || undefined,
+          nationalityPreference: jobNationalityPreference.value || undefined,
+          certificates: Array.isArray(certificatesForSelect.value)
+            ? certificatesForSelect.value.map(c => typeof c === 'object' && c !== null ? c.value : c).filter(Boolean).join(',')
+            : undefined,
         },
       }
 
       const response = await $api.job.freePostPublic(payload as any)
 
-      console.log('=== FREE POST RESPONSE ===')
-      console.log('Response:', response)
-      console.log('Access token:', response?.accessToken)
-      console.log('User:', response?.user)
-      console.log('=========================')
-
       if (response?.success) {
         isAddJobSuccess = true
 
-        const accessToken = response.access_token || response.accessToken
+        const accessToken = response.access_token || (response as any)?.accessToken
 
         // User mới tạo trong flow free-post: tự đăng nhập và vào dashboard
         if (accessToken && response.user) {
@@ -2793,13 +3063,13 @@ function validateJobFields(): boolean {
     isValid = false
   }
 
-  if (!job.value.salaryType) {
-    jobErrors.value.salaryType = 'Please select salary frequency.'
-    isValid = false
-  }
+  // Validate salary min/max only if NOT Negotiable
+  if (!isNegotiable.value) {
+    if (!jobSalaryPeriod.value) {
+      jobErrors.value.salaryType = 'Please select salary frequency.'
+      isValid = false
+    }
 
-  // Validate salary min/max only if salary type is not "Thỏa thuận" (5)
-  if (job.value.salaryType != 5) {
     if (!job.value.salaryMin || unformatCurrency(job.value.salaryMin).trim() === '') {
       jobErrors.value.salaryMin = 'Please enter minimum salary.'
       isValid = false
@@ -2810,9 +3080,8 @@ function validateJobFields(): boolean {
     }
   }
 
-  // Check if address is empty or only contains empty HTML tags
-  const addressHtml = job.value.address || ''
-  const cleanAddress = addressHtml.replace(/<[^>]*>/g, '').trim()
+  // Address validation
+  const cleanAddress = (job.value.address || '').trim()
 
   if (cleanAddress.length === 0) {
     jobErrors.value.address = 'Job location address is required.'
@@ -2882,7 +3151,7 @@ function validateJobFields(): boolean {
 
   // Validate salary
   if (
-    job.value.salaryType != 5 &&
+    !isNegotiable.value &&
     job.value.salaryMin &&
     job.value.salaryMax &&
     Number(unformatCurrency(job.value.salaryMin)) > Number(unformatCurrency(job.value.salaryMax))

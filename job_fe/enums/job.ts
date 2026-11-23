@@ -43,6 +43,7 @@ export enum SalaryType {
 }
 
 export enum Gender {
+  nopreference = 0,
   male = 1,
   female = 2,
 }

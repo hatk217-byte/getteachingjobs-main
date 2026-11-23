@@ -143,6 +143,51 @@ export class PublicJobDto {
   @IsNotEmpty()
   @IsString()
   address: string;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsString()
+  currency?: string;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsString()
+  salaryRateType?: string;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsNumber()
+  vacancies?: number;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsString()
+  startDate?: string;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsString()
+  contractLength?: string;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsString()
+  workingSchedule?: string;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsString()
+  workMode?: string;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsString()
+  nationalityPreference?: string;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsString()
+  certificates?: string;
 }
 
 export class PublicFreePostRequestDto {

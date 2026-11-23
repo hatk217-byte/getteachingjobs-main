@@ -128,6 +128,15 @@ export const useJobFilters = () => {
     })),
   )
 
+  const salaryPeriodItems = computed(() =>
+    Object.entries(salaryTypeLabel)
+      .filter(([key]) => key !== '5')
+      .map(([key, value]) => ({
+        label: value,
+        value: key,
+      })),
+  )
+
   const genderItems = computed(() =>
     Object.entries(genderLabel).map(([key, value]) => ({
       label: value,
@@ -175,6 +184,7 @@ export const useJobFilters = () => {
     organizationTypeItemsSearchable,
     salaryTypeLabel,
     salaryTypeItems,
+    salaryPeriodItems,
     genderLabel,
     genderItems,
     gradeLabel,

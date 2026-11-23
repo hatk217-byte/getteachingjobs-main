@@ -141,6 +141,42 @@ export class Job {
   @Column({ type: 'text' })
   address: string;
 
+  @ApiProperty({ description: 'Currency: VND or USD', default: 'VND' })
+  @Column({ type: 'varchar', length: 10, nullable: true, default: 'VND' })
+  currency: string;
+
+  @ApiProperty({ description: 'Salary Rate Type: Gross or Net', default: 'Net' })
+  @Column({ type: 'varchar', length: 10, nullable: true, default: 'Net' })
+  salaryRateType: string;
+
+  @ApiProperty({ description: 'Number of vacancies', nullable: true })
+  @Column({ type: 'int', nullable: true })
+  vacancies: number;
+
+  @ApiProperty({ description: 'Start Date', nullable: true })
+  @Column({ type: 'varchar', length: 100, nullable: true })
+  startDate: string;
+
+  @ApiProperty({ description: 'Contract Length', nullable: true })
+  @Column({ type: 'varchar', length: 100, nullable: true })
+  contractLength: string;
+
+  @ApiProperty({ description: 'Working schedule and hours', nullable: true })
+  @Column({ type: 'varchar', length: 255, nullable: true })
+  workingSchedule: string;
+
+  @ApiProperty({ description: 'Work Mode: On-site, Hybrid, Online', nullable: true })
+  @Column({ type: 'varchar', length: 50, nullable: true, default: 'On-site' })
+  workMode: string;
+
+  @ApiProperty({ description: 'Nationality or Native preference', nullable: true })
+  @Column({ type: 'varchar', length: 150, nullable: true })
+  nationalityPreference: string;
+
+  @ApiProperty({ description: 'Certificates required/preferred', nullable: true })
+  @Column({ type: 'text', nullable: true })
+  certificates: string;
+
   @ApiProperty({
     description: 'Post type: Basic, Hot, Urgent',
     default: 'Basic',

@@ -114,12 +114,6 @@ export const useAuthStore = defineStore('auth', {
 
       this.user = UserMapper.toModel(response)
 
-      console.log('===== GET ME INFO =====')
-      console.log('User:', this.user)
-      console.log('Role:', this.user?.role)
-      console.log('Role Type:', typeof this.user?.role)
-      console.log('=======================')
-
       return this.user
     },
 
