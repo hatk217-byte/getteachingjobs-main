@@ -67,18 +67,7 @@
                   @mouseenter="cancelCloseServicesDropdown"
                   @mouseleave="scheduleCloseServicesDropdown"
                 >
-                  <div class="site-nav__dropdown-header">
-                    <span class="site-nav__dropdown-eyebrow">Teacher Services</span>
-                    <NuxtLink
-                      to="/teacher-support#services"
-                      class="site-nav__dropdown-view-all"
-                      @click="closeServicesDropdown"
-                    >
-                      View all 6 services &rarr;
-                    </NuxtLink>
-                  </div>
-
-                  <div class="site-nav__dropdown-grid">
+                  <div class="site-nav__dropdown-list">
                     <NuxtLink
                       v-for="svc in teacherServicesList"
                       :key="svc.slug"
@@ -88,21 +77,17 @@
                       @click="closeServicesDropdown"
                     >
                       <span class="site-nav__dropdown-num">{{ svc.num }}</span>
-                      <div class="site-nav__dropdown-text">
-                        <span class="site-nav__dropdown-item-title">{{ svc.title }}</span>
-                        <span class="site-nav__dropdown-item-desc">{{ svc.desc }}</span>
-                      </div>
+                      <span class="site-nav__dropdown-item-title">{{ svc.title }}</span>
                     </NuxtLink>
                   </div>
 
                   <div class="site-nav__dropdown-footer">
                     <NuxtLink
-                      to="/teacher-support/your-situation"
+                      to="/teacher-support#services"
                       class="site-nav__dropdown-footer-link"
                       @click="closeServicesDropdown"
                     >
-                      <UIcon name="i-lucide-compass" class="size-4 shrink-0 text-blue-600" />
-                      <span>Not sure which service you need? <strong>Check your case in 2 mins &rarr;</strong></span>
+                      <span>View all 6 services &rarr;</span>
                     </NuxtLink>
                   </div>
                 </div>
@@ -354,48 +339,12 @@ const isMobileServicesOpen = ref(false)
 let closeTimer: ReturnType<typeof setTimeout> | null = null
 
 const teacherServicesList = [
-  {
-    slug: 'job-placement',
-    num: '01',
-    title: 'Job Placement',
-    desc: 'Direct school contracts with 0% agent fee',
-    to: '/teacher-support/services/job-placement',
-  },
-  {
-    slug: 'visa-service',
-    num: '02',
-    title: 'Vietnam Visa Service',
-    desc: 'DN1 sponsorship, e-visas & legal stay',
-    to: '/teacher-support/services/visa-service',
-  },
-  {
-    slug: 'consular-legalization',
-    num: '03',
-    title: 'Apostille & Legalization',
-    desc: 'Certified translations & embassy legalisation',
-    to: '/teacher-support/services/consular-legalization',
-  },
-  {
-    slug: 'coe-support',
-    num: '04',
-    title: 'DMW & OEC Support',
-    desc: 'Filipino teachers departure & COE clearance',
-    to: '/teacher-support/services/coe-support',
-  },
-  {
-    slug: 'work-permit-trc',
-    num: '05',
-    title: 'Work Permit & TRC',
-    desc: 'Teaching permits & 1-2 year residence cards',
-    to: '/teacher-support/services/work-permit-trc',
-  },
-  {
-    slug: 'other-supports',
-    num: '06',
-    title: 'Relocation & Settlement',
-    desc: 'Police clearance, airport pickup & housing',
-    to: '/teacher-support/services/other-supports',
-  },
+  { slug: 'job-placement', num: '01', title: 'Job Placement', to: '/teacher-support/services/job-placement' },
+  { slug: 'visa-service', num: '02', title: 'Vietnam Visa Service', to: '/teacher-support/services/visa-service' },
+  { slug: 'consular-legalization', num: '03', title: 'Apostille & Legalization', to: '/teacher-support/services/consular-legalization' },
+  { slug: 'coe-support', num: '04', title: 'DMW & OEC Support', to: '/teacher-support/services/coe-support' },
+  { slug: 'work-permit-trc', num: '05', title: 'Work Permit & TRC', to: '/teacher-support/services/work-permit-trc' },
+  { slug: 'other-supports', num: '06', title: 'Relocation & Settlement', to: '/teacher-support/services/other-supports' },
 ]
 
 const isServicesActive = computed(() => {
