@@ -33,9 +33,9 @@
           aria-label="Primary"
         >
           <template v-for="item in menuItems" :key="item.to">
-            <!-- Services Dropdown (Teacher Support navigation) -->
+            <!-- Services / Teacher Support Dropdown -->
             <div
-              v-if="item.label === 'Services'"
+              v-if="item.hasDropdown"
               class="site-nav__dropdown-wrapper"
               @mouseenter="openServicesDropdown"
               @mouseleave="scheduleCloseServicesDropdown"
@@ -49,7 +49,7 @@
                 }"
                 aria-haspopup="true"
                 :aria-expanded="isServicesDropdownOpen"
-                @click="toggleServicesDropdown"
+                @click="onServicesTriggerClick(item)"
               >
                 <span>{{ item.label }}</span>
                 <UIcon
@@ -133,7 +133,7 @@
           <nav class="site-mobile-menu__nav" aria-label="Primary">
             <template v-for="item in menuItems" :key="`mobile-${item.to}`">
               <!-- Mobile Services Dropdown -->
-              <div v-if="item.label === 'Services'" class="site-mobile-menu__dropdown-wrapper">
+              <div v-if="item.hasDropdown" class="site-mobile-menu__dropdown-wrapper">
                 <button
                   type="button"
                   class="site-mobile-menu__dropdown-trigger"
@@ -400,8 +400,7 @@ const teacherServicesList = [
 
 const isServicesActive = computed(() => {
   const p = router.currentRoute.value.path
-  const h = router.currentRoute.value.hash
-  return p.startsWith('/teacher-support/services') || (p === '/teacher-support' && (h === '#services' || !h))
+  return p.startsWith('/teacher-support')
 })
 
 const openServicesDropdown = () => {
@@ -438,6 +437,15 @@ const toggleServicesDropdown = () => {
   isServicesDropdownOpen.value = !isServicesDropdownOpen.value
 }
 
+const onServicesTriggerClick = (item: { to: string }) => {
+  if (isServicesDropdownOpen.value) {
+    closeServicesDropdown()
+    router.push(item.to)
+  } else {
+    openServicesDropdown()
+  }
+}
+
 watch(
   () => router.currentRoute.value.fullPath,
   () => {
@@ -464,7 +472,7 @@ onMounted(() => {
 const menuItems = computed(() => {
   if (isTeacherSupport.value) {
     return [
-      { label: 'Services', to: '/teacher-support#services' },
+      { label: 'Services', to: '/teacher-support#services', hasDropdown: true },
       { label: 'Your Situation', to: '/teacher-support/your-situation' },
       { label: 'Why Us', to: '/teacher-support/why-us' },
       { label: 'Useful Guides', to: '/teacher-support/guides' },
@@ -474,7 +482,7 @@ const menuItems = computed(() => {
   return [
     { label: 'Schools & Centers', to: ROUTE_PAGE.COMPANY.GET },
     { label: 'Find Jobs', to: ROUTE_PAGE.SEARCH },
-    { label: 'Teacher Support', to: '/teacher-support' },
+    { label: 'Teacher Support', to: '/teacher-support', hasDropdown: true },
     { label: 'Teacher Guides', to: '/blog' },
   ]
 })
