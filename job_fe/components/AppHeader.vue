@@ -32,18 +32,96 @@
           class="site-nav site-nav--desktop"
           aria-label="Primary"
         >
-          <NuxtLink
-            v-for="item in menuItems"
-            :key="item.to"
-            :to="item.to"
-            :class="{
-              'is-active': isActive(item),
-              'is-highlight': item.highlight,
-            }"
-          >
-            <span v-if="item.highlight" class="highlight-dot" aria-hidden="true" />
-            {{ item.label }}
-          </NuxtLink>
+          <template v-for="item in menuItems" :key="item.to">
+            <!-- Services Dropdown (Teacher Support navigation) -->
+            <div
+              v-if="item.label === 'Services'"
+              class="site-nav__dropdown-wrapper"
+              @mouseenter="openServicesDropdown"
+              @mouseleave="scheduleCloseServicesDropdown"
+            >
+              <button
+                type="button"
+                class="site-nav__link site-nav__dropdown-trigger"
+                :class="{
+                  'is-active': isServicesActive,
+                  'is-open': isServicesDropdownOpen,
+                }"
+                aria-haspopup="true"
+                :aria-expanded="isServicesDropdownOpen"
+                @click="toggleServicesDropdown"
+              >
+                <span>{{ item.label }}</span>
+                <UIcon
+                  name="i-lucide-chevron-down"
+                  class="site-nav__chevron"
+                  :class="{ 'is-rotated': isServicesDropdownOpen }"
+                />
+              </button>
+
+              <Transition name="dropdown-fade">
+                <div
+                  v-show="isServicesDropdownOpen"
+                  class="site-nav__dropdown-menu"
+                  role="menu"
+                  @mouseenter="cancelCloseServicesDropdown"
+                  @mouseleave="scheduleCloseServicesDropdown"
+                >
+                  <div class="site-nav__dropdown-header">
+                    <span class="site-nav__dropdown-eyebrow">Teacher Services</span>
+                    <NuxtLink
+                      to="/teacher-support#services"
+                      class="site-nav__dropdown-view-all"
+                      @click="closeServicesDropdown"
+                    >
+                      View all 6 services &rarr;
+                    </NuxtLink>
+                  </div>
+
+                  <div class="site-nav__dropdown-grid">
+                    <NuxtLink
+                      v-for="svc in teacherServicesList"
+                      :key="svc.slug"
+                      :to="svc.to"
+                      class="site-nav__dropdown-item"
+                      :class="{ 'is-item-active': router.currentRoute.value.path === svc.to }"
+                      @click="closeServicesDropdown"
+                    >
+                      <span class="site-nav__dropdown-num">{{ svc.num }}</span>
+                      <div class="site-nav__dropdown-text">
+                        <span class="site-nav__dropdown-item-title">{{ svc.title }}</span>
+                        <span class="site-nav__dropdown-item-desc">{{ svc.desc }}</span>
+                      </div>
+                    </NuxtLink>
+                  </div>
+
+                  <div class="site-nav__dropdown-footer">
+                    <NuxtLink
+                      to="/teacher-support/your-situation"
+                      class="site-nav__dropdown-footer-link"
+                      @click="closeServicesDropdown"
+                    >
+                      <UIcon name="i-lucide-compass" class="size-4 shrink-0 text-blue-600" />
+                      <span>Not sure which service you need? <strong>Check your case in 2 mins &rarr;</strong></span>
+                    </NuxtLink>
+                  </div>
+                </div>
+              </Transition>
+            </div>
+
+            <!-- Standard Link -->
+            <NuxtLink
+              v-else
+              :to="item.to"
+              :class="{
+                'is-active': isActive(item),
+                'is-highlight': item.highlight,
+              }"
+            >
+              <span v-if="item.highlight" class="highlight-dot" aria-hidden="true" />
+              {{ item.label }}
+            </NuxtLink>
+          </template>
         </nav>
 
         <div
@@ -53,19 +131,58 @@
           data-mobile-nav
         >
           <nav class="site-mobile-menu__nav" aria-label="Primary">
-            <NuxtLink
-              v-for="item in menuItems"
-              :key="`mobile-${item.to}`"
-              :to="item.to"
-              :class="{
-                'is-active': isActive(item),
-                'is-highlight': item.highlight,
-              }"
-              @click="closeMobileNav"
-            >
-              <span v-if="item.highlight" class="highlight-dot" aria-hidden="true" />
-              {{ item.label }}
-            </NuxtLink>
+            <template v-for="item in menuItems" :key="`mobile-${item.to}`">
+              <!-- Mobile Services Dropdown -->
+              <div v-if="item.label === 'Services'" class="site-mobile-menu__dropdown-wrapper">
+                <button
+                  type="button"
+                  class="site-mobile-menu__dropdown-trigger"
+                  :class="{ 'is-active': isServicesActive, 'is-open': isMobileServicesOpen }"
+                  @click="isMobileServicesOpen = !isMobileServicesOpen"
+                >
+                  <span>{{ item.label }}</span>
+                  <UIcon
+                    name="i-lucide-chevron-down"
+                    class="size-4 transition-transform duration-200"
+                    :class="{ 'rotate-180': isMobileServicesOpen }"
+                  />
+                </button>
+                <div v-show="isMobileServicesOpen" class="site-mobile-menu__subnav">
+                  <NuxtLink
+                    v-for="svc in teacherServicesList"
+                    :key="`m-${svc.slug}`"
+                    :to="svc.to"
+                    class="site-mobile-menu__sublink"
+                    :class="{ 'is-active': router.currentRoute.value.path === svc.to }"
+                    @click="closeMobileNav"
+                  >
+                    <span class="site-mobile-menu__subnum">{{ svc.num }}</span>
+                    <span>{{ svc.title }}</span>
+                  </NuxtLink>
+                  <NuxtLink
+                    to="/teacher-support#services"
+                    class="site-mobile-menu__sublink site-mobile-menu__sublink--all"
+                    @click="closeMobileNav"
+                  >
+                    View all 6 services overview &rarr;
+                  </NuxtLink>
+                </div>
+              </div>
+
+              <!-- Standard Mobile Link -->
+              <NuxtLink
+                v-else
+                :to="item.to"
+                :class="{
+                  'is-active': isActive(item),
+                  'is-highlight': item.highlight,
+                }"
+                @click="closeMobileNav"
+              >
+                <span v-if="item.highlight" class="highlight-dot" aria-hidden="true" />
+                {{ item.label }}
+              </NuxtLink>
+            </template>
           </nav>
 
           <div class="site-mobile-menu__actions">
@@ -231,6 +348,103 @@ const isTeacherSupport = computed(() => {
 const isHomePage = computed(() => {
   return router.currentRoute.value.path === '/'
 })
+
+const isServicesDropdownOpen = ref(false)
+const isMobileServicesOpen = ref(false)
+let closeTimer: ReturnType<typeof setTimeout> | null = null
+
+const teacherServicesList = [
+  {
+    slug: 'job-placement',
+    num: '01',
+    title: 'Job Placement',
+    desc: 'Direct school contracts with 0% agent fee',
+    to: '/teacher-support/services/job-placement',
+  },
+  {
+    slug: 'visa-service',
+    num: '02',
+    title: 'Vietnam Visa Service',
+    desc: 'DN1 sponsorship, e-visas & legal stay',
+    to: '/teacher-support/services/visa-service',
+  },
+  {
+    slug: 'consular-legalization',
+    num: '03',
+    title: 'Apostille & Legalization',
+    desc: 'Certified translations & embassy legalisation',
+    to: '/teacher-support/services/consular-legalization',
+  },
+  {
+    slug: 'coe-support',
+    num: '04',
+    title: 'DMW & OEC Support',
+    desc: 'Filipino teachers departure & COE clearance',
+    to: '/teacher-support/services/coe-support',
+  },
+  {
+    slug: 'work-permit-trc',
+    num: '05',
+    title: 'Work Permit & TRC',
+    desc: 'Teaching permits & 1-2 year residence cards',
+    to: '/teacher-support/services/work-permit-trc',
+  },
+  {
+    slug: 'other-supports',
+    num: '06',
+    title: 'Relocation & Settlement',
+    desc: 'Police clearance, airport pickup & housing',
+    to: '/teacher-support/services/other-supports',
+  },
+]
+
+const isServicesActive = computed(() => {
+  const p = router.currentRoute.value.path
+  const h = router.currentRoute.value.hash
+  return p.startsWith('/teacher-support/services') || (p === '/teacher-support' && (h === '#services' || !h))
+})
+
+const openServicesDropdown = () => {
+  if (closeTimer) {
+    clearTimeout(closeTimer)
+    closeTimer = null
+  }
+  isServicesDropdownOpen.value = true
+}
+
+const scheduleCloseServicesDropdown = () => {
+  if (closeTimer) clearTimeout(closeTimer)
+  closeTimer = setTimeout(() => {
+    isServicesDropdownOpen.value = false
+  }, 160)
+}
+
+const cancelCloseServicesDropdown = () => {
+  if (closeTimer) {
+    clearTimeout(closeTimer)
+    closeTimer = null
+  }
+}
+
+const closeServicesDropdown = () => {
+  if (closeTimer) {
+    clearTimeout(closeTimer)
+    closeTimer = null
+  }
+  isServicesDropdownOpen.value = false
+}
+
+const toggleServicesDropdown = () => {
+  isServicesDropdownOpen.value = !isServicesDropdownOpen.value
+}
+
+watch(
+  () => router.currentRoute.value.fullPath,
+  () => {
+    closeServicesDropdown()
+    closeMobileNav()
+  }
+)
 
 const isScrolled = ref(false)
 
