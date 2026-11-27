@@ -836,6 +836,7 @@
 
 <script setup lang="ts">
 import { ref, reactive, computed } from 'vue'
+import { NATIONALITY_OPTIONS } from '@/data/nationalities'
 
 useHead({
   title: 'Teacher Support & Relocation in Vietnam - GetTeachingJobs.vn',
@@ -871,22 +872,8 @@ const vietnamCityOptions = [
   'Other Province in Vietnam',
 ]
 
-// Popular Nationalities with taggable search
-const nationalityOptions = [
-  'Philippines',
-  'South Africa',
-  'United Kingdom',
-  'United States',
-  'Australia',
-  'Canada',
-  'Ireland',
-  'New Zealand',
-  'Zimbabwe',
-  'Nigeria',
-  'India',
-  'Kenya',
-  'Other Nationality',
-]
+// Complete World Nationalities with taggable search
+const nationalityOptions = NATIONALITY_OPTIONS
 
 // Service Options matching concise and official naming
 const serviceOptions = [

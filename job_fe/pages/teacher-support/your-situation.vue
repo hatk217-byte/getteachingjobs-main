@@ -267,6 +267,7 @@
 <script setup lang="ts">
 import { ref, reactive, computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
+import { NATIONALITY_OPTIONS } from '@/data/nationalities'
 
 const route = useRoute()
 
@@ -293,22 +294,8 @@ const vietnamCityOptions = [
   'Other Province in Vietnam',
 ]
 
-// Popular Nationalities with taggable search
-const nationalityOptions = [
-  'Philippines',
-  'South Africa',
-  'United Kingdom',
-  'United States',
-  'Australia',
-  'Canada',
-  'Ireland',
-  'New Zealand',
-  'Zimbabwe',
-  'Nigeria',
-  'India',
-  'Kenya',
-  'Other Nationality',
-]
+// Complete World Nationalities with taggable search
+const nationalityOptions = NATIONALITY_OPTIONS
 
 // Service Options matching concise and official naming
 const serviceOptions = [

@@ -504,6 +504,7 @@
 import { ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { TEACHER_SERVICES } from '@/data/teacher-services'
+import { NATIONALITY_OPTIONS } from '@/data/nationalities'
 
 const route = useRoute()
 const slug = computed(() => route.params.slug as string)
@@ -560,21 +561,7 @@ const countryCode = computed(() => {
   return (selectedCountry.value as CountryCallingCode).code || '+84'
 })
 
-const nationalityOptions = [
-  'South Africa',
-  'Philippines',
-  'United Kingdom (UK)',
-  'United States (USA)',
-  'Australia',
-  'Canada',
-  'Ireland',
-  'New Zealand',
-  'India',
-  'Zimbabwe',
-  'Nigeria',
-  'Kenya',
-  'Other Country',
-]
+const nationalityOptions = NATIONALITY_OPTIONS
 
 const vietnamCityOptions = [
   'Hanoi',
