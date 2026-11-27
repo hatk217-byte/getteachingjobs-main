@@ -18,7 +18,7 @@
           </h1>
 
           <p class="ts-hero-p">
-            We help with job placement, visas, legalization, work permits, TRC cards, and more. One-to-one support to get your documents ready for your school offer.
+            We consult &amp; support teachers with job placement, visa, apostille/ legalization, work permit, TRC &amp; more. One-to-one support to get your documents ready for your employer’s offer.
           </p>
 
           <div class="ts-hero-actions">
