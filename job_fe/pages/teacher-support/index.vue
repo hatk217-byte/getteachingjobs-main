@@ -97,7 +97,7 @@
               </NuxtLink>
             </h3>
             <p class="card-desc">
-              Direct connections with verified international and bilingual schools across Vietnam.
+              Direct connections with verified English centers; private/international/bilingual schools across Vietnam.
             </p>
             <ul class="feature-list">
               <li>
