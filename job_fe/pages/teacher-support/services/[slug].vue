@@ -38,23 +38,49 @@
             <h1 class="hero-title">{{ service.title }}</h1>
             <p class="hero-desc">{{ service.heroDesc }}</p>
 
-            <div class="hero-stats">
-              <div class="stat-item stat-item-wide">
-                <span class="stat-label">Estimated Turnaround</span>
-                <span class="stat-value">{{ service.turnaroundTime }}</span>
+            <div class="hero-stats" :class="{ 'is-single': !service.successRate && !service.feeMetric }">
+              <div class="stat-item stat-item-turnaround">
+                <div class="stat-icon-wrap turnaround">
+                  <svg class="stat-icon" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+                  </svg>
+                </div>
+                <div class="stat-body">
+                  <span class="stat-label">Estimated Turnaround</span>
+                  <div class="stat-value-row">
+                    <span class="stat-value">{{ service.turnaroundTime }}</span>
+                  </div>
+                  <p v-if="service.turnaroundNote" class="stat-note">
+                    {{ service.turnaroundNote }}
+                  </p>
+                </div>
               </div>
               <template v-if="service.successRate">
                 <div class="stat-divider" />
                 <div class="stat-item">
-                  <span class="stat-label">Quality Metric</span>
-                  <span class="stat-value">{{ service.successRate }}</span>
+                  <div class="stat-icon-wrap quality">
+                    <svg class="stat-icon" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                    </svg>
+                  </div>
+                  <div class="stat-body">
+                    <span class="stat-label">Quality Metric</span>
+                    <span class="stat-value">{{ service.successRate }}</span>
+                  </div>
                 </div>
               </template>
               <template v-if="service.feeMetric">
                 <div class="stat-divider" />
                 <div class="stat-item">
-                  <span class="stat-label">Fee Transparency</span>
-                  <span class="stat-value">{{ service.feeMetric }}</span>
+                  <div class="stat-icon-wrap fee">
+                    <svg class="stat-icon" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
+                    </svg>
+                  </div>
+                  <div class="stat-body">
+                    <span class="stat-label">Fee Transparency</span>
+                    <span class="stat-value">{{ service.feeMetric }}</span>
+                  </div>
                 </div>
               </template>
             </div>
@@ -726,46 +752,107 @@ useSeoMeta({
   .hero-stats {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
+    align-items: flex-start;
     gap: 20px 28px;
-    padding: 16px 24px;
+    padding: 16px 22px;
     background: #ffffff;
     border: 1px solid #e2e8f0;
     border-radius: 14px;
     width: fit-content;
-    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.03);
+    max-width: 100%;
+    box-shadow: 0 2px 8px -2px rgba(15, 23, 42, 0.04);
+
+    &.is-single {
+      max-width: 540px;
+      border-color: #dbeafe;
+      background: #ffffff;
+      box-shadow: 0 4px 14px -3px rgba(37, 99, 235, 0.08);
+    }
 
     .stat-item {
       display: flex;
-      flex-direction: column;
-      gap: 2px;
+      align-items: flex-start;
+      gap: 12px;
 
-      &.stat-item-wide {
+      &.stat-item-wide,
+      &.stat-item-turnaround {
         max-width: 480px;
       }
 
+      .stat-icon-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        background: #eff6ff;
+        color: #2563eb;
+        flex-shrink: 0;
+        margin-top: 1px;
+
+        .stat-icon {
+          width: 18px;
+          height: 18px;
+        }
+
+        &.quality {
+          background: #ecfdf5;
+          color: #059669;
+        }
+
+        &.fee {
+          background: #f1f5f9;
+          color: #475569;
+        }
+      }
+
+      .stat-body {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        min-width: 0;
+      }
+
       .stat-label {
-        font-size: 11.5px;
+        font-size: 11px;
         text-transform: uppercase;
-        letter-spacing: 0.05em;
+        letter-spacing: 0.06em;
         font-weight: 700;
         color: #64748b;
       }
 
       .stat-value {
-        font-size: 15px;
+        font-size: 15.5px;
         font-weight: 800;
         color: #0f274a;
+        line-height: 1.35;
+      }
+
+      .stat-note {
+        margin: 3px 0 0;
+        font-size: 13px;
+        font-weight: 450;
+        color: #475569;
+        line-height: 1.45;
       }
     }
 
     .stat-divider {
       width: 1px;
-      height: 32px;
+      height: 38px;
       background: #e2e8f0;
+      align-self: center;
       @media (max-width: 600px) {
         display: none;
       }
+    }
+
+    @media (max-width: 600px) {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 16px;
+      width: 100%;
     }
   }
 }

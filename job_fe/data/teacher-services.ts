@@ -26,6 +26,7 @@ export interface ServiceDetail {
   topBanner?: string
   heroDesc: string
   turnaroundTime: string
+  turnaroundNote?: string
   successRate?: string
   feeMetric?: string
   comparisonTable?: ServiceComparisonTable
@@ -58,7 +59,8 @@ export const TEACHER_SERVICES: Record<string, ServiceDetail> = {
     shortTitle: 'Job Placement',
     tagline: 'Direct connections with verified English centers, bilingual, and international schools across Vietnam with 0% agent fee.',
     heroDesc: 'Find teaching jobs in Hanoi, Ho Chi Minh City, Da Nang, and other cities. You sign a contract directly with the center/school, not with GetTeachingJobs. We never take a percentage of your salary.',
-    turnaroundTime: 'We usually send your profile to centers/schools within 2-4 business days. The center/school decides when to interview you.',
+    turnaroundTime: '2–4 business days',
+    turnaroundNote: 'We usually send your profile to centers/schools within this window. The center/school decides when to interview you.',
     comparisonTable: {
       title: 'Center & School Types & Requirements at a Glance',
       headers: ['Center/School Type', 'Requirements', 'Pay & Workload'],
