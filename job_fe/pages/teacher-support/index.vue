@@ -104,25 +104,25 @@
                 <svg class="check-bullet" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
                 </svg>
-                <span>Secure a job offer/contract between teachers and the centers/schools</span>
+                <span>Job offer &amp; contract with centers/schools</span>
               </li>
               <li>
                 <svg class="check-bullet" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
                 </svg>
-                <span>Secure a 3-month visa (working purpose) under the employer’s profile</span>
+                <span>3-month work visa via your employer</span>
               </li>
               <li>
                 <svg class="check-bullet" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
                 </svg>
-                <span>Provide guidance on legalizing documents and obtaining a Work Permit and Temporary Resident Card (TRC)</span>
+                <span>Document legalization, Work Permit &amp; TRC guidance</span>
               </li>
               <li>
                 <svg class="check-bullet" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
                 </svg>
-                <span>Offer ongoing support with any information teachers need while in Vietnam</span>
+                <span>Ongoing support while in Vietnam</span>
               </li>
             </ul>
             <div class="card-footer">
