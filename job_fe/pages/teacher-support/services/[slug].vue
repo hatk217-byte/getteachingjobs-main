@@ -127,32 +127,21 @@
                     <span>{{ note }}</span>
                   </div>
                 </div>
-
-                <!-- General Requirements (if present) -->
-                <div v-if="service.generalRequirements?.length" class="general-requirements-block">
-                  <h3 class="general-req-title">General Requirements (Vietnam Work Permit Standard)</h3>
-                  <ul class="general-req-list">
-                    <li v-for="(req, rIdx) in service.generalRequirements" :key="rIdx">
-                      <strong class="req-label">{{ req.label }}:</strong>
-                      <span class="req-desc">{{ req.desc }}</span>
-                    </li>
-                  </ul>
-                </div>
               </section>
 
               <!-- Who it's for -->
               <section class="content-block">
                 <h2 class="block-title">Who This Service Is For</h2>
-                <div class="audience-grid">
+                <div class="audience-grid" :class="{ 'is-requirements': service.slug === 'job-placement' }">
                   <div
                     v-for="(aud, idx) in service.targetAudience"
                     :key="idx"
                     class="audience-card"
                   >
-                    <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor">
+                    <svg v-if="service.slug !== 'job-placement'" class="check-icon" viewBox="0 0 20 20" fill="currentColor">
                       <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
                     </svg>
-                    <span>{{ aud }}</span>
+                    <span class="aud-text" v-html="aud" />
                   </div>
                 </div>
               </section>
@@ -996,64 +985,44 @@ useSeoMeta({
   }
 }
 
-.general-requirements-block {
-  margin-top: 20px;
-  padding: 20px 22px;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-
-  .general-req-title {
-    font-size: 15px;
-    font-weight: 700;
-    color: #0f274a;
-    margin: 0 0 14px;
-    letter-spacing: -0.01em;
-  }
-
-  .general-req-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-
-    li {
-      position: relative;
-      padding-left: 18px;
-      font-size: 14px;
-      line-height: 1.55;
-      color: #334155;
-
-      &::before {
-        content: "•";
-        position: absolute;
-        left: 2px;
-        top: 0;
-        color: #2563eb;
-        font-weight: 700;
-        font-size: 15px;
-      }
-
-      .req-label {
-        color: #0f274a;
-        font-weight: 700;
-        margin-right: 4px;
-      }
-
-      .req-desc {
-        color: #334155;
-      }
-    }
-  }
-}
-
 /* Audience Grid */
 .audience-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 14px;
+
+  &.is-requirements {
+    grid-template-columns: repeat(2, 1fr);
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+
+    .audience-card {
+      padding: 18px 20px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+      display: block;
+
+      .aud-text {
+        font-size: 13.5px;
+        line-height: 1.55;
+        color: #475569;
+        font-weight: 450;
+        display: block;
+
+        strong {
+          display: block;
+          font-size: 15px;
+          font-weight: 700;
+          color: #0f274a;
+          margin-bottom: 6px;
+        }
+      }
+    }
+  }
 
   .audience-card {
     display: flex;
