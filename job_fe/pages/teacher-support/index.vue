@@ -86,16 +86,8 @@
           <!-- 1. Job Placement -->
           <div class="ts-service-card card-placement">
             <div class="card-head">
-              <div class="card-head-left">
-                <span class="card-num">01</span>
-                <span class="category-badge highlight">Highly Recommended</span>
-              </div>
-              <NuxtLink
-                to="/teacher-support/services/job-placement"
-                class="card-view-details"
-              >
-                <span>View details &rarr;</span>
-              </NuxtLink>
+              <span class="card-num">01</span>
+              <span class="category-badge highlight">Highly Recommended</span>
             </div>
             <h3 class="card-title">
               <NuxtLink to="/teacher-support/services/job-placement" class="card-title-link">
@@ -140,12 +132,6 @@
           <div class="ts-service-card card-visa">
             <div class="card-head">
               <span class="card-num">02</span>
-              <NuxtLink
-                to="/teacher-support/services/visa-service"
-                class="card-view-details"
-              >
-                <span>View details &rarr;</span>
-              </NuxtLink>
             </div>
             <h3 class="card-title">
               <NuxtLink to="/teacher-support/services/visa-service" class="card-title-link">
@@ -190,12 +176,6 @@
           <div class="ts-service-card card-legalization">
             <div class="card-head">
               <span class="card-num">03</span>
-              <NuxtLink
-                to="/teacher-support/services/consular-legalization"
-                class="card-view-details"
-              >
-                <span>View details &rarr;</span>
-              </NuxtLink>
             </div>
             <h3 class="card-title">
               <NuxtLink to="/teacher-support/services/consular-legalization" class="card-title-link">
@@ -240,12 +220,6 @@
           <div class="ts-service-card card-coe">
             <div class="card-head">
               <span class="card-num">04</span>
-              <NuxtLink
-                to="/teacher-support/services/coe-support"
-                class="card-view-details"
-              >
-                <span>View details &rarr;</span>
-              </NuxtLink>
             </div>
             <h3 class="card-title">
               <NuxtLink to="/teacher-support/services/coe-support" class="card-title-link">
@@ -296,12 +270,6 @@
           <div class="ts-service-card card-workpermit">
             <div class="card-head">
               <span class="card-num">05</span>
-              <NuxtLink
-                to="/teacher-support/services/work-permit-trc"
-                class="card-view-details"
-              >
-                <span>View details &rarr;</span>
-              </NuxtLink>
             </div>
             <h3 class="card-title">
               <NuxtLink to="/teacher-support/services/work-permit-trc" class="card-title-link">
@@ -346,12 +314,6 @@
           <div class="ts-service-card card-other">
             <div class="card-head">
               <span class="card-num">06</span>
-              <NuxtLink
-                to="/teacher-support/services/other-supports"
-                class="card-view-details"
-              >
-                <span>View details &rarr;</span>
-              </NuxtLink>
             </div>
             <h3 class="card-title">
               <NuxtLink to="/teacher-support/services/other-supports" class="card-title-link">
