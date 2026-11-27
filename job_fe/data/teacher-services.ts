@@ -58,7 +58,7 @@ export const TEACHER_SERVICES: Record<string, ServiceDetail> = {
     shortTitle: 'Job Placement',
     tagline: 'Direct connections with verified international, bilingual, and English centers across Vietnam with 0% agent fee.',
     heroDesc: 'Find teaching jobs in Hanoi, Ho Chi Minh City, Da Nang, and other cities. You sign a contract directly with the school, not with GetTeachingJobs. We never take a percentage of your salary.',
-    turnaroundTime: 'We usually send your profile to schools within 5 business days. The school decides when to interview you.',
+    turnaroundTime: 'We usually send your profile to schools within 2-4 business days. The school decides when to interview you.',
     comparisonTable: {
       title: 'School Types & Requirements at a Glance',
       headers: ['School Type', 'Requirements', 'Pay & Workload'],
