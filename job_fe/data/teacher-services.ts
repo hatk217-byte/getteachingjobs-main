@@ -87,6 +87,10 @@ export const TEACHER_SERVICES: Record<string, ServiceDetail> = {
           note: 'Full international accredited curricula (IB, Cambridge, US/UK standards)',
         },
       ],
+      notes: [
+        'Hiring decision: The center/school makes the hiring decision.',
+        'Preferences: Tell us your city, your age group, and your minimum salary. We will only send you jobs that match.',
+      ],
     },
     generalRequirements: [
       {
