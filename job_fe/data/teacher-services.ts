@@ -57,11 +57,8 @@ export const TEACHER_SERVICES: Record<string, ServiceDetail> = {
     title: 'Job Placement & School Matching',
     shortTitle: 'Job Placement',
     tagline: 'Direct connections with verified international, bilingual, and English centers across Vietnam with 0% agent fee.',
-    badge: '0% Agent Deduction',
-    topBanner: 'The school makes the hiring decision. We cannot guarantee you a job, a salary, or a Work Permit.',
     heroDesc: 'Find teaching jobs in Hanoi, Ho Chi Minh City, Da Nang, and other cities. You sign a contract directly with the school, not with GetTeachingJobs. We never take a percentage of your salary.',
     turnaroundTime: 'We usually send your profile to schools within 5 business days. The school decides when to interview you.',
-    feeMetric: '0% fee for teachers (Schools pay)',
     comparisonTable: {
       title: 'School Types & Requirements at a Glance',
       headers: ['School Type', 'Requirements', 'Pay & Workload'],
@@ -83,7 +80,6 @@ export const TEACHER_SERVICES: Record<string, ServiceDetail> = {
         },
       ],
       notes: [
-        'Hiring decision: The school makes the hiring decision. We cannot guarantee you a job, a salary, or a Work Permit.',
         'Teacher expenses: You pay for your own Apostille, translation, health check, and visa fees, unless your school agrees to pay them. These are separate from job placement.',
         'Preferences: Tell us your city, your age group, and your minimum salary. We will only send you jobs that match.',
       ],

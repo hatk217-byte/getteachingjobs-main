@@ -24,7 +24,7 @@
           <div class="hero-header">
             <div class="hero-top-badges">
               <span class="service-num-badge">{{ service.num }}</span>
-              <span class="service-feature-badge">{{ service.badge }}</span>
+              <span v-if="service.badge" class="service-feature-badge">{{ service.badge }}</span>
             </div>
 
             <!-- Top Advisory Callout Banner -->
@@ -50,11 +50,13 @@
                   <span class="stat-value">{{ service.successRate }}</span>
                 </div>
               </template>
-              <div class="stat-divider" />
-              <div class="stat-item">
-                <span class="stat-label">Fee Transparency</span>
-                <span class="stat-value">{{ service.feeMetric || 'Separately listed quotes' }}</span>
-              </div>
+              <template v-if="service.feeMetric">
+                <div class="stat-divider" />
+                <div class="stat-item">
+                  <span class="stat-label">Fee Transparency</span>
+                  <span class="stat-value">{{ service.feeMetric }}</span>
+                </div>
+              </template>
             </div>
           </div>
         </div>
