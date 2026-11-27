@@ -18,8 +18,7 @@
           </h1>
 
           <p class="ts-hero-p">
-            <span class="ts-hero-p-main">We consult &amp; support teachers with job placement, visa, apostille/ legalization, work permit, TRC &amp; more.</span>
-            <span class="ts-hero-p-sub">One-to-one support to get your documents ready for your employer’s offer.</span>
+            We consult &amp; support teachers with job placement, visa, apostille/ legalization, work permit, TRC &amp; more. One-to-one support to get your documents ready for your employer’s offer.
           </p>
 
           <div class="ts-hero-actions">
