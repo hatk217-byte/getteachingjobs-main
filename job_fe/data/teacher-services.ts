@@ -9,6 +9,11 @@ export interface ServiceComparisonTableRow {
   note: string
 }
 
+export interface ServiceGeneralRequirement {
+  label: string
+  desc: string
+}
+
 export interface ServiceComparisonTable {
   title: string
   headers?: string[]
@@ -30,6 +35,7 @@ export interface ServiceDetail {
   successRate?: string
   feeMetric?: string
   comparisonTable?: ServiceComparisonTable
+  generalRequirements?: ServiceGeneralRequirement[]
   timelineNote?: string
   documentGroups?: {
     category: string
@@ -62,30 +68,44 @@ export const TEACHER_SERVICES: Record<string, ServiceDetail> = {
     turnaroundTime: '2–4 business days',
     turnaroundNote: 'We usually send your profile to centers/schools within this window. The center/school decides when to interview you.',
     comparisonTable: {
-      title: 'Center & School Types & Requirements at a Glance',
-      headers: ['Center/School Type', 'Requirements', 'Pay & Workload'],
+      title: 'Popular Recruiting Educational Institutions in Vietnam',
+      headers: ['Institution Type', 'Typical Schedule', 'Curriculum & Focus'],
       rows: [
         {
-          type: 'Language center',
-          duration: 'Degree and teaching certificate',
-          note: 'Usually lower pay, more hours.',
+          type: 'English / Language Centers',
+          duration: 'Flexible schedule (weekday evenings & weekends), 1–2 days off per week',
+          note: 'Communicative English, phonics, test preparation (IELTS, TOEIC)',
         },
         {
-          type: 'Bilingual school',
-          duration: 'Degree, teaching certificate, and experience',
-          note: 'Usually higher pay.',
+          type: 'Bilingual Schools',
+          duration: 'Daytime on weekdays (Monday – Friday); occasional Saturday mornings for events or meetings',
+          note: 'National MOET curriculum integrated with Cambridge or international subjects',
         },
         {
-          type: 'International school',
-          duration: 'Degree, teaching license, and experience',
-          note: 'Usually highest pay, and the hardest to enter.',
+          type: 'Private & International Schools',
+          duration: 'Daytime on weekdays (Monday – Friday); occasional Saturday mornings for events or meetings',
+          note: 'Full international accredited curricula (IB, Cambridge, US/UK standards)',
         },
-      ],
-      notes: [
-        'Teacher expenses: You pay for your own Apostille, translation, health check, and visa fees, unless your center/school agrees to pay them. These are separate from job placement.',
-        'Preferences: Tell us your city, your age group, and your minimum salary. We will only send you jobs that match.',
       ],
     },
+    generalRequirements: [
+      {
+        label: 'Education',
+        desc: 'Bachelor’s degree or higher. (For public/private school positions, priority is given to candidates with a degree in Teaching or Education relevant to the subject/grade level).',
+      },
+      {
+        label: 'Teaching Certification',
+        desc: 'A valid teaching certificate of at least 120 hours (TEFL, TESOL, CELTA, etc.).',
+      },
+      {
+        label: 'English Proficiency',
+        desc: 'C1 or C2 level certificate (required for non-native English speakers).',
+      },
+      {
+        label: 'Experience',
+        desc: 'At least 2 years of verified teaching experience supported by a Certificate of Employment (COE) — especially required for non-native teachers or native teachers whose degree is not in Teaching/Education.',
+      },
+    ],
     targetAudience: [
       'Native English teachers (US, UK, CA, AU, NZ, SA, IE)',
       'Filipino teachers with a degree and a teaching certificate. A PRC license can help with some centers/schools, but it is not required.',

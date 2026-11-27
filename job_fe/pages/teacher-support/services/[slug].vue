@@ -127,6 +127,17 @@
                     <span>{{ note }}</span>
                   </div>
                 </div>
+
+                <!-- General Requirements (if present) -->
+                <div v-if="service.generalRequirements?.length" class="general-requirements-block">
+                  <h3 class="general-req-title">General Requirements (Vietnam Work Permit Standard)</h3>
+                  <ul class="general-req-list">
+                    <li v-for="(req, rIdx) in service.generalRequirements" :key="rIdx">
+                      <strong class="req-label">{{ req.label }}:</strong>
+                      <span class="req-desc">{{ req.desc }}</span>
+                    </li>
+                  </ul>
+                </div>
               </section>
 
               <!-- Who it's for -->
@@ -980,6 +991,59 @@ useSeoMeta({
       font-weight: 800;
       font-size: 16px;
       line-height: 1.3;
+    }
+  }
+}
+
+.general-requirements-block {
+  margin-top: 20px;
+  padding: 20px 22px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+
+  .general-req-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #0f274a;
+    margin: 0 0 14px;
+    letter-spacing: -0.01em;
+  }
+
+  .general-req-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    li {
+      position: relative;
+      padding-left: 18px;
+      font-size: 14px;
+      line-height: 1.55;
+      color: #334155;
+
+      &::before {
+        content: "•";
+        position: absolute;
+        left: 2px;
+        top: 0;
+        color: #2563eb;
+        font-weight: 700;
+        font-size: 15px;
+      }
+
+      .req-label {
+        color: #0f274a;
+        font-weight: 700;
+        margin-right: 4px;
+      }
+
+      .req-desc {
+        color: #334155;
+      }
     }
   }
 }
