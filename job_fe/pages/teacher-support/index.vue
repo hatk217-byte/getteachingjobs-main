@@ -87,7 +87,9 @@
           <div class="ts-service-card card-placement">
             <div class="card-head">
               <span class="card-num">01</span>
-              <span class="category-badge highlight">Highly Recommended</span>
+              <span class="category-badge highlight">
+                <span class="badge-text-shimmer">Teacher's Top Pick</span>
+              </span>
             </div>
             <h3 class="card-title">
               <NuxtLink to="/teacher-support/services/job-placement" class="card-title-link">

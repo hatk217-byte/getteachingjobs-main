@@ -422,11 +422,31 @@
         color: #475569;
         border: 1px solid #e2e8f0;
         white-space: nowrap;
+        display: inline-flex;
+        align-items: center;
 
         &.highlight {
-          background: #fef2f2;
-          color: #dc2626;
-          border-color: #fecaca;
+          background: #ffffff;
+          border-color: #e2e8f0;
+          box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+
+          .badge-text-shimmer {
+            font-weight: 800;
+            background: linear-gradient(
+              90deg,
+              #1d4ed8 0%,
+              #dc2626 25%,
+              #2563eb 50%,
+              #ef4444 75%,
+              #1d4ed8 100%
+            );
+            background-size: 200% auto;
+            color: #1d4ed8;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: badgeTextShimmer 2.8s linear infinite;
+            display: inline-block;
+          }
         }
 
         &.popular {
@@ -1593,5 +1613,14 @@
   }
   100% {
     box-shadow: 0 0 0 5px rgba(37, 99, 235, 0.45) !important;
+  }
+}
+
+@keyframes badgeTextShimmer {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 200% center;
   }
 }
