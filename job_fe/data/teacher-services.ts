@@ -121,12 +121,14 @@ export const TEACHER_SERVICES: Record<string, ServiceDetail> = {
       },
     ],
     requiredDocuments: [
-      'Updated CV / Resume tailored for international teaching',
-      'Passport valid for at least 6 months. Longer is better for a long contract.',
-      'University Degree (Bachelor or higher)',
-      'Teaching certificate, usually TEFL / TESOL 120 hours, CELTA, or PGCE. We check your certificate first.',
+      'Updated CV / Resume tailored for teaching positions in Vietnam',
+      'University Degree (Bachelor’s degree or higher)',
+      'Teaching Certificate (valid TEFL, TESOL of at least 120 hours, CELTA, etc.)',
+      'English Proficiency Certificate (C1/C2 or IELTS for non-native English teachers)',
+      'Certificate of Employment (COE confirming at least 2 years of teaching experience)',
+      'A 2–3 minute self-introduction video',
     ],
-    docsNote: 'Clear scans are enough for the first check.',
+    docsNote: 'Clear scans and video links are enough for the initial profile matching.',
     faqs: [
       {
         q: 'Why is there 0% agent fee for teachers?',
