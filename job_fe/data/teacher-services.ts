@@ -65,7 +65,7 @@ export const TEACHER_SERVICES: Record<string, ServiceDetail> = {
     shortTitle: 'Job Placement',
     tagline: 'Direct connections with verified English centers, bilingual, and international schools across Vietnam with 0% agent fee.',
     heroDesc: 'Find teaching jobs in Hanoi, Ho Chi Minh City, Da Nang, and other cities. You sign a contract directly with the center/school, not with GetTeachingJobs. We never take a percentage of your salary.',
-    turnaroundTime: '2–4 business days',
+    turnaroundTime: '2-4 business days',
     turnaroundNote: 'We usually send your profile to centers/schools within this window. The center/school decides when to interview you.',
     comparisonTable: {
       title: 'Popular Recruiting Educational Institutions in Vietnam',
@@ -73,17 +73,17 @@ export const TEACHER_SERVICES: Record<string, ServiceDetail> = {
       rows: [
         {
           type: 'English / Language Centers',
-          duration: 'Flexible schedule (weekday evenings & weekends), 1–2 days off per week',
+          duration: 'Flexible schedule (weekday evenings & weekends), 1-2 days off per week',
           note: 'Communicative English, phonics, test preparation (IELTS, TOEIC)',
         },
         {
           type: 'Bilingual Schools',
-          duration: 'Daytime on weekdays (Monday – Friday); occasional Saturday mornings for events or meetings',
+          duration: 'Daytime on weekdays (Monday - Friday); occasional Saturday mornings for events or meetings',
           note: 'National MOET curriculum integrated with Cambridge or international subjects',
         },
         {
           type: 'Private & International Schools',
-          duration: 'Daytime on weekdays (Monday – Friday); occasional Saturday mornings for events or meetings',
+          duration: 'Daytime on weekdays (Monday - Friday); occasional Saturday mornings for events or meetings',
           note: 'Full international accredited curricula (IB, Cambridge, US/UK standards)',
         },
       ],
@@ -96,7 +96,7 @@ export const TEACHER_SERVICES: Record<string, ServiceDetail> = {
       '<strong>Education:</strong> Bachelor’s degree or higher. (For public/private school positions, priority is given to candidates with a degree in Teaching or Education relevant to the subject/grade level).',
       '<strong>Teaching Certification:</strong> A valid teaching certificate of at least 120 hours (TEFL, TESOL, CELTA, etc.).',
       '<strong>English Proficiency:</strong> C1 or C2 level certificate (required for non-native English speakers).',
-      '<strong>Experience:</strong> At least 2 years of verified teaching experience supported by a Certificate of Employment (COE) — especially required for non-native teachers or native teachers whose degree is not in Teaching/Education.',
+      '<strong>Experience:</strong> At least 2 years of verified teaching experience supported by a Certificate of Employment (COE) - especially required for non-native teachers or native teachers whose degree is not in Teaching/Education.',
     ],
     keyDeliverables: [
       {
@@ -126,29 +126,25 @@ export const TEACHER_SERVICES: Record<string, ServiceDetail> = {
       'Teaching Certificate (valid TEFL, TESOL of at least 120 hours, CELTA, etc.)',
       'English Proficiency Certificate (C1/C2 or IELTS for non-native English teachers)',
       'Certificate of Employment (COE confirming at least 2 years of teaching experience)',
-      'A 2–3 minute self-introduction video',
+      'A 2-3 minute self-introduction video',
     ],
     docsNote: 'Clear scans and video links are enough for the initial profile matching.',
     faqs: [
       {
-        q: 'Why is there 0% agent fee for teachers?',
-        a: 'Partner centers/schools pay our placement fee upon successful recruitment. You sign a contract directly with the center/school, not with GetTeachingJobs. We never charge teachers a single dollar from their agreed contract salary.',
-      },
-      {
         q: 'Can I apply while still outside Vietnam?',
-        a: 'Yes, absolutely. In fact, securing your center/school offer before arriving in Vietnam is the recommended approach so the center/school can sponsor your entry. A DN1 visa lets you enter Vietnam to work with the center/school. It does NOT let you teach or get paid work. You need a Work Permit and an LD visa first.',
+        a: 'Yes, absolutely - provided you meet the position requirements and the hiring school/center is open to overseas applicants. You can complete your interviews and teaching demo online, and once you accept an offer, we will guide you through the employer-sponsored visa and relocation process to Vietnam.',
       },
       {
         q: 'What is the average teaching salary in Vietnam?',
-        a: 'As a guide only. Full-time English teachers in language centers often earn around USD 1,200 to USD 2,000 a month. Bilingual and international schools can pay more. Your pay depends on your center/school, hours, and contract. Always check if a quoted range is gross or net, and if it includes housing.',
+        a: 'Salaries are not fixed and depend on your qualifications, teaching location, and each school or center\'s pay scale, alongside additional employer benefits (like visa sponsorship, housing stipends, or bonuses). Once we review your profile, we will share specific offers with exact compensation packages.',
       },
       {
         q: 'Do I need a degree to teach in Vietnam?',
-        a: "In most cases, yes. You usually need a bachelor's degree and a teaching certificate for a Work Permit.",
+        a: 'Yes. Under Vietnam\'s updated Work Permit regulations, a Bachelor\'s degree (or higher) in any field is legally required to teach - with Teaching or Education degrees strongly preferred for school positions.',
       },
       {
         q: 'Can I apply if I am already in Vietnam on a tourist visa?',
-        a: 'Yes, you can apply for a job. But you cannot work until you have a Work Permit and an LD visa.',
+        a: 'Yes, you can! However, once you pass the interview and accept the offer, you\'ll still need to do a visa run to get the right visa to re-enter and then proceed with your Work Permit (WP) after that.',
       },
     ],
     ctaButtonText: 'Request Center/School Matching',
