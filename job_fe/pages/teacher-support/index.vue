@@ -79,7 +79,7 @@
       <div class="ts-container">
         <div class="ts-section-header">
           <span class="ts-pill">OUR SERVICES</span>
-          <h2 class="ts-title">All the documents you need, <span class="highlight">from offer to classroom.</span></h2>
+          <h2 class="ts-title">Supporting you every step of the way &mdash; <span class="highlight">from offer to classroom in Vietnam.</span></h2>
           <p class="ts-subtitle">
             Vietnam's consular procedures can be complex. We handle each document carefully, step by step.
           </p>
