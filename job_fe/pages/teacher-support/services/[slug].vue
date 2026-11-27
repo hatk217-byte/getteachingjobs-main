@@ -203,7 +203,7 @@
               </section>
 
               <!-- 4-Step Execution Flow -->
-              <section class="content-block">
+              <section v-if="service.processSteps?.length" class="content-block">
                 <h2 class="block-title">Step-by-Step Processing Timeline</h2>
                 <div v-if="service.timelineNote" class="timeline-intro-note">
                   <svg class="clock-icon" viewBox="0 0 20 20" fill="currentColor">

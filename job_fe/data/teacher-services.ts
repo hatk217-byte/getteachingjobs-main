@@ -48,7 +48,7 @@ export interface ServiceDetail {
     desc: string
   }[]
   requiredDocuments: string[]
-  processSteps: {
+  processSteps?: {
     step: string
     title: string
     desc: string
@@ -127,28 +127,6 @@ export const TEACHER_SERVICES: Record<string, ServiceDetail> = {
       'Teaching certificate, usually TEFL / TESOL 120 hours, CELTA, or PGCE. We check your certificate first.',
     ],
     docsNote: 'Clear scans are enough for the first check.',
-    processSteps: [
-      {
-        step: '01',
-        title: 'Profile & Goal Review',
-        desc: 'Tell us your city, your age group, and your minimum salary. We will only send you jobs that match.',
-      },
-      {
-        step: '02',
-        title: 'Center & School Introductions & Interviews',
-        desc: 'We submit your profile to centers/schools and arrange interviews. Some centers/schools ask for a short video. We will tell you if your center/school needs one.',
-      },
-      {
-        step: '03',
-        title: 'Offer Review & Verification',
-        desc: 'We review the draft contract and flag common issues, such as work hours, overtime, notice period, and tax. You should also check it yourself before you sign.',
-      },
-      {
-        step: '04',
-        title: 'Visa & Work Permit Handover',
-        desc: 'After you sign, we help you start the visa and Work Permit process with your center/school.',
-      },
-    ],
     faqs: [
       {
         q: 'Why is there 0% agent fee for teachers?',
