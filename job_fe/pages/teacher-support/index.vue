@@ -104,7 +104,7 @@
                 <svg class="check-bullet" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
                 </svg>
-                <span>Secure a job offer/contract between teachers and the schools/centers</span>
+                <span>Secure a job offer/contract between teachers and the centers/schools</span>
               </li>
               <li>
                 <svg class="check-bullet" viewBox="0 0 20 20" fill="currentColor">

@@ -54,17 +54,17 @@ export const TEACHER_SERVICES: Record<string, ServiceDetail> = {
   'job-placement': {
     slug: 'job-placement',
     num: '01',
-    title: 'Job Placement & School Matching',
+    title: 'Job Placement & Center/School Matching',
     shortTitle: 'Job Placement',
-    tagline: 'Direct connections with verified international, bilingual, and English centers across Vietnam with 0% agent fee.',
-    heroDesc: 'Find teaching jobs in Hanoi, Ho Chi Minh City, Da Nang, and other cities. You sign a contract directly with the school, not with GetTeachingJobs. We never take a percentage of your salary.',
-    turnaroundTime: 'We usually send your profile to schools within 2-4 business days. The school decides when to interview you.',
+    tagline: 'Direct connections with verified English centers, bilingual, and international schools across Vietnam with 0% agent fee.',
+    heroDesc: 'Find teaching jobs in Hanoi, Ho Chi Minh City, Da Nang, and other cities. You sign a contract directly with the center/school, not with GetTeachingJobs. We never take a percentage of your salary.',
+    turnaroundTime: 'We usually send your profile to centers/schools within 2-4 business days. The center/school decides when to interview you.',
     comparisonTable: {
-      title: 'School Types & Requirements at a Glance',
-      headers: ['School Type', 'Requirements', 'Pay & Workload'],
+      title: 'Center & School Types & Requirements at a Glance',
+      headers: ['Center/School Type', 'Requirements', 'Pay & Workload'],
       rows: [
         {
-          type: 'Language centre',
+          type: 'Language center',
           duration: 'Degree and teaching certificate',
           note: 'Usually lower pay, more hours.',
         },
@@ -80,20 +80,20 @@ export const TEACHER_SERVICES: Record<string, ServiceDetail> = {
         },
       ],
       notes: [
-        'Teacher expenses: You pay for your own Apostille, translation, health check, and visa fees, unless your school agrees to pay them. These are separate from job placement.',
+        'Teacher expenses: You pay for your own Apostille, translation, health check, and visa fees, unless your center/school agrees to pay them. These are separate from job placement.',
         'Preferences: Tell us your city, your age group, and your minimum salary. We will only send you jobs that match.',
       ],
     },
     targetAudience: [
       'Native English teachers (US, UK, CA, AU, NZ, SA, IE)',
-      'Filipino teachers with a degree and a teaching certificate. A PRC license can help with some schools, but it is not required.',
+      'Filipino teachers with a degree and a teaching certificate. A PRC license can help with some centers/schools, but it is not required.',
       'Non-native English teachers with proof of English level, for example IELTS 6.5',
       'Subject teachers (Math, Science, IB, Cambridge curriculum)',
     ],
     keyDeliverables: [
       {
-        title: 'Direct School Contracts (0% Deductions)',
-        desc: 'You sign directly with the school or educational institution, not with GetTeachingJobs. We do not operate as an umbrella agency taking monthly cuts from your paycheck.',
+        title: 'Direct Center/School Contracts (0% Deductions)',
+        desc: 'You sign directly with the center/school or educational institution, not with GetTeachingJobs. We do not operate as an umbrella agency taking monthly cuts from your paycheck.',
       },
       {
         title: 'Pre-vetted Salary & Benefits Packages',
@@ -101,7 +101,7 @@ export const TEACHER_SERVICES: Record<string, ServiceDetail> = {
       },
       {
         title: 'Interview & Demo Lesson Prep',
-        desc: 'Guidance on Vietnamese school interview expectations, demo lesson formats, and teaching philosophy alignment.',
+        desc: 'Guidance on Vietnamese center and school interview expectations, demo lesson formats, and teaching philosophy alignment.',
       },
       {
         title: 'Draft Contract Review',
@@ -123,8 +123,8 @@ export const TEACHER_SERVICES: Record<string, ServiceDetail> = {
       },
       {
         step: '02',
-        title: 'School Introductions & Interviews',
-        desc: 'We submit your profile to schools and arrange interviews. Some schools ask for a short video. We will tell you if your school needs one.',
+        title: 'Center & School Introductions & Interviews',
+        desc: 'We submit your profile to centers/schools and arrange interviews. Some centers/schools ask for a short video. We will tell you if your center/school needs one.',
       },
       {
         step: '03',
@@ -134,21 +134,21 @@ export const TEACHER_SERVICES: Record<string, ServiceDetail> = {
       {
         step: '04',
         title: 'Visa & Work Permit Handover',
-        desc: 'After you sign, we help you start the visa and Work Permit process with your school.',
+        desc: 'After you sign, we help you start the visa and Work Permit process with your center/school.',
       },
     ],
     faqs: [
       {
         q: 'Why is there 0% agent fee for teachers?',
-        a: 'Partner schools pay our placement fee upon successful recruitment. You sign a contract directly with the school, not with GetTeachingJobs. We never charge teachers a single dollar from their agreed contract salary.',
+        a: 'Partner centers/schools pay our placement fee upon successful recruitment. You sign a contract directly with the center/school, not with GetTeachingJobs. We never charge teachers a single dollar from their agreed contract salary.',
       },
       {
         q: 'Can I apply while still outside Vietnam?',
-        a: 'Yes, absolutely. In fact, securing your school offer before arriving in Vietnam is the recommended approach so the school can sponsor your entry. A DN1 visa lets you enter Vietnam to work with the school. It does NOT let you teach or get paid work. You need a Work Permit and an LD visa first.',
+        a: 'Yes, absolutely. In fact, securing your center/school offer before arriving in Vietnam is the recommended approach so the center/school can sponsor your entry. A DN1 visa lets you enter Vietnam to work with the center/school. It does NOT let you teach or get paid work. You need a Work Permit and an LD visa first.',
       },
       {
         q: 'What is the average teaching salary in Vietnam?',
-        a: 'As a guide only. Full-time English teachers in language centres often earn around USD 1,200 to USD 2,000 a month. Bilingual and international schools can pay more. Your pay depends on your school, hours, and contract. Always check if a quoted range is gross or net, and if it includes housing.',
+        a: 'As a guide only. Full-time English teachers in language centers often earn around USD 1,200 to USD 2,000 a month. Bilingual and international schools can pay more. Your pay depends on your center/school, hours, and contract. Always check if a quoted range is gross or net, and if it includes housing.',
       },
       {
         q: 'Do I need a degree to teach in Vietnam?',
@@ -159,7 +159,7 @@ export const TEACHER_SERVICES: Record<string, ServiceDetail> = {
         a: 'Yes, you can apply for a job. But you cannot work until you have a Work Permit and an LD visa.',
       },
     ],
-    ctaButtonText: 'Request School Matching',
+    ctaButtonText: 'Request Center/School Matching',
   },
 
   'visa-service': {
