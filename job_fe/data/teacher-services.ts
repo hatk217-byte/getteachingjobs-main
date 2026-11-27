@@ -100,20 +100,24 @@ export const TEACHER_SERVICES: Record<string, ServiceDetail> = {
     ],
     keyDeliverables: [
       {
-        title: 'Direct Center/School Contracts (0% Deductions)',
-        desc: 'You sign directly with the center/school or educational institution, not with GetTeachingJobs. We do not operate as an umbrella agency taking monthly cuts from your paycheck.',
+        title: 'Profile Review & JD Sharing',
+        desc: 'Review your profile, match suitable roles, and share detailed JDs for your consideration.',
       },
       {
-        title: 'Pre-vetted Salary & Benefits Packages',
-        desc: 'We check the pay, leave, housing, and visa sponsorship in each offer before we send it to you.',
+        title: 'Interview & Demo Setup',
+        desc: 'Arrange online or offline interviews and demos with partner schools or centers.',
       },
       {
-        title: 'Interview & Demo Lesson Prep',
-        desc: 'Guidance on Vietnamese center and school interview expectations, demo lesson formats, and teaching philosophy alignment.',
+        title: 'Result Follow-Up',
+        desc: 'Track feedback and update you promptly on the hiring decision.',
       },
       {
-        title: 'Draft Contract Review',
-        desc: 'We review the draft contract and flag common issues, such as work hours, overtime, notice period, and tax. You should also check it yourself before you sign.',
+        title: 'Offer Acceptance & Visa Support',
+        desc: 'Upon your agreement, assist with employer-sponsored visa procedures and onboarding preparation.',
+      },
+      {
+        title: 'Alternative Job Matching',
+        desc: 'If an offer isn’t a match or doesn’t work out, we continue matching you with other openings.',
       },
     ],
     requiredDocuments: [
